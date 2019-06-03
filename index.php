@@ -1,4 +1,4 @@
 <?php
 
 
-header ( 'Location: controller/home.php');
+header ( 'Location: controller/home.php'); 
