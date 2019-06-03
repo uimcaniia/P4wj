@@ -1,0 +1,793 @@
+html, body{
+margin:0;
+height:100%;
+}
+body{
+  font-family: 'Caveat', sans-serif;
+  font-size:1.2em;
+    background-image: url('../img/fondBody.png');
+  background-size: cover;
+  background-position-y: center;
+  background-attachment: fixed;
+}
+
+header{
+  position: relative;
+  width:100%;
+  height:100%;
+  max-height: 800px;
+  background-image: url('../img/fond.png');
+  background-size: cover;
+}
+body > header:nth-child(1) > div:nth-child(1)
+{
+  position: fixed;
+  background-color: #000c;
+  z-index: 2000;
+}
+.blackLine{
+  width:100%;
+  background-color: #00000080;
+}
+header .blackLine{
+  height:50px;
+  color: #3e9e9e;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+header div.blackLine div{
+  display:flex;
+  flex-direction: column;
+  width:200px;
+  justify-content: end;
+}
+header div.blackLine div:nth-child(2){
+  position: absolute;
+  right:20px;
+}
+#btnSpanMenuHeader, #titleMenuHeader, #barreMenuHeader{
+display: flex;
+flex-direction: row;
+  }
+  #titleMenuHeader{
+    top:30px;
+
+  }
+  #titleMenuHeader p{
+    position: absolute;
+    right: 5px;
+    color: #bef8f8;
+    opacity: 0;
+    cursor: default;
+    margin-right: 7px;
+  }
+    #titleMenuHeader > p:nth-child(1){
+    right:135px;
+  }
+    #titleMenuHeader > p:nth-child(2){
+    right:60px;
+  }
+#barreMenuHeader{
+     top:30px;
+}
+  #barreMenuHeader div{
+    position: absolute;
+    height:0;
+    width:0;
+    right:19px;
+    opacity: 0;
+    border-radius: 4px;
+    border:0px;
+    border-right: 2px solid #3e9e9e;
+    border-bottom: 2px solid #3e9e9e;
+  }
+    #barreMenuHeader div:nth-child(1){
+right:150px;
+    }
+    #barreMenuHeader div:nth-child(2){
+right:78px;
+}
+
+header #btnSpanMenuHeader span{
+  font-size:1.2em;
+  cursor:pointer;
+  margin-right: 30px;
+}
+header #btnSpanMenuHeader a{
+  margin-left:0;
+}
+header .blackLine a:hover, header #btnSpanMenuHeader span:hover{
+  color: #75dede;
+}
+header .blackLine a{
+  margin-left:20px;
+  text-decoration: none;
+  color: #3e9e9e;
+  width: 170px;
+  font-size: 1.5em;
+}
+header div.blackLine hr{
+  width: 0px;
+  margin : 2px 0 0 20px;
+  color: #75dede;
+  opacity: 0;
+}
+
+header .blackLine:last-child{
+  position:absolute;
+  bottom:0;
+  justify-content: center;
+  font-size: 2.3em;
+}
+#logo{
+  text-align: center;
+}
+#logo img{
+  width:80%;
+  margin-top: 70px;
+}
+#bckBody{
+  width:100%;
+}
+#titlePage{
+  position: relative;
+  display: flex;
+justify-content: center;
+height: 100px;
+align-items: end;
+}
+#titlePage h1{
+  margin:0;
+  text-align: center;
+  color : #1f8787;
+  font-size: 3em;
+}
+#titlePage img{
+  width:80px;
+  position: absolute;
+margin-left: 360px;
+bottom: 40px;
+}
+#barre hr{
+  border:1px solid #bdbcbc;
+}
+#barre > hr:nth-child(1){
+width:300px;
+}
+#barre > hr:nth-child(2){
+  width:120px;
+}
+#bckBody > p:nth-child(3){
+  margin-top:100px;
+  text-align: center;
+
+font-size: 1.2em;
+}
+#containtExtract{
+  width:100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+#containtExtract h2{
+  margin: 5px 0 10px 10px;
+font-size: 1.3em;
+color: #939393;
+}
+
+#bckBody p{
+  margin:0;
+  color: #1f8787;
+}
+
+#bkgEpisodeExtrait{
+  position: relative;
+  background-color: #fffc;
+  box-shadow: 2px 2px 5px black;
+  width: 300px;
+  height:400px;
+  padding:10px;
+  margin: 20px;
+}
+#globalEpisode{
+  display: flex;
+  justify-content: center;
+  width:100%;
+  align-items: center;
+}
+#bkgEpisode{
+  position: relative;
+  background-color: #fffc;
+  box-shadow: 2px 2px 5px black;
+  width: 80%;
+  padding:30px;
+  margin: 20px;
+}
+#episode{
+    border-left: 2px solid #bdbcbc;
+  border-bottom: 2px solid #bdbcbc;
+  padding: 10px;
+text-align: justify;
+}
+#scotch{
+  position: absolute;
+top: -40px;
+right: 110px;
+}
+#scotch img{
+  height:60px;
+}
+#containtExtract #datePublication span.fas.fa-thumbtack, #bkgEpisode div span.fas.fa-thumbtack{
+font-size: 1em;
+color: #939393;
+padding-top: 2px;
+}
+
+#titleEpisodeExtract{
+  text-align: left;
+}
+
+#bkgEpisodeExtrait hr, #bkgEpisode hr{
+width: 60%;
+margin: 0;
+border: 1px solid #bdbcbc;
+}
+#episodeExtract{
+  border-left: 2px solid #bdbcbc;
+  border-bottom: 2px solid #bdbcbc;
+  height: 280px;
+padding: 10px;
+text-align: justify;
+}
+
+#datePublication{
+  height:50px;
+  width:100%;
+   border-right: 2px solid #bdbcbc;
+  border-bottom: 2px solid #bdbcbc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+div#bkgEpisode div#datePublication > div:nth-child(2){
+  display: flex;
+}
+#datePublication > div:nth-child(1){
+  display: flex;
+}
+#datePublication > div:nth-child(1) p, #bkgEpisode div#datePublication div a, #datePublication > div:nth-child(2) > p:nth-child(1){
+  margin-right:10px;
+  color: #939393;
+  margin-left: 10px;
+  text-decoration: none
+}
+#containtExtract div#readMore a{
+  margin-right:10px;
+  text-decoration: none;
+  color: #939393;
+}
+
+#globalComment{
+  background-color: #000000b3;
+}
+#globalComment p{
+  margin:0;
+}
+#headerComment{
+  padding-bottom: 10px;
+}
+#headerComment a{
+ color:#4ac2c2;
+  text-decoration: none;
+}
+#headerComment a:hover{
+ color:#91eded;
+}
+#contentInputComment, div.contentInputReply{
+  width: 480px;
+  height:0px;
+  display: none;
+}
+#headerComment .fa-times.contentInputComment{
+  display: none;
+}
+
+#globalComment .comment p, .commentSignal .comment p, #globalComment p{
+  margin: 5px 0 0 10px;
+}
+#globalComment .comment, .globalReply .reply{
+  border-left:2px solid #4ac2c2;
+  margin-left: 50px;
+}
+#globalComment > p:nth-child(5){
+  margin-left:25px;
+}
+#globalComment .formComment{
+display:flex;
+flex-direction: column;
+width: 480px;
+margin-left: 20px;
+height: 100px;
+justify-content: center;
+}
+#globalComment .formComment div.formColumComment{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+height: 30px;
+align-items: center;
+}
+#globalComment .formComment textarea{
+height:100%;
+}
+#globalComment .formComment div.formColumComment button{
+  background-color: transparent;
+border: 0;
+color: #4ac2c2;
+font-size: initial;
+  }
+  #globalComment .formComment div.formColumComment span{
+    color: #4ac2c2;
+  }
+ #globalComment .formComment div.formColumComment button:hover, #globalComment .formComment div.formColumComment span:hover{
+ color:#91eded;
+ cursor : pointer;
+  }
+
+#globalComment span{
+font-size:0.9em;
+margin-left:10px;
+}
+#globalComment a{
+color: #4ac2c2;
+}
+#globalComment span:hover{
+ color:#91eded;
+ cursor : pointer;
+}
+#globalComment .popupSignal{
+  margin-left:20px;
+  height:0px;
+  width:170px;
+
+  border-bottom: 2px solid #3e9e9e;
+  opacity: 0;
+}
+#globalComment .messSignal{
+   color:#91eded;
+}
+#globalComment .popupSignal p{
+  margin:0 0 10px 0;
+  color:white;
+  font-size:0.9em;
+  opacity: 0;
+}
+#globalComment, .globalReply{
+  display: flex;
+  flex-direction:column;
+  width:100%;
+  color: white;
+  padding: 10px;
+}
+.globalReply{
+  padding-left:50px;
+  display: none;
+}
+#headerComment, .commentSignal, .comment, .replySignal, .lookReply, .reply{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+  align-items: baseline;
+}
+.commentSignal{
+  padding:20px 0 0 20px;
+}
+div.commentSignal:nth-child(2){
+padding-top:10px;
+}
+#headerComment > p, div.commentSignal p:nth-child(1), div.commentSignal p:nth-child(3), div.commentSignal span, div.replySignal p:nth-child(1), div.replySignal p:nth-child(3), div.replySignal span{
+  color: #4ac2c2;
+
+}
+#headerComment > p:nth-child(1){
+  font-size : 1.8em;
+}
+div.commentSignal p:nth-child(5), div.replySignal p:nth-child(5) {
+  font-size : 0.9em;
+}
+.lookReply{
+padding:0px 10px 0px 10px;
+}
+#globalComment .lookReply .plusMoins{
+  position: relative;
+}
+#globalComment .lookReply .plusMoins span{
+  position: absolute;
+  bottom:0;
+}
+#globalComment .lookReply .plusMoins .fa-minus-circle{
+  display: none;
+}
+#globalComment .hideInfoCommentSend{
+  display: none;
+}
+
+
+/**************************************************************/
+#containtLogin,  #containtLogin fieldset{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  justify-content: center;
+  align-items: center;
+}
+#containtLogin form{
+  width:80%;
+}
+#containtLogin fieldset{
+  width:100%;
+  padding:20px;
+  margin-top:40px;
+  background-color: #ffffff80;
+  border:1px solid white;
+}
+#containtLogin fieldset legend{
+  text-align: center;
+  margin:auto;
+  font-size:1.5em;
+  color:#1f8787;
+}
+#containtLogin fieldset input{
+  height:20px;
+  width:300px;
+  border-radius: 5px;
+  border:1px solid white;
+  background-color: #ffffff80;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 2px 2px 5px black;
+  font-family: inherit;
+  font-size:1.2em;
+}
+#containtLogin fieldset input:focus{
+  background-color: #b5ccca99;
+}
+#containtLogin fieldset input[type=submit]{
+  height:40px;
+  width:200px;
+padding:0;
+background-color: #d2d2d280;
+}
+#containtLogin fieldset input[type=submit]:hover{
+cursor: pointer;
+background-color: #fff7f799;
+}
+
+/****************************************************/
+#containtGlobalSpace{
+display: flex;
+justify-content: center;
+width: 100%;
+align-items: center;
+}
+#globalSpace{
+  background-color: #fffc;
+box-shadow: 2px 2px 5px black;
+width: 80%;
+padding: 30px;
+margin: 20px;
+}
+#globalSpace hr{
+width: 20%;
+margin: 0;
+border: 1px solid #bdbcbc;
+  }
+#infoSpaceOne{
+border-left: 2px solid #bdbcbc;
+border-bottom: 2px solid #bdbcbc;
+padding: 10px;
+text-align: justify;
+}
+#infoSpaceTwo{
+    padding-bottom:20px;
+}
+#infoSpaceTwo > p:nth-child(1){
+  padding-top:10px;
+}
+
+#infoSpaceTwo{
+width: 100%;
+border-right: 2px solid #bdbcbc;
+border-bottom: 2px solid #bdbcbc;
+}
+#infoSpaceThree{
+border-left: 2px solid #bdbcbc;
+height: 20px;
+}
+#infoSpaceThree p{
+  height:20px;
+}
+#contentFormChangePseudo, #contentFormChangePsw{
+width: 480px;
+height: 0px;
+display: none;
+}
+#globalSpace p{
+  color:black;
+}
+#globalSpace em{
+  color:#1f8787;
+}
+#globalSpace span{
+  font-size: 0.9em;
+  margin-left: 10px;
+color: #1f8787;
+}
+#globalSpace span:hover{
+  color: #4ac2c2;
+ cursor : pointer;
+}
+#globalSpace button {
+    background-color: transparent;
+    border: 0;
+    color: #1f8787;
+    font-size: initial;
+  }
+  #globalSpace button:hover {
+  color: #4ac2c2;
+ cursor : pointer;
+  }
+#globalSpace #pseudo, #globalSpace #password, #globalSpace #repassword{
+height: 20px;
+width: 300px;
+border-radius: 5px;
+border: 1px solid white;
+background-color: #ffffff80;
+padding: 20px;
+margin: 10px;
+box-shadow: 2px 2px 5px black;
+font-family: inherit;
+font-size: 1.2em;
+}
+#contentFormChangePsw > form:nth-child(1){
+  display: flex;
+}
+#btnNewPsw{
+  display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+}
+#pseudo:focus, #password:focus{
+  background-color: #b5ccca99;
+  }
+
+  /***************************************************************************/
+
+#containtAdmin, #containtAdminComment{
+width: 100%;
+}
+
+#containtAdmin .whiteBlock, #containtAdminComment .whiteBlock, #containtAdminMessage .whiteBlock{
+background-color: #fffc;
+box-shadow: 2px 2px 5px black;
+padding: 10px;
+margin: 10px;
+height: 25px;
+cursor:pointer;
+text-align: center;
+}
+#containGlobalAdmin > div:nth-child(1){
+width:300px;
+}
+#containtAdminComment > div:nth-child(1) > div:nth-child(1){
+  width:120px;
+  height:25px;
+
+}
+#navEpisode .whiteBlock, #navComment .whiteBlock{
+  width:150px;
+}
+ #containtAdminMessage .whiteBlock{
+  width:80px;
+ }
+ #containtAdminMessage  #showMessage .whiteBlock{
+  width:150px;
+ }
+#EpisodeWork, #CommentWork, #messageWork{
+  display: flex;
+  width:100%;
+}
+#navEpisode, #navComment{
+text-align: center;
+}
+#navComment, #navMessage{
+  width:100%;
+}
+#modifEp, #delEp, #editEp, #showComment, #showCommentSignal{
+display: flex;
+}
+#blockWriteIdEp, #blockWriteIdEpModif, #arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend, #quitEdit, #hideWriteEpisode,#hideWriteEpisodeModif, #divModifSelectEp, #divDelSelectEp, #navEpisode, #navComment, #navMessage, #divSelectCom, #selectSortComEp, #selectSortComPs, #divSelectComSignal, #selectSortComSignal, #selectSortComSignEp, #selectSortComSignPs{
+  display: none;
+}
+#showComment, #showCommentSignal, #ShowMessage{
+  width:100%;
+}
+#navEpisode .flexRow, #navComment .flexRow, #navMessage .flexRow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#navEpisode .flexColumn, #navComment .flexColumn, #navMessage .flexColumn{
+  display: flex;
+  flex-direction: column;
+}
+#navEpisode .customSelect select, #navComment .custom select{
+background-color: #fffc;
+  width:150px;
+}
+#divSelectCom .flexRow button, #divSelectComSignal .flexRow button{
+ padding: 10px 0 25px 0;
+width: 80px;
+}
+#divSelectCom, #divSelectComSignal{
+  flex:1;
+}
+
+#writeEpisode, #writeEpisodeModif{
+width: 100%;
+display: flex;
+flex-direction: row;
+}
+#writeEpisode hr, #writeEpisodeModif hr{
+  margin:20px;
+  flex:1;
+  width:1px;
+}
+#hideWriteEpisode, #hideWriteEpisodeModif{
+  width:100%;
+}
+#blockWriteEpisode, #blockWriteTitleEpisode, #blockWriteEpisodeModif, #blockWriteTitleEpisodeModif{
+background-color: #fffc;
+box-shadow: 2px 2px 5px black;
+  overflow: auto;
+  margin:10px 0 10px 0;
+}
+#blockWriteEpisode, #blockWriteEpisodeModif{
+  width: 95%;
+    height: 200px;
+    padding: 8px;
+    margin-bottom: 0;
+}
+#blockWriteTitleEpisode, #blockWriteTitleEpisodeModif{
+width:50%;
+height:30px;
+padding:5px;
+}
+#containtEpisodeAdmin, #containtEpisodeAdminModif{
+  width: 100%
+}
+#containtEpisodeAdmin input[type=button], #containtEpisodeAdminModif input[type=button]{
+  background-color: #fff0;
+box-shadow: 2px 2px 5px black;
+border: 0;
+height: 25px;
+border-radius: 2px;
+}
+#ctrlWriteEpisode, #ctrlWriteEpisodeModif{
+background-color: #000c;
+width: 95%;
+color:white;
+height:30px;
+box-shadow: 2px 2px 5px black;
+text-align: end;
+padding:8px;
+}
+#ctrlWriteEpisode span, #ctrlWriteEpisodeModif span{
+  margin:0px 20px 0px 20px;
+  cursor:pointer;
+}
+#messageAdmin{
+  width:100%;
+  height:600px;
+   display: none;
+    z-index: 1500;
+      position: absolute;
+      text-align: center;
+
+}
+#messageAdmin > div{
+  width:500px;
+  height:300px;
+  background-color: #fffc;
+  box-shadow: 2px 2px 5px black; 
+  padding:20px;
+  left:50%;
+  right:50%;
+margin:auto;
+}
+
+#containMess{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 100%;
+}
+#containMess input{
+  background-color: #fffc;
+box-shadow: 2px 2px 5px black;
+  overflow: auto;
+  width:90%;
+  height:30px;
+}
+#containMess textarea{
+    background-color: #fffc;
+box-shadow: 2px 2px 5px black;
+  width:90%;
+  height:100px;
+  }
+#containMess div{
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0 20px 0;
+  width: 100%;
+}
+#containMess div label{
+  width:100px;
+  text-align: left;
+}
+#arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend{
+  width:90%;
+  text-align: left;
+   border-spacing : 0;
+border-collapse : collapse;
+}
+#arrayComment > thead tr th, #arrayPseudo > thead tr th, #arrayCommentSignal > thead tr th, #arrayPseudoSignal > thead tr th{
+  background-color: #439598b0;
+color: white;
+text-align: center;
+}
+#arrayMessageReceive > thead tr th, #arrayMessageSend > thead tr th{
+  background-color: #439598b0;
+color: white;
+  }
+#arrayComment tbody tr:nth-child(even), #arrayPseudo tbody tr:nth-child(even), #arrayCommentSignal tbody tr:nth-child(even), #arrayPseudoSignal tbody tr:nth-child(even), #arrayMessageReceive tbody tr:nth-child(even), #arrayMessageSend tbody tr:nth-child(even){
+  background-color: #ffffff78;
+
+}
+#arrayComment tbody tr:nth-child(odd), #arrayPseudo tbody tr:nth-child(odd), #arrayCommentSignal tbody tr:nth-child(odd), #arrayPseudoSignal tbody tr:nth-child(odd), #arrayMessageReceive tbody tr:nth-child(odd), #arrayMessageSend tbody tr:nth-child(odd){
+  background-color: #ffffffd4;
+}
+#arrayComment tbody tr td, #arrayPseudo tbody tr td, #arrayCommentSignal tbody tr td, #arrayPseudoSignal tbody tr td, #arrayMessageReceive tbody tr td, #arrayMessageSend tbody tr td{
+  padding-left:20px;
+}
+#arrayComment > tbody tr td:nth-child(1), #arrayPseudo tbody tr td:nth-child(1), #arrayCommentSignal tbody tr td:nth-child(1), #arrayPseudoSignal tbody tr td:nth-child(1){
+  width:170px;
+}
+#arrayComment > tbody tr td:nth-child(2), #arrayPseudo tbody tr td:nth-child(2), #arrayCommentSignal tbody tr td:nth-child(2), #arrayPseudoSignal tbody tr td:nth-child(2),#arrayMessageReceive tbody tr td:nth-child(2), #arrayMessageSend tbody tr td:nth-child(2){
+  width:150px;
+}
+#arrayComment > tbody tr td:nth-child(4), #arrayPseudo tbody tr td:nth-child(4), #arrayCommentSignal tbody tr td:nth-child(4), #arrayPseudoSignal tbody tr td:nth-child(4){
+  width:50px;
+}
+#arrayMessageReceive tbody tr td:nth-child(1), #arrayMessageSend tbody tr td:nth-child(1){
+  width:100px;
+}
+
+/********************************************************************************/
+footer{
+    width:100%;
+  height: 120px;
+  background-image: url('../img/fond.png');
+  background-position-x: center;
+  background-size: cover;
+}
+footer .blackLine{
+  height:120px;
+}
