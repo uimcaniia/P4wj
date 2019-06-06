@@ -1,11 +1,5 @@
 <?php
 
-// Chargement des classes
-
-/*	loadClass("Episode");
-		echo 'coucou';*/
-	loadClass("Input");
-
 function listLastEpisode($nbr)
 {
 	$episodes = new Episode;
@@ -160,43 +154,24 @@ function listNewCommentEpisode($idEpisode)
 {
 	$idIntEpisode = intval($idEpisode); // on transforme la string en int
 	$comment = new Comment; 	// on récupère tous les commentaires suivant l'id de l'épisode
-	$aComment = $comment->getAllCommentOrder($idIntEpisode, 'commentTime');
-	//print_r($aComment);
+	$aComment = $comment->getAllCommentOrderJoin($idIntEpisode, 'commentTime', 'user', 'idUser', 'id', 'pseudo');
+
+	foreach ($aComment as $key => $value)
+	{
+		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires
+		$aReply = $reply->getAllReplyOrderJoin($value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
+		$aComment[$key]['reply'] = $aReply;
+	}
+
+/*	echo '<pre>';
+	print_r($aComment);
+	echo '</pre>';*/
 	if($aComment === false)
 	{
 		throw new Exception('Impossible de charger la liste des commentaires');
 	}
 
-	for ($i = 0 ; $i < count($aComment) ; $i++)
-	{
-		foreach ($aComment[$i] as $key => $value)
-		{
-			if($key == 'idUser')
-			{
-				$user = new User(); // on récupère le pseudo de l'utilisateur qui a commenté
-				$getInfosUser = $user->get('id', $aComment[$i]['idUser']);
-				$aComment[$i]['pseudo'] = $getInfosUser[0]['pseudo'];
-			}
-			if ($key =='id')
-			{ 
-				$reply = new Reply; // on ajoute les réponse correspondantes aux commentaires
-				$aReply = $reply->getAllReplyComment($value);
-				for ($j = 0 ; $j < count($aReply) ; $j++)
-				{
-					foreach ($aReply[$j] as $keyReply => $valueRepy)
-					{
-						if($keyReply == 'iduser_reply')
-						{
-							$userReply = new User(); // on récupère le pseudo de l'utilisateur qui a répondu
-							$getInfosUserReply = $userReply->get('id', $aReply[$j]['iduser_reply']);
-							$aReply[$j]['pseudo'] = $getInfosUserReply[0]['pseudo'];
-						}
-					}
-				}
-				$aComment[$i]['reply'] = $aReply;
-			}
-		}
-	}
+	
 	return $aComment;
 }
 //********************************************************

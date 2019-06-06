@@ -19,23 +19,42 @@ class CommentManager extends bdd{
 	 	 	parent::addRequest($request);
 	 	 }
 
- //*****************************************************************************************************************
-	 	 //recupère les entrée de la table suivant l'épisode
-	 	 public function get($comment)
-	 	 { 
-	 	 	if(is_int($comment))
-	 	 	{
-		 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE id  = '.$comment.' ';
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	if($aRes == NULL)
-		 	 	{
-		 	 		return false;
-		 	 	}else
-		 	 	{
-		 	 		return $aRes;
-		 	 	}
-	 	 	}
+
+	 	 //******************************************************************************************************************
+	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit
+	 	 public function getAllCommentOrder($idEpisode, $ordre)
+	 	 {
+	 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE idEpisode = '.$idEpisode.' ORDER BY '.$ordre.'';
+	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	return $aRes;
 	 	 }
+
+	 	  //******************************************************************************************************************
+	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit avec jointure vers autre table
+	 	 public function getAllCommentOrderJoin($idEpisode, $ordre, $tableJoin, $col, $colJoin, $colRecup)
+	 	 {
+	 	 	$request ='SELECT a.*, b.'. $colRecup.' 
+	 	 			   FROM '.self::TAB_COM.' AS a 
+	 	 			   INNER JOIN '.$tableJoin.' AS b 
+	 	 			   ON b.'.$colJoin.' = a.'.$col.' 
+	 	 			   WHERE a.idEpisode = '.$idEpisode.' 
+	 	 			   ORDER BY '.$ordre.'';
+	 	 	//echo $request;
+	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	return $aRes;
+	 	 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 //******************************************************************************************************************
 	 	 //recupère tous commentaires en function d'une valeur et dans un ordre prédéfinit
@@ -64,14 +83,7 @@ class CommentManager extends bdd{
 		 	 	return $aRes;
 	 	 }
 
-//******************************************************************************************************************
-	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit
-	 	 public function getAllCommentOrder($episode, $ordre)
-	 	 {
-		 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE idEpisode = '.$episode.' ORDER BY '.$ordre.'';
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	return $aRes;
-	 	 }
+
 
 //******************************************************************************************************************
 	 	//actualise le signalement d'un commentaire

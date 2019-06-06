@@ -26,19 +26,46 @@ class ReplyManager extends bdd{
 	 	 //recupère les entrée de la table reply suivant l'id'
 	 	 public function get($reply)
 	 	 { 
-	 	 	if(is_int($reply))
-	 	 	{
 		 	 	$request = 'SELECT * FROM '. self::TAB_REP.' WHERE id  = '.$reply.' ';
 		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	if($aRes == NULL)
-		 	 	{
-		 	 		return false;
-		 	 	}else
-		 	 	{
-		 	 		return $aRes;
-		 	 	}
-	 	 	}
 	 	 }
+
+//************************************************************************
+	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit avec jointure vers autre table
+	 	 public function getAllReplyOrderJoin($idComment, $ordre, $tableJoin, $col, $colJoin, $colRecup)
+	 	 {
+	 	 	$request ='SELECT a.*, b.'. $colRecup.' 
+	 	 			   FROM '.self::TAB_REP.' AS a 
+	 	 			   INNER JOIN '.$tableJoin.' AS b 
+	 	 			   ON b.'.$colJoin.' = a.'.$col.' 
+	 	 			   WHERE a.idcomment_reply = '.$idComment.' 
+	 	 			   ORDER BY '.$ordre.'';
+	 	 	//echo $request;
+	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	return $aRes;
+	 	 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //******************************************************************************************************************
 	 	 //recupère tous reply d'un commentaire
