@@ -16,7 +16,7 @@ class UserManager extends bdd{
 		    $param5 = $user->getAdmin();
 
 	 	 	$request = 'INSERT INTO '. self::TAB_USER.'(inscription, email, pseudo, psw, admin) VALUES (NOW(), '.$param2.', '.$param3.', '.$param4.', '.$param5.')';
-
+//echo $request;
 	 	 	parent::addRequest($request);
 
 	 	 }

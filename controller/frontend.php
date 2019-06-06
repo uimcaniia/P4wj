@@ -119,8 +119,9 @@ function testErrorSubscribe($email, $pseudo, $psw, $pswAgain)
 		require('view/frontend/loginView.php');
 	}
 	else{
+		echo 'coucou';
 		subscribe($email, $pseudo, $psw);
-		makeSession($mail);
+		makeSession($email);
 		//print_r($_SESSION);
 		header ('location: index.php?action=space');
 	}
@@ -138,16 +139,18 @@ function makeSession($mail){
 //*******************************************************
 function subscribe($email, $pseudo, $psw)
 {
+	$pswHash = password_hash($psw, PASSWORD_DEFAULT);
 	$aDataUser=array(
-	"email" => "'$email'",
+	"email"  => "'$email'",
 	"pseudo" => "'$pseudo'",
-	"psw" => "'$psw'",
-	"admin" => 0);
+	"psw"    => "'$pswHash'",
+	"admin"  => 0);
 
 	$user = new User();
 	$user-> hydrate($aDataUser);
 	$user->add($user);
 }
+
 //*******************************************************
 function disconnect()
 {

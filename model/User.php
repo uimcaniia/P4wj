@@ -21,13 +21,14 @@
 		// **************************************************
 
 
-/*	 	 public function getDataToHydrate($mail, $psw){
+	 	 public function getDataToHydrate($mail, $psw){
 
 	 	 		$aData = parent::get($mail, $psw);
 	 	 		self::hydrate($aData);
 	 	 }
 
 	 	 public function hydrate($aData){
+	 	 	print_r($aData);
 	 	 	foreach ($aData as $key => $value){
 	 	 		 // On récupère le nom du setter correspondant à l'attribut en mettant sa première lettre en majuscule. 
 	 	 		$method = 'set'.ucfirst($key);
@@ -36,7 +37,7 @@
 	 	 		}
 	 	 	}
 	 	 }
-*/
+
 /*	 	 public function buildSpace($write, $iconCheck, $iconAnnul, $aInputPseudo, $aInputPsw){
 	 	 	//print_r($aInputPseudo);
 	 	 	$div = <<<EOT
@@ -205,8 +206,7 @@ EOT;
 		
 		/** Assigne son mot de passe*/
 		public function setPsw($psw) {
-			if(is_string($psw)){
-				htmlspecialchars($psw);
+			if(is_string($psw)) {
 				$this->_psw = $psw;
 			}
 		}

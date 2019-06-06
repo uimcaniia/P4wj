@@ -22,10 +22,7 @@
 		{
 			$emailClean    = htmlspecialchars($email);
 			$pswClean      = htmlspecialchars($psw);
-
 			$errorConnexion = self::verifUserInfos($pswClean, $emailClean, 'email', 'psw');
-			//$aResultError = array($this->_aTestError['tstPsw'][$errorConnexion]);
-
 			return $this->_aTestError['tstPsw'][$errorConnexion];
 		}
 
@@ -41,7 +38,7 @@
 		{
 			$pseudoClean   = htmlspecialchars($pseudo);
 			$errorPseudo = self::verifChaine($pseudoClean, '', 'pseudo', "" , true);
-			return $this->_aTestError['tstPseudo'][$errorMail];
+			return $this->_aTestError['tstPseudo'][$errorPseudo];
 		}
 		// **************************************************
 		public function tstSubPsw($psw, $pswAgain)
@@ -49,27 +46,11 @@
 			$pswClean      = htmlspecialchars($psw);
 			$pswAgainClean = htmlspecialchars($pswAgain);
 			$errorPsw    = self::verifChaine($pswClean,    $this->_regPsw , '', $pswAgainClean, false);
-			return $this->_aTestError['tstPsw'][$errorMail];
+			return $this->_aTestError['tstPsw'][$errorPsw];
 		}
-		// **************************************************
-/*		public function tstSub($email, $pseudo, $psw, $pswAgain)
-		{
-			$emailClean    = htmlspecialchars($email);
-			$pseudoClean   = htmlspecialchars($pseudo); 
-			$pswClean      = htmlspecialchars($psw);
-			$pswAgainClean = htmlspecialchars($pswAgain);
-
-			$errorMail   = self::verifChaine($emailClean,  $this->_regMail, 'email' , ""            , true); // vérification des infos
-			$errorPseudo = self::verifChaine($pseudoClean, ''      , 'pseudo', ""            , true);
-			$errorPsw    = self::verifChaine($pswClean,    $this->_regPsw , ''      , $pswAgainClean, false);
-
-			$aResultError = array($this->_aTestError['tstMail'][$errorMail], $aTestError['tstPseudo'][$errorPseudo], $aTestError['tstPsw'][$errorPsw]);
-
-			return $aResultError;
-		}*/
 
 		// **************************************************
-		public function verifChaine ($chaine, $paramBdd, $confirm, $empty)
+		public function verifChaine ($chaine, $regex, $paramBdd, $confirm, $empty)
 		{
 			$numError= 0;
 			$aResultError=array();
