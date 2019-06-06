@@ -62,7 +62,7 @@
 		
 		/** Retourne date d'envoie*/
 		public function getDate() {
-			return $this->_date;
+			return strftime('%d-%m-%Y',strtotime($this->_date));
 		}
 		/** retourne son rang en tant qu'utilisateur(0) ou admin(1)*/
 		public function getAdmin() {
@@ -75,16 +75,19 @@
 
 		/** Assigne id du message  */
 		public function setId($id) {
+			$id = (int) $id;
 			$this->_id = $id;
 		}
 		
 		/** Assigne id de celui qui envoie */
 		public function setSend($send) {
+			$send = (int) $send;
 			$this->_send = $send;
 		}
 		
 		/** Assigne id de celui qui reçoit  */
 		public function setReceive($receive) {
+			$receive = (int) $receive;
 				$this->_receive = $receive;
 		}
 		/** Assigne  sujet du message  */
@@ -103,6 +106,7 @@
 		
 		/** Assigne son rang en tant qu'utilisateur(0) ou admin(1)*/
 		public function setAdmin($admin) {
+			$admin = (int) $admin;
 			$this->_admin = $admin;
 		}
 

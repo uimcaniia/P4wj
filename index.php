@@ -66,10 +66,12 @@ try {
         {
         	if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 0) // test id pour les utilisateur
         	{
+        		echo 'util';
             	space();
             }
             elseif(isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
             {
+            	echo'admin';
             	admin();
             }
             else{

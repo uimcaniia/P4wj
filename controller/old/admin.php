@@ -56,6 +56,8 @@ if(isset($_SESSION['idUser']) && isset($_SESSION['pseudo']) && isset($_SESSION['
 	$message = new Message; 
 	$aMessageSend = $message->get('send', $_SESSION['idUser']);
 	$aMessageReceive = $message->get('receive', $_SESSION['idUser']);
+
+	
 	for($i = 0 ; $i < count($aMessageSend) ; $i++)
 	{
 		foreach ($aMessageSend[$i] as $key => $value)

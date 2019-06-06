@@ -76,7 +76,6 @@ function testErrorLog($email, $psw)
 {
 	$form = new Form;
 	$alert = $form->tstLog($email, $psw);
-	//echo $alert;
 	$alertConnectionMail='';
 	$alertConnectionPsw='';
 	$alertConnectionPseudo='';
@@ -95,7 +94,6 @@ function testErrorLog($email, $psw)
 		$user = new User();
 		$getInfosUserConnect = $user->get('email', $email);
 		makeSession($email);
-		//print_r($_SESSION);
 		header ('location: index.php?action=space');
 	}
 }
@@ -119,15 +117,14 @@ function testErrorSubscribe($email, $pseudo, $psw, $pswAgain)
 		require('view/frontend/loginView.php');
 	}
 	else{
-		echo 'coucou';
 		subscribe($email, $pseudo, $psw);
 		makeSession($email);
-		//print_r($_SESSION);
 		header ('location: index.php?action=space');
 	}
 }
 //*****************************************************
-function makeSession($mail){
+function makeSession($mail)
+{
 	$user = new User();
 	$getInfosUserConnect = $user->get('email', $mail);
 

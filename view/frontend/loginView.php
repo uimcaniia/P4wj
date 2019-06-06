@@ -5,7 +5,7 @@
 
 		<section id="containtLogin">
 
-	<p id='alertConnect'><?= $alert?></p>
+	<p class='alertConnect'><?= $alert?></p>
 	<form method="post" action="index.php?action=connect">
 		<div class="form">
 			<fieldset>
@@ -29,9 +29,11 @@ for ($i = 0 ; $i <= count($aInputLog)-1 ; $i++)
 			</fieldset>
 		</div>
 	</form>
-	<p><?php $alertConnectionMail?></p>
-	<p><?php $alertConnectionPsw?></p>
-	<p><?php $alertConnectionPseudo?></p>
+
+
+	<p class='alertConnect'><?= $alertConnectionMail?></p>
+	<p class='alertConnect'><?= $alertConnectionPsw?></p>
+	<p class='alertConnect'><?= $alertConnectionPseudo?></p>
 	<form method="post" action="index.php?action=registration">
 		<div class="form">
 			<fieldset>

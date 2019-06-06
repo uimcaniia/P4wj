@@ -67,7 +67,7 @@
 				{
 	?>
 					<p>- Signaler le commentaire </p>
-					<span id =<?= $aComment[$i]['id'] ?> class=fas fa-bell <?= $aComment[$i]['idUser'] ?> onclick="javascript:animPopup('signal<?=$i?>')"></span>
+					<span id ="<?= $aComment[$i]['id'] ?>" class="fas fa-bell" <?= $aComment[$i]['idUser'] ?> onclick="javascript:animPopup('signal<?=$i?>')"></span>
 					<div class="popupSignal">
 						<p> Merci de nous avoir prévenu.</p>
 					</div>

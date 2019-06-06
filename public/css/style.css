@@ -491,9 +491,12 @@ background-color: #d2d2d280;
 cursor: pointer;
 background-color: #fff7f799;
 }
+.alertConnect{
+  margin:0;
+}
 
 /****************************************************/
-#containtGlobalSpace{
+#containtSpace{
 display: flex;
 justify-content: center;
 width: 100%;
@@ -543,6 +546,7 @@ display: none;
 }
 #globalSpace p{
   color:black;
+  margin:0;
 }
 #globalSpace em{
   color:#1f8787;

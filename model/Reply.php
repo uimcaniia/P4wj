@@ -5,7 +5,7 @@
 
 
 		// CONSTANTES
-		const ID    = 'id';          // Nom de la colonne id de la table locale
+		const ID    = 'id';          
 		const RE    = 'reply';  //  	texte de la réponse
 		const DA    = 'dateReply';     //  	date de la réponse
 		const CO    = 'idcomment_reply';   // id du commentaire recevant la réponse
@@ -16,13 +16,13 @@
 		// Attributs de l'objet
 		// **************************************************
 		
-		 private $_id;
-	  	 private $_reply;
-		 private $_dateReply;
-	  	 private $_idcomment_reply;
-	 	 private $_iduser_reply;
-	 	 private $_reporting_reply;
-	 	 private $_id_episode;
+		 private $_id;// Nom de la colonne id de la table locale
+	  	 private $_reply;//  	texte de la réponse
+		 private $_dateReply; //  	date de la réponse
+	  	 private $_idcomment_reply;// id du commentaire recevant la réponse
+	 	 private $_iduser_reply;// id de l'utilisateur qui a répondut 
+	 	 private $_reporting_reply; //  	réponse signalé (1) ou non (0) 
+	 	 private $_id_episode; //  id de l'épisode qui a le commentaire ayant reçut réponse
 
 		// **************************************************
 		// Methode

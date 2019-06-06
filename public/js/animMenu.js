@@ -64,7 +64,7 @@ animMenu();
 function animConnectLogin(){
 	var icon = document.getElementById('linkConnect');
 	var pseudo = $('#bienvenuePseudo').attr('class'); 
-	var link = '<a href="space.php#titlePage"> cliquez ici!</a>';// $('#changePsw p em').html(
+	var link = '<a href="index.php?action=space"> cliquez ici!</a>';// $('#changePsw p em').html(
 	//console.log(icon);
 	var classIcon = icon.className.split(' ')[1];
 	if(classIcon == 'fa-power-off'){
