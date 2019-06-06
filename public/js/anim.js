@@ -63,7 +63,7 @@ function animDivWriteCommentOpen(divGlobal, id){
 		$(btnOpen).fadeOut(0);
 		$(btnClose).fadeIn(200);
 
-		$(div).delay(0).animate({'height':'130px'}, {'duration':200});
+		$(div).delay(0).animate({'height':'90px'}, {'duration':200});
 		$(div).fadeIn(500);
 }
 
@@ -84,7 +84,7 @@ function animDivWriteReplyOpen(id, open, close){
 		$(open).fadeOut(0);
 		$(close).fadeIn(200);
 
-		$('#'+id).delay(0).animate({'height':'130px'}, {'duration':200});
+		$('#'+id).delay(0).animate({'height':'90px'}, {'duration':200});
 		$('#'+id).fadeIn(500);
 }
 

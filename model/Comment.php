@@ -1,16 +1,7 @@
 <?php
 
 	class Comment extends CommentManager {
-
-
-
-		// CONSTANTES
-		const ID    = 'id';          // Nom de la colonne id de la table locale
-		const DA    = 'commentTime'; // dat du commentaire 
-		const CO    = 'comment';     // texte du commentaire 
-		const EP    = 'idEpisode';   // id de l'épisode concerné par le commentaire
-		const RE    = 'reporting';   // commentaire signalé (1) ou non (0)
-		const US    = 'idUser';      // id de l'utilisateur responsable du commentaire	 
+ 
 		
 		// **************************************************
 		// Attributs de l'objet
@@ -69,7 +60,7 @@
 		/** Retourne la date du commentaire */
 		public function getCommentTime()
 		{
-			return $this->_commentTime;
+			return strftime('%d-%m-%Y',strtotime($this->_commentTime));
 		}
 		
 		/** Retourne le texte du commentaire  */
@@ -111,7 +102,7 @@
 		/** Assigne la date du commentaire  */
 		public function setCommentTime($commentTime)
 		{
-				$this->_commentTime = $commentTime;
+			$this->_commentTime = $commentTime;
 		}
 		
 		/** Assigne le texte du commentaire */

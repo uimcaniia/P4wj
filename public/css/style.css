@@ -180,12 +180,12 @@ font-size: 1.3em;
 color: #939393;
 }
 
-#bckBody p{
+/*#bckBody p{
   margin:0;
   color: #1f8787;
-}
+}*/
 
-#bkgEpisodeExtrait{
+.bkgEpisodeExtrait{
   position: relative;
   background-color: #fffc;
   box-shadow: 2px 2px 5px black;
@@ -194,7 +194,7 @@ color: #939393;
   padding:10px;
   margin: 20px;
 }
-#globalEpisode{
+#containtChapitre{
   display: flex;
   justify-content: center;
   width:100%;
@@ -214,38 +214,47 @@ color: #939393;
   padding: 10px;
 text-align: justify;
 }
-#scotch{
+#episode p{
+color: #1f8787;
+margin:0;
+}
+.scotch{
   position: absolute;
 top: -40px;
 right: 110px;
 }
-#scotch img{
+.scotch img{
   height:60px;
 }
-#containtExtract #datePublication span.fas.fa-thumbtack, #bkgEpisode div span.fas.fa-thumbtack{
+#containtExtract .datePublication span.fas.fa-thumbtack, #bkgEpisode div span.fas.fa-thumbtack{
 font-size: 1em;
 color: #939393;
-padding-top: 2px;
+padding-top: 20px;
+  margin:0;
 }
 
-#titleEpisodeExtract{
+.titleEpisodeExtract{
   text-align: left;
 }
 
-#bkgEpisodeExtrait hr, #bkgEpisode hr{
+.bkgEpisodeExtrait hr, #bkgEpisode hr{
 width: 60%;
 margin: 0;
 border: 1px solid #bdbcbc;
 }
-#episodeExtract{
+.episodeExtract{
   border-left: 2px solid #bdbcbc;
   border-bottom: 2px solid #bdbcbc;
   height: 280px;
 padding: 10px;
 text-align: justify;
-}
+  color: #1f8787;
 
-#datePublication{
+}
+.episodeExtract p{
+  margin:0;
+}
+.datePublication{
   height:50px;
   width:100%;
    border-right: 2px solid #bdbcbc;
@@ -254,19 +263,19 @@ text-align: justify;
   justify-content: space-between;
   align-items: center;
 }
-div#bkgEpisode div#datePublication > div:nth-child(2){
+div#bkgEpisode div.datePublication > div:nth-child(2){
   display: flex;
 }
-#datePublication > div:nth-child(1){
+.datePublication > div:nth-child(1){
   display: flex;
 }
-#datePublication > div:nth-child(1) p, #bkgEpisode div#datePublication div a, #datePublication > div:nth-child(2) > p:nth-child(1){
+.datePublication > div:nth-child(1) p, #bkgEpisode div.datePublication div a, .datePublication > div:nth-child(2) > p:nth-child(1){
   margin-right:10px;
   color: #939393;
   margin-left: 10px;
   text-decoration: none
 }
-#containtExtract div#readMore a{
+#containtExtract div.readMore a{
   margin-right:10px;
   text-decoration: none;
   color: #939393;
@@ -304,8 +313,13 @@ div#bkgEpisode div#datePublication > div:nth-child(2){
   border-left:2px solid #4ac2c2;
   margin-left: 50px;
 }
-#globalComment > p:nth-child(5){
-  margin-left:25px;
+section#containtComment div#globalComment div.comment + p{
+  margin-left:60px;
+  color: #4ac2c2;
+}
+section#containtComment div#globalComment div.lookReply p{
+  margin-left:50px;
+  color: #4ac2c2;
 }
 #globalComment .formComment{
 display:flex;
@@ -314,6 +328,7 @@ width: 480px;
 margin-left: 20px;
 height: 100px;
 justify-content: center;
+align-items: center;
 }
 #globalComment .formComment div.formColumComment{
   display: flex;
@@ -322,8 +337,11 @@ justify-content: center;
 height: 30px;
 align-items: center;
 }
-#globalComment .formComment textarea{
-height:100%;
+#globalComment .formComment input{
+width:80%;
+height:40px;
+border-radius: 10px;
+padding-left: 15px;
 }
 #globalComment .formComment div.formColumComment button{
   background-color: transparent;
@@ -347,8 +365,9 @@ margin-left:10px;
 color: #4ac2c2;
 }
 #globalComment span:hover{
- color:#91eded;
+
  cursor : pointer;
+ color: #91eded;
 }
 #globalComment .popupSignal{
   margin-left:20px;
@@ -409,6 +428,11 @@ padding:0px 10px 0px 10px;
 #globalComment .lookReply .plusMoins span{
   position: absolute;
   bottom:0;
+  color: #4ac2c2;
+}
+
+#globalComment .lookReply .plusMoins span:hover{
+   color: #91eded;
 }
 #globalComment .lookReply .plusMoins .fa-minus-circle{
   display: none;

@@ -40,14 +40,12 @@ class EpisodeManager extends bdd{
 	 	 }
 
  //*****************************************************************************************************************
-	 	 //recupère plusieurs épisode
-	 	 public function getChoiseNbr($nbrEpisode)
+	 	 //recupère les $nbr dernier épisode ajoutés
+	 	 public function getChoiseNbr($nbr)
 	 	 {
-	 	 	if(is_int($nbrEpisode)){
-		 	 	$request = 'SELECT * FROM '. self::TAB_EPI.' ORDER BY id DESC LIMIT 0,'.$nbrEpisode.'  ';
+		 	 	$request = 'SELECT * FROM '. self::TAB_EPI.' ORDER BY id DESC LIMIT 0,'.$nbr.' ';
 		 	 	$aRes = parent::addRequestSelect($request);
 		 	 	return $aRes;
-	 	 	}
 	 	 }
 
 //******************************************************************************************************************

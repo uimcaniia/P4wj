@@ -21,7 +21,7 @@
 		// **************************************************
 
 
-	 	 public function getDataToHydrate($mail, $psw){
+/*	 	 public function getDataToHydrate($mail, $psw){
 
 	 	 		$aData = parent::get($mail, $psw);
 	 	 		self::hydrate($aData);
@@ -36,8 +36,8 @@
 	 	 		}
 	 	 	}
 	 	 }
-
-	 	 public function buildSpace($write, $iconCheck, $iconAnnul, $aInputPseudo, $aInputPsw){
+*/
+/*	 	 public function buildSpace($write, $iconCheck, $iconAnnul, $aInputPseudo, $aInputPsw){
 	 	 	//print_r($aInputPseudo);
 	 	 	$div = <<<EOT
 	 <div id='containtGlobalSpace'>
@@ -126,7 +126,7 @@ EOT;
 
 			return $div;
 	 	}
-
+*/
 
 		// **************************************************
 		// GETTERS
@@ -139,7 +139,7 @@ EOT;
 		
 		/** Retourne la date d'inscription */
 		public function getInscription() {
-			return $this->_inscription;
+			return strftime('%d-%m-%Y',strtotime($this->_inscription));
 		}
 		
 		/** Retourne l'adresse mail de l'utilisateur */
@@ -214,7 +214,7 @@ EOT;
 		/** Assigne le nbr de commentaires*/
 		public function setComment($comment) {
 			$comment = (int) $comment;
-				$this->_comment = $comment;
+			$this->_comment = $comment;
 			
 		}
 

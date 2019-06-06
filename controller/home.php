@@ -1,7 +1,8 @@
 <?php
 
-# Lecture du fichier de configuration commune + autoload
-require_once ('commonConfig.php'); 
+require('Episode.php');
+
+listPost($nbr);
 
 $headTitle       = "Bienvenue!"; // titre de la page
 $metaDescription = "";

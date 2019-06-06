@@ -79,7 +79,7 @@
 		/** Retourne date de la réponse  */
 		public function getDateReply()
 		{
-			return $this->_dateReply;
+			return strftime('%d-%m-%Y',strtotime($this->_dateReply));
 		}
 		
 		/** Retourne id du commentaire recevant la réponse */
@@ -129,29 +129,33 @@
 		/** Assigne date de la réponse */
 		public function setDate($dateReply)
 		{
-				$this->_dateReply = $dateReply;
+			$this->_dateReply = $dateReply;
 		}
 		
 		/** Assigne id du commentaire recevant la réponse */
 		public function setIdcomment_reply($idcomment_reply)
 		{
+			$idcomment_reply = (int) $idcomment_reply;
 			$this->_idcomment_reply = $idcomment_reply;
 		}
 		
 		/** Assigne id de l'utilisateur qui a répondut */
 		public function setIduser_reply($iduser_reply)
 		{
+			$iduser_reply = (int) $iduser_reply;
 			$this->_iduser_reply = $iduser_reply;
 		}
 
 		/** Assigne réponse signalé (1) ou non (0) */
 		public function set_Reporting_reply($reporting_reply)
 		{
+			$reporting_reply = (int) $reporting_reply;
 			$this->_reporting_reply = $reporting_reply;
 		}
 		/** Assigne l'id de l'épisode concerné */
 		public function setId_episode($id_episode)
 		{
+			$id_episode = (int) $id_episode;
 			$this->_id_episode = $id_episode;
 		}
 		

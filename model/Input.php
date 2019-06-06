@@ -2,18 +2,6 @@
 
 	class Input extends InputManager {
 
-
-
-		// CONSTANTES
-		const ID    = 'id';          // Nom de la colonne id de la table locale
-		const CL    = 'class_style'; // attribut "class"  
-		const ST    = 'id_style';     //  id css du champ input 
-		const TY    = 'type';   //  type du champs 
-		const NA    = 'name';   // attribut "name 
-		const VA    = 'value';   // attribut "value" 
-		const PL    = 'placeholder';      // attribut "placeholder 
-		const CO    = 'contenteditable';   // attribut "contenteditable" 		 
-		
 		// **************************************************
 		// Attributs de l'objet
 		// **************************************************
@@ -31,7 +19,35 @@
 		// Methode
 		// **************************************************
 
-	 	 public function getDataToHydrate($intComment)
+	 	 public function getInput($aInput)
+	 	 {
+	 	 	$aRes = array();
+	 	 	if(is_array($aInput))
+	 	 	{
+	 	 		foreach ($aInput as $value)
+	 	 		{
+			 	 	if(is_int($value))
+			 	 	{
+	 	 				$aData = parent::get($value);
+	 				}
+	 				array_push($aRes, $aData[0]);
+	 			}
+	 		}elseif(!is_array($aInput))
+	 		{
+	 			if(is_int($aInput))
+	 			{
+	 				$aData = parent::get($aInput);
+	 				array_push($aRes, $aData[0]);
+	 			}
+	 		}
+	 		else
+	 		{
+	 			throw new Exception('L\'id du champs input n\'est pas correct'); 
+	 		}
+	 		return $aRes;
+	 	}
+
+/*	 	 public function getDataToHydrate($intComment)
 	 	 {
 	 	 	if(is_int($intComment))
 	 	 	{
@@ -61,7 +77,7 @@
 		 	{
 		 	 	$this->setCheckIdentite(false);
 		 	}
-	 	 }
+	 	 }*/
 
 
 		// **************************************************

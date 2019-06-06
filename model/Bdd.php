@@ -2,10 +2,10 @@
 
 class Bdd{
 
-private $_serveur = SERVEUR;
-private $_base = BASE;
-private $_psw = MDP;
-private $_user = USER;
+private $_serveur = "localhost";
+private $_base = "coan3607_jean_forteroche";
+private $_psw = "coucou";
+private $_user = "root";
 
 static protected $bdd = null;
 
