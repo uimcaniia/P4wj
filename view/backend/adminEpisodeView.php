@@ -95,27 +95,15 @@
 			 				<div id='containtEpisodeAdmin'>
 			 					<div id='blockWriteIdEp'>
 			 					</div>
-			 					
+			 					<p></p>
 		 						<div>
-		 							<div id='blockWriteTitleEpisode' contentEditable>
-		 							</div>
+		 							<input type='texte' name='blockWriteTitleEpisode' id='blockWriteTitleEpisode'>
 		 						</div>
-
-		 						<div id='ctrlWrite'>
-		 							<input type="button" value="G" style="font-weight: bold;" onclick="commande('bold');" />
-		 							<input type="button" value="I" style="font-style: italic;" onclick="commande('italic');" />
-		 							<input type="button" value="S" style="text-decoration: underline;" onclick="commande('underline');" />
-		 							<input type="button" value="Lien" onclick="commande('createLink');" />
-									<input type="button" value="Image" onclick="commande('insertImage');"/>
-								</div>
-
-		 						<div id='blockWriteEpisode' contentEditable>
+		 						<div id='blockWriteEpisode'>
+		 							<textarea id='blockWriteEpisode'>Votre texte...</textarea>
 		 						</div>
-
-		 						
 		 						<div id='ctrlWriteEpisode'>
-		 							<span id='quitEdit'>Nouveau</span>
-		 							<span id='saveEdit'>Enregistrer</span>
+		 							<span id='saveEdit' onclick="save();">Enregistrer</span>
 		 						</div>
 			 				</div>
 			 			</div>
@@ -129,22 +117,12 @@
 			 					</div>
 			 					<p></p>
 		 						<div>
-		 							<div id='blockWriteTitleEpisodeModif' contentEditable>
-		 							</div>
+		 							<input type='texte' name='blockWriteTitleEpisodeModif' id='blockWriteTitleEpisodeModif'>
 		 						</div>
 
-		 						<div id='ctrlWrite'>
-		 							<input type="button" value="G" style="font-weight: bold;" onclick="commande('bold');" />
-		 							<input type="button" value="I" style="font-style: italic;" onclick="commande('italic');" />
-		 							<input type="button" value="S" style="text-decoration: underline;" onclick="commande('underline');" />
-		 							<input type="button" value="Lien" onclick="commande('createLink');" />
-									<input type="button" value="Image" onclick="commande('insertImage');"/>
-								</div>
-
-		 						<div id='blockWriteEpisodeModif' contentEditable>
+		 						<div id='blockWriteEpisodeModif'>
+		 							<textarea id='blockWriteEpisodeModif'>Votre texte...</textarea>
 		 						</div>
-
-		 						
 		 						<div id='ctrlWriteEpisodeModif'>
 		 							<span id='saveModif' onclick="save();">Enregistrer</span>
 		 						</div>
