@@ -597,10 +597,13 @@ justify-content: center;
 
   /***************************************************************************/
 
-#containtAdmin, #containtAdminComment{
+#containtAdmin, #containtAdminComment, #containtAdminMessage{
 width: 100%;
 }
-
+#containtAdmin p, #containtAdminComment p, #containtAdminMessage p{
+margin:0;
+color: #1f8787;
+}
 #containtAdmin .whiteBlock, #containtAdminComment .whiteBlock, #containtAdminMessage .whiteBlock{
 background-color: #fffc;
 box-shadow: 2px 2px 5px black;
@@ -610,7 +613,7 @@ height: 25px;
 cursor:pointer;
 text-align: center;
 }
-#containGlobalAdmin > div:nth-child(1){
+#containtAdmin > div:nth-child(1){
 width:300px;
 }
 #containtAdminComment > div:nth-child(1) > div:nth-child(1){

@@ -170,8 +170,6 @@ function listNewCommentEpisode($idEpisode)
 	{
 		throw new Exception('Impossible de charger la liste des commentaires');
 	}
-
-	
 	return $aComment;
 }
 //********************************************************
