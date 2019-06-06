@@ -1,3 +1,6 @@
+			<?php $headTitle = 'Espace connexion'; ?>
+		<?php $titleH1 = 'Espace connexion'; ?>
+
 	<div id="bckBody">
 
 		<div id="titlePage">
