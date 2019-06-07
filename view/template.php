@@ -14,7 +14,7 @@
         <link href="public/css/mobile.css" rel="stylesheet"/>
 
         <script src="public/js/jquery.js"></script>
-        <script src="public/js/anim.js"></script>
+        <script src="public/js/frontend/anim.js"></script>
         <script src="https://cdn.tiny.cloud/1/srz41u49mvl7063mbtpqe2wb8l1hn1vvc2b6oo14kzrf96nq/tinymce/5/tinymce.min.js"></script>
         <script>tinymce.init({selector:'textarea'});</script>
     	<title><?= $headTitle ?></title>
@@ -84,13 +84,13 @@
             </div>
         </footer>
 
-        <script src="public/js/animMenu.js"></script>
-        <script src="public/js/signal.js"></script>
-        <script src="public/js/comment.js"></script>
-        <script src="public/js/actualize.js"></script>
-        <script src="public/js/adminEpisode.js"></script>
-        <script src="public/js/adminComment.js"></script>
-        <script src="public/js/adminMessage.js"></script>
+        <script src="public/js/frontend/animMenu.js"></script>
+        <script src="public/js/frontend/signal.js"></script>
+        <script src="public/js/frontend/comment.js"></script>
+        <script src="public/js/backend/actualize.js"></script>
+        <script src="public/js/backend/adminEpisode.js"></script>
+        <script src="public/js/backend/adminComment.js"></script>
+        <script src="public/js/backend/adminMessage.js"></script>
 
         
     </body>
