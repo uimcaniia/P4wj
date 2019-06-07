@@ -11,8 +11,9 @@ $(document).ready(function(){
 		var valEpSelect= $('#selectCom').val(); 
 		var valBddSelect = 'episode'; 
 		var title = $('#selectCom option:selected').text();
-		var div= $('#arrayComment');
-		recupDataComment(valEpSelect, valBddSelect, title, div);
+		var div= 'arrayComment';
+		var action = 'AdmComment';
+		recupDataComment(action, valEpSelect, valBddSelect, title, div);
 		return false;
 	});
 	//****************************************
@@ -21,8 +22,9 @@ $(document).ready(function(){
 		var valEpSelect= $('#selectPseudo').val(); 
 		var valBddSelect = 'pseudo'; 
 		var title = $('#selectPseudo option:selected').text();
-		var div= $('#arrayPseudo');
-		recupDataComment(valEpSelect, valBddSelect, title, div);
+		var div= 'arrayPseudo';
+		var action = 'AdmComment';
+		recupDataComment(action, valEpSelect, valBddSelect, title, div);
 		return false;
 	});
 		//****************************************
@@ -31,8 +33,9 @@ $(document).ready(function(){
 		var valEpSelect= $('#selectComSignal').val(); 
 		var valBddSelect = 'episodeSignal'; 
 		var title = $('#selectComSignal option:selected').text();
-		var div= $('#arrayCommentSignal');
-		recupDataComment(valEpSelect, valBddSelect, title, div);
+		var div= 'arrayCommentSignal';
+		var action = 'AdmCommentSignal';
+		recupDataComment(action, valEpSelect, valBddSelect, title, div);
 		return false;
 	});
 	//****************************************
@@ -41,20 +44,32 @@ $(document).ready(function(){
 		var valEpSelect= $('#selectPseudoSignal').val(); 
 		var valBddSelect = 'pseudoSignal'; 
 		var title = $('#selectPseudoSignal option:selected').text();
-		var div= $('#arrayPseudoSignal');
-		recupDataComment(valEpSelect, valBddSelect, title, div);
+		var div= 'arrayPseudoSignal';
+		var action = 'AdmCommentSignal';
+		recupDataComment(action, valEpSelect, valBddSelect, title, div);
 		return false;
 	});
 	//****************************************
-	function recupDataComment(valCommentSelect, valBddSelect, title, div){
+	function recupDataComment(action, valComSelect, colBdd, title, div){
 
-		$.post('recupAdminCommentSelect.php', {valCommentSelect:valCommentSelect, valBddSelect:valBddSelect, title:title}, function(donnee){
-		$(div).fadeIn(600);
-		$(div).html(donnee);
+		$.post('index.php?action='+action+'', {valComSelect:valComSelect, colBdd:colBdd}, function(donnee){
+		console.log(donnee);
+		
+		$('#'+div).fadeIn(600);
+		$('#'+div).html(donnee);
+
+		if((colBdd == 'episode')||(colBdd == 'episodeSignal')){
+			$('#'+div+' thead tr th').html(title);
+		}
+		if((colBdd == 'pseudo')||(colBdd == 'pseudoSignal')){
+			$('#'+div+' thead tr').html('<th>'+title+'</th><th><span class="fas fa-envelope" onclick="animSendMessageUser(\''+valComSelect+'\',\''+title+'\');"></span></th>')
+		}
+
 		return false;		
 	
 		})
 	}
+
 			//****************************************
 
 });

@@ -5,23 +5,21 @@ if(!Array.isArray) {
   };
 }
 //*****************************************************************
-
-
 $(document).ready(function(){
-	//****************************************
-//action sur le bouton sélectionner un épisode à modifier
+//****************************************
+
+
+	//action sur le bouton sélectionner un épisode à modifier
 	$('#goEpModif').click(function(){
-		console.log('ok');
-		var valEpModif = $('#selectEpModif').val(); 
-			
+		var valEpModif = $('#selectEpModif').val(); 	
 		recupData(valEpModif);
 		return false;
 	});
-
+	
+	//****************************************
 	function recupData(valEpModif){
-index.php?action=connect
-		//$.post('recupAdminEpisodeSelect.php', {valEpModif:valEpModif}, function(donnee){
-		$.post('recupAdminEpisodeSelect.php', {valEpModif:valEpModif}, function(donnee){
+		$.post('index.php?action=selEpModif', {valEpModif:valEpModif}, function(donnee){
+			console.log(donnee);
 			var aDonnee = donnee.split("`");
 				$('#divModifSelectEp').fadeOut(0);
 				$('#hideWriteEpisodeModif').fadeIn(300);
@@ -31,11 +29,11 @@ index.php?action=connect
 				var txt = aDonnee[1];
 				$('#blockWriteIdEpModif').html(id);
 				$('#blockWriteTitleEpisodeModif').html(title);
-				$('#blockWriteEpisodeModif').html(txt);
+				$('#blockWriteEpisodeModif textarea').val(txt);
 		})
 	}
-			//****************************************
-//action sur le bouton sauvegarder un épisode Modifier
+	//****************************************
+	//action sur le bouton sauvegarder un épisode Modifier
 	$('#saveModif').click(function(){
 		var titleModifEp = $('#blockWriteTitleEpisodeModif').text(); // on récupère les données dans le titre de la zone d'édition
 		var texteModifEp = $('#blockWriteEpisodeModif').text(); //idem pour la zone de texte
@@ -50,25 +48,22 @@ index.php?action=connect
 			$('#containtEpisodeAdminModif > p:nth-child(2)').fadeOut(5000); 
 			return false;
 		});
-			
-		
 	});
 
 	//****************************************
-//action sur le bouton sélectionner un épisode à modifier
+	//action sur le bouton sélectionner un épisode à supprimer
 	$('#goEpDel').click(function(){
-		var valEpDel = $('#selectEpDel').val(); 
-		console.log(valEpDel);
-		$.post('sendAdminEpisode.php', {valEpDel:valEpDel}, function(donnee){
+		var valEpDelet = $('#selectEpDel').val(); 
+		console.log(valEpDelet);
+		$.post('index.php?action=delEpModif', {valEpDelet:valEpDelet}, function(donnee){
 			//recupData(valEpDel);
 			$("#containGlobalAdmin").html(donnee);
 			return false;
 		});
 	});
-//***************************************************
-//recupère l'id du dernier episode de la bdd
+	//***************************************************
+	//recupère l'id du dernier episode de la bdd
 	function recupIdEdit(){
-
 		$.post('recupAdminEpisodeEdit.php', {}, function(donnee){
 			$('#blockWriteIdEp').html(donnee);
 		})

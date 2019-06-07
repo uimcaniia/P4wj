@@ -30,14 +30,14 @@ class CommentManager extends bdd{
 	 	 }
 
 	 	  //******************************************************************************************************************
-	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit avec jointure vers autre table
-	 	 public function getAllCommentOrderJoin($idEpisode, $ordre, $tableJoin, $col, $colJoin, $colRecup)
+	 	 //recupère tous commentaires en function d'une selection dans un ordre définit avec jointure vers autre table
+	 	 public function getAllCommentOrderJoin($colSelect, $idSelect, $ordre, $tableJoin, $col, $colJoin, $colRecup)
 	 	 {
 	 	 	$request ='SELECT a.*, b.'. $colRecup.' 
 	 	 			   FROM '.self::TAB_COM.' AS a 
 	 	 			   INNER JOIN '.$tableJoin.' AS b 
 	 	 			   ON b.'.$colJoin.' = a.'.$col.' 
-	 	 			   WHERE a.idEpisode = '.$idEpisode.' 
+	 	 			   WHERE a.'.$colSelect.' = '.$idSelect.' 
 	 	 			   ORDER BY '.$ordre.'';
 	 	 	//echo $request;
 	 	 	$aRes = parent::addRequestSelect($request);
@@ -45,18 +45,7 @@ class CommentManager extends bdd{
 	 	 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-//******************************************************************************************************************
+		//******************************************************************************************************************
 	 	 //recupère tous commentaires en function d'une valeur et dans un ordre prédéfinit
 	 	 public function getAllCommentSelect($col, $val)
 	 	 {
@@ -64,6 +53,41 @@ class CommentManager extends bdd{
 		 	 	$aRes = parent::addRequestSelect($request);
 		 	 	return $aRes;
 	 	 }
+
+	 	 //******************************************************************************************************************
+	 	 //recupère tous commentaires signalé en function d'une sélection avec jointure dans un ordre
+	 	 public function getAllCommentSignalSelectJoin($colSelect, $idSelect, $tableJoin, $col, $colJoin, $colRecup)
+	 	 {
+		 	$request ='SELECT a.*, b.'. $colRecup.' 
+				   FROM '.self::TAB_COM.' AS a 
+				   INNER JOIN '.$tableJoin.' AS b 
+				   ON b.'.$colJoin.' = a.'.$col.' 
+				   WHERE a.'.$colSelect.' = '.$idSelect.' AND a.reporting = 1 
+				   ORDER BY CAST(idEpisode AS unsigned)';
+
+		 	 	$aRes = parent::addRequestSelect($request);
+		 	 	return $aRes;
+	 	 }
+	 	 //******************************************************************************************************************
+	 	 //recupère tous commentaires signalé en function d'une valeur 
+	 	 public function getAllCommentSignalSelect($col, $val)
+	 	 {
+		 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE reporting = 1  AND '.$col.' = '.$val.' ORDER BY CAST(idEpisode AS unsigned)';
+		 	 	$aRes = parent::addRequestSelect($request);
+		 	 	return $aRes;
+	 	 }
+
+
+
+
+
+
+
+
+
+
+
+
 
  //******************************************************************************************************************
 	 	 //recupère tous commentaires signalé et dans un ordre prédéfinit
@@ -74,14 +98,7 @@ class CommentManager extends bdd{
 		 	 	$aRes = parent::addRequestSelect($request);
 		 	 	return $aRes;
 	 	 }
-	 	  //******************************************************************************************************************
-	 	 //recupère tous commentaires signalé en function d'une valeur 
-	 	 public function getAllCommentSignalSelect($col, $val)
-	 	 {
-		 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE reporting = 1  AND '.$col.' = '.$val.' ORDER BY CAST(idEpisode AS unsigned)';
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	return $aRes;
-	 	 }
+
 
 
 

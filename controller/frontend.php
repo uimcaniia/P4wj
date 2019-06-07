@@ -154,12 +154,12 @@ function listNewCommentEpisode($idEpisode)
 {
 	$idIntEpisode = intval($idEpisode); // on transforme la string en int
 	$comment = new Comment; 	// on récupère tous les commentaires suivant l'id de l'épisode
-	$aComment = $comment->getAllCommentOrderJoin($idIntEpisode, 'commentTime', 'user', 'idUser', 'id', 'pseudo');
+	$aComment = $comment->getAllCommentOrderJoin('idEpisode', $idIntEpisode, 'commentTime', 'user', 'idUser', 'id', 'pseudo');
 
 	foreach ($aComment as $key => $value)
 	{
 		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires
-		$aReply = $reply->getAllReplyOrderJoin($value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
+		$aReply = $reply->getAllReplyOrderJoin('idcomment_reply', $value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
 		$aComment[$key]['reply'] = $aReply;
 	}
 

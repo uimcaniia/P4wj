@@ -32,13 +32,13 @@ class ReplyManager extends bdd{
 
 //************************************************************************
 	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit avec jointure vers autre table
-	 	 public function getAllReplyOrderJoin($idComment, $ordre, $tableJoin, $col, $colJoin, $colRecup)
+	 	 public function getAllReplyOrderJoin($colSelect, $idSelect, $ordre, $tableJoin, $col, $colJoin, $colRecup)
 	 	 {
 	 	 	$request ='SELECT a.*, b.'. $colRecup.' 
 	 	 			   FROM '.self::TAB_REP.' AS a 
 	 	 			   INNER JOIN '.$tableJoin.' AS b 
 	 	 			   ON b.'.$colJoin.' = a.'.$col.' 
-	 	 			   WHERE a.idcomment_reply = '.$idComment.' 
+	 	 			   WHERE a.'.$colSelect.' = '.$idSelect.' 
 	 	 			   ORDER BY '.$ordre.'';
 	 	 	//echo $request;
 	 	 	$aRes = parent::addRequestSelect($request);
@@ -46,9 +46,29 @@ class ReplyManager extends bdd{
 	 	 }
 
 
+//******************************************************************************************************************
+	 	 //recupère toutes les réponses signalées en function d'une sélection avec jointure
+	 	 public function getAllReplySignalSelectJoin($colSelect, $idSelect, $tableJoin, $col, $colJoin, $colRecup)
+	 	 {
+		 	$request ='SELECT a.*, b.'. $colRecup.' 
+				   FROM '.self::TAB_REP.' AS a 
+				   INNER JOIN '.$tableJoin.' AS b 
+				   ON b.'.$colJoin.' = a.'.$col.' 
+				   WHERE a.'.$colSelect.' = '.$idSelect.' AND a.reporting_reply = 1';
 
+		 	 	$aRes = parent::addRequestSelect($request);
+		 	 	return $aRes;
+	 	 }
 
-
+//******************************************************************************************************************
+	 	 //recupère tous reply signalé et dans un ordre prédéfinit
+	 	 public function getAllReplySignal()
+	 	 {
+		 	 	$request = 'SELECT * FROM '. self::TAB_REP.' WHERE reporting_reply = 1 ORDER BY CAST(idcomment_reply AS unsigned)';
+		 	 	//echo $request;
+		 	 	$aRes = parent::addRequestSelect($request);
+		 	 	return $aRes;
+	 	 }
 
 
 
@@ -84,15 +104,7 @@ class ReplyManager extends bdd{
 		 	 	$aRes = parent::addRequestSelect($request);
 		 	 	return $aRes;
 	 	 }
-	 	  //******************************************************************************************************************
-	 	 //recupère tous reply signalé et dans un ordre prédéfinit
-	 	 public function getAllReplySignal()
-	 	 {
-		 	 	$request = 'SELECT * FROM '. self::TAB_REP.' WHERE reporting_reply = 1 ORDER BY CAST(idcomment_reply AS unsigned)';
-		 	 	//echo $request;
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	return $aRes;
-	 	 }
+
 	 	  //******************************************************************************************************************
 	 	 //recupère tous reply signalé en function d'une valeur 
 	 	 public function getAllReplySignalSelect($col, $val)

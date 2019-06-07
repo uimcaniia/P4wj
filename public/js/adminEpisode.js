@@ -8,7 +8,8 @@ if(!Array.isArray) {
 
 
 $(document).ready(function(){
-	//****************************************
+
+//****************************************
 //action sur le bouton sélectionner un épisode à modifier
 	$('#goEpModif').click(function(){
 		console.log('ok');
@@ -17,11 +18,11 @@ $(document).ready(function(){
 		recupData(valEpModif);
 		return false;
 	});
-
+//****************************************
 	function recupData(valEpModif){
-index.php?action=connect
 		//$.post('recupAdminEpisodeSelect.php', {valEpModif:valEpModif}, function(donnee){
-		$.post('recupAdminEpisodeSelect.php', {valEpModif:valEpModif}, function(donnee){
+		$.post('index.php?action=selEpModif', {valEpModif:valEpModif}, function(donnee){
+			console.log('donnee');
 			var aDonnee = donnee.split("`");
 				$('#divModifSelectEp').fadeOut(0);
 				$('#hideWriteEpisodeModif').fadeIn(300);
@@ -32,9 +33,10 @@ index.php?action=connect
 				$('#blockWriteIdEpModif').html(id);
 				$('#blockWriteTitleEpisodeModif').html(title);
 				$('#blockWriteEpisodeModif').html(txt);
+				return false;
 		})
 	}
-			//****************************************
+//****************************************
 //action sur le bouton sauvegarder un épisode Modifier
 	$('#saveModif').click(function(){
 		var titleModifEp = $('#blockWriteTitleEpisodeModif').text(); // on récupère les données dans le titre de la zone d'édition

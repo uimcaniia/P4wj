@@ -44,7 +44,7 @@ function admin()
 	$aEpisodeSignal  = getEpisodeSignal($aCommentSignal, $episode);  // on récupère tous les épisodes ayant uncomment signalés
 	$aMessageSend    = getMessageSend($aMessageSend);
 	$aMessageReceive = getMessageReceive($aMessageReceive);
-	
+
 	require('view/backend/adminView.php');
 }
 //**********************************************************************
@@ -126,43 +126,150 @@ function getMessageReceive($aMessageReceive)
 	return $aMessageReceive;
 }
 //**********************************************************************
+function recupEpisodeSelect($valEpModif)
+{
+	$episode = new Episode();
+	$aEpisode = $episode->get($_POST['valEpModif']);
+	echo ' '.$aEpisode[0]['title'].'`'.$aEpisode[0]['episode'].'`'.$aEpisode[0]['id'].'';
+}
+//***********************************************************************
+function delEpisodeSelect($valEpDel)
+{
+	$episode = new Episode();
+	$aEpisode = $episode->delete($valEpDel);
+//	echo $aEpisode;
+}
+//**********************************************************************
+function commentEpisodeSelect($idEpisode) //(requete AJAX)
+{
+	$table = '';
+	$comment = new Comment(); // on recup les commentaire + le pseudo dans la table user
+	$aComment = $comment->getAllCommentOrderJoin('idEpisode', $idEpisode, 'commentTime', 'user', 'idUser', 'id', 'pseudo');
+
+	foreach ($aComment as $key => $value)
+	{
+		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires + pseudo dans la table user
+		$aReply = $reply->getAllReplyOrderJoin('idcomment_reply', $value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
+		$aComment[$key]['reply'] = $aReply;
+	}
+
+	$table.='<thead><tr><th colspan = 4>TITRE</th></tr></thead><tbody>';
+
+	for($i = 0 ; $i < count($aComment); $i++)
+	{
+		$table.= '<tr><td> Le '.$aComment[$i]['commentTime'].'</td><td> de '.$aComment[$i]['pseudo'].' : </td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['id'].'\',\''.$aComment[$i]['pseudo'].'\', );"></span></td></tr>';
+
+		for($k = 0 ; $k < count($aComment[$i]['reply']); $k++)
+		{
+			$table.= '<tr><td> Réponse le '.$aComment[$i]['reply'][$k]['dateReply'].'</td><td> de '.$aComment[$i]['reply'][$k]['pseudo'].' : </td><td> '.$aComment[$i]['reply'][$k]['reply'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\''.$aComment[$i]['reply'][$k]['pseudo'].'\');"></span></td></tr>';	
+		}
+	}
+	$table.='</tbody>';
+	echo $table;
+}
+//**********************************************************************
+function commentPseudoSelect($idPseudo)//(requete AJAX)
+{
+	$table = '';
+	$comment  = new Comment();
+	$aComment = $comment->getAllCommentSelect('idUser', $idPseudo);
+	$reply    = new ReplyManager;
+	$aReply   = $reply->getAllReplySelect('iduser_reply', $idPseudo);
+
+	$table.='<thead><tr></tr></thead><tbody>';
+
+	for($i = 0 ; $i < count($aComment); $i++)
+	{
+		$table.= '<tr><td> Commentaire du '.$aComment[$i]['commentTime'].'</td><td> '.$aComment[$i]['comment'].'</td></tr>';
+	}
+
+	if (!empty($aReply))
+	{
+		for ($j = 0 ; $j < count($aReply) ; $j++)
+		{
+			$table.= '<tr><td> Réponse du '.$aReply[$j]['dateReply'].'</td><td> '.$aReply[$j]['reply'].'</td></tr>';
+		}
+	}		
+	
+	$table.='</tbody>';
+	echo $table;
+}
+//**********************************************************************
+function commentSignalEpisodeSelect($idEpisodeSignal)//(requete AJAX)
+{
+	$table = '';
+	$comment = new Comment(); // on recup les commentaire + le pseudo dans la table user
+	$aComment = $comment->getAllCommentSignalSelectJoin('idEpisode', $idEpisodeSignal, 'user', 'idUser', 'id', 'pseudo');
+	foreach ($aComment as $key => $value)
+	{
+		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires + pseudo dans la table user
+		$aReply = $reply->getAllReplySignalSelectJoin('idcomment_reply', $value['id'], 'user', 'iduser_reply', 'id', 'pseudo');;
+		$aComment[$key]['reply'] = $aReply;
+	}
+
+	$table.='<thead><tr><th colspan = 4>TITRE</th></tr></thead><tbody>';
+	
+	for($i = 0 ; $i < count($aComment); $i++)
+	{
+		$table.= '<tr><td> Le '.$aComment[$i]['commentTime'].'</td><td> de '.$aComment[$i]['pseudo'].' : </td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['id'].'\',\''.$aComment[$i]['pseudo'].'\', );"></span></td></tr>';
+
+		for($k = 0 ; $k < count($aComment[$i]['reply']); $k++)
+		{
+			$table.= '<tr><td> Réponse le '.$aComment[$i]['reply'][$k]['dateReply'].'</td><td> de '.$aComment[$i]['reply'][$k]['pseudo'].' : </td><td> '.$aComment[$i]['reply'][$k]['reply'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\''.$aComment[$i]['reply'][$k]['pseudo'].'\');"></span></td></tr>';	
+		}
+	}
+
+	$table.='</tbody>';
+	echo $table;
+}
+//**********************************************************************
+function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
+{
+	$table = '';
+	$comment  = new Comment();
+	$aComment = $comment->getAllCommentSignalSelect('idUser', $idPseudoSignal);
+	$reply    = new ReplyManager;
+	$aReply   = $reply->getAllReplySelect('iduser_reply', $idPseudoSignal);
+
+	$table.='<thead><tr></tr></thead><tbody>';
+
+	for($i = 0 ; $i < count($aComment); $i++)
+	{
+		$table.= '<tr><td> Commentaire du '.$aComment[$i]['commentTime'].'</td><td> '.$aComment[$i]['comment'].'</td></tr>';
+	}
+
+	if (!empty($aReply))
+	{
+		for ($j = 0 ; $j < count($aReply) ; $j++)
+		{
+			$table.= '<tr><td> Réponse du '.$aReply[$j]['dateReply'].'</td><td> '.$aReply[$j]['reply'].'</td></tr>';
+		}
+	}	
+			$table.='</tbody>';
+			echo $table;
+		}
+
+//**********************************************************************
+
+
+
+
 function allReceiveMessage($idUser)
 {
 	require('view/backend/commonView.php');
 }
-
+//**********************************************************************
 function allSendMessage($idUser)
 {
 	require('view/backend/commonView.php');
 }
-
+//**********************************************************************
 function sendMessage($idUser, $idrecipient)
 {
 	require('view/backend/commonView.php');
 }
-
+//**********************************************************************
 function deleteMessage($idMess)
 {
 	require('view/backend/commonView.php');
-}
-
-
-function showCommentEpisode($idEpisode)
-{
-	require('view/backend/adminView.php');
-}
-
-function showCommentPseudo($idseudo)
-{
-	require('view/backend/adminView.php');
-}
-
-function showCommentCommentSignal($idEpisodeSignal)
-{
-	require('view/backend/adminView.php');
-}
-
-function showCommentPseudoSignal($idPseudoSignal)
-{
-	require('view/backend/adminView.php');
 }

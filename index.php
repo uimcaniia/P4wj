@@ -140,36 +140,89 @@ try {
                 throw new Exception('Aucun identifiant d\'utilisateur envoyé');
             }
         }
-        elseif ($_GET['action'] == 'showCommentAdmin')// si l'admin veut voir tous les commentaires d'un épisode sur son interface
+
+/*        elseif ($_GET['action'] == 'addEpisode')// si l'admin veut poster un épisode
+        {
+            if (isset($_GET['idUser']) && $_GET['idUser'] == 1) 
+            {
+
+            }
+        }*/
+
+
+/*        elseif ($_GET['action'] == 'selEpModif')// si l'admin veut selectionner un épisode pour le modifier sur son interface
 		{
 			if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
 			{
-				if(isset($_GET['idEpisode']) && $_GET['idEpisode'] > 0)
+				if(isset($_POST['valEpModif']) && $_POST['valEpModif'] > 0)
 				{
-					showCommentEpisode($_GET['idEpisode']);
+					recupEpisodeSelect($_POST['valEpModif']);
 				}
-				elseif(isset($_GET['idseudo']) && $_GET['idseudo'] > 0) //tous les commentaires d'un pseudo
-				{
-					showCommentPseudo($_GET['idseudo']);
-				}
-				elseif(isset($_GET['idEpisodeSignal']) && $_GET['idEpisodeSignal'] > 0) //tous les commentaires signalés d'un épisode
-				{
-					showCommentCommentSignal($_GET['idEpisodeSignal']);
-				}
-				elseif(isset($_GET['idPseudoSignal']) && $_GET['idPseudoSignal'] > 0) //tous les commentaires d'un pseudo signalé
-				{
-					showCommentPseudoSignal($_GET['idPseudoSignal']);
-				}
-			}
+                else
+                {
+                    throw new Exception('Aucune sélection possible d\'épisode à modifier est trouvé');
+                }
+            }
+        }*/
+        elseif($_GET['action'] == 'delEpModif') // si l'admin veut supprimer un épisode sur son interface
+        {
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            {
+                if(isset($_POST['valEpDelet']) && $_POST['valEpDelet'] > 0)
+                {
+                    delEpisodeSelect($_POST['valEpDelet']);
+                }
+                else
+                {
+                    throw new Exception('Aucune sélection possible d\'épisode à supprimer est trouvé');
+                }
+            }
+        }
+        elseif($_GET['action'] == 'AdmComment')
+        {
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            {
+                if(isset($_POST['valComSelect']) && isset($_POST['colBdd']) && $_POST['colBdd'] == 'episode')
+                {
+                    commentEpisodeSelect($_POST['valComSelect']);
+                }
+                elseif(isset($_POST['valComSelect']) && isset($_POST['colBdd']) && $_POST['colBdd'] == 'pseudo') //tous les commentaires d'un pseudo
+                {
+                    commentPseudoSelect($_POST['valComSelect']);
+                }
+                else
+                {
+                    throw new Exception('Aucun selecteur est trouvé pour afficher les commentaires correspondant');
+                }
+            }
+            else
+            {
+                throw new Exception('Vous n\'avez pas les autorisations requise pour voir les commentaires dans cette zone');
+            }
+        }
+        elseif($_GET['action'] == 'AdmCommentSignal')
+        {
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            {
+                if(isset($_POST['valComSelect']) && isset($_POST['colBdd']) && $_POST['colBdd'] == 'episodeSignal')
+                {
+                    commentSignalEpisodeSelect($_POST['valComSelect'], $_POST['colBdd']);
+                }
+                elseif(isset($_POST['valComSelect']) && isset($_POST['colBdd']) && $_POST['colBdd'] == 'pseudoSignal') //tous les commentaires d'un pseudo
+                {
+                    commentSignalPseudoSelect($_POST['valComSelect'], $_POST['colBdd']);
+                }
+                else
+                {
+                    throw new Exception('Aucun selecteur est trouvé pour afficher les commentaires signalés correspondant');
+                }
+            }
+            else
+            {
+                throw new Exception('Vous n\'avez pas les autorisations requise pour voir les commentaires signalés dans cette zone');
+            }
         }
 
-        elseif ($_GET['action'] == 'addEpisode')// si l'admin veut poster un épisode
-		{
-			if (isset($_GET['idUser']) && $_GET['idUser'] == 1) 
-			{
-
-			}
-        }
 
 	
         //*******************************************************************************
