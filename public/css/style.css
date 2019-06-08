@@ -649,10 +649,13 @@ display: flex;
 #showComment, #showCommentSignal, #ShowMessage{
   width:100%;
 }
-#navEpisode .flexRow, #navComment .flexRow, #navMessage .flexRow{
+#navEpisode .flexRow, #navComment .flexRow, #navMessage .flexRow, #messageAdmin .flexRow{
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+#messageAdmin .flexRow{
+  justify-content: center;
 }
 #navEpisode .flexColumn, #navComment .flexColumn, #navMessage .flexColumn{
   display: flex;
@@ -668,6 +671,7 @@ width: 80px;
 }
 #divSelectCom, #divSelectComSignal{
   flex:1;
+
 }
 
 #writeEpisode, #writeEpisodeModif{
@@ -730,19 +734,41 @@ padding:8px;
     z-index: 1500;
       position: absolute;
       text-align: center;
-
+}
+#alertMessage{
+  margin-bottom: 0
+}
+#messageBtn{
+  position: relative;
+}
+#messageBtn span{
+margin:20px 0 0 30px;
+}
+#messageBtn span:hover, #arrayMessageReceive span:hover, #arrayMessageSend span:hover{
+color: #1f8787;
+}
+#messageAdmin .flexRow p, #messageAdmin alertMessage{
+margin-bottom:0;
+  }
+#messageAdmin #pseudoMessage{
+  margin-left:7px;
 }
 #messageAdmin > div{
-  width:500px;
+  width:90%;
   height:300px;
-  background-color: #fffc;
+  background-color: #e7f0f0eb;
   box-shadow: 2px 2px 5px black; 
   padding:20px;
-  left:50%;
-  right:50%;
 margin:auto;
+position: relative;
 }
-
+#messageAdmin span.fa-times{
+  position: absolute;
+  right:20px;
+}
+#messageAdmin > div:nth-child(1) > p:nth-child(2){
+  margin-bottom: 0;
+}
 #containMess{
 display: flex;
 flex-direction: column;
@@ -754,7 +780,7 @@ width: 100%;
   background-color: #fffc;
 box-shadow: 2px 2px 5px black;
   overflow: auto;
-  width:90%;
+  width:300px;
   height:30px;
 }
 #containMess textarea{
@@ -766,12 +792,16 @@ box-shadow: 2px 2px 5px black;
 #containMess div{
   display: flex;
   flex-direction: row;
-  margin: 20px 0 20px 0;
+  margin: 10px 0 10px 0;
   width: 100%;
 }
 #containMess div label{
   width:100px;
   text-align: left;
+}
+html body div#bckBody section#messageAdmin div div#containMess div span#textMess_container.mceEditor.defaultSimpleSkin table.mceLayout{
+  width:100%;
+  height:100%;
 }
 #arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend{
   width:90%;
@@ -810,6 +840,7 @@ color: white;
 #arrayMessageReceive tbody tr td:nth-child(1), #arrayMessageSend tbody tr td:nth-child(1){
   width:100px;
 }
+/*********************************************************************************/
 
 /********************************************************************************/
 footer{

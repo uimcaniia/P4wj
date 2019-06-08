@@ -251,9 +251,6 @@ function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
 
 //**********************************************************************
 
-
-
-
 function allReceiveMessage($idUser)
 {
 	require('view/backend/commonView.php');
@@ -264,12 +261,30 @@ function allSendMessage($idUser)
 	require('view/backend/commonView.php');
 }
 //**********************************************************************
-function sendMessage($idUser, $idrecipient)
+function sendMessage($idUser, $idrecipient, $subject, $text) //(requete AJAX)
 {
-	require('view/backend/commonView.php');
+		$aDataMessage=array(
+			"send"    => $idUser,
+			"subject" => "'$subject'",
+			"receive" => $idrecipient,
+			"text"    => "'$text'");
+
+		$message = new Message();
+		$hydrateMess = $message->hydrate($aDataMessage);
+		$message->add($message);
+		$aLastMess = $message->getLastMessage();
+		$mess = getMessJustSend($aLastMess[0]);
+		echo $mess;
+}
+//**********************************************************************
+function getMessJustSend($aDataMessage)
+{
+		$table=	'<tr><td>'.$aDataMessage['date'].'</td><td>'.$aDataMessage['receive'].'</td><td>'.$aDataMessage['subject'].'</td><td>'.$aDataMessage['text'].'</td></tr>';
+	return $table;
 }
 //**********************************************************************
 function deleteMessage($idMess)
 {
-	require('view/backend/commonView.php');
+	$message = new Message();
+	$message->delete($idMess);
 }

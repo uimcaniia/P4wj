@@ -13,22 +13,26 @@
 		 private $_subject; //Sujet du message 
 	  	 private $_text; // message
 	 	 private $_date;// date d'envoie 
-	 	 private $_admin; // autorisation de celui qui envoie:0= utilisateur ; 1 = admin 	
-
 
 		// **************************************************
 		// Methode
 		// **************************************************
 
 	 	 public function hydrate($aData){
-	 	 	//print_r($aData);
-	 	 	foreach ($aData as $key => $value){
-	 	 		 // On récupère le nom du setter correspondant à l'attribut en mettant sa première lettre en majuscule. 
-	 	 		$method = 'set'.ucfirst($key);
-	 	 		if(method_exists($this, $method)){
-	 	 			$this->$method($value);
-	 	 		}
-	 	 	}
+	 	 	print_r($aData);
+	 	 	if(is_array($aData))
+	 	 	{
+		 	 	foreach ($aData as $key => $value){
+		 	 		 // On récupère le nom du setter correspondant à l'attribut en mettant sa première lettre en majuscule. 
+		 	 		$method = 'set'.ucfirst($key);
+		 	 		if(method_exists($this, $method)){
+		 	 			$this->$method($value);
+		 	 		}
+		 	 	}
+		 	 }
+		 	 else{
+		 	 	throw new Exception('les valeurs du message ne sont pas complète'); 
+		 	 }
 	 	 }
 
 		// **************************************************
@@ -64,10 +68,6 @@
 		public function getDate() {
 			return strftime('%d-%m-%Y',strtotime($this->_date));
 		}
-		/** retourne son rang en tant qu'utilisateur(0) ou admin(1)*/
-		public function getAdmin() {
-			return $this->_admin;
-		}
 
 		// **************************************************
 		// SETTERS
@@ -81,33 +81,32 @@
 		
 		/** Assigne id de celui qui envoie */
 		public function setSend($send) {
-			$send = (int) $send;
+			//intval($send);
+			$send = intval($send);
 			$this->_send = $send;
 		}
 		
 		/** Assigne id de celui qui reçoit  */
 		public function setReceive($receive) {
-			$receive = (int) $receive;
-				$this->_receive = $receive;
+			$receive = intval($receive);
+			$this->_receive = $receive;
 		}
 		/** Assigne  sujet du message  */
 		public function setSubject($subject) {
-				$this->_subject = $subject;
+			$sujetTrim = trim($subject); // on supprime les espace blanc en début et fin de chaine
+			$sujetClean = htmlspecialchars($sujetTrim);
+			$this->_subject = $sujetClean;
 		}
 		/** Assigne  message  */
 		public function setText($text) {
-				$this->_text = $text;
+			$textTrim = trim($text); // on supprime les espace blanc en début et fin de chaine
+			$textClean = htmlspecialchars($textTrim);
+			$this->_text = $textClean;
 		}
 		
 		/** Assigne date d'envoie */
 		public function setDate($date) {
-				$this->_date = $date;
-		}
-		
-		/** Assigne son rang en tant qu'utilisateur(0) ou admin(1)*/
-		public function setAdmin($admin) {
-			$admin = (int) $admin;
-			$this->_admin = $admin;
+			$this->_date = $date;
 		}
 
 	}

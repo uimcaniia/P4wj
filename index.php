@@ -78,45 +78,19 @@ try {
 				throw new Exception('Aucun compte n\'est trouvé');
 			}
 		}
-        elseif ($_GET['action'] == 'showAllMessage')// si on veut voir les messages reçut
-        {
-        	if (isset($_SESSION['idUser']) && $_SESSION['idUser'] >= 0) 
-    		{
-    			showAllMessage($_SESSION['idUser']);
-    		}
-    		else
-            {
-                throw new Exception('Aucun identifiant d\'utilisateur envoyé');
-            }
-    	}
-		elseif ($_GET['action'] == 'showAllMessageSend')// si utilisateur veut voir ses messages envoyés
-		{
-			if (isset($_SESSION['idUser']) && ($_SESSION['idUser']) >= 0) 
-    		{
-				showAllMessageSend($_SESSION['idUser']);
-			}
-		    else
-            {
-                throw new Exception('Aucun identifiant d\'utilisateur envoyé');
-            }
-        }
 		elseif ($_GET['action'] == 'sendMessage')// si utilisateur veut envoyer un message
 		{
-			if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+			if (isset($_SESSION['idUser']) && isset($_SESSION['idUser']) > 0) 
     		{
-				if (!empty($_GET['idRecipient'])) // si l'id du destinataire est pas vide
+				if (isset($_POST['idReceive']) && isset($_POST['txt']) && isset($_POST['sujet']))
 				{
-					sendMessage($_SESSION['admin'], $_GET['idRecipient']);
+					sendMessage($_SESSION['idUser'], $_POST['idReceive'], $_POST['sujet'], $_POST['txt']);
 				}
 				else
 				{
 					throw new Exception('Aucun destinataire est trouvé');
 				}
-			}
-			elseif (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 0) 
-			{
-				sendMessage($_SESSION['idUser'], 1); // l'utisateur ne peut contacter que l'admin
-			}
+            }
 			else
             {
                 throw new Exception('Aucun identifiant d\'utilisateur envoyé');
@@ -124,20 +98,13 @@ try {
 		}
 		elseif ($_GET['action'] == 'deleteMessage')// si utilisateur veut supprimer un message
 		{
-			if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] >= 0) 
+			if (isset($_POST['idMessDel']) && $_POST['idMessDel'] > 1 && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
     		{
-				if (!empty($_GET['idMess']))
-				{
-					deleteMessage($_GET['idMess']);
-				}
-				else
-				{
-					throw new Exception('Aucun identifiant du message est trouvé');
-				}
+				deleteMessage($_POST['idMessDel']);
 			}
 			else
             {
-                throw new Exception('Aucun identifiant d\'utilisateur envoyé');
+                throw new Exception('Vous ne pouvez pas réaliser la suppression du message');
             }
         }
 

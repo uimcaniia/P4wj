@@ -100,7 +100,7 @@
 		 							<input type='texte' name='blockWriteTitleEpisode' id='blockWriteTitleEpisode'>
 		 						</div>
 		 						<div id='blockWriteEpisode'>
-		 							<textarea id='blockWriteEpisode'>Votre texte...</textarea>
+		 							<textarea id='blockWriteEpisode' class='text' name='elem1'>Votre texte...</textarea>
 		 						</div>
 		 						<div id='ctrlWriteEpisode'>
 		 							<span id='saveEdit' onclick="save();">Enregistrer</span>
@@ -121,7 +121,7 @@
 		 						</div>
 
 		 						<div id='blockWriteEpisodeModif'>
-		 							<textarea id='blockWriteEpisodeModif'>Votre texte...</textarea>
+		 							<textarea id='blockWriteEpisodeModif' class='text' name='elem2'>Votre texte...</textarea>
 		 						</div>
 		 						<div id='ctrlWriteEpisodeModif'>
 		 							<span id='saveModif' onclick="save();">Enregistrer</span>

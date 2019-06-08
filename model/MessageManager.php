@@ -14,10 +14,9 @@ class MessageManager extends bdd{
 		    $param2 = $message->getReceive();
 		    $param3 = $message->getSubject();
 		    $param4 = $message->getText();
-		    $param5 = $message->getAdmin();
 
-	 	 	$request = 'INSERT INTO '. self::TAB_MESS.'(send, receive, subject, text, date, admin) VALUES ('.$param1.', '.$param2.', '.$param3.' , '.$param4.', NOW(), '.$param5.')';
-	 	 	//echo $request;
+	 	 	$request = 'INSERT INTO '. self::TAB_MESS.'(send, receive, subject, text, date) VALUES ('.$param1.', '.$param2.', '.$param3.' , '.$param4.', NOW())';
+	 	 	echo $request;
 	 	 	parent::addRequest($request);
 	 	 }
 
@@ -30,7 +29,15 @@ class MessageManager extends bdd{
 	 	 	$aRes = parent::addRequestSelect($request);
 	 	 	return $aRes;
 	 	 }
-
+ //*****************************************************************************************************************
+	 	 //recupère le derniers messages postés
+	 	 public function getLastMessage()
+	 	 { 
+	 	 	$request = 'SELECT LAST_INSERT_ID(id) FROM '. self::TAB_MESS.'';
+	 	 	//echo $request;
+	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	return $aRes;
+	 	 }
 
 //******************************************************************************************************************
 	 	 //supprime un message
