@@ -231,28 +231,24 @@ function addReply($idEpisode, $idPseudo, $comment, $reply)
 //********************************************************
 function signalComment($idEpisode, $idComment, $idUserSignal)
 {
-	$idIntUser = intval($idUserSignal); // on transforme la string en int
-
 	$majSignalUser = new User;
-	$userReporting = $majSignalUser->get('id', $idIntUser); // on récup le nbr de signalement qu'il a reçut
+	$userReporting = $majSignalUser->get('id', $idUserSignal); // on récup le nbr de signalement qu'il a reçut
 	$userReporting[0]['reporting'] = $userReporting[0]['reporting'] +1; // on ajoute +1 de signalement
-	$userReporting = $majSignalUser->update('reporting', $userReporting[0]['reporting'], $idIntUser); // maj du signalement
+	$userReporting = $majSignalUser->update('reporting', $userReporting[0]['reporting'], $idUserSignal); // maj du signalement
 
 	$majSignalComment = new Comment;
-	$commentReporting = $majSignalComment->update($_POST['idCommentSignal']);
+	$commentReporting = $majSignalComment->update($idComment);
 }
 //********************************************************
 function signalReply($idEpisode, $idComment, $idReply, $idUserSignal)
 {
-	$idIntUser = intval($idUserSignal); // on transforme la string en int
-
 	$majSignalUser = new User;
-	$userReporting = $majSignalUser->get('id', $idIntUser); // on récup le nbr de signalement qu'il a reçut
+	$userReporting = $majSignalUser->get('id', $idUserSignal); // on récup le nbr de signalement qu'il a reçut
 	$userReporting[0]['reporting'] = $userReporting[0]['reporting'] +1; // on ajoute +1 de signalement
-	$userReporting = $majSignalUser->update('reporting', $userReporting[0]['reporting'], $idIntUser); // maj du signalement
+	$userReporting = $majSignalUser->update('reporting', $userReporting[0]['reporting'], $idUserSignal); // maj du signalement
 
 	$majSignalReply = new Reply;
-	$commentReporting = $majSignalReply->update($_POST['idReplySignal']);
+	$commentReporting = $majSignalReply->update($idReply);
 }
 //********************************************************
 function biography()

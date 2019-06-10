@@ -48,6 +48,7 @@ function replyComment(idComment, reply, divClose, btn, divPushReply){
 			$('#'+divClose).delay(0).animate({'height':'0px'}, {'duration':200});
 		}else{
 			$.post('index.php?action=addReply', {idComment:idComment, txtReply:txtReply, idEpisode:idEpisode}, function(data){
+				//console.log(data);
 				var emptyDiv = $.trim($('#'+divPushReply+ ' + div.globalReply').text());
 				if(emptyDiv == ''){
 					$(data).appendTo($('#'+divPushReply+ ' + div.globalReply'));

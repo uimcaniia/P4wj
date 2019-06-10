@@ -40,6 +40,10 @@
 			$pseudoConnect='';
 	?>
 			<a href='index.php?action=login' alt="Espace connexion"><p> - Vous devez être connecté pour laisser un commentaire<span class="fas fa-user"></span></p></a>
+			<div class="hideInfoCommentSend">
+				<p id='dateComment'><?= date("d-m-Y") ?></p>
+				<p id='numEpisode'><?= $_GET['idEpisode'] ?></p>
+			</div>
 		</div>
 	<?php
 		}
@@ -60,7 +64,7 @@
 		 	 		<p> le </p>
 		 	 		<p><?= strftime('%d-%m-%Y',strtotime($aComment[$i]['commentTime'] ))?></p>
 	<?php
-				if(($isConnect === true) && ($aComment[$i]['reporting'] == 0) && ($aComment[$i]['idUser'] != $_SESSION['idUser']))
+				if($aComment[$i]['reporting'] == 0)
 				{
 	?>
 					<p>- Signaler le commentaire </p>
@@ -70,30 +74,25 @@
 					</div>
 	<?php
 				}
+				elseif(($isConnect == true) && ($aComment[$i]['reporting'] != 0) && ($aComment[$i]['idUser'] == $_SESSION['idUser']))
+				{
+	?>
+					<p class="messSignal">- Votre commentaire a été signalé.</p>
+	<?php
+				}
 				elseif(($isConnect == true) && ($aComment[$i]['reporting'] != 0) && ($aComment[$i]['idUser'] != $_SESSION['idUser']))
 				{
 	?>
 					<p class="messSignal">- Commentaire signalé.</p>
 	<?php
 				}
-				elseif(($isConnect == true) && ($aComment[$i]['reporting'] != 0) && ($aComment[$i]['idUser']== $_SESSION['idUser']))
-				{
-	?>
-					<p class="messSignal">- Votre commentaire a été signalé.</p>
-	<?php
-				}
-				elseif($isConnect == false)
-				{
-	?>
-					<p class="messSignal"></p>
-	<?php
-				}
 				else
-				{ 			
+				{
 	?>
-					<p class="messSignal"></p>
+					<p class="messSignal">- Commentaire signalé.</p>
 	<?php
 				}
+
 	?>
 				</div>
 				<div class="comment">
@@ -155,7 +154,7 @@
 						{
 	?>
 						<p>- Signaler la réponse </p>
-						<span id =<?=$aComment[$i]['reply'][$j]['id']?> class=fas fa-bell <?=$aComment[$i]['reply'][$j]['iduser_reply']?> onclick="javascript:animPopupReply('part<?=$i?>', 'replySignal<?=$j?>')"></span>
+						<span id ="<?=$aComment[$i]['reply'][$j]['id']?>" class="fas fa-bell <?=$aComment[$i]['reply'][$j]['iduser_reply']?>" onclick="javascript:animPopupReply('part<?=$i?>', 'replySignal<?=$j?>')"></span>
 						<div class="popupSignal">
 							<p> Merci de nous avoir prévenu.</p>
 						</div>
@@ -164,12 +163,23 @@
 	<?php
 						}else
 						{
+							if(($isConnect == true) && ($aComment[$i]['reporting'] != 0) && ($aComment[$i]['idUser']== $_SESSION['idUser']))
+							{
 	?>
-					<p class="messSignal">- Réponse signalée.</p>
+					<p class="messSignal">- Votre réponse a été signalée.</p>
 				</div>
 
 	<?php
+							}
+							else
+							{
+	?>
+					<p class="messSignal">- Réponse signalée.</p>
+				</div>
+	<?php
+							}
 						}
+
 	?>
 				<div class="reply">
 					<p><?=$aComment[$i]['reply'][$j]['reply']?></p>

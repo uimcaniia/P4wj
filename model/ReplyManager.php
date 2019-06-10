@@ -27,7 +27,6 @@ class ReplyManager extends bdd{
 	 	 	$request = 'SELECT MAX(id) FROM '. self::TAB_REP.'';
 	 	 	$id = parent::addRequestSelect($request);
 
-	 	 	//$request2 = 'SELECT * FROM '. self::TAB_COM.' WHERE id = '.$id.'';
 	 	 	$request2 ='SELECT a.*, b.pseudo 
 	 	 			   FROM '.self::TAB_REP.' AS a 
 	 	 			   INNER JOIN user AS b 
