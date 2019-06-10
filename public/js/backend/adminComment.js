@@ -72,20 +72,28 @@ $(document).ready(function(){
 
 });
 //************************************************************************
-	function delComAndRep(idComment, tableBdd, idReply, idUser){
-		console.log('ok');
+	function delComAndRep(idComment, tableBdd, idReply, idUser, by){
+
 		if(tableBdd == 'comment'){
+
 			$('#confirmDeleteComment').fadeIn(600);
 			$('#confirmDeleteComment span.fa-times').click(function(){
 				closeDeleteCommentDiv();
 			});
 			$('#confirmDeleteComment span.fa-check').click(function(){
-				$.post('index.php?action=delComment', {idComment:idComment, idUser:idUser}, function(donnee){
-					console.log(donnee);
+
+				$.post('index.php?action=delComment', {idComment:idComment, idUser:idUser}, function(donnee){					
 					closeDeleteCommentDiv();
+					if(by == 'byEpisode'){
+						$('#goComSignByEp').click();
+					}
+					else{	
+						$('#goComSignByPs').click();
+					}
 					return false;
 				});
 			});
+
 		}if(tableBdd == 'reply'){
 			$('#confirmDeleteCommentReply').fadeIn(600);
 			$('#confirmDeleteComment span.fa-times').click(function(){
@@ -93,14 +101,18 @@ $(document).ready(function(){
 			});
 			$('#confirmDeleteComment span.fa-check').click(function(){
 				$.post('index.php?action=delCommentReply', {idReply:idReply, idUser:idUser}, function(donnee){
-					console.log(donnee);
 					closeDeleteCommentReplyDiv();
+					if(by == 'byEpisode'){
+						$('#goComSignByEp').click();
+					}
+					else{	
+						$('#goComSignByPs').click();
+					}
 					return false;
 				});
 			});
 		}
 	}
-	//deleteCommentAndReply();
 
 	//*********************************************************************
 	//action sur le bouton pour fermer la zone de confirmation de supprission de commentaire

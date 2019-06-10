@@ -37,7 +37,7 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 			if(count($aEpisodeHaveComment) == 0)
 			{
 ?>
-												<p> Il n'y a aucun commentaire pour le moment
+												<p> Il n'y a aucun commentaire pour le moment</p>
 <?php        
 			}
 			else
@@ -67,7 +67,7 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 			if(count($aEpisodeHaveComment) == 0)
 			{
 ?>
-												<p> Aucun utilisateur n'a posté de commentaire
+												<p> Aucun utilisateur n'a posté de commentaire</p>
 <?php        
 			}
 			else
@@ -113,7 +113,7 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 			if(count($aEpisodeHaveComment) == 0)
 			{
 ?>
-												<p> Il n'y a aucun commentaire signalé
+												<p> Il n'y a aucun commentaire signalé</p>
 <?php        
 			}
 			else
@@ -124,7 +124,7 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 						 				<div class="flexRow">
 					 						<div>
 						 						<button id ='sortEpRep' class="whiteBlock" type='submit' name='sortEpRep' onclick="animShowAdminMenu('selectSortComSignEp','<?=$divHidenDivSelComSign?>');" >Par épisode</button>
-						 						<button id ='sortPsRep' class="whiteBlock" type='submit' name='sortPsRep' onclick="animShowAdminMenu('selectSortComSignPs','<?=$divHidenDivSelPseudoSign?>');" >Par pseudo</button>
+						 						<button id ='sortPsRep' class="whiteBlock" type='submit' name='sortPsRep' onclick="animShowAdminMenu('selectSortComSignPs','<?=$divHidenDivSelPseudoSign?>');">Par pseudo</button>
 					 						</div>
 						 					<div id ='selectSortComSignEp'class='customSelect'>
 						 						<label for="selectComSignal"></label>

@@ -72,6 +72,7 @@ function getEpisodeHaveComment($aComment)
 			}
 		}
 	}
+
 	return $aEpisode;
 }
 //**********************************************************************
@@ -281,11 +282,11 @@ function commentSignalEpisodeSelect($idEpisodeSignal)//(requete AJAX)
 	
 	for($i = 0 ; $i < count($aComment); $i++)
 	{
-		$table.= '<tr><td> Le '.$aComment[$i]['commentTime'].'</td><td> de '.$aComment[$i]['pseudo'].' : </td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['idUser'].'\',\''.$aComment[$i]['pseudo'].'\');"></span></td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'comment\',\'\',\''.$aComment[$i]['idUser'].'\');"></span></td></tr>';
+		$table.= '<tr><td> Le '.$aComment[$i]['commentTime'].'</td><td> de '.$aComment[$i]['pseudo'].' : </td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['idUser'].'\',\''.$aComment[$i]['pseudo'].'\');"></span></td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'comment\',\'\',\''.$aComment[$i]['idUser'].'\',\'byEpisode\');"></span></td></tr>';
 
 		for($k = 0 ; $k < count($aComment[$i]['reply']); $k++)
 		{
-			$table.= '<tr><td> Réponse le '.$aComment[$i]['reply'][$k]['dateReply'].'</td><td> de '.$aComment[$i]['reply'][$k]['pseudo'].' : </td><td> '.$aComment[$i]['reply'][$k]['reply'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\''.$aComment[$i]['reply'][$k]['pseudo'].'\');"></span></td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'reply\',\''.$aComment[$i]['reply'][$k]['id'].'\',\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\');"></span></td></tr>';	
+			$table.= '<tr><td> Réponse le '.$aComment[$i]['reply'][$k]['dateReply'].'</td><td> de '.$aComment[$i]['reply'][$k]['pseudo'].' : </td><td> '.$aComment[$i]['reply'][$k]['reply'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\''.$aComment[$i]['reply'][$k]['pseudo'].'\');"></span></td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'reply\',\''.$aComment[$i]['reply'][$k]['id'].'\',\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\'byEpisode\');"></span></td></tr>';	
 		}
 	}
 
@@ -305,14 +306,14 @@ function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
 
 	for($i = 0 ; $i < count($aComment); $i++)
 	{
-		$table.= '<tr><td> Commentaire du '.$aComment[$i]['commentTime'].'</td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'comment\',\'\',\''.$aComment[$i]['idUser'].'\');"></span></td></tr>';
+		$table.= '<tr"><td> Commentaire du '.$aComment[$i]['commentTime'].'</td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'comment\',\'\',\''.$aComment[$i]['idUser'].'\',\'byPseudo\');"></span></td></tr>';
 	}
 
 	if (!empty($aReply))
 	{
 		for ($j = 0 ; $j < count($aReply) ; $j++)
 		{
-			$table.= '<tr><td> Réponse du '.$aReply[$j]['dateReply'].'</td><td> '.$aReply[$j]['reply'].'</td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aReply[$j]['idcomment_reply'].'\',\'reply\',\''.$aReply[$j]['id'].'\',\''.$aReply[$j]['iduser_reply'].'\');"></span></td></tr>';
+			$table.= '<tr><td> Réponse du '.$aReply[$j]['dateReply'].'</td><td> '.$aReply[$j]['reply'].'</td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aReply[$j]['idcomment_reply'].'\',\'reply\',\''.$aReply[$j]['id'].'\',\''.$aReply[$j]['iduser_reply'].'\' ,\'byPseudo\');"></span></td></tr>';
 		}
 	}	
 			$table.='</tbody>';
