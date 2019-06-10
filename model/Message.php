@@ -19,7 +19,7 @@
 		// **************************************************
 
 	 	 public function hydrate($aData){
-	 	 	print_r($aData);
+	 	 	//print_r($aData);
 	 	 	if(is_array($aData))
 	 	 	{
 		 	 	foreach ($aData as $key => $value){

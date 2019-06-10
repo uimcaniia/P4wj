@@ -2,7 +2,7 @@
 <?php $titleH1 = 'Espace Admin'; ?>
 
 <?php ob_start(); ?>
-
+				<p id='confirmSendMess'></p>
 				<section id="messageAdmin">
 					<div>
 						<span class="fas fa-times"  onclick="closeMessageDiv()"></span>
@@ -24,6 +24,41 @@
 						</div>
 						<div id="messageBtn" class="flexRow">
 							<p>Envoyer</p>
+							<span id='sendMess' class="fas fa-check"></span>
+						</div>
+					</div>
+				</section>
+				<section id="confirmDeleteComment">
+					<div>
+						<span class="fas fa-times"  onclick="closeDeleteCommentDiv()"></span>
+							<p>Voulez-vous vraiment supprimer ce commentaire?</p>
+							<p>Les réponses qui y sont associés, seront supprimer en même temps.</p>
+						<p id='alertMessage'></p>
+						<div id="messageBtn" class="flexRow">
+							<p>supprimer</p>
+							<span id='sendMess' class="fas fa-check"></span>
+						</div>
+					</div>
+				</section>
+				<section id="confirmDeleteCommentReply">
+					<div>
+						<span class="fas fa-times"  onclick="closeDeleteCommentReplyDiv()"></span>
+							<p>Voulez-vous vraiment supprimer ce commentaire?</p>
+							
+						<p id='alertMessage'></p>
+						<div id="messageBtn" class="flexRow">
+							<p>supprimer</p>
+							<span id='sendMess' class="fas fa-check"></span>
+						</div>
+					</div>
+				</section>
+				<section id="confirmDeleteEpisode">
+					<div>
+						<span class="fas fa-times"  onclick="closeDeleteEpisodeDiv()"></span>
+							<p>Voulez-vous vraiment supprimer cet épisode?</p>
+						<p id='alertMessage'></p>
+						<div id="messageBtn" class="flexRow">
+							<p>supprimer</p>
 							<span id='sendMess' class="fas fa-check"></span>
 						</div>
 					</div>

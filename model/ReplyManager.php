@@ -30,6 +30,15 @@ class ReplyManager extends bdd{
 		 	 	$aRes = parent::addRequestSelect($request);
 	 	 }
 
+//******************************************************************************************************************
+	 	 //recupère tous reply de la table
+	 	 public function getAllReply()
+	 	 {
+		 	 	$request = 'SELECT * FROM '. self::TAB_REP.' ORDER BY dateReply';
+		 	 	$aRes = parent::addRequestSelect($request);
+		 	 	return $aRes;
+	 	 }
+
 //************************************************************************
 	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit avec jointure vers autre table
 	 	 public function getAllReplyOrderJoin($colSelect, $idSelect, $ordre, $tableJoin, $col, $colJoin, $colRecup)
@@ -60,7 +69,7 @@ class ReplyManager extends bdd{
 		 	 	return $aRes;
 	 	 }
 
-//******************************************************************************************************************
+		//******************************************************************************************************************
 	 	 //recupère tous reply signalé et dans un ordre prédéfinit
 	 	 public function getAllReplySignal()
 	 	 {
@@ -69,9 +78,36 @@ class ReplyManager extends bdd{
 		 	 	$aRes = parent::addRequestSelect($request);
 		 	 	return $aRes;
 	 	 }
+		//******************************************************************************************************************
+	 	 //supprime un reply (quand l'admin est pas content)
+	 	 public function delete($idReply)
+	 	 {
+	 	 	$request = 'DELETE FROM '. self::TAB_REP.' WHERE id = '.$idReply.'';
+	 	 	parent::addRequest($request);
+	 	 }
+	 	 //******************************************************************************************************************
+	 	 //supprime les réponse d'un commentaire supprimé (quand l'admin est super pas content)
+	 	 public function deleteByComment($idComment)
+	 	 {
+	 	 	$request = 'DELETE FROM '. self::TAB_REP.' WHERE idcomment_reply = '.$idComment.'';
+	 	 	parent::addRequest($request);
+	 	 }
+	 	 //******************************************************************************************************************
+	 	 //supprime les réponse d'un commentaire supprimé (quand l'admin est super pas content)
+	 	 public function deleteByEpisode($idEpisode)
+	 	 {
+	 	 	$request = 'DELETE FROM '. self::TAB_REP.' WHERE id_episode = '.$idEpisode.'';
+	 	 	parent::addRequest($request);
+	 	 }
 
-
-
+ //******************************************************************************************************************
+	 	 //recupère tous reply signalé en function d'une valeur 
+	 	 public function getAllReplySelect($col, $val)
+	 	 {
+		 	 	$request = 'SELECT * FROM '. self::TAB_REP.' WHERE '.$col.' = '.$val.'';
+		 	 	$aRes = parent::addRequestSelect($request);
+		 	 	return $aRes;
+	 	 }
 
 
 
@@ -96,14 +132,7 @@ class ReplyManager extends bdd{
 		 	 	return $aRes;
 	 	 }
 
-	 	 //******************************************************************************************************************
-	 	 //recupère tous reply de la table
-	 	 public function getAllReply()
-	 	 {
-		 	 	$request = 'SELECT * FROM '. self::TAB_REP.' ORDER BY dateReply';
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	return $aRes;
-	 	 }
+
 
 	 	  //******************************************************************************************************************
 	 	 //recupère tous reply signalé en function d'une valeur 
@@ -114,26 +143,9 @@ class ReplyManager extends bdd{
 		 	 	return $aRes;
 	 	 }
 
- //******************************************************************************************************************
-	 	 //recupère tous reply signalé en function d'une valeur 
-	 	 public function getAllReplySelect($col, $val)
-	 	 {
-		 	 	$request = 'SELECT * FROM '. self::TAB_REP.' WHERE '.$col.' = '.$val.'';
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	return $aRes;
-	 	 }
 
-//******************************************************************************************************************
-	 	 //supprime un reply (quand l'admin est pas content)
-	 	 public function delete(Reply $reply)
-	 	 {
 
-	 	 	$param = $reply->getId();
 
-	 	 	$request = 'DELETE FROM '. self::TAB_REP.' WHERE id = '.$param.'';
-
-	 	 	parent::addRequest($request);
-	 	 }
 
 //******************************************************************************************************************
 	 	 //compte le nombre d'entrée dans la table

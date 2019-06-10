@@ -1,6 +1,6 @@
 //action sur les bouton pour envoyer un message
 function animSendMessageUser(idReceive, pseudo, idSender){
-	
+	$('#confirmSendMess').fadeIn(600);
 	$('#messageAdmin').fadeIn(600);
 	$('#pseudoMessage').html(' à '+pseudo);
 
@@ -18,15 +18,61 @@ function animSendMessageUser(idReceive, pseudo, idSender){
 			$.post('index.php?action=sendMessage', {sujet:sujet, txt:txt, idReceive:idReceive}, function(data){
 				$('#arrayMessageSend tbody').append(data);
 
-				$('#messageAdmin').html('<p>Votre message à bien été envoyé à '+pseudo+'.</p>');
-				$('#messageAdmin').fadeOut(2000);
-
-
+				$('#confirmSendMess').html('<p>Votre message à bien été envoyé à '+pseudo+'.</p>');
+				$('#confirmSendMess').delay(0).animate({'opacity': '10'}, {'duration' : 0});
+				$('#confirmSendMess').delay(0).animate({'opacity': '0'}, {'duration' : 2000});
+				$('#confirmSendMess').fadeOut(0).delay(2000);
+				$('#subjectMess').val('');
+				$('#textMess').val('');
+				$('#messageAdmin').fadeOut(0);
 				return false;
 			});
 		}
 	});
 }
+//***************************************************************
+function changeorderMessage(){
+	$('#messReceiveOrderBydate').click(function(){
+		var direction = $(this).attr('class');;
+		if(direction == 'fas fa-angle-up'){
+			$.post('index.php?action=changeorderMessageReceive', {idReceive: 'upDate'},function(data){
+				$('#messReceiveOrderBydate').removeClass('fas fa-angle-up');
+				$('#messReceiveOrderBydate').addClass('fas fa-angle-down');
+				$('#arrayMessageReceive tbody').html(data);
+				return false;
+			});
+		}if(direction == 'fas fa-angle-down' ){
+			$.post('index.php?action=changeorderMessageReceive', {idReceive: 'downDate'},function(data){
+				console.log(data);
+				$('#messReceiveOrderBydate').removeClass('fas fa-angle-down');
+				$('#messReceiveOrderBydate').addClass('fas fa-angle-up');
+				$('#arrayMessageReceive tbody').html(data);
+				return false;
+			});
+		}
+
+	});
+	$('#messSendOrderBydate').click(function(){
+		var direction = $(this).attr('class')
+		if(direction == 'fas fa-angle-up'){
+			$.post('index.php?action=changeorderMessageSend', {idReceive: 'upDate'},function(data){
+				$('#messSendOrderBydate').removeClass('fas fa-angle-up');
+				$('#messSendOrderBydate').addClass('fas fa-angle-down');
+				$('#arrayMessageSend tbody').html(data);
+				return false;
+			});
+		}if(direction == 'fas fa-angle-down' ){
+			$.post('index.php?action=changeorderMessageSend', {idReceive: 'downDate'},function(data){
+				$('#messSendOrderBydate').removeClass('fas fa-angle-down');
+				$('#messSendOrderBydate').addClass('fas fa-angle-up');
+				$('#arrayMessageSend tbody').html(data);
+				
+				return false;
+			});
+		}
+	});
+}
+changeorderMessage();
 //*********************************************************************
 //action sur les bouton pour supprimer un message
 function animDelMessage(idMessDel){
@@ -41,7 +87,7 @@ function closeMessageDiv(){
 	$('#subjectMess').val('');
 	$('#textMess').val('');
 	$('#messageAdmin').fadeOut(600);
-
 }
+
 
 

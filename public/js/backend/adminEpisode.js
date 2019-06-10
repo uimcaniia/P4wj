@@ -53,14 +53,24 @@ $(document).ready(function(){
 	//****************************************
 	//action sur le bouton sélectionner un épisode à supprimer
 	$('#goEpDel').click(function(){
-		var valEpDelet = $('#selectEpDel').val(); 
-		console.log(valEpDelet);
-		$.post('index.php?action=delEpModif', {valEpDelet:valEpDelet}, function(donnee){
-			//recupData(valEpDel);
-			$("#containGlobalAdmin").html(donnee);
-			return false;
+		$('#confirmDeleteEpisode').fadeIn(600); // ouverture de la div pour demander confirmation
+		$('#confirmDeleteEpisode span.fa-times').click(function(){
+			$('#confirmDeleteEpisode').fadeOut(600);
+		});
+		$('#confirmDeleteEpisode span.fa-check').click(function(){
+			var valEpDelet = $('#selectEpDel').val(); 
+			$.post('index.php?action=delEpModif', {valEpDelet:valEpDelet}, function(donnee){
+				$('#selectEpDel > option[value = "'+valEpDelet+'"').remove(); // maj des input select de toutes les parties
+				$('#selectEpModif > option[value = "'+valEpDelet+'"').remove();
+				$('#selectCom > option[value = "'+valEpDelet+'"').remove();
+				$('#selectComSignal > option[value = "'+valEpDelet+'"').remove();
+				$('#confirmDeleteEpisode').fadeOut(600);
+				return false;
+			});
 		});
 	});
+
+
 	//***************************************************
 	//recupère l'id du dernier episode de la bdd
 	function recupIdEdit(){
@@ -68,8 +78,8 @@ $(document).ready(function(){
 			$('#blockWriteIdEp').html(donnee);
 		})
 	}
-		//****************************************
-//action sur le bouton sauvegarder un épisode editer
+	//****************************************
+	//action sur le bouton sauvegarder un épisode editer
 	$('#saveEdit').click(function(){
 		var titleNewEp = $('#blockWriteTitleEpisode').text(); // on vérifie si il y a des données dans le titre de la zone d'édition
 		var texteNewEp = $('#blockWriteEpisode').text(); //idem pour la zone de texte
@@ -106,7 +116,7 @@ $(document).ready(function(){
 		}
 	});
 		//****************************************
-//action sur le bouton Quitter un épisode editer
+	//action sur le bouton Quitter un épisode editer
 	$('#quitEdit').click(function(){
 		var titleNewEp = $('#blockWriteTitleEpisode').text(); // on vérifie si il y a des données dans le titre de la zone d'édition
 		var texteNewEp = $('#blockWriteEpisode').text(); //idem pour la zone de texte
@@ -128,8 +138,8 @@ $(document).ready(function(){
 	});
 
 
-//*****************************************************************
-//compare les entrée de la BDD et celles du texte présenté
+	//*****************************************************************
+	//compare les entrée de la BDD et celles du texte présenté
 	function compareDataBdd(aDataEpisodeCompare){
 		$.post('recupAdminEpisode.php', {titleNewEp:titleNewEp, texteNewEp:texteNewEp, IdNewEpClean:IdNewEpClean}, function(donnee){
 				var aDonnee = donnee.split("`");

@@ -16,26 +16,33 @@ class MessageManager extends bdd{
 		    $param4 = $message->getText();
 
 	 	 	$request = 'INSERT INTO '. self::TAB_MESS.'(send, receive, subject, text, date) VALUES ('.$param1.', '.$param2.', '.$param3.' , '.$param4.', NOW())';
-	 	 	echo $request;
+	 	 	//echo $request;
 	 	 	parent::addRequest($request);
 	 	 }
 
  //*****************************************************************************************************************
 	 	 //recupère les entrée de la table 
-	 	 public function get($col, $val)
+	 	 public function get($col, $val, $order)
 	 	 { 
-	 	 	$request = 'SELECT * FROM '. self::TAB_MESS.' WHERE '.$col.' = '.$val.' ORDER BY id';
+	 	 	$request = 'SELECT * FROM '. self::TAB_MESS.' WHERE '.$col.' = '.$val.' ORDER BY '.$order.'';
 	 	 	//echo $request;
 	 	 	$aRes = parent::addRequestSelect($request);
 	 	 	return $aRes;
 	 	 }
  //*****************************************************************************************************************
-	 	 //recupère le derniers messages postés
+	 	 //recupère le derniers messages postés et le pseudo du receveur (jointure)
 	 	 public function getLastMessage()
 	 	 { 
-	 	 	$request = 'SELECT LAST_INSERT_ID(id) FROM '. self::TAB_MESS.'';
-	 	 	//echo $request;
-	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	$request = 'SELECT MAX(id) FROM '. self::TAB_MESS.'';
+	 	 	$id = parent::addRequestSelect($request);
+
+	 	 	$request2 ='SELECT a.*, b.pseudo 
+	 	 			   FROM '.self::TAB_MESS.' AS a 
+	 	 			   INNER JOIN user AS b 
+	 	 			   ON b.id = a.receive 
+	 	 			   WHERE a.id = '.$id[0]['MAX(id)'].'';
+	 	 	$aRes = parent::addRequestSelect($request2);
+	 	 	echo $request2;
 	 	 	return $aRes;
 	 	 }
 

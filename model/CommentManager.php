@@ -25,6 +25,16 @@ class CommentManager extends bdd{
 	 	 public function getAllCommentOrder($idEpisode, $ordre)
 	 	 {
 	 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE idEpisode = '.$idEpisode.' ORDER BY '.$ordre.'';
+	 	 	echo $request;
+	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	return $aRes;
+	 	 }
+
+	 	//******************************************************************************************************************
+	 	 //recupère tous commentaires 
+	 	 public function getAllComment()
+	 	 {
+	 	 	$request = 'SELECT * FROM '. self::TAB_COM.'';
 	 	 	$aRes = parent::addRequestSelect($request);
 	 	 	return $aRes;
 	 	 }
@@ -76,7 +86,20 @@ class CommentManager extends bdd{
 		 	 	$aRes = parent::addRequestSelect($request);
 		 	 	return $aRes;
 	 	 }
-
+		//******************************************************************************************************************
+	 	 //supprime un comment (quand l'admin est pas content)
+	 	 public function delete($idComment)
+	 	 {
+	 	 	$request = 'DELETE FROM '. self::TAB_COM.' WHERE id = '.$idComment.'';
+	 	 	parent::addRequest($request);
+	 	 }
+	 	 //******************************************************************************************************************
+	 	 //supprime les commentaires en fonction de l'épisode (quand celui-ci se fait supprimer)
+	 	 public function deleteByEpisode($idEpisode)
+	 	 {
+	 	 	$request = 'DELETE FROM '. self::TAB_COM.' WHERE idEpisode = '.$idEpisode.'';
+	 	 	parent::addRequest($request);
+	 	 }
 
 
 
@@ -111,17 +134,7 @@ class CommentManager extends bdd{
 	 	 	parent::addRequest($request);
 	 	 }
 
-//******************************************************************************************************************
-	 	 //supprime un comment (quand l'admin est pas content)
-	 	 public function delete(Comment $comment)
-	 	 {
 
-	 	 	$param = $comment->getId();
-
-	 	 	$request = 'DELETE FROM '. self::TAB_COM.' WHERE id = '.$param.'';
-
-	 	 	parent::addRequest($request);
-	 	 }
 
 //******************************************************************************************************************
 	 	 //compte le nombre d'entrée dans la table

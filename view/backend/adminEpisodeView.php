@@ -34,7 +34,7 @@
 				 				<div id="divModifSelectEp">
 					 				<div class="flexRow">
 				 						<div class="whiteBlock">
-				 							<p>Modifier l'épisode n°:<p>
+				 							<p>Titre de l'épisode :<p>
 				 						</div>
 					 					<div class='customSelect'>
 					 						<label for="selectEpModif"></label>
@@ -46,7 +46,7 @@
 				$idep = $aEpisode[$i]['id'];
 				$title = $aEpisode[$i]['title'];
 ?>
-												  <option value="<?=$idep?>"><?=$num?> : <?=$title?></option>
+												  <option value="<?=$idep?>"><?=$title?></option>
 <?php
 			}
 ?>
@@ -64,7 +64,7 @@
 			 					</div>
 		 						<div id='divDelSelectEp'>
 		 							<div class="flexRow">
-				 						<div class="whiteBlock"><p>Suprrimer l'épisode n°:</p>
+				 						<div class="whiteBlock"><p>Titre de l'épisode :</p>
 				 						</div>
 				 						<div class='customSelect'>
 					 						<label for="selectEpDel"></label>
@@ -76,7 +76,7 @@
 				$idep = $aEpisode[$i]['id'];
 				$title = $aEpisode[$i]['title'];
 ?>
-												  <option value="<?=$idep?>"><?=$num?> : <?=$title?></option>
+												  <option value="<?=$idep?>"><?=$title?></option>
 <?php
 			}
 ?>

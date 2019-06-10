@@ -75,3 +75,4 @@ function animConnectLogin(){
 	}
 }
 animConnectLogin();
+

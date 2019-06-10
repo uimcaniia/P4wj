@@ -53,8 +53,7 @@ $(document).ready(function(){
 	function recupDataComment(action, valComSelect, colBdd, title, div){
 
 		$.post('index.php?action='+action+'', {valComSelect:valComSelect, colBdd:colBdd}, function(donnee){
-		console.log(donnee);
-		
+				
 		$('#'+div).fadeIn(600);
 		$('#'+div).html(donnee);
 
@@ -62,14 +61,55 @@ $(document).ready(function(){
 			$('#'+div+' thead tr th').html(title);
 		}
 		if((colBdd == 'pseudo')||(colBdd == 'pseudoSignal')){
-			$('#'+div+' thead tr').html('<th>'+title+'</th><th><span class="fas fa-envelope" onclick="animSendMessageUser(\''+valComSelect+'\',\''+title+'\');"></span></th>')
+			$('#'+div+' thead tr').html('<th>'+title+'</th><th><span class="fas fa-envelope" onclick="animSendMessageUser(\''+valComSelect+'\',\''+title+'\');"></span></th><th></th>')
 		}
 
 		return false;		
 	
-		})
+		});
 	}
 
-			//****************************************
 
 });
+//************************************************************************
+	function delComAndRep(idComment, tableBdd, idReply, idUser){
+		console.log('ok');
+		if(tableBdd == 'comment'){
+			$('#confirmDeleteComment').fadeIn(600);
+			$('#confirmDeleteComment span.fa-times').click(function(){
+				closeDeleteCommentDiv();
+			});
+			$('#confirmDeleteComment span.fa-check').click(function(){
+				$.post('index.php?action=delComment', {idComment:idComment, idUser:idUser}, function(donnee){
+					console.log(donnee);
+					closeDeleteCommentDiv();
+					return false;
+				});
+			});
+		}if(tableBdd == 'reply'){
+			$('#confirmDeleteCommentReply').fadeIn(600);
+			$('#confirmDeleteComment span.fa-times').click(function(){
+				closeDeleteCommentReplyDiv();
+			});
+			$('#confirmDeleteComment span.fa-check').click(function(){
+				$.post('index.php?action=delCommentReply', {idReply:idReply, idUser:idUser}, function(donnee){
+					console.log(donnee);
+					closeDeleteCommentReplyDiv();
+					return false;
+				});
+			});
+		}
+	}
+	//deleteCommentAndReply();
+
+	//*********************************************************************
+	//action sur le bouton pour fermer la zone de confirmation de supprission de commentaire
+	function closeDeleteCommentDiv(){
+		$('#confirmDeleteComment').fadeOut(600);
+	}
+		//*********************************************************************
+	//action sur le bouton pour fermer la zone de confirmation de supprission de commentaire et reponses
+	function closeDeleteCommentReplyDiv(){
+		$('#confirmDeleteCommentReply').fadeOut(600);
+	}
+

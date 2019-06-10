@@ -33,24 +33,46 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 						 						<button id ='sortPs' class="whiteBlock" type='submit' name='sortPs' onclick="animShowAdminMenu('selectSortComPs','<?=$divHidenDivSelPseudo?>');" >Par pseudo</button>
 					 						</div>
 						 					<div id ='selectSortComEp'class='customSelect'>
+<?php
+			if(count($aEpisodeHaveComment) == 0)
+			{
+?>
+												<p> Il n'y a aucun commentaire pour le moment
+<?php        
+			}
+			else
+			{
+?>
 						 						<label for="selectCom"></label>
 						 						<select id="selectCom" name="selectEp">
 <?php
-			for($i = 0 ; $i < count($aEpisode) ; $i++)
-			{
-				$num = $i+1;
-				$idep = $aEpisode[$i]['id'];
-				$title = $aEpisode[$i]['title'];
+				for($i = 0 ; $i < count($aEpisodeHaveComment) ; $i++)
+				{
+					$idep = $aEpisodeHaveComment[$i]['id'];
+					$title = $aEpisodeHaveComment[$i]['title'];
 ?>
-													  <option value="<?=$idep?>"><?=$num?> : <?=$title?></option>
+													  <option value="<?=$idep?>"><?=$title?></option>
 <?php
-			}
+				}
 ?>
 												</select>
 												<span id="goComByEp" class="fas fa-check"></span>
+<?php 
+			}
+?>
 											</div>
 
 						 					<div id ='selectSortComPs'class='customSelect'>
+<?php
+			if(count($aEpisodeHaveComment) == 0)
+			{
+?>
+												<p> Aucun utilisateur n'a posté de commentaire
+<?php        
+			}
+			else
+			{
+?>
 						 						<label for="selectPseudo"></label>
 						 						<select id="selectPseudo" name="selectEp">
 <?php
@@ -66,6 +88,9 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 ?>
 												</select>
 												<span id="goComByPs" class="fas fa-check"></span>
+<?php 
+			}
+?>
 											</div>
 										</div>
 										<div class="flexRow">
@@ -84,6 +109,16 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 		 							<span onclick="animShowAdminMenu('divSelectComSignal','<?=$divHidenSelComSign?>');" ><p>Commentaires signalés</p>
 		 							</span>
 				 				</div>
+<?php
+			if(count($aEpisodeHaveComment) == 0)
+			{
+?>
+												<p> Il n'y a aucun commentaire signalé
+<?php        
+			}
+			else
+			{
+?>
 				 				<div id="divSelectComSignal">
 				 					<div class='flexColumn'>
 						 				<div class="flexRow">
@@ -93,17 +128,18 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 					 						</div>
 						 					<div id ='selectSortComSignEp'class='customSelect'>
 						 						<label for="selectComSignal"></label>
+
 						 						<select id="selectComSignal" name="selectEp">
 <?php
-			for($i = 0 ; $i < count($aEpisodeSignal) ; $i++)
-			{
-				$num=$i+1;
-				$idep = $aEpisodeSignal[$i]['id'];
-				$title = $aEpisodeSignal[$i]['title'];
+				for($i = 0 ; $i < count($aEpisodeSignal) ; $i++)
+				{
+					$num=$i+1;
+					$idep = $aEpisodeSignal[$i]['id'];
+					$title = $aEpisodeSignal[$i]['title'];
 ?>
-													  <option value="<?=$idep?>"><?=$num?> : <?=$title?></option>
+													  <option value="<?=$idep?>"><?=$title?></option>
 <?php
-			}
+				}
 ?>
 												</select>
 												<span id="goComSignByEp" class="fas fa-check"></span>
@@ -113,15 +149,15 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 						 						<label for="selectPseudoSignal"></label>
 						 						<select id="selectPseudoSignal" name="selectEp">
 <?php
-			for($i = 0 ; $i < count($aUserSignal) ; $i++)
-			{
-				$idUser = $aUserSignal[$i]['id'];
-				$pseudo = $aUserSignal[$i]['pseudo'];
-				$nbrComSign = $aUserSignal[$i]['reporting'];
+				for($i = 0 ; $i < count($aUserSignal) ; $i++)
+				{
+					$idUser = $aUserSignal[$i]['id'];
+					$pseudo = $aUserSignal[$i]['pseudo'];
+					$nbrComSign = $aUserSignal[$i]['reporting'];
 ?>
 													  <option value="<?=$idUser?>"><?=$pseudo?></option>
 <?php
-			}
+				}
 ?>
 												</select>
 												<span id="goComSignByPs" class="fas fa-check"></span>
@@ -136,6 +172,9 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 										</table>
 									</div>
 								</div>
+<?php 
+			}
+?>
 				 			</div>
 		 				</div>
 		 			</div>

@@ -107,6 +107,36 @@ try {
                 throw new Exception('Vous ne pouvez pas réaliser la suppression du message');
             }
         }
+        elseif ($_GET['action'] == 'changeorderMessageReceive')// si utilisateur veut changer le sens d'affichage des messages
+        {
+            if (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'upDate') 
+            {
+                changeOrderMessage('receive', 'ASC', $_SESSION['idUser']);
+            }
+            elseif (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'downDate') 
+            {
+                 changeOrderMessage('receive', 'DESC', $_SESSION['idUser']);
+            }
+            else
+            {
+                throw new Exception('Le sens d\'affichage n\'est pas disponible '.$_POST['idReceive'].'');
+            }
+        }
+        elseif ($_GET['action'] == 'changeorderMessageSend')// si utilisateur veut changer le sens d'affichage des messages
+        {
+            if (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'upDate') 
+            {
+                changeOrderMessage('send','ASC', $_SESSION['idUser']);
+            }
+            elseif (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'downDate') 
+            {
+                 changeOrderMessage('send','DESC', $_SESSION['idUser']);
+            }
+            else
+            {
+                throw new Exception('Le sens d\'affichage n\'est pas disponible');
+            }
+        }
 
 /*        elseif ($_GET['action'] == 'addEpisode')// si l'admin veut poster un épisode
         {
@@ -145,7 +175,7 @@ try {
                 }
             }
         }
-        elseif($_GET['action'] == 'AdmComment')
+        elseif($_GET['action'] == 'AdmComment') // si l'admin veut voir tous les commentaires sur son interface
         {
             if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
             {
@@ -187,6 +217,44 @@ try {
             else
             {
                 throw new Exception('Vous n\'avez pas les autorisations requise pour voir les commentaires signalés dans cette zone');
+            }
+        }
+        elseif($_GET['action'] == 'delComment') // si l'admin veut supprimer un commentaire signalés
+        {
+             echo 'ok2';
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            {
+                if(isset($_POST['idComment'])  && isset($_POST['idUser'])) // si commentaire, supprime commentaire + réponse
+                {
+                    deleteCommentReply($_POST['idComment'], $_POST['idUser']);
+                }
+                else
+                {
+                    throw new Exception('Aucun selecteur est trouvé pour supprimer le commentaire signalé');
+                }
+            }
+            else
+            {
+                throw new Exception('vous n\'avez pas l\'autorisation necessaire pour supprimer le commentaire signalé');
+            }
+        }
+        elseif($_GET['action'] == 'delCommentReply') // si l'admin veut supprimer un commentaire signalés
+        {
+            echo 'ok1';
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            {
+                if(isset($_POST['idReply']) && isset($_POST['idUser']))//si réponse, supprime que réponse signalé
+                {
+                    deleteReply($_POST['idReply'], $_POST['idUser']);
+                }
+                else
+                {
+                    throw new Exception('Aucun selecteur est trouvé pour supprimer la réponse signalée');
+                }
+            }
+            else
+            {
+                throw new Exception('vous n\'avez pas l\'autorisation necessaire pour supprimer la réponse signalée');
             }
         }
 

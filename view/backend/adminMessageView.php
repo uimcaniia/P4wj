@@ -24,16 +24,16 @@ $divHidenWrite   = 'arrayMessageReceive,arrayMessageSend';
 		 							<span onclick="animShowAdminMenu('arrayMessageSend', '<?=$divHidenSend?>');" ><p>Message envoyés</p>
 		 							</span>
 				 				</div>
-				 				<div class="whiteBlock">
+<!-- 				 				<div class="whiteBlock">
 		 							<span onclick="animShowAdminMenu('arrayMessageSend', '<?=$divHidenWrite?>');" ><p>Envoyer un message</p>
 		 							</span>
-				 				</div>
+				 				</div> -->
 		 						<div class='flexColumn'>
 			 						<div class="flexRow">
 										<table id='arrayMessageReceive'>
 											<thead>
 												<tr>
-													<th>Date</th>
+													<th>Date <span id='messReceiveOrderBydate' class='fas fa-angle-down'></span></th>
 													<th>De</th>
 													<th>Sujet</th>
 													<th>Message</th>
@@ -46,7 +46,7 @@ $divHidenWrite   = 'arrayMessageReceive,arrayMessageSend';
 			for($i = 0 ; $i < count($aMessageReceive) ; $i++)
 			{
 				$idMess      = $aMessageReceive[$i]['id'];
-				$idSend   = $aMessageReceive[$i]['send'];
+				$idSend      = $aMessageReceive[$i]['send'];
 				$dateReceive = $aMessageReceive[$i]['date'];
 				$pseudo      = $aMessageReceive[$i]['pseudo'];
 				$subject     = $aMessageReceive[$i]['subject'];
@@ -75,7 +75,7 @@ $divHidenWrite   = 'arrayMessageReceive,arrayMessageSend';
 										<table id='arrayMessageSend'>
 											<thead>
 												<tr>
-													<th>Date</th>
+													<th>Date <span id='messSendOrderBydate' class='fas fa-angle-down'></span></th>
 													<th>De</th>
 													<th>Sujet</th>
 													<th>Message</th>

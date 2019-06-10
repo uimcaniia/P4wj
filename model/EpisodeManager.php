@@ -39,6 +39,21 @@ class EpisodeManager extends bdd{
 		 	 	return $aRes;
 	 	 }
 
+/*//******************************************************************************************************************
+	 	 //recupère tous les épisodes en function d'une selection dans un ordre définit avec jointure vers autre table
+	 	 public function getAllEpisodeOrderJoin($colSelect, $idSelect, $ordre, $tableJoin, $col, $colJoin, $colRecup)
+	 	 {
+	 	 	$request ='SELECT a.*, b.'. $colRecup.' 
+	 	 			   FROM '.self::TAB_EPI.' AS a 
+	 	 			   INNER JOIN '.$tableJoin.' AS b 
+	 	 			   ON b.'.$colJoin.' = a.'.$col.' 
+	 	 			   WHERE a.'.$colSelect.' = '.$idSelect.' 
+	 	 			   ORDER BY '.$ordre.'';
+	 	 	//echo $request;
+	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	return $aRes;
+	 	 }*/
+
  //*****************************************************************************************************************
 	 	 //recupère les $nbr dernier épisode ajoutés
 	 	 public function getChoiseNbr($nbr)
