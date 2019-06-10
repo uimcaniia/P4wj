@@ -19,7 +19,22 @@ class CommentManager extends bdd{
 	 	 	parent::addRequest($request);
 	 	 }
 
+		//*************************************************************************
+	 	 public function getLastComment()
+	 	 {
+	 	 	$request = 'SELECT MAX(id) FROM '. self::TAB_COM.'';
+	 	 	$id = parent::addRequestSelect($request);
 
+	 	 	//$request2 = 'SELECT * FROM '. self::TAB_COM.' WHERE id = '.$id.'';
+	 	 	$request2 ='SELECT a.*, b.pseudo 
+	 	 			   FROM '.self::TAB_COM.' AS a 
+	 	 			   INNER JOIN user AS b 
+	 	 			   ON b.id = a.idUser 
+	 	 			   WHERE a.id = '.$id[0]['MAX(id)'].'';
+//echo $request2;
+	 	 	$aRes = parent::addRequestSelect($request2);
+	 	 	return $aRes;
+	 	 }
 	 	 //******************************************************************************************************************
 	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit
 	 	 public function getAllCommentOrder($idEpisode, $ordre)

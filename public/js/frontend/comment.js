@@ -1,40 +1,73 @@
 
-
-
 $(document).ready(function(){
 
+//*************************************************************
+//AJAX pour envoyer des commentaires aux épisodes
 
-var aElemCommentValid = document.querySelector('#globalComment div#contentInputComment form div.formComment div.formColumComment button.fas.fa-check');  //
-	//console.log(aElemCommentValid);
-
-	$(aElemCommentValid).click(function(){
+	$('#sendCommentEpisode').click(function(){
 		
-		var valDivComment = $('#commentUserConnect').val(); 
-		var pseudo = $('#pseudoComment').html();
-		var date = $('#dateComment').html();
-		var idUser = $('#idUserComment').html();
+		var comment = $('#commentUserConnect').val(); 
 		var idEpisode = $('#numEpisode').html();
 		
 		div = document.getElementById('contentInputComment');
-		btnOpen = document.querySelector('#headerComment .fa-pen-nib');
+		btnOpen = document.querySelector('#headerComment .fa-pen-comment');
 		btnClose = document.querySelector('#headerComment .fa-times');
 
-
-/*console.log(valDivComment);
-		console.log(pseudo);
-		console.log(date);*/
-
-
-		$.post('sendComment.php', {valDivComment:valDivComment, pseudo:pseudo, idUser:idUser, idEpisode:idEpisode}, function(data){
-			$('<div class="commentSignal"><p> De </p><p>'+pseudo+'</p><p> le </p><p>'+date+'</p></div><div class="comment"><p id="commentUserConnectSend">'+data+'</p></div>').appendTo($('#globalComment'));
+		var commentClean = comment.replace(/ |\n|\r|\t/g, ''); // on s'assure qu'il n'y ai pas un commentaire remplis d'espace blanc
+		if(commentClean == ''){
 			$(btnClose).fadeOut(0);
 			$(btnOpen).fadeIn(200);
 
 			$(div).fadeOut(200);
 			$(div).delay(0).animate({'height':'0px'}, {'duration':200});
-		});
-		return false;
+		}else{
+			$.post('index.php?action=addComment', {comment:comment, idEpisode:idEpisode}, function(data){
+				$(data).appendTo($('#globalComment'));
+				$(btnClose).fadeOut(0);
+				$(btnOpen).fadeIn(200);
+
+				$(div).fadeOut(200);
+				$(div).delay(0).animate({'height':'0px'}, {'duration':200});
+				return false;
+			});
+		}
 	});
 
-
 });
+	//*************************************************************
+//AJAX pour répondre à des commentaires aux épisodes
+function replyComment(idComment, reply, divClose, btn, divPushReply){
+
+		var txtReply = $('#'+reply).val(); 
+		var idEpisode = $('#numEpisode').html();
+
+		var replyClean = txtReply.replace(/ |\n|\r|\t/g, ''); // on s'assure qu'il n'y ai pas un commentaire remplis d'espace blanc
+		if(replyClean == ''){
+			$('#'+btn).fadeIn(200);
+			$('#'+divClose).fadeOut(200);
+			$('#'+divClose).delay(0).animate({'height':'0px'}, {'duration':200});
+		}else{
+			$.post('index.php?action=addReply', {idComment:idComment, txtReply:txtReply, idEpisode:idEpisode}, function(data){
+				var emptyDiv = $.trim($('#'+divPushReply+ ' + div.globalReply').text());
+				if(emptyDiv == ''){
+					$(data).appendTo($('#'+divPushReply+ ' + div.globalReply'));
+					$('<p> Voir les réponses </p><div class="plusMoins"><span class="fas fa-plus" onclick="javascript:animCommentPlus(\''+divPushReply+'\')"></span><span class="fas fa-minus" onclick="javascript:animCommentMoins(\''+divPushReply+'\')"></span></div>').appendTo($('#'+divPushReply));
+				
+					$('#'+divPushReply+' div.plusMoins span.fa-plus').fadeOut(0);
+					$('#'+divPushReply+' div.plusMoins span.fa-minus').fadeIn(0);
+					$('#'+divPushReply+ ' + div.globalReply').fadeIn(200);
+					$('#'+btn).fadeIn(200);
+				}else{
+					$(data).appendTo($('#'+divPushReply+ ' + div.globalReply'));
+					$('#'+divPushReply+' div.plusMoins span.fa-plus').fadeOut(0);
+					$('#'+divPushReply+' div.plusMoins span.fa-minus').fadeIn(0);
+					$('#'+divPushReply+ ' + div.globalReply').fadeIn(200);
+					$('#'+btn).fadeIn(200);
+				}
+				$('#'+divClose).fadeOut(200);
+				$('#'+divClose).delay(0).animate({'height':'0px'}, {'duration':200});
+				return false;
+			});
+		}
+
+}

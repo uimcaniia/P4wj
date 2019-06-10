@@ -11,26 +11,26 @@
 	?>
 
 
-			<p> - Laissez un message <span class="fas fa-pen-nib contentInputComment" onclick="javascript:animDivWriteCommentOpen('headerComment', 'contentInputComment')"></span>
+			<p> - Laissez un message <span class="fas fa-comment contentInputComment" onclick="javascript:animDivWriteCommentOpen('headerComment', 'contentInputComment')"></span>
 			</p>
 		</div>
 		<div id="contentInputComment">
-			<form method="post">
-				<div class="formComment">
-					<label for="commentUserConnect"></label>
-					<div class="hideInfoCommentSend">
-						<p id='pseudoComment'><?= $_SESSION['pseudo'] ?></p>
-						<p id='idUserComment'><?= $_SESSION['idUser'] ?></p>
-						<p id='dateComment'><?= date("d-m-Y") ?></p>
-						<p id='numEpisode'><?= $_GET['idEpisode'] ?></p>
-					</div>
-					<input type="text" id ="commentUserConnect" value="" name ="commentUserConnect" placeholder="Votre commentaire ...">
-					<div class='formColumComment'>
-						<span class="fas fa-times contentInputComment" onclick="javascript:animDivWriteCommentClose('headerComment', 'contentInputComment')"></span>
-						<button type="submit" class="fas fa-check" name='sendComment'></button>
-					</div>
+			
+			<div class="formComment">
+				<label for="commentUserConnect"></label>
+				<div class="hideInfoCommentSend">
+					<p id='pseudoComment'><?= $_SESSION['pseudo'] ?></p>
+					<p id='idUserComment'><?= $_SESSION['idUser'] ?></p>
+					<p id='dateComment'><?= date("d-m-Y") ?></p>
+					<p id='numEpisode'><?= $_GET['idEpisode'] ?></p>
 				</div>
-			</form>
+				<input type="text" id ="commentUserConnect" value="" name ="commentUserConnect" placeholder="Votre commentaire ...">
+				<div class='formColumComment'>
+					<span class="fas fa-times contentInputComment" onclick="javascript:animDivWriteCommentClose('headerComment', 'contentInputComment')"></span>
+					<span id="sendCommentEpisode" class="fas fa-check"></span>
+				</div>
+			</div>
+			
 	 	</div>
 
 	<?php
@@ -51,23 +51,20 @@
 		}
 		else
 		{
-/*			echo '<pre>';
-			print_r($aComment);
-			echo '</pre>';*/
 			for ($i = 0 ; $i < count($aComment) ; $i++)
 			{
 	?>
-		 	 	<div class="commentSignal" id ='signal$i'>
+		 	 	<div class="commentSignal" id ='signal<?=$i?>'>
 		 	 		<p> De </p>
 		 	 		<p><?= $aComment[$i]['pseudo'] ?></p>
 		 	 		<p> le </p>
-		 	 		<p><?= $aComment[$i]['commentTime'] ?></p>
+		 	 		<p><?= strftime('%d-%m-%Y',strtotime($aComment[$i]['commentTime'] ))?></p>
 	<?php
-				if(($isConnect === true) && ($aComment[$i]['reporting'] == 0)&&($aComment[$i]['idUser'] != $_SESSION['idUser']))
+				if(($isConnect === true) && ($aComment[$i]['reporting'] == 0) && ($aComment[$i]['idUser'] != $_SESSION['idUser']))
 				{
 	?>
 					<p>- Signaler le commentaire </p>
-					<span id ="<?= $aComment[$i]['id'] ?>" class="fas fa-bell" <?= $aComment[$i]['idUser'] ?> onclick="javascript:animPopup('signal<?=$i?>')"></span>
+					<span id ="<?= $aComment[$i]['id'] ?>" class="fas fa-bell <?=$aComment[$i]['idUser']?>" onclick="javascript:animPopup('signal<?=$i?>')"></span>
 					<div class="popupSignal">
 						<p> Merci de nous avoir prévenu.</p>
 					</div>
@@ -106,31 +103,40 @@
 		 		if($isConnect === true)
 				{
 	?>
-				<p> Répondre <span id="btnOpen<?=$i?>" class="fas fa-pen-nib contentInputReply" onclick="javascript:animDivWriteReplyOpen('replyDiv<?=$i?>', btnOpen<?=$i?>, btnClose<?=$i?>)"></span>
+				<p><span class="far fa-hand-point-right"></span> Répondre <span id="btnOpen<?=$i?>" class="fas fa-comment contentInputReply" onclick="javascript:animDivWriteReplyOpen('replyDiv<?=$i?>', 'btnOpen<?=$i?>')"></span>
 				</p>
 				<div class="contentInputReply" id="replyDiv<?=$i?>">
-					<form method="post" action="comment.php">
-						<div class="formComment">
-							<label for="replyUserConnect"></label>
-							<input type="text" id ="replyUserConnect" name ="replyUserConnect" placeholder="Votre commentaire ...">
-							<div class='formColumComment'>
-								<span id="btnClose<?=$i?>" class="fas fa-times contentInputReply" onclick="javascript:animDivWriteReplyClose('replyDiv<?=$i?>', btnOpen<?=$i?>, btnClose<?=$i?>)"></span>
-								<button type="submit" class="fas fa-check" name='sendReply'></button>
-							</div>
+					
+					<div class="formComment">
+						<label for="replyUserConnect"></label>
+						<input type="text" id ="replyUserConnect<?=$i?>" name ="replyUserConnect" placeholder="Répondre...">
+						<div class='formColumComment'>
+							<span id="btnCloseReply<?=$i?>" class="fas fa-times contentInputReply" onclick="javascript:animDivWriteReplyClose('replyDiv<?=$i?>', 'btnOpen<?=$i?>')"></span>
+							<span id="btnValidReply<?=$i?>" class="fas fa-check" onclick="javascript:replyComment('<?= $aComment[$i]['id']?>',  'replyUserConnect<?=$i?>', 'replyDiv<?=$i?>', 'btnOpen<?=$i?>', 'part<?=$i?>' )"></span>
 						</div>
-					</form>
+					</div>
+					
 			 	</div>
 	<?php
 				}
+				if(empty($aComment[$i]['reply']))
+				{
+	?>
+					<div class='lookReply' id='part<?=$i?>'>
+					</div>
+					<div class="globalReply">
+					</div>
 
+	<?php
+				}
 				if(!empty($aComment[$i]['reply']))
 				{
 	?>
 				<div class='lookReply' id='part<?=$i?>'>
-					<p> Voir les réponses </p>
+					<p><span class="far fa-hand-point-right"></span> Voir les réponses </p>
 					<div class="plusMoins">
-						<span class="fa fa-plus-circle" onclick="javascript:animCommentPlus('part<?=$i?>')"></span>
-						<span class="fas fa-minus-circle" onclick="javascript:animCommentMoins('part<?=$i?>')"></span>
+						<span class="fa fa-plus" onclick="javascript:animCommentPlus('part<?=$i?>')"></span>
+						<span class="fas fa-minus" onclick="javascript:animCommentMoins('part<?=$i?>')"></span>
 					</div>
 				</div>
 
@@ -159,20 +165,20 @@
 						}else
 						{
 	?>
-						<p class="messSignal">- Réponse signalée.</p>
-					</div>
+					<p class="messSignal">- Réponse signalée.</p>
+				</div>
 
 	<?php
 						}
 	?>
-					<div class="reply">
-						<p><?=$aComment[$i]['reply'][$j]['reply']?></p>
-					</div>
+				<div class="reply">
+					<p><?=$aComment[$i]['reply'][$j]['reply']?></p>
+				</div>
 
 	<?php
 					}
 	?>
-				</div>
+			</div>
 	<?php
 					
 				}
@@ -181,9 +187,4 @@
 
 
 			?>
-		</div>
-	
-
-			<?php
 		
-	?>

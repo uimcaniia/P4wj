@@ -221,7 +221,6 @@ try {
         }
         elseif($_GET['action'] == 'delComment') // si l'admin veut supprimer un commentaire signalés
         {
-             echo 'ok2';
             if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
             {
                 if(isset($_POST['idComment'])  && isset($_POST['idUser'])) // si commentaire, supprime commentaire + réponse
@@ -238,9 +237,8 @@ try {
                 throw new Exception('vous n\'avez pas l\'autorisation necessaire pour supprimer le commentaire signalé');
             }
         }
-        elseif($_GET['action'] == 'delCommentReply') // si l'admin veut supprimer un commentaire signalés
+        elseif($_GET['action'] == 'delCommentReply') // si l'admin veut supprimer un commentaire signalés et ses réponses
         {
-            echo 'ok1';
             if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
             {
                 if(isset($_POST['idReply']) && isset($_POST['idUser']))//si réponse, supprime que réponse signalé
@@ -284,13 +282,14 @@ try {
         // ENVOIE COMMENTAIRE 
         elseif ($_GET['action'] == 'addComment') // si on veut poster un commentaire
         {
-            if (isset($_GET['idEpisode']) && $_GET['idEpisode'] > 0) // test id épisode
+            if (isset($_POST['idEpisode']) && $_POST['idEpisode'] > 0) // test id épisode
             {
+
             	if (isset($_SESSION['idUser']) && $_SESSION['idUser'] > 0) // test id utilisateur si connecté
             	{
             		if (!empty($_POST['comment'])) // test si le champs n'est pas vide
             		{
-            			addComment($_GET['idEpisode'], $_SESSION['idUser'], $_POST['comment']);
+            			addComment($_POST['idEpisode'], $_SESSION['idUser'], $_POST['comment']);
             		}
             		else
             		{
@@ -311,20 +310,13 @@ try {
         // REPONSE COMMENTAIRE
         elseif ($_GET['action'] == 'addReply') // si on veut répondre à un commentaire
         {
-            if (isset($_GET['idEpisode']) && $_GET['idEpisode'] > 0) // test id épisode
+            if (isset($_POST['idEpisode']) && $_POST['idEpisode'] > 0) // test id épisode
             {
-            	if (isset($_GET['idComment']) && $_GET['idComment'] > 0) // test id épisode
+            	if (isset($_POST['idComment']) && $_POST['idComment'] > 0) // test id épisode
             	{
 	            	if (isset($_SESSION['idUser']) && $_SESSION['idUser'] > 0) // test id utilisateur
 	            	{
-	            		if (!empty($_POST['reply'])) // test si le champs n'est pas vide
-	            		{
-	            			addReply($_GET['idEpisode'], $_SESSION['idUser'], $_GET['idComment'], $_POST['reply']);
-	            		}
-	            		else
-	            		{
-	                    	throw new Exception('Le commentaire est vide !');
-	                	}
+	            		addReply($_POST['idEpisode'], $_SESSION['idUser'], $_POST['idComment'], $_POST['txtReply']);
 	            	}
 	            	else
 	            	{

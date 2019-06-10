@@ -11,15 +11,31 @@ class ReplyManager extends bdd{
 	 	 public function add(Reply $reply)
 	 	 {
 	 	 	$param1 = $reply->getReply();
-		    $param2 = $reply->getDateReply();
-		    $param3 = $reply->getIdComment_reply();
-		    $param4 = $reply->getIduser_reply();
-		    $param5 = $reply->getReporting_reply();
-		    $param6 = $reply->getId_episode();
+		    $param3 = $reply->getIdcomment_reply();
+		    $param4 = $reply->getId_episode();
+		    $param5 = $reply->getIduser_reply();
 
-	 	 	$request = 'INSERT INTO '. self::TAB_REP.'(reply , dateReply, idcomment_reply, id_episode, iduser_reply, reporting_reply) VALUES ('.$param1.', '.$param2.', '.$param3.' , '.$param4.', , '.$param5.')';
 
+	 	 	$request = 'INSERT INTO '. self::TAB_REP.'(reply, dateReply, idcomment_reply, id_episode, iduser_reply, reporting_reply) VALUES ('.$param1.', NOW(), '.$param3.' , '.$param4.', '.$param5.', 0)';
+//echo $request;
 	 	 	parent::addRequest($request);
+	 	 }
+
+	//*************************************************************************
+	 	 public function getLastReply()
+	 	 {
+	 	 	$request = 'SELECT MAX(id) FROM '. self::TAB_REP.'';
+	 	 	$id = parent::addRequestSelect($request);
+
+	 	 	//$request2 = 'SELECT * FROM '. self::TAB_COM.' WHERE id = '.$id.'';
+	 	 	$request2 ='SELECT a.*, b.pseudo 
+	 	 			   FROM '.self::TAB_REP.' AS a 
+	 	 			   INNER JOIN user AS b 
+	 	 			   ON b.id = a.iduser_reply 
+	 	 			   WHERE a.id = '.$id[0]['MAX(id)'].'';
+//echo $request2;
+	 	 	$aRes = parent::addRequestSelect($request2);
+	 	 	return $aRes;
 	 	 }
 
  //*****************************************************************************************************************

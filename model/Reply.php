@@ -41,21 +41,25 @@
 
 	 	 public function hydrate($aData)
 	 	 {
+/*	 	 			echo '<pre>';
+	print_r($aData);
+	echo '</pre>';*/
 	 	 	if($aData != false)
 	 	 	{
-	 	 		$this->setCheckIdentite(true);
 		 	 	foreach ($aData[0] as $key => $value)
 		 	 	{
 		 	 		 // On récupère le nom du setter correspondant à l'attribut en mettant sa première lettre en majuscule. 
 		 	 		$method = 'set'.ucfirst($key);
 		 	 		if(method_exists($this, $method))
 		 	 		{
+
 		 	 			$this->$method($value);
+		 	 			//echo $value;
 		 	 		}
 		 	 	}
 		 	}else
 		 	{
-		 	 	$this->setCheckIdentite(false);
+
 		 	}
 	 	 }
 
@@ -113,7 +117,7 @@
 		/** Assigne l'ID' de l'item */
 		public function setId($id)
 		{
-			$id = (int) $id;
+			$id = (int)$id;
 			$this->_id = $id;
 		}
 		
@@ -135,28 +139,28 @@
 		/** Assigne id du commentaire recevant la réponse */
 		public function setIdcomment_reply($idcomment_reply)
 		{
-			$idcomment_reply = (int) $idcomment_reply;
-			$this->_idcomment_reply = $idcomment_reply;
+			$idcomment_replyInt = (int)$idcomment_reply;
+			$this->_idcomment_reply = $idcomment_replyInt;
 		}
 		
 		/** Assigne id de l'utilisateur qui a répondut */
 		public function setIduser_reply($iduser_reply)
 		{
-			$iduser_reply = (int) $iduser_reply;
-			$this->_iduser_reply = $iduser_reply;
+			$iduser_replyInt = (int)$iduser_reply;
+			$this->_iduser_reply = $iduser_replyInt;
 		}
 
 		/** Assigne réponse signalé (1) ou non (0) */
 		public function set_Reporting_reply($reporting_reply)
 		{
-			$reporting_reply = (int) $reporting_reply;
+			$reporting_reply = (int)$reporting_reply;
 			$this->_reporting_reply = $reporting_reply;
 		}
 		/** Assigne l'id de l'épisode concerné */
 		public function setId_episode($id_episode)
 		{
-			$id_episode = (int) $id_episode;
-			$this->_id_episode = $id_episode;
+			$id_episodeInt = (int)$id_episode;
+			$this->_id_episode = $id_episodeInt;
 		}
 		
 	}

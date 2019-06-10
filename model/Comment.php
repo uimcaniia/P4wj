@@ -96,7 +96,7 @@
 		/** Assigne l'ID' de l'item */
 		public function setId($id)
 		{
-			$id = (int) $id;
+			$id = (int)$id;
 			$this->_id = $id;
 		}
 		
@@ -119,22 +119,22 @@
 		/** Assigne id de l'épisode concerné par le commentaire */
 		public function setIdEpisode($idEpisode)
 		{
-			$id = (int) $idEpisode;
-			$this->_idEpisode = $idEpisode;
+			$id = (int)$idEpisode;
+			$this->_idEpisode = $id;
 		}
 		
 		/** Assigne commentaire signalé (1) ou non (0) */
 		public function setReporting($reporting)
 		{
-			$id = (int) $reporting;
-			$this->_reporting = $reporting;
+			$id = (int)$reporting;
+			$this->_reporting = $id;
 		}
 
 		/** Assigne id de l'utilisateur responsable du commentaire */
 		public function setIdUser($idUser)
 		{
-			$id = (int) $idUser;
-			$this->_idUser = $idUser;
+			$id = (int)$idUser;
+			$this->_idUser = $id;
 		}
 		
 	}

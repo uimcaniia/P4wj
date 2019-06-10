@@ -4,8 +4,8 @@
  //animation commentaire  + -
 
 function animCommentPlus($id){
-	open = document.querySelector('#'+ $id+' .plusMoins .fa-plus-circle');
-	close = document.querySelector('#'+ $id+' .plusMoins .fa-minus-circle');
+	open = document.querySelector('#'+ $id+' .plusMoins .fa-plus');
+	close = document.querySelector('#'+ $id+' .plusMoins .fa-minus');
 	divFrere = document.querySelector('#'+ $id+' + .globalReply');
 
 		$(open).fadeOut(200);
@@ -14,8 +14,8 @@ function animCommentPlus($id){
 }
 
 function animCommentMoins($id){
-	open = document.querySelector('#'+ $id+' .plusMoins .fa-plus-circle');
-	close = document.querySelector('#'+ $id+' .plusMoins .fa-minus-circle');
+	open = document.querySelector('#'+ $id+' .plusMoins .fa-plus');
+	close = document.querySelector('#'+ $id+' .plusMoins .fa-minus');
 	divFrere = document.querySelector('#'+ $id+' + .globalReply');
 
 		$(close).fadeOut(200);
@@ -57,7 +57,7 @@ function animPopupReply(idDivGlobal, id){
 function animDivWriteCommentOpen(divGlobal, id){
 
 	div = document.getElementById(id);
-	btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-nib');
+	btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-comment');
 	btnClose = document.querySelector('#'+divGlobal+' .fa-times');
 
 		$(btnOpen).fadeOut(0);
@@ -70,7 +70,7 @@ function animDivWriteCommentOpen(divGlobal, id){
 function animDivWriteCommentClose(divGlobal, id){
 
 		div = document.getElementById(id);
-		btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-nib');
+		btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-comment');
 		btnClose = document.querySelector('#'+divGlobal+' .fa-times');
 
 		$(btnClose).fadeOut(0);
@@ -80,17 +80,15 @@ function animDivWriteCommentClose(divGlobal, id){
 		$(div).delay(0).animate({'height':'0px'}, {'duration':200});
 }
 //********************************************************
-function animDivWriteReplyOpen(id, open, close){
-		$(open).fadeOut(0);
-		$(close).fadeIn(200);
+function animDivWriteReplyOpen(id, open){
+		$('#'+open).fadeOut(0);
 
 		$('#'+id).delay(0).animate({'height':'90px'}, {'duration':200});
 		$('#'+id).fadeIn(500);
 }
 
-function animDivWriteReplyClose(id, open, close){
-		$(close).fadeOut(100);
-		$(open).fadeIn(200);
+function animDivWriteReplyClose(id, close){
+		$('#'+close).fadeIn(100);
 
 		$('#'+id).fadeOut(200);
 		$('#'+id).delay(0).animate({'height':'0px'}, {'duration':200});
@@ -100,7 +98,7 @@ function animDivWriteReplyClose(id, open, close){
 function animDivWriteNewInfoOpen(divGlobal, id){
 
 	div = document.getElementById(id);
-	btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-nib');
+	btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-comment');
 	btnClose = document.querySelector('#'+divGlobal+' .fa-times');
 
 		$(btnOpen).fadeOut(0);
@@ -113,7 +111,7 @@ function animDivWriteNewInfoOpen(divGlobal, id){
 function animDivWriteNewInfoClose(divGlobal, id){
 
 		div = document.getElementById(id);
-		btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-nib');
+		btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-comment');
 		btnClose = document.querySelector('#'+divGlobal+' .fa-times');
 
 		$(btnClose).fadeOut(0);

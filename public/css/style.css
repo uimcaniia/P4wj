@@ -438,7 +438,7 @@ padding:0px 10px 0px 10px;
 #globalComment .lookReply .plusMoins span:hover{
    color: #91eded;
 }
-#globalComment .lookReply .plusMoins .fa-minus-circle{
+#globalComment .lookReply .plusMoins .fa-minus{
   display: none;
 }
 #globalComment .hideInfoCommentSend{
@@ -885,7 +885,12 @@ color: white;
   width:100px;
 }
 /*********************************************************************************/
-
+body #globalComment span.far.fa-hand-point-right{
+  cursor:initial;
+}
+body #globalComment span.far.fa-hand-point-right:hover{
+  color: #4ac2c2;
+}
 /********************************************************************************/
 footer{
     width:100%;

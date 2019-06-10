@@ -11,15 +11,15 @@ var aElemSignalIconeReply = document.querySelectorAll('div.replySignal > span.fa
 		var pRefresh = document.querySelector('#'+idDivComment+' > p:nth-child(5)') // div p a rafraichir
 		//console.log(pRefresh);
 		var idCommentSignal = $(this).attr('id'); // id du commentaire signalé
-		//console.log(idCommentSignal);
+		console.log(idCommentSignal);
 		var idUserSignal = this.className.split(' ')[2]; // id de l'utilisateur signalé
-		//console.log(idUserSignal);
-		//console.log(idCommentSignal);
+		console.log(idUserSignal);
 
-		$.post('sendSignal.php', {idCommentSignal:idCommentSignal , idUserSignal:idUserSignal}, function(data){
+		$.post('index.php?action=addComment', {idCommentSignal:idCommentSignal , idUserSignal:idUserSignal}, function(data){
 			$(pRefresh).html('- Commentaire signalé !');
+			return false;
 		});
-		return false;
+		
 	});
 
 	$(aElemSignalIconeReply).click(function(){
@@ -35,8 +35,9 @@ var aElemSignalIconeReply = document.querySelectorAll('div.replySignal > span.fa
 
 		$.post('sendSignal.php', {idReplySignal:idReplySignal , idUserReplySignal:idUserReplySignal}, function(data){
 			$(pRefresh).html('- Réponse signalé !');
+			return false;
 		});
-		return false;
+		
 	});
 
 });
