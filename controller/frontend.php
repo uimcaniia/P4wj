@@ -184,7 +184,7 @@ function addComment($idEpisode, $idPseudo, $comment)
 	$userComment = $majCommentUser->get('id', $idPseudo); // on récup le nbr de commentaire qu'il a posté
 	$userComment[0]['comment'] = $userComment[0]['comment'] +1; // on ajoute +1 de commentaire
 	$userComment = $majCommentUser->update('comment', $userComment[0]['comment'], $idPseudo); // maj du nbr de commentaire
-	
+
 	$aDataComment=array(
 		array(
 			"comment"   => "'$comment'",
@@ -229,14 +229,30 @@ function addReply($idEpisode, $idPseudo, $comment, $reply)
 	echo $resReply;
 }
 //********************************************************
-function signalComment($idEpisode, $idComment)
+function signalComment($idEpisode, $idComment, $idUserSignal)
 {
-	require('view/frontend/commentView.php');
+	$idIntUser = intval($idUserSignal); // on transforme la string en int
+
+	$majSignalUser = new User;
+	$userReporting = $majSignalUser->get('id', $idIntUser); // on récup le nbr de signalement qu'il a reçut
+	$userReporting[0]['reporting'] = $userReporting[0]['reporting'] +1; // on ajoute +1 de signalement
+	$userReporting = $majSignalUser->update('reporting', $userReporting[0]['reporting'], $idIntUser); // maj du signalement
+
+	$majSignalComment = new Comment;
+	$commentReporting = $majSignalComment->update($_POST['idCommentSignal']);
 }
 //********************************************************
-function signalReply($idEpisode, $idComment, $idReply)
+function signalReply($idEpisode, $idComment, $idReply, $idUserSignal)
 {
-	require('view/frontend/commentView.php');
+	$idIntUser = intval($idUserSignal); // on transforme la string en int
+
+	$majSignalUser = new User;
+	$userReporting = $majSignalUser->get('id', $idIntUser); // on récup le nbr de signalement qu'il a reçut
+	$userReporting[0]['reporting'] = $userReporting[0]['reporting'] +1; // on ajoute +1 de signalement
+	$userReporting = $majSignalUser->update('reporting', $userReporting[0]['reporting'], $idIntUser); // maj du signalement
+
+	$majSignalReply = new Reply;
+	$commentReporting = $majSignalReply->update($_POST['idReplySignal']);
 }
 //********************************************************
 function biography()

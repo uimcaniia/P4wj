@@ -337,21 +337,28 @@ try {
         // SIGNALER COMMENTAIRE
         elseif ($_GET['action'] == 'signalComment') // si on veut signaler un commentaire ou une réponse à un commentaire
         {
-            if (isset($_GET['idEpisode']) && $_GET['idEpisode'] > 0) // test id épisode
+            if (isset($_POST['idEpisode']) && $_POST['idEpisode'] > 0) // test id épisode
             {
-            	if (isset($_GET['idComment']) && $_GET['idComment'] > 0) // test id commentaire
-            	{
-            		signalComment($_GET['idEpisode'], $_GET['idComment']);
+                if (isset($_POST['idUserSignal']) && $_POST['idUserSignal'] > 0) // test id épisode
+                {
+                	if (!isset($_POST['idReply']) && isset($_POST['idComment']) && $_POST['idComment'] > 0) // test id commentaire
+                	{
+                		signalComment($_POST['idEpisode'], $_POST['idComment'], $_POST['idUserSignal']);
 
-	            }
-	            elseif ((isset($_GET['idReply']) && $_GET['idReply'] > 0) && (isset($_GET['idComment']) && $_GET['idComment'] > 0)) // test id commentaire et réponse
-            	{
-            		signalReply($_GET['idEpisode'], $_GET['idComment'], $_GET['idReply']);
-	            }
-            	else
-            	{
-            		throw new Exception('Aucun identifiant de commentaire envoyé!');
-            	}
+    	            }
+    	            elseif ((isset($_POST['idReply']) && $_POST['idReply'] > 0) && (isset($_POST['idComment']) && $_POST['idComment'] > 0)) // test id commentaire et réponse
+                	{
+                		signalReply($_POST['idEpisode'], $_POST['idComment'], $_POST['idReply'], $_POST['idUserSignal']);
+    	            }
+                	else
+                	{
+                		throw new Exception('Aucun identifiant de commentaire envoyé!');
+                	}
+                }
+                else
+                {
+                    throw new Exception('Aucun identifiant d\'utilisateur envoyé!');
+                }
             }
             else
             {
