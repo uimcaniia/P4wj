@@ -27,6 +27,7 @@ class UserManager extends bdd{
 	 	 { 
 		 	 $request = 'SELECT * FROM '. self::TAB_USER.' WHERE '.$param.'  = "'.$value.'" ';
 		 	 $aRes = parent::addRequestSelect($request);
+		 	 //echo $request;
 		 	 return $aRes;
 	 	 }
 

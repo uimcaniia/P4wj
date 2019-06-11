@@ -11,7 +11,7 @@
 		private $_aTestError = array( // array contenant les différente erreur a afficher
 		    "tstMail"   => array("","Veuillez indiquer un e-mail", "Ce mail existe déjà. Vous avez déjà un compte?" , "Adresse mail invalide."),
 		    "tstPseudo" => array("", "Veuillez indiquer un Pseudo", "Ce pseudo existe déjà. Veuillez en choisir un autre", ""),
-		    "tstPsw"    => array("", "Veuillez indiquer un mot de passe","", "Le mot de passe n'est pas assez sécurisé. Veuillez utiliser 8 caractères minimum avec au moins une majuscule et un chiffre", "Le mot de passe et (ou) l'adresse mail renseigné n'est pas le bon.", "Les 2 mots de passe ne sont pas identiques", 'veuillez remplir les champs')
+		    "tstPsw"    => array("", "Veuillez indiquer un mot de passe","", "Le mot de passe n'est pas assez sécurisé. Veuillez utiliser 8 caractères minimum avec au moins une majuscule et un chiffre", "Le mot de passe et (ou) l'adresse mail renseigné n'est pas le bon.", "Les 2 mots de passe ne sont pas identiques", 'veuillez remplir les champs', 'ce compte a été supprimé!')
 		);
 
 		// **************************************************
@@ -64,7 +64,8 @@
 				{
 					$user = new User();
 					$verifInfo = parent::get($paramBdd, $chaine);
-					if (is_array($verifInfo))
+					//print_r($verifInfo);
+					if (!empty($verifInfo))
 					{
 						$numError = 2;
 						array_push($aResultError, $numError);
@@ -103,7 +104,6 @@
 			$numError= 0;
 			$aResultError=array();
 
-
 			if(empty($mail) || empty($psw))
 			{
 				$numError = 6;
@@ -114,19 +114,24 @@
 				$verifInfo = parent::get($paramBdd, $mail);
 				if (is_array($verifInfo))
 				{
-					if(password_verify($psw,$verifInfo[0][$pswCompare]))
+					if ($verifInfo[0]['deleteUser'] == 1)
 					{
-
-						return 0;
+						$numError = 7;
+						array_push($aResultError, $numError);
+					}
+					elseif(($verifInfo[0]['deleteUser'] == 0) && (password_verify($psw,$verifInfo[0][$pswCompare])))
+					{
+						$numError = 0;
 					}
 					else{
-						return $numError= 4;
+						$numError= 4;
 						array_push($aResultError, $numError);
 					}
 				}
 				else
 				{
-					return $numError= 4;
+					$numError= 4;
+					array_push($aResultError, $numError);
 				}
 			}
 			if(count($aResultError) == 0)
