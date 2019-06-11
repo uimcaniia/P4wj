@@ -5,7 +5,8 @@ require('controller/backend.php');
 require('controller/frontend.php');
 
 try { 
-    if (isset($_GET['action'])) {
+    if (isset($_GET['action'])) 
+    {
         if ($_GET['action'] == 'listLastEpisode') // si on veut les 4 derniers épisode de sortis
         {
             listLastEpisode(4);
@@ -363,6 +364,46 @@ try {
             else
             {
                 throw new Exception('Aucun identifiant de billet envoyé');
+            }
+        }
+        //*********************************************************************************
+        // voir les infos d'un compte ayant des signalements
+        elseif($_GET['action'] == 'getInfoPseudo') // si l'admin veut supprimer un utilisateur
+        {
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) // on s'assure que c'est bien l'admin
+            {
+                if(isset($_POST['idUser']) && $_POST['idUser'] > 0 )//si réponse, supprime que réponse signalé
+                {
+                    getPseudoModerate($_POST['idUser']);
+                }
+                else
+                {
+                    throw new Exception('Aucun selecteur est trouvé pour afficher les indos du pseudo');
+                }
+            }
+            else
+            {
+                throw new Exception('vous n\'avez pas l\'autorisation necessaire pour voir les infos de l\'utilisateur');
+            }
+        }
+        //********************************************************************************
+        //supprimer un utilisateur
+        elseif($_GET['action'] == 'delPseudo') // si l'admin veut supprimer un utilisateur
+        {
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) // on s'assure que c'est bien l'admin
+            {
+                if(isset($_POST['idUser']) && $_POST['idUser'] > 0 )//si réponse, supprime que réponse signalé
+                {
+                    deletePseudo($_POST['idUser']);
+                }
+                else
+                {
+                    throw new Exception('Aucun selecteur est trouvé pour supprimer le pseudo');
+                }
+            }
+            else
+            {
+                throw new Exception('vous n\'avez pas l\'autorisation necessaire pour supprimer un utilisateur');
             }
         }
         //*******************************************************************************

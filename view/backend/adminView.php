@@ -36,7 +36,7 @@
 						<p id='alertMessage'></p>
 						<div id="messageBtn" class="flexRow">
 							<p>supprimer</p>
-							<span id='sendMess' class="fas fa-check"></span>
+							<span id='delCom' class="fas fa-check"></span>
 						</div>
 					</div>
 				</section>
@@ -48,7 +48,7 @@
 						<p id='alertMessage'></p>
 						<div id="messageBtn" class="flexRow">
 							<p>supprimer</p>
-							<span id='sendMess' class="fas fa-check"></span>
+							<span id='delRepCom' class="fas fa-check"></span>
 						</div>
 					</div>
 				</section>
@@ -59,7 +59,20 @@
 						<p id='alertMessage'></p>
 						<div id="messageBtn" class="flexRow">
 							<p>supprimer</p>
-							<span id='sendMess' class="fas fa-check"></span>
+							<span id='delEpConfirm' class="fas fa-check"></span>
+						</div>
+					</div>
+				</section>
+				<section id="confirmDeletePseudo">
+					<div>
+						<span class="fas fa-times"  onclick="closeDeletePseudoDiv()"></span>
+							<p>Voulez-vous vraiment supprimer ce compte?</p>
+							<p>Les commentaires qui y sont associés, seront encore visible.</p>
+							<p>Le pseudonyme sera modifié et le compte sera bloqué.</p>
+						<p id='alertMessage'></p>
+						<div id="messageBtn" class="flexRow">
+							<p>supprimer</p>
+							<span id='delPseudo' class="fas fa-check"></span>
 						</div>
 					</div>
 				</section>
@@ -71,9 +84,6 @@
 				</section>
 				<section id="containtAdminMessage">
 					<?php include ('adminMessageView.php'); ?>
-				</section>
-				<section id='containtSpace'>
-					<?php include ('adminGestionView.php'); ?>
 				</section>
 
 <?php $content = ob_get_clean(); ?>

@@ -20,13 +20,6 @@ function admin()
 	$admin         = new Admin();
 	$getInfosAdmin = $admin->get('id', $_SESSION['idUser']);
 
-	$input       = new Input();
-	$inputPseudo = $input->get(10); // array contenant les attribut du champs input pseudo
-
-	$inputNewPassword    = $input->get(14);// array contenant les attribut du champs input password
-	$inputRepeatPassword = $input->get(15);
-	array_push($inputNewPassword, $inputRepeatPassword[0]); // assemblage des 2 array
-
 	$reply = new Reply; // on recupère les réponse correspondantes aux commentaires + pseudo dans la table user
 	$aReply = $reply->getAllReply();
 
@@ -38,13 +31,18 @@ function admin()
 	$episode = new Episode;
 	$aEpisode = $episode ->getAllEpisode();
 	$aEpisodeHaveComment = getEpisodeHaveComment($aAllCommentCompare); // array contenant tous les épisode ayant reçut des commentaires
-
 	$message         = new Message; 
 	$aMessageSend    = $message->get('send', $_SESSION['idUser'], 'date ASC'); // array qui contiendra tout les message envoyés
 	$aMessageReceive = $message->get('receive', $_SESSION['idUser'], 'date ASC'); // et les message reçut
 
 	$aUserSignal     = getUserSignal($aUser);// on récupère tous les utilisateur signalés
+
 	$aEpisodeSignal  = getEpisodeSignal($aCommentSignal, $episode);  // on récupère tous les épisodes ayant uncomment signalés
+
+	$user = new User;
+	$aUserModo   = $user ->getAllUserExist();
+	$aUserModerate   = $user ->getOnlyUserSignalExist($aUserModo);// on récupère tous les épisodes ayant uncomment signalés
+
 	$aMessageSend    = getMessageSend($aMessageSend);
 	$aMessageReceive = getMessageReceive($aMessageReceive);
 
@@ -299,7 +297,7 @@ function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
 	$table = '';
 	$comment  = new Comment();
 	$aComment = $comment->getAllCommentSignalSelect('idUser', $idPseudoSignal);
-	$reply    = new ReplyManager;
+	$reply    = new Reply;
 	$aReply   = $reply->getAllReplySelect('iduser_reply', $idPseudoSignal);
 
 	$table.='<thead><tr></tr></thead><tbody>';
@@ -410,4 +408,21 @@ function deleteMessage($idMess)
 {
 	$message = new Message();
 	$message->delete($idMess);
+}
+//**********************************************************************
+function getPseudoModerate($idUser)
+{
+	$user  = new User();
+	$aUserInfos = $user->get('id', $idUser); 
+
+		$div ='<p>Pseudo : '.$aUserInfos[0]['pseudo'].'</p><p>Nombre de modération actuelle : '.$aUserInfos[0]['moderate'].'</p><p>Ce lecteur à posté '.$aUserInfos[0]['comment'].' commentaire dont '.$aUserInfos[0]['reporting'].' ont été signalé(s)</p><p>Il est inscrit depuis le '.$aUserInfos[0]['inscription'].'</p><div class="flexRow"><p>Voulez-vous bloquer ce lecteur?</p><span id="goDeletPseudoModerate" class="fas fa-user-slash" onclick="deletePseudo(\''.$aUserInfos[0]['id'].'\');"></span>';
+
+	echo $div;
+}
+//**********************************************************************
+function deletePseudo($idUser)
+{
+	$user = new User; // on ne supprime pas le compte, mais on le bloque
+	$user-> update('pseudo', 'Profil supprimé', $idUser);
+	$user-> update('deleteUser', '1', $idUser);
 }

@@ -13,7 +13,7 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 
 				<div id="CommentWork">
 	 				<div class="whiteBlock">
-		 				<span onclick="animShowAdminMenu('navComment', '<?=$divHidenComment?>');"><p>Commentaires :</p>
+		 				<span onclick="animShowAdminMenu('navComment', '<?=$divHidenComment?>');"><p>Modération des commentaires :</p>
 		 				</span>
 		 			</div>
 
@@ -26,7 +26,7 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 		 							</span>
 				 				</div>
 				 				<div id="divSelectCom">
-					 				<div class='flexColumn'>
+					 				<!-- <div class='flexColumn'> -->
 						 				<div class="flexRow">
 					 						<div>
 						 						<button id ='sortEp' class="whiteBlock" type='submit' name='sortEp' onclick="animShowAdminMenu('selectSortComEp','<?=$divHidenDivSelCom?>');" >Par épisode</button>
@@ -93,13 +93,8 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 ?>
 											</div>
 										</div>
-										<div class="flexRow">
-											<table id='arrayComment'>
-											</table>
-											<table id='arrayPseudo'>
-											</table>
-										</div>
-									</div>
+
+									<!-- </div> -->
 								</div>
 
 				 			</div>
@@ -165,17 +160,25 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 
 										</div>
 									</div>
-									<div class="flexRow">
-										<table id='arrayCommentSignal'>
-										</table>
-										<table id='arrayPseudoSignal'>
-										</table>
-									</div>
+
 								</div>
 <?php 
 			}
 ?>
+
 				 			</div>
+		 					<div class="flexRow">
+								<table id='arrayComment'>
+								</table>
+								<table id='arrayPseudo'>
+								</table>
+							</div>
+							<div class="flexRow">
+								<table id='arrayCommentSignal'>
+								</table>
+								<table id='arrayPseudoSignal'>
+								</table>
+							</div>
 		 				</div>
 		 			</div>
 	 			<div>

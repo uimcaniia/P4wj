@@ -88,6 +88,29 @@ function closeMessageDiv(){
 	$('#textMess').val('');
 	$('#messageAdmin').fadeOut(600);
 }
+//*****************************************************************
+//action pour récupérer et afficher les détails d'un compte utilisateur
+function givePseudoDetail(){
+	$('#infoPseudoModerate').fadeIn(600);
+	var idUser= $('#selectPseudoSignalModo').val(); 
+		$.post('index.php?action=getInfoPseudo', {idUser:idUser}, function(data){
+			$('#infoPseudoModerate').html(data);
+		return false;
+	});
+}
+//*******************************************************************
+//action pour bloquer le compte d'un utilisateur
+function deletePseudo(idUser){
+	$('#confirmDeletePseudo').fadeIn(600);
 
-
-
+	$('#confirmDeletePseudo span.fa-check').click(function(){
+		$.post('index.php?action=delPseudo', {idUser:idUser}, function(data){
+			$('#selectPseudoSignalModo > option[value = "'+idUser+'"').remove();
+			$('#confirmDeletePseudo').fadeOut(600);
+			return false;
+		});
+	});
+}
+function closeDeletePseudoDiv(){
+	$('#confirmDeletePseudo').fadeOut(600);
+}

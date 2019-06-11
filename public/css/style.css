@@ -613,26 +613,27 @@ background-color: #fffc;
 box-shadow: 2px 2px 5px black;
 padding: 10px;
 margin: 10px;
-height: 25px;
 cursor:pointer;
 text-align: center;
+width:120px;
 }
 #containtAdmin > div:nth-child(1){
 width:300px;
 }
 #containtAdminComment > div:nth-child(1) > div:nth-child(1){
   width:120px;
-  height:25px;
 
 }
 #navEpisode .whiteBlock, #navComment .whiteBlock{
   width:150px;
 }
  #containtAdminMessage .whiteBlock{
-  width:80px;
+  width:120px;
+
  }
- #containtAdminMessage  #showMessage .whiteBlock{
+ #containtAdminMessage #showMessage .whiteBlock{
   width:150px;
+
  }
 #EpisodeWork, #CommentWork, #messageWork{
   display: flex;
@@ -648,7 +649,7 @@ text-align: center;
 display: flex;
 align-items: center;
 }
-#blockWriteIdEp, #blockWriteIdEpModif, #arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend, #quitEdit, #hideWriteEpisode,#hideWriteEpisodeModif, #divModifSelectEp, #divDelSelectEp, #navEpisode, #navComment, #navMessage, #divSelectCom, #selectSortComEp, #selectSortComPs, #divSelectComSignal, #selectSortComSignal, #selectSortComSignEp, #selectSortComSignPs{
+#selectPseudoSignalModerate, #infoPseudoModerate, #blockWriteIdEp, #blockWriteIdEpModif, #arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend, #quitEdit, #hideWriteEpisode,#hideWriteEpisodeModif, #divModifSelectEp, #divDelSelectEp, #navEpisode, #navComment, #navMessage, #divSelectCom, #selectSortComEp, #selectSortComPs, #divSelectComSignal, #selectSortComSignal, #selectSortComSignEp, #selectSortComSignPs{
   display: none;
 }
 #showComment, #showCommentSignal, #ShowMessage{
@@ -662,6 +663,24 @@ align-items: center;
 #messageAdmin .flexRow{
   justify-content: center;
 }
+#infoPseudoModerate{
+  background-color: #ffffffab;
+
+  width:80%;
+  margin:auto;
+  text-align: center;
+  align-items: center;
+}
+#infoPseudoModerate div{
+margin-top:20px;
+  }
+  #infoPseudoModerate div span{
+margin:0 0 8px 20px;
+  }
+    #infoPseudoModerate div span:hover{
+cursor: pointer;
+color: #1f8787;
+  }
 #navEpisode .flexColumn, #navComment .flexColumn, #navMessage .flexColumn{
   display: flex;
   flex-direction: column;
@@ -673,10 +692,10 @@ background-color: #fffc;
 #divSelectCom .flexRow button, #divSelectComSignal .flexRow button{
  padding: 10px 0 25px 0;
 width: 80px;
+height: 20px;
 }
 #divSelectCom, #divSelectComSignal{
   flex:1;
-
 }
 
 #writeEpisode, #writeEpisodeModif{
@@ -686,8 +705,8 @@ flex-direction: row;
 }
 #writeEpisode hr, #writeEpisodeModif hr{
   margin:20px;
-  flex:1;
-  width:1px;
+ /* flex:1;*/
+  width:0px;
 }
 #hideWriteEpisode, #hideWriteEpisodeModif{
   width:100%;
@@ -740,7 +759,7 @@ z-index: 1500;
 position: absolute;
 text-align: center;
 }
-#confirmDeleteComment, #confirmDeleteCommentReply, #confirmDeleteEpisode{
+#confirmDeleteComment, #confirmDeleteCommentReply, #confirmDeleteEpisode, #confirmDeletePseudo{
   width:100%;
 height:600px;
 display: none;
@@ -766,7 +785,7 @@ text-align: center;
 #messageBtn span{
 margin:20px 0 0 30px;
 }
-#messageAdmin span:hover, #arrayMessageReceive span:hover, #arrayMessageSend span:hover, #confirmDeleteComment span:hover, #confirmDeleteCommentReply span:hover, #confirmDeleteEpisode span:hover{
+#messageAdmin span:hover, #arrayMessageReceive span:hover, #arrayMessageSend span:hover, #confirmDeleteComment span:hover, #confirmDeleteCommentReply span:hover, #confirmDeleteEpisode span:hover, #confirmDeletePseudo span:hover{
 color: #1f8787;
 cursor:pointer;
 }
@@ -785,7 +804,7 @@ margin-bottom:0;
 margin:auto;
 position: relative;
 }
-#confirmDeleteComment > div, #confirmDeleteCommentReply > div, #confirmDeleteEpisode > div{
+#confirmDeleteComment > div, #confirmDeleteCommentReply > div, #confirmDeleteEpisode > div, #confirmDeletePseudo > div{
     width:300px;
   height:200px;
   background-color: #e7f0f0eb;
@@ -795,15 +814,19 @@ margin:auto;
 position: relative;
 text-align: center;
 }
-#confirmDeleteComment .flexRow, #confirmDeleteCommentReply .flexRow, #confirmDeleteEpisode  .flexRow{
+ #confirmDeletePseudo > div{
+  height:250px;
+  width:350px;
+}
+#confirmDeleteComment .flexRow, #confirmDeleteCommentReply .flexRow, #confirmDeleteEpisode .flexRow, #confirmDeletePseudo .flexRow{
   display: flex;
   justify-content: center;
 }
-#confirmDeleteComment span.fa-times, #confirmDeleteCommentReply span.fa-times, #confirmDeleteEpisode span.fa-times{
+#confirmDeleteComment span.fa-times, #confirmDeleteCommentReply span.fa-times, #confirmDeleteEpisode span.fa-times, #confirmDeletePseudo span.fa-times{
   position: absolute;
 right: 20px;
 }
-#confirmDeleteComment span.fa-check, #confirmDeleteCommentReply span.fa-check, #confirmDeleteEpisode span.fa-check{
+#confirmDeleteComment span.fa-check, #confirmDeleteCommentReply span.fa-check, #confirmDeleteEpisode span.fa-check, #confirmDeletePseudo span.fa-check{
 margin: 20px 0 0 10px;
 }
 #messageAdmin span.fa-times{

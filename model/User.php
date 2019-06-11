@@ -14,6 +14,7 @@
 	 	 private $_psw;// mot de pass de l'utilisateur
 	 	 private $_comment;//  nbr de commentaire laissé 
 	 	 private $_reporting;// nbr de signal reçut
+	 	 private $_deleteUser;// profil supprimé : 1 ou non : 0 
 	 	 private $_admin;// autorisation admin (0=utilisateur ; 1=admin
 
 		// **************************************************
@@ -28,7 +29,6 @@
 	 	 }
 
 	 	 public function hydrate($aData){
-	 	 	//print_r($aData);
 	 	 	foreach ($aData as $key => $value){
 	 	 		 // On récupère le nom du setter correspondant à l'attribut en mettant sa première lettre en majuscule. 
 	 	 		$method = 'set'.ucfirst($key);
@@ -36,6 +36,20 @@
 	 	 			$this->$method($value);
 	 	 		}
 	 	 	}
+	 	 }
+
+	 	 public function getOnlyUserSignalExist($aData){
+	 	 		//print_r($aData);
+	 	 	$aUserExist = array();
+	 	 	for($i = 0 ; $i < count($aData) ; $i++)
+	 	 	{
+	 	 		if($aData[$i]['reporting'] != 0)
+	 	 		{
+	 	 			array_push($aUserExist, $aData[$i]);
+	 	 		}
+	 	 	}
+
+	 	 	return $aUserExist;
 	 	 }
 
 
@@ -77,7 +91,10 @@
 		public function getReporting() {
 			return $this->_reporting;
 		}
-
+		/** Retourne son rang en tant que profil supprimé : 1 ou non : 0*/
+		public function getDeleteUser() {
+			return $this->_deleteUser;
+		}
 		/** Retourne son rang en tant qu'utilisateur(0) ou admin(1)*/
 		public function getAdmin() {
 			return $this->_admin;
@@ -133,7 +150,11 @@
 			$reporting = (int) $reporting;
 			$this->_reporting = $reporting;
 		}
-
+		/** Assigne son rang en tant que profil supprimé : 1 ou non : 0*/
+		public function setDeleteUser($deleteUser) {
+			$deleteUser = (int) $deleteUser;
+			$this->_deleteUser = $deleteUser;
+		}
 		/** Assigne son rang en tant qu'utilisateur(0) ou admin(1)*/
 		public function setAdmin($admin) {
 			$admin = (int) $admin;

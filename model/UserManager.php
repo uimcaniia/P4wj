@@ -25,24 +25,26 @@ class UserManager extends bdd{
 	 	 //lit une entrée de la table user en comparant un paramètre et une valeur
 	 	 public function get($param, $value)
 	 	 { 
-
 		 	 $request = 'SELECT * FROM '. self::TAB_USER.' WHERE '.$param.'  = "'.$value.'" ';
 		 	 $aRes = parent::addRequestSelect($request);
-		 	 if($aRes == NULL)
-		 	 {
-		 	 	return false;
-		 	 }else
-		 	 {
-		 	 	return $aRes;
-		 	 }
-	 	 	
+		 	 return $aRes;
 	 	 }
+
 
 //******************************************************************************************************************
 	 	 //recupère tous utilisateur sauf l'admin
 	 	 public function getAllUser()
 	 	 {
 		 	 	$request = 'SELECT * FROM '. self::TAB_USER.' WHERE admin = 0 ORDER BY id';
+		 	 	$aRes = parent::addRequestSelect($request);
+		 	 	//echo $request;
+		 	 	return $aRes;
+	 	 }
+//******************************************************************************************************************
+	 	 //recupère tous utilisateur sauf l'admin et les compte supprimé
+	 	 public function getAllUserExist()
+	 	 {
+		 	 	$request = 'SELECT * FROM '. self::TAB_USER.' WHERE admin = 0 AND deleteUser = 0 ORDER BY id';
 		 	 	$aRes = parent::addRequestSelect($request);
 		 	 	//echo $request;
 		 	 	return $aRes;
