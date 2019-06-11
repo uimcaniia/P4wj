@@ -45,13 +45,14 @@
 		{
 			$pswClean      = htmlspecialchars($psw);
 			$pswAgainClean = htmlspecialchars($pswAgain);
-			$errorPsw    = self::verifChaine($pswClean,    $this->_regPsw , '', $pswAgainClean, false);
+			$errorPsw    = self::verifChaine($pswClean, $this->_regPsw , '', $pswAgainClean, false);
 			return $this->_aTestError['tstPsw'][$errorPsw];
 		}
 
 		// **************************************************
 		public function verifChaine ($chaine, $regex, $paramBdd, $confirm, $empty)
 		{
+//echo $confirm; 
 			$numError= 0;
 			$aResultError=array();
 			if(empty($chaine))
@@ -79,9 +80,9 @@
 						array_push($aResultError, $numError);
 					}
 				}
-				if (empty($confirm))
+				if (!empty($confirm))
 				{
-					if(($empty == false) && ($chaine !== $confirm))
+					if(($empty == false) && ($chaine != $confirm))
 					{
 						$numError = 5;
 						array_push($aResultError, $numError);

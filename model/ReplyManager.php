@@ -124,20 +124,6 @@ class ReplyManager extends bdd{
 		 	 	return $aRes;
 	 	 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //******************************************************************************************************************
 	 	 //recupère tous reply d'un commentaire
 	 	 public function getAllReplyComment($reply)
@@ -147,8 +133,6 @@ class ReplyManager extends bdd{
 		 	 	return $aRes;
 	 	 }
 
-
-
 	 	  //******************************************************************************************************************
 	 	 //recupère tous reply signalé en function d'une valeur 
 	 	 public function getAllReplySignalSelect($col, $val)
@@ -157,10 +141,6 @@ class ReplyManager extends bdd{
 		 	 	$aRes = parent::addRequestSelect($request);
 		 	 	return $aRes;
 	 	 }
-
-
-
-
 
 //******************************************************************************************************************
 	 	 //compte le nombre d'entrée dans la table
@@ -173,9 +153,9 @@ class ReplyManager extends bdd{
 
 //******************************************************************************************************************
 	 	//actualise le signalement d'un reply
-	 	 public function update($reply){
+	 	 public function update($reply, $report){
 
-	 	 	$request = 'UPDATE '. self::TAB_REP.' SET reporting_reply = 1 WHERE id = '.$reply.'';
+	 	 	$request = 'UPDATE '. self::TAB_REP.' SET reporting_reply = '.$report.' WHERE id = '.$reply.'';
 //echo $request;
 	 	 	parent::addRequest($request);
 	 	 }

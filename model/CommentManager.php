@@ -116,11 +116,11 @@ class CommentManager extends bdd{
 	 	 	parent::addRequest($request);
 	 	 }
 
-		//******************************************************************************************************************
+	 	 //******************************************************************************************************************
 	 	//actualise le signalement d'un commentaire
-	 	 public function update($idComment){
+	 	 public function update($idComment, $report){
 
-	 	 	$request = 'UPDATE '. self::TAB_COM.' SET reporting = 1 WHERE id = '.$idComment.'';
+	 	 	$request = 'UPDATE '. self::TAB_COM.' SET reporting = '.$report.' WHERE id = '.$idComment.'';
 		echo $request;
 	 	 	parent::addRequest($request);
 	 	 }

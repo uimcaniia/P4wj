@@ -256,6 +256,44 @@ try {
                 throw new Exception('vous n\'avez pas l\'autorisation necessaire pour supprimer la réponse signalée');
             }
         }
+        //**********************************************************
+        //moderation signalement
+        elseif($_GET['action'] == 'removeSignalcomment') // si l'admin veut supprimer un commentaire signalés
+        {
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            {
+                if(isset($_POST['idComment'])  && isset($_POST['idUser'])) // si commentaire, supprime commentaire + réponse
+                {
+                    removeCommentSignal($_POST['idComment'], $_POST['idUser']);
+                }
+                else
+                {
+                    throw new Exception('Aucun selecteur est trouvé pour mettre a jour le commentaire signalé');
+                }
+            }
+            else
+            {
+                throw new Exception('vous n\'avez pas l\'autorisation necessaire pour mettre a jour le commentaire signalé');
+            }
+        }
+        elseif($_GET['action'] == 'removeSignalReply') // si l'admin veut supprimer un commentaire signalés et ses réponses
+        {
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
+            {
+                if(isset($_POST['idReply']) && isset($_POST['idUser']))//si réponse, supprime que réponse signalé
+                {
+                    removeReplySignal($_POST['idReply'], $_POST['idUser']);
+                }
+                else
+                {
+                    throw new Exception('Aucun selecteur est trouvé pour mettre a jour la réponse signalée');
+                }
+            }
+            else
+            {
+                throw new Exception('vous n\'avez pas l\'autorisation necessaire pour mettre a jour la réponse signalée');
+            }
+        }
 
 
 	
@@ -404,6 +442,26 @@ try {
             else
             {
                 throw new Exception('vous n\'avez pas l\'autorisation necessaire pour supprimer un utilisateur');
+            }
+        }
+        //********************************************************************************
+        //supprimer un utilisateur
+        elseif($_GET['action'] == 'updateMdpUser') // si l'admin veut supprimer un utilisateur
+        {
+            if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 0) // on s'assure que c'est pas l'admin
+            {
+                if(isset($_POST['valPsw']) && isset($_POST['valPswConfirm']))//
+                {
+                    updatePswUser($_POST['valPsw'], $_POST['valPswConfirm'], $_SESSION['idUser']);
+                }
+                else
+                {
+                    throw new Exception('Aucun mot de passe est transmit');
+                }
+            }
+            else
+            {
+                throw new Exception('vous n\'avez pas l\'autorisation necessaire pour changer le mot de passe');
             }
         }
         //*******************************************************************************

@@ -655,7 +655,7 @@ align-items: center;
 #showComment, #showCommentSignal, #ShowMessage{
   width:100%;
 }
-#navEpisode .flexRow, #navComment .flexRow, #navMessage .flexRow, #messageAdmin .flexRow{
+#navEpisode .flexRow, #navComment .flexRow, #navMessage .flexRow, #messageAdmin .flexRow, #infoSpaceTwo .flexRow{
   display: flex;
   flex-direction: row;
   align-items: center;

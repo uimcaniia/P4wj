@@ -3,7 +3,7 @@
 
 <?php ob_start(); ?>
 				<p id='confirmSendMess'></p>
-				<section id="messageAdmin">
+				<article id="messageAdmin">
 					<div>
 						<span class="fas fa-times"  onclick="closeMessageDiv()"></span>
 						<div class='flexRow'>
@@ -27,8 +27,8 @@
 							<span id='sendMess' class="fas fa-check"></span>
 						</div>
 					</div>
-				</section>
-				<section id="confirmDeleteComment">
+				</article>
+				<article id="confirmDeleteComment">
 					<div>
 						<span class="fas fa-times"  onclick="closeDeleteCommentDiv()"></span>
 							<p>Voulez-vous vraiment supprimer ce commentaire?</p>
@@ -39,8 +39,8 @@
 							<span id='delCom' class="fas fa-check"></span>
 						</div>
 					</div>
-				</section>
-				<section id="confirmDeleteCommentReply">
+				</article>
+				<article id="confirmDeleteCommentReply">
 					<div>
 						<span class="fas fa-times"  onclick="closeDeleteCommentReplyDiv()"></span>
 							<p>Voulez-vous vraiment supprimer ce commentaire?</p>
@@ -51,8 +51,8 @@
 							<span id='delRepCom' class="fas fa-check"></span>
 						</div>
 					</div>
-				</section>
-				<section id="confirmDeleteEpisode">
+				</article>
+				<article id="confirmDeleteEpisode">
 					<div>
 						<span class="fas fa-times"  onclick="closeDeleteEpisodeDiv()"></span>
 							<p>Voulez-vous vraiment supprimer cet épisode?</p>
@@ -62,8 +62,8 @@
 							<span id='delEpConfirm' class="fas fa-check"></span>
 						</div>
 					</div>
-				</section>
-				<section id="confirmDeletePseudo">
+				</article>
+				<article id="confirmDeletePseudo">
 					<div>
 						<span class="fas fa-times"  onclick="closeDeletePseudoDiv()"></span>
 							<p>Voulez-vous vraiment supprimer ce compte?</p>
@@ -75,7 +75,7 @@
 							<span id='delPseudo' class="fas fa-check"></span>
 						</div>
 					</div>
-				</section>
+				</article>
 				<section id='containtAdmin'>
 					<?php include ('adminEpisodeView.php'); ?>
 				</section>

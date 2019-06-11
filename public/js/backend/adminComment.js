@@ -125,3 +125,31 @@ $(document).ready(function(){
 		$('#confirmDeleteCommentReply').fadeOut(600);
 	}
 
+//************************************************************************
+	function removeSignal(idComment, tableBdd, idReply, idUser, by){
+
+		if(tableBdd == 'comment'){
+
+			$.post('index.php?action=removeSignalcomment', {idComment:idComment, idUser:idUser}, function(donnee){					
+				if(by == 'byEpisode'){
+					$('#goComSignByEp').click();
+				}
+				else{	
+					$('#goComSignByPs').click();
+				}
+				return false;
+			});
+
+
+		}if(tableBdd == 'reply'){
+			$.post('index.php?action=removeSignalReply', {idReply:idReply, idUser:idUser}, function(donnee){
+				if(by == 'byEpisode'){
+					$('#goComSignByEp').click();
+				}
+				else{	
+					$('#goComSignByPs').click();
+				}
+				return false;
+			});
+		}
+	}

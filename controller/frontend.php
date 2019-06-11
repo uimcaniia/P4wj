@@ -237,7 +237,7 @@ function signalComment($idEpisode, $idComment, $idUserSignal)
 	$userReporting = $majSignalUser->update('reporting', $userReporting[0]['reporting'], $idUserSignal); // maj du signalement
 
 	$majSignalComment = new Comment;
-	$commentReporting = $majSignalComment->update($idComment);
+	$commentReporting = $majSignalComment->update($idComment, '1');
 }
 //********************************************************
 function signalReply($idEpisode, $idComment, $idReply, $idUserSignal)
@@ -248,7 +248,7 @@ function signalReply($idEpisode, $idComment, $idReply, $idUserSignal)
 	$userReporting = $majSignalUser->update('reporting', $userReporting[0]['reporting'], $idUserSignal); // maj du signalement
 
 	$majSignalReply = new Reply;
-	$commentReporting = $majSignalReply->update($idReply);
+	$commentReporting = $majSignalReply->update($idReply, '1');
 }
 //********************************************************
 function biography()
