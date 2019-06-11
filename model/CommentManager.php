@@ -121,18 +121,9 @@ class CommentManager extends bdd{
 	 	 public function update($idComment, $report){
 
 	 	 	$request = 'UPDATE '. self::TAB_COM.' SET reporting = '.$report.' WHERE id = '.$idComment.'';
-		echo $request;
+		//echo $request;
 	 	 	parent::addRequest($request);
 	 	 }
-
-
-
-
-
-
-
-
-
 
  //******************************************************************************************************************
 	 	 //recupère tous commentaires signalé et dans un ordre prédéfinit

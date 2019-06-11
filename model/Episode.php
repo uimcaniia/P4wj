@@ -118,6 +118,10 @@
 	 	 {
 	 	 	if(is_int($id))
 	 	 	{
+	 	 		$minNum = parent::getFirstEpisode();
+	 	 		$idFirstEpisode = $minNum[0][MIN('id')] ;
+	 	 		print_r($minNum);
+
 	 	 		if ($id > 1) // si ce n'est pas le premier episode
 				{
 					$idPrev = $id - 1;

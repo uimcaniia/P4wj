@@ -444,7 +444,7 @@ function updatePswUser($psw, $pswAgain, $idUser)
 function removeCommentSignal($idComment, $idUser)
 {
 	$majSignalComment = new Comment;
-	$commentReporting = $majSignalComment->update($idComment, '1');
+	$commentReporting = $majSignalComment->update($idComment, '0');
 
 	$user              = new User;
 	$getInfosUser      = $user->get('id', $idUser);
@@ -455,7 +455,7 @@ function removeCommentSignal($idComment, $idUser)
 function removeReplySignal($idReply, $idUser)
 {
 	$majSignalReply = new Reply;
-	$commentReporting = $majSignalReply->update($idReply, '1');;
+	$commentReporting = $majSignalReply->update($idReply, '0');;
 
 	$user              = new User;
 	$getInfosUser      = $user->get('id', $idUser);

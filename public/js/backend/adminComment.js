@@ -130,7 +130,8 @@ $(document).ready(function(){
 
 		if(tableBdd == 'comment'){
 
-			$.post('index.php?action=removeSignalcomment', {idComment:idComment, idUser:idUser}, function(donnee){					
+			$.post('index.php?action=removeSignalcomment', {idComment:idComment, idUser:idUser}, function(donnee){	
+			console.log(donnee);				
 				if(by == 'byEpisode'){
 					$('#goComSignByEp').click();
 				}

@@ -19,6 +19,7 @@ function extractAllEpisode()
 {
 	$episodes = new Episode;
 	$aEpisode = $episodes->getAllEpisode();// on récupère tous les épisodes
+
 	if($aEpisode === false)
 	{
 		throw new Exception('Impossible de charger la liste complètes des épisodes');
