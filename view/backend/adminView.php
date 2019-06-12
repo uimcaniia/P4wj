@@ -2,8 +2,8 @@
 <?php $titleH1 = 'Espace Admin'; ?>
 
 <?php ob_start(); ?>
-				<p id='confirmSendMess'></p>
-				<article id="messageAdmin">
+				<!-- <p id='confirmSendMess'></p> -->
+				<!-- <article id="messageAdmin">
 					<div>
 						<span class="fas fa-times"  onclick="closeMessageDiv()"></span>
 						<div class='flexRow'>
@@ -27,7 +27,7 @@
 							<span id='sendMess' class="fas fa-check"></span>
 						</div>
 					</div>
-				</article>
+				</article> -->
 				<article id="confirmDeleteComment">
 					<div>
 						<span class="fas fa-times"  onclick="closeDeleteCommentDiv()"></span>

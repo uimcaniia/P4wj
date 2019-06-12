@@ -151,6 +151,6 @@ $(document).ready(function(){
 		});
 	}
 
-
-	//setInterval(recupData,1000);
+	
+	
 });

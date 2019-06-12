@@ -76,3 +76,184 @@ function animConnectLogin(){
 }
 animConnectLogin();
 
+//**************************************************************
+//animation zone admin
+$('#showNavEpisode').click(function(){
+	$('#navEpisode').fadeIn(600);
+	if($('#navComment').is(":visible")){ 
+		$('#navComment').fadeOut(0);
+	}
+		if($('#navMessage').is(":visible")){ 
+		$('#navMessage').fadeOut(0);
+	}
+});
+//*********************************************************
+$('#btnEditEp').click(function(){
+	$('#hideWriteEpisode').fadeIn(600);
+	if($('#divModifSelectEp').is(":visible")){ 
+		$('#divModifSelectEp').fadeOut(0);
+	}
+	if($('#divDelSelectEp').is(":visible")){ 
+		$('#divDelSelectEp').fadeOut(0);
+	}
+	if($('#hideWriteEpisodeModif').is(":visible")){ 
+		$('#hideWriteEpisodeModif').fadeOut(0);
+	}
+});
+//*********************************************************
+$('#btnModifEp').click(function(){
+	$('#divModifSelectEp').fadeIn(600);
+	if($('#hideWriteEpisode').is(":visible")){ 
+		$('#hideWriteEpisode').fadeOut(0);
+	}
+	if($('#divDelSelectEp').is(":visible")){ 
+		$('#divDelSelectEp').fadeOut(0);
+	}
+});
+//*********************************************************
+$('#btnDelEp').click(function(){
+	$('#divDelSelectEp').fadeIn(600);
+	if($('#divModifSelectEp').is(":visible")){ 
+		$('#divModifSelectEp').fadeOut(0);
+	}
+	if($('#hideWriteEpisode').is(":visible")){ 
+		$('#hideWriteEpisode').fadeOut(0);
+	}
+	if($('#hideWriteEpisodeModif').is(":visible")){ 
+		$('#hideWriteEpisodeModif').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#showCommentDiv').click(function(){
+	$('#navComment').fadeIn(600);
+	if($('#navEpisode').is(":visible")){ 
+		$('#navEpisode').fadeOut(0);
+	}
+	if($('#hideWriteEpisode').is(":visible")){ 
+		$('#hideWriteEpisode').fadeOut(0);
+	}
+	if($('#hideWriteEpisodeModif').is(":visible")){ 
+		$('#hideWriteEpisodeModif').fadeOut(0);
+	}
+	if($('#navMessage').is(":visible")){ 
+		$('#navMessage').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#btnselectCom').click(function(){
+	$('#divSelectCom').fadeIn(600);
+	if($('#divSelectComSignal').is(":visible")){ 
+		$('#divSelectComSignal').fadeOut(0);
+	}
+	if($('#arrayPseudoSignal').is(":visible")){ 
+		$('#arrayPseudoSignal').fadeOut(0);
+	}
+	if($('#arrayCommentSignal').is(":visible")){ 
+		$('#arrayCommentSignal').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#sortEp').click(function(){
+	$('#selectSortComEp').fadeIn(600);
+	if($('#selectSortComPs').is(":visible")){ 
+		$('#selectSortComPs').fadeOut(0);
+	}
+	if($('#arrayPseudo').is(":visible")){ 
+		$('#arrayPseudo').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#sortPs').click(function(){
+	$('#selectSortComPs').fadeIn(600);
+	if($('#selectSortComEp').is(":visible")){ 
+		$('#selectSortComEp').fadeOut(0);
+	}
+	if($('#arrayComment').is(":visible")){ 
+		$('#arrayComment').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#btnSelectComSign').click(function(){
+	$('#divSelectComSignal').fadeIn(600);
+	if($('#divSelectCom').is(":visible")){ 
+		$('#divSelectCom').fadeOut(0);
+	}
+	if($('#arrayPseudo').is(":visible")){ 
+		$('#arrayPseudo').fadeOut(0);
+	}
+	if($('#arrayComment').is(":visible")){ 
+		$('#arrayComment').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#sortEpRep').click(function(){
+	$('#selectSortComSignEp').fadeIn(600);
+	if($('#selectSortComSignPs').is(":visible")){ 
+		$('#selectSortComSignPs').fadeOut(0);
+	}
+	if($('#arrayPseudoSignal').is(":visible")){ 
+		$('#arrayPseudoSignal').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#sortPsRep').click(function(){
+	$('#selectSortComSignPs').fadeIn(600);
+	if($('#selectSortComSignEp').is(":visible")){ 
+		$('#selectSortComSignEp').fadeOut(0);
+	}
+	if($('#arrayCommentSignal').is(":visible")){ 
+		$('#arrayCommentSignal').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#showDivMess').click(function(){
+	$('#navMessage').fadeIn(600);
+	if($('#navEpisode').is(":visible")){ 
+		$('#navEpisode').fadeOut(0);
+	}
+	if($('#hideWriteEpisode').is(":visible")){ 
+		$('#hideWriteEpisode').fadeOut(0);
+	}
+		if($('#hideWriteEpisodeModif').is(":visible")){ 
+		$('#hideWriteEpisodeModif').fadeOut(0);
+	}
+		if($('#navComment').is(":visible")){ 
+		$('#navComment').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#btnSelectPseudoSignModo').click(function(){
+	$('#selectPseudoSignalModerate').fadeIn(600);
+	if($('#arrayMessageReceive').is(":visible")){ 
+		$('#arrayMessageReceive').fadeOut(0);
+	}
+	if($('#arrayMessageSend').is(":visible")){ 
+		$('#arrayMessageSend').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#btnArrMessReceive').click(function(){
+	$('#arrayMessageReceive').fadeIn(600);
+	if($('#arrayMessageSend').is(":visible")){ 
+		$('#arrayMessageSend').fadeOut(0);
+	}
+	if($('#selectPseudoSignalModerate').is(":visible")){ 
+		$('#selectPseudoSignalModerate').fadeOut(0);
+	}
+		if($('#infoPseudoModerate').is(":visible")){ 
+		$('#infoPseudoModerate').fadeOut(0);
+	}
+});
+//**************************************************************************************
+$('#btnArrMessSend').click(function(){
+	$('#arrayMessageSend').fadeIn(600);
+	if($('#arrayMessageReceive').is(":visible")){ 
+		$('#arrayMessageReceive').fadeOut(0);
+	}
+	if($('#selectPseudoSignalModerate').is(":visible")){ 
+		$('#selectPseudoSignalModerate').fadeOut(0);
+	}
+		if($('#infoPseudoModerate').is(":visible")){ 
+		$('#infoPseudoModerate').fadeOut(0);
+	}
+});

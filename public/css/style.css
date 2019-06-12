@@ -130,6 +130,7 @@ header .blackLine:last-child{
 }
 #bckBody{
   width:100%;
+  margin-bottom:20px;
 }
 #titlePage{
   position: relative;
@@ -316,6 +317,7 @@ div#bkgEpisode div.datePublication > div:nth-child(2){
 #globalComment .comment, .globalReply .reply{
   border-left:2px solid #4ac2c2;
   margin-left: 50px;
+  width: 80%;
 }
 section#containtComment div#globalComment div.comment + p{
   margin-left:60px;
@@ -789,7 +791,7 @@ margin:20px 0 0 30px;
 color: #1f8787;
 cursor:pointer;
 }
-#messageAdmin .flexRow p, #messageAdmin alertMessage{
+#messageAdmin .flexRow p{
 margin-bottom:0;
   }
 #messageAdmin #pseudoMessage{
@@ -804,6 +806,10 @@ margin-bottom:0;
 margin:auto;
 position: relative;
 }
+ #navMessage .flexColumn{
+  justify-content: center;
+  align-items: center;
+ }
 #confirmDeleteComment > div, #confirmDeleteCommentReply > div, #confirmDeleteEpisode > div, #confirmDeletePseudo > div{
     width:300px;
   height:200px;

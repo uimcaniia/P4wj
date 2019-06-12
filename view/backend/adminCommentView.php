@@ -1,19 +1,7 @@
-<?php
-$divHidenComment = 'navEpisode,hideWriteEpisode,hideWriteEpisodeModif,navMessage';
-
-$divHidenSelCom       = 'divSelectComSignal,arrayPseudoSignal,arrayCommentSignal';
-$divHidenDivSelCom    = 'selectSortComPs,arrayPseudo';
-$divHidenDivSelPseudo = 'selectSortComEp,arrayComment';
-
-$divHidenSelComSign       = 'divSelectCom,arrayPseudo,arrayComment';
-$divHidenDivSelComSign    = 'selectSortComSignPs,arrayPseudoSignal';
-$divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
-
-?>
 
 				<div id="CommentWork">
 	 				<div class="whiteBlock">
-		 				<span onclick="animShowAdminMenu('navComment', '<?=$divHidenComment?>');"><p>Modération des commentaires :</p>
+		 				<span id="showCommentDiv"><p>Modération des commentaires :</p>
 		 				</span>
 		 			</div>
 
@@ -22,15 +10,15 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 
 		 					<div id="showComment">
 			 					<div class="whiteBlock">
-		 							<span onclick="animShowAdminMenu('divSelectCom', '<?=$divHidenSelCom?>');" ><p>Les commentaires</p>
+		 							<span id="btnselectCom"><p>Les commentaires</p>
 		 							</span>
 				 				</div>
 				 				<div id="divSelectCom">
 					 				<!-- <div class='flexColumn'> -->
 						 				<div class="flexRow">
 					 						<div>
-						 						<button id ='sortEp' class="whiteBlock" type='submit' name='sortEp' onclick="animShowAdminMenu('selectSortComEp','<?=$divHidenDivSelCom?>');" >Par épisode</button>
-						 						<button id ='sortPs' class="whiteBlock" type='submit' name='sortPs' onclick="animShowAdminMenu('selectSortComPs','<?=$divHidenDivSelPseudo?>');" >Par pseudo</button>
+						 						<button id ='sortEp' class="whiteBlock" type='submit' name='sortEp'>Par épisode</button>
+						 						<button id ='sortPs' class="whiteBlock" type='submit' name='sortPs'>Par pseudo</button>
 					 						</div>
 						 					<div id ='selectSortComEp'class='customSelect'>
 <?php
@@ -101,7 +89,7 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 
 				 			<div id="showCommentSignal">
 			 					<div class="whiteBlock">
-		 							<span onclick="animShowAdminMenu('divSelectComSignal','<?=$divHidenSelComSign?>');" ><p>Commentaires signalés</p>
+		 							<span id='btnSelectComSign'><p>Commentaires signalés</p>
 		 							</span>
 				 				</div>
 <?php
@@ -118,8 +106,8 @@ $divHidenDivSelPseudoSign = 'selectSortComSignEp,arrayCommentSignal';
 				 					<div class='flexColumn'>
 						 				<div class="flexRow">
 					 						<div>
-						 						<button id ='sortEpRep' class="whiteBlock" type='submit' name='sortEpRep' onclick="animShowAdminMenu('selectSortComSignEp','<?=$divHidenDivSelComSign?>');" >Par épisode</button>
-						 						<button id ='sortPsRep' class="whiteBlock" type='submit' name='sortPsRep' onclick="animShowAdminMenu('selectSortComSignPs','<?=$divHidenDivSelPseudoSign?>');">Par pseudo</button>
+						 						<button id ='sortEpRep' class="whiteBlock" type='submit' name='sortEpRep'>Par épisode</button>
+						 						<button id ='sortPsRep' class="whiteBlock" type='submit' name='sortPsRep'>Par pseudo</button>
 					 						</div>
 						 					<div id ='selectSortComSignEp'class='customSelect'>
 						 						<label for="selectComSignal"></label>

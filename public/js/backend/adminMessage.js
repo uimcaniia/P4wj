@@ -1,5 +1,5 @@
 //action sur les bouton pour envoyer un message
-function animSendMessageUser(idReceive, pseudo, idSender){
+/*function animSendMessageUser(idReceive, pseudo, idSender){
 	$('#confirmSendMess').fadeIn(600);
 	$('#messageAdmin').fadeIn(600);
 	$('#pseudoMessage').html(' à '+pseudo);
@@ -72,10 +72,10 @@ function changeorderMessage(){
 		}
 	});
 }
-changeorderMessage();
+changeorderMessage();*/
 //*********************************************************************
 //action sur les bouton pour supprimer un message
-function animDelMessage(idMessDel){
+/*function animDelMessage(idMessDel){
 	$.post('index.php?action=deleteMessage', {idMessDel:idMessDel}, function(data){
 		console.log(data);
 	});
@@ -87,17 +87,22 @@ function closeMessageDiv(){
 	$('#subjectMess').val('');
 	$('#textMess').val('');
 	$('#messageAdmin').fadeOut(600);
-}
+}*/
 //*****************************************************************
 //action pour récupérer et afficher les détails d'un compte utilisateur
-function givePseudoDetail(){
-	$('#infoPseudoModerate').fadeIn(600);
-	var idUser= $('#selectPseudoSignalModo').val(); 
-		$.post('index.php?action=getInfoPseudo', {idUser:idUser}, function(data){
-			$('#infoPseudoModerate').html(data);
-		return false;
-	});
-}
+//function givePseudoDetail(){
+	$('#goSelectPseudoModerate').click(function(){
+
+		$('#infoPseudoModerate').fadeIn(600);
+		var idUser= $('#selectPseudoSignalModo').val(); 
+			$.post('index.php?action=getInfoPseudo', {idUser:idUser}, function(data){
+
+				$('#infoPseudoModerate').html(data);
+				
+			return false;
+		});
+	})
+//}
 //*******************************************************************
 //action pour bloquer le compte d'un utilisateur
 function deletePseudo(idUser){

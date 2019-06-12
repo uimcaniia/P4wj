@@ -1,9 +1,3 @@
-<?php
-	 		$divHidenEpisode = "navComment,navMessage";
-	 		$divHidenEdit = 'divModifSelectEp,divDelSelectEp,hideWriteEpisodeModif';
-	 		$divHidenModif = 'hideWriteEpisode,divDelSelectEp';
-	 		$divHidenDel = 'divModifSelectEp,hideWriteEpisode,hideWriteEpisodeModif';
-?>
 
 	 			<div class="whiteBlock">
 	 				<p> Bienvenue dans votre espace <?=$getInfosAdmin[0]['pseudo']?></p>
@@ -12,7 +6,7 @@
 		 		<div id="EpisodeWork">
 
 	 				<div class="whiteBlock">
-		 				<span onclick="animShowAdminMenu('navEpisode','<?= $divHidenEpisode?>');"><p>Episodes :</p>
+		 				<span id='showNavEpisode'><p>Episodes :</p>
 		 				</span>
 		 			</div>
 
@@ -21,14 +15,14 @@
 
 		 					<div id='editEp'>
 			 					<div class="whiteBlock">
-			 						<span id='btnEditEp' onclick="animShowAdminMenu('hideWriteEpisode','<?=$divHidenEdit?>');" ><p>Editer un épisode</p>
+			 						<span id='btnEditEp'><p>Ajouter un épisode</p>
 			 						</span>
 			 					</div>
 		 					</div>
 
 		 					<div id="modifEp">
 			 					<div class="whiteBlock">
-		 							<span id='btnModifEp' onclick="animShowAdminMenu('divModifSelectEp','<?=$divHidenModif?>');" ><p>Modifier un épisode </p>
+		 							<span id='btnModifEp' ><p>Modifier un épisode </p>
 		 							</span>
 				 				</div>
 				 				<div id="divModifSelectEp">
@@ -59,7 +53,7 @@
 
 		 					<div id='delEp'>
 			 					<div class="whiteBlock">
-			 						<span onclick="animShowAdminMenu('divDelSelectEp','<?=$divHidenDel?>');" ><p>Supprimer un épisode</p>
+			 						<span id ="btnDelEp"><p>Supprimer un épisode</p>
 			 						</span>
 			 					</div>
 		 						<div id='divDelSelectEp'>

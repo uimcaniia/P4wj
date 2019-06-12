@@ -64,7 +64,22 @@
 		 	 		<p> le </p>
 		 	 		<p><?= strftime('%d-%m-%Y',strtotime($aComment[$i]['commentTime'] ))?></p>
 	<?php
-				if($aComment[$i]['reporting'] == 0)
+				if(($aComment[$i]['reporting'] == 0) && ($isConnect == true) && ($aComment[$i]['idUser'] == $_SESSION['idUser']))
+				{
+	?>
+	<?php
+				}
+				elseif(($aComment[$i]['reporting'] == 0) && ($isConnect == true) && ($aComment[$i]['idUser'] != $_SESSION['idUser']))
+				{
+	?>
+					<p>- Signaler le commentaire </p>
+					<span id ="<?= $aComment[$i]['id'] ?>" class="fas fa-bell <?=$aComment[$i]['idUser']?>" onclick="javascript:animPopup('signal<?=$i?>')"></span>
+					<div class="popupSignal">
+						<p> Merci de nous avoir prévenu.</p>
+					</div>
+	<?php
+				}
+				elseif(($aComment[$i]['reporting'] == 0) && ($isConnect == false))
 				{
 	?>
 					<p>- Signaler le commentaire </p>
@@ -148,9 +163,9 @@
 						<p> De </p>
 						<p> <?=$aComment[$i]['reply'][$j]['pseudo']?> </p>
 						<p> le </p>
-						<p> <?=$aComment[$i]['reply'][$j]['dateReply']?> </p>
+						<p> <?=strftime('%d-%m-%Y',strtotime($aComment[$i]['reply'][$j]['dateReply']))?> </p>
 	<?php
-						if($aComment[$i]['reply'][$j]['reporting_reply'] == 0)
+						if(($aComment[$i]['reply'][$j]['reporting_reply'] == 0) && ($isConnect == true) && ($aComment[$i]['reply'][$j]['iduser_reply'] != $_SESSION['idUser']))
 						{
 	?>
 						<p>- Signaler la réponse </p>
@@ -161,24 +176,42 @@
 					</div>
 
 	<?php
-						}else
+						}
+						elseif(($aComment[$i]['reply'][$j]['reporting_reply'] == 0) && ($isConnect == false))
 						{
-							if(($isConnect == true) && ($aComment[$i]['reporting'] != 0) && ($aComment[$i]['idUser']== $_SESSION['idUser']))
-							{
+	?>
+						<p>- Signaler la réponse </p>
+						<span id ="<?=$aComment[$i]['reply'][$j]['id']?>" class="fas fa-bell <?=$aComment[$i]['reply'][$j]['iduser_reply']?>" onclick="javascript:animPopupReply('part<?=$i?>', 'replySignal<?=$j?>')"></span>
+						<div class="popupSignal">
+							<p> Merci de nous avoir prévenu.</p>
+						</div>
+					</div>
+
+	<?php
+						}
+						elseif(($isConnect == true) && ($aComment[$i]['reply'][$j]['reporting_reply'] != 0) && ($aComment[$i]['reply'][$j]['iduser_reply'] == $_SESSION['idUser']))
+						{
 	?>
 					<p class="messSignal">- Votre réponse a été signalée.</p>
 				</div>
 
 	<?php
-							}
-							else
-							{
+						}
+						elseif(($isConnect == true) && ($aComment[$i]['reply'][$j]['reporting_reply'] == 0) && ($aComment[$i]['reply'][$j]['iduser_reply'] == $_SESSION['idUser']))
+						{
+	?>
+					
+				</div>
+	<?php
+						}
+						else
+						{
 	?>
 					<p class="messSignal">- Réponse signalée.</p>
 				</div>
 	<?php
-							}
 						}
+					
 
 	?>
 				<div class="reply">
