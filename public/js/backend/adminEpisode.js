@@ -7,50 +7,6 @@ if(!Array.isArray) {
 //*****************************************************************
 $(document).ready(function(){
 //****************************************
-
-
-	//action sur le bouton sélectionner un épisode à modifier
-	$('#goEpModif').click(function(){
-		var valEpModif = $('#selectEpModif').val(); 	
-		recupData(valEpModif);
-		return false;
-	});
-	
-	//****************************************
-	function recupData(valEpModif){
-		$.post('index.php?action=selEpModif', {valEpModif:valEpModif}, function(donnee){
-			console.log(donnee);
-			var aDonnee = donnee.split("`");
-				$('#divModifSelectEp').fadeOut(0);
-				$('#hideWriteEpisodeModif').fadeIn(300);
-
-				var id = aDonnee[2];
-				var title = aDonnee[0];
-				var txt = aDonnee[1];
-				$('#blockWriteIdEpModif').html(id);
-				$('#blockWriteTitleEpisodeModif').html(title);
-				$('#blockWriteEpisodeModif textarea').val(txt);
-		})
-	}
-	//****************************************
-	//action sur le bouton sauvegarder un épisode Modifier
-	$('#saveModif').click(function(){
-		var titleModifEp = $('#blockWriteTitleEpisodeModif').text(); // on récupère les données dans le titre de la zone d'édition
-		var texteModifEp = $('#blockWriteEpisodeModif').text(); //idem pour la zone de texte
-		var idmodifEp = $('#blockWriteIdEpModif').text(); //idem pour l'id
-		var idModifEpClean = idmodifEp.replace(/ |\n|\r|\t/g, '');
-
-		Number(idModifEpClean);
-		$.post('sendAdminEpisode.php', {updateTitleModifEp:titleModifEp, updateTexteModifEp:texteModifEp, idModifEpClean:idModifEpClean}, function(dataSavemodif){  // MAJ des données dans la BDD
-			//$('#EpisodeWork').html(dataSavemodif);
-			$('#containtEpisodeAdminModif > p:nth-child(2)').fadeIn(0);
-			$('#containtEpisodeAdminModif > p:nth-child(2)').html(' - La sauvegarde de l\'épisode a bien été effectuée.');
-			$('#containtEpisodeAdminModif > p:nth-child(2)').fadeOut(5000); 
-			return false;
-		});
-	});
-
-	//****************************************
 	//action sur le bouton sélectionner un épisode à supprimer
 	$('#goEpDel').click(function(){
 		$('#confirmDeleteEpisode').fadeIn(600); // ouverture de la div pour demander confirmation
@@ -69,88 +25,129 @@ $(document).ready(function(){
 			});
 		});
 	});
+//****************************************
 
+	$('#saveEdit').click( function(){
+		tinyMCE.triggerSave(true, true);
+		var id= $('#blockWriteIdEp').text();
+		idClean = id.replace(/ |\n|\r|\t/g, '');
 
-	//***************************************************
-	//recupère l'id du dernier episode de la bdd
-	function recupIdEdit(){
-		$.post('recupAdminEpisodeEdit.php', {}, function(donnee){
-			$('#blockWriteIdEp').html(donnee);
-		})
-	}
+		if(idClean == ''){
+			var txtEpisode = $('#blockWriteEpisode textarea').val();
+			var titleEpisode = $('#blockWriteTitleEpisode').val();
+			console.log(txtEpisode);
+			console.log(titleEpisode);
+			$.post('index.php?action=saveNewEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode}, function(donnee){			
+				$('<p>'+donnee+'</p>').appendTo('#blockWriteIdEp');
+				$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
+				$('#containtEpisodeAdmin > p:nth-child(2)').text('La création et la sauvegarde a bien été effectuée.')
+				$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
+					return false;
+				});
+		}else{
+
+			var res = $('#tinymce').text();
+			console.log(res);
+			var txtEpisode = $('#blockWriteEpisode textarea').val();
+			var titleEpisode = $('#blockWriteTitleEpisode').val();
+			console.log(txtEpisode);
+			console.log(titleEpisode);
+			idEpisode = $('#blockWriteIdEp p').text();
+			$.post('index.php?action=saveEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode, idEpisode:idEpisode}, function(donnee){			
+			$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
+			$('#containtEpisodeAdmin > p:nth-child(2)').text('La sauvegarde a bien été effectuée.');
+			$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
+				return false;
+			});
+		}
+	});
+
 	//****************************************
-	//action sur le bouton sauvegarder un épisode editer
-	$('#saveEdit').click(function(){
-		var titleNewEp = $('#blockWriteTitleEpisode').text(); // on vérifie si il y a des données dans le titre de la zone d'édition
-		var texteNewEp = $('#blockWriteEpisode').text(); //idem pour la zone de texte
-		var idNewEp = $('#blockWriteIdEp').text(); //idem pour la zone de texte 
 
-		var titleNewEpClean = titleNewEp.replace(/ |\n|\r|\t/g, ''); //supprime espace, les tabulation et les saut de ligne pour ne garder que les caractère visible
-		var texteNewEpClean = texteNewEp.replace(/ |\n|\r|\t/g, '');
-		var idNewEpClean = idNewEp.replace(/ |\n|\r|\t/g, '');
+	$('#showEdit').click( function(){
+		tinyMCE.triggerSave(true, true);
+		var txtEpisode = $('#blockWriteEpisode textarea').val();
+		var titleEpisode = $('#blockWriteTitleEpisode').val();
+		$('#confirmPublishEpisode').fadeIn(600); // on demande confirmation
 
-		if((titleNewEpClean == '') && (texteNewEpClean == '')){ 
-			console.log('rien');
-		}
-		if((titleNewEpClean != '') || (texteNewEpClean != '')){ 
-			if(idNewEpClean == ""){
-				$.post('sendAdminEpisode.php', {titleNewEp:titleNewEp, texteNewEp:texteNewEp}, function(dataSave){ // on sauvegarde
-					//$('#EpisodeWork').html(dataSave);
-					recupIdEdit();
-					$('#quitEdit').fadeIn(100);
-					$('#blockWriteIdEp').after('<p> - La création et la sauvegarde de l\'épisode a bien été effectuée.</p>');
-					$('#containtEpisodeAdmin > p:nth-child(2)').fadeOut(5000);	
-					return false;				
-				});
-				
-			}else{
-				Number(idNewEpClean);
-				$.post('sendAdminEpisode.php', {updateTitleNewEp:titleNewEp, updateTexteNewEp:texteNewEp, idNewEpClean:idNewEpClean}, function(dataSavemodif){  // MAJ des données dans la BDD
-					//$('#EpisodeWork').html(dataSavemodif);
-					$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(0);
-					$('#containtEpisodeAdmin > p:nth-child(2)').html(' - La sauvegarde de l\'épisode a bien été effectuée.');
-					$('#containtEpisodeAdmin > p:nth-child(2)').fadeOut(5000); 
-					return false;
-				});
-			}
-		}
-	});
-		//****************************************
-	//action sur le bouton Quitter un épisode editer
-	$('#quitEdit').click(function(){
-		var titleNewEp = $('#blockWriteTitleEpisode').text(); // on vérifie si il y a des données dans le titre de la zone d'édition
-		var texteNewEp = $('#blockWriteEpisode').text(); //idem pour la zone de texte
-		var idNewEp = $('#blockWriteIdEp').text(); //idem pour l'id' 
-
-		var titleNewEpClean = titleNewEp.replace(/ |\n|\r|\t/g, ''); //supprime espace, les tabulation et les saut de ligne pour ne garder que les caractère visible
-		var texteNewEpClean = texteNewEp.replace(/ |\n|\r|\t/g, '');
-		var idNewEpClean = idNewEp.replace(/ |\n|\r|\t/g, '');
-
-		Number(idNewEpClean); // on sauvegarde et on vide les champs
-		$.post('sendAdminEpisode.php', {updateTitleNewEp:titleNewEp, updateTexteNewEp:texteNewEp, idNewEpClean:idNewEpClean}, function(dataSavemodif){  // MAJ des données dans la BDD
-			$('#blockWriteTitleEpisode').empty();
-			$('#blockWriteEpisode').empty();
-			$('#blockWriteIdEp').empty();
-			return false;
+		$('#closePublishConfirm').click(function(){
+			$('#confirmPublishEpisode').fadeOut(600);
 		});
-			
 		
+		$('#publishEp').click(function(){
+			var id= $('#blockWriteIdEp').text();
+			idClean = id.replace(/ |\n|\r|\t/g, '');
+
+			if(idClean == ''){ // si il n'y a pas d'id, c'est que l'épisode n'existe pas en bdd, du coup on sauvegarde avant
+				console.log($('#blockWriteIdEp').text());
+				$.post('index.php?action=saveNewEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode}, function(donnee){	
+					$('<p>'+donnee+'</p>').appendTo('#blockWriteIdEp');
+					$.post('index.php?action=publishEpisode', {idEpisode:donnee}, function(donnee){	
+					$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);	
+						$('#containtEpisodeAdmin > p:nth-child(2)').text('La publication a bien été effectuée.')
+						$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
+						return false;
+					});
+					return false;
+				});
+				$('#confirmPublishEpisode').fadeOut(600);
+			}else{
+				idEpisode = $('#blockWriteIdEp p').text();
+				$.post('index.php?action=saveEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode, idEpisode:idEpisode}, function(donnee){			
+					$.post('index.php?action=publishEpisode', {idEpisode:idEpisode}, function(donnee){	
+						console.log(donnee);		
+					$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
+					$('#containtEpisodeAdmin > p:nth-child(2)').text('La publication a bien été effectuée.')
+					$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
+						return false;
+					});
+				$('#confirmPublishEpisode').fadeOut(600);
+			});
+			}
+		});
 	});
 
 
-	//*****************************************************************
-	//compare les entrée de la BDD et celles du texte présenté
-	function compareDataBdd(aDataEpisodeCompare){
-		$.post('recupAdminEpisode.php', {titleNewEp:titleNewEp, texteNewEp:texteNewEp, IdNewEpClean:IdNewEpClean}, function(donnee){
-				var aDonnee = donnee.split("`");
-				if((aDonnee[0] == aDataEpisodeCompare[0]) && (aDonnee[1] == aDataEpisodeCompare[1]) && (aDonnee[2] == aDataEpisodeCompare[2])){
-					return true;
-				}else{
-					return false;
-				}
-		});
-	}
+	//********************************************
+	//action sur le bouton sélectionner un épisode à modifier
+	$('#goEpModif').click(function(){
 
-	
-	
-});
+		var valEpModif = $('#selectEpModif').val(); 	
+				$.post('index.php?action=selEpModif', {valEpModif:valEpModif}, function(donnee){
+			var aDonnee = JSON.parse(donnee);
+			console.log(aDonnee);
+				$('#divModifSelectEp').fadeOut(0);
+				$('#hideWriteEpisodeModif').fadeIn(300);
+
+				var id = aDonnee[0]['id'];
+				var title = aDonnee[0]['title'];
+				var txt = aDonnee[0]['episode'];
+				$('<p>'+id+'</p>').appendTo('#blockWriteIdEpModif');
+				//$('#blockWriteIdEpModif').text(id);
+				document.getElementById("blockWriteTitleEpisodeModif").value=title;
+				tinyMCE.get('blockWriteEpisodeModif').setContent(txt) ;
+		})
+	});
+
+
+	//****************************************
+	//action sur le bouton sauvegarder un épisode Modifier
+	$('#saveModif').click(function(){
+		tinyMCE.triggerSave(true, true);
+		var txtEpisode = $('#blockWriteEpisodeModif textarea').val();
+		var titleEpisode = $('#blockWriteTitleEpisodeModif').val();
+		var id= $('#blockWriteIdEpModif p').text();
+		idEpisode = id.replace(/ |\n|\r|\t/g, '');
+
+		$.post('index.php?action=saveEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode, idEpisode:idEpisode}, function(donnee){			
+
+			console.log(donnee);		
+			$('#containtEpisodeAdminModif > p:nth-child(2)').fadeIn(600);
+			$('#containtEpisodeAdminModif > p:nth-child(2)').text('La publication a bien été effectuée.')
+			$('#containtEpisodeAdminModif > p:nth-child(2)').delay(2000).fadeOut(1000);
+				return false;
+			});
+				
+		});
+	});
+

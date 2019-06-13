@@ -79,7 +79,7 @@ try {
 				throw new Exception('Aucun compte n\'est trouvé');
 			}
 		}
-		elseif ($_GET['action'] == 'sendMessage')// si utilisateur veut envoyer un message
+/*		elseif ($_GET['action'] == 'sendMessage')// si utilisateur veut envoyer un message
 		{
 			if (isset($_SESSION['idUser']) && isset($_SESSION['idUser']) > 0) 
     		{
@@ -96,8 +96,8 @@ try {
             {
                 throw new Exception('Aucun identifiant d\'utilisateur envoyé');
             }
-		}
-		elseif ($_GET['action'] == 'deleteMessage')// si utilisateur veut supprimer un message
+		}*/
+/*		elseif ($_GET['action'] == 'deleteMessage')// si utilisateur veut supprimer un message
 		{
 			if (isset($_POST['idMessDel']) && $_POST['idMessDel'] > 1 && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
     		{
@@ -107,8 +107,8 @@ try {
             {
                 throw new Exception('Vous ne pouvez pas réaliser la suppression du message');
             }
-        }
-        elseif ($_GET['action'] == 'changeorderMessageReceive')// si utilisateur veut changer le sens d'affichage des messages
+        }*/
+/*        elseif ($_GET['action'] == 'changeorderMessageReceive')// si utilisateur veut changer le sens d'affichage des messages
         {
             if (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'upDate') 
             {
@@ -122,8 +122,8 @@ try {
             {
                 throw new Exception('Le sens d\'affichage n\'est pas disponible '.$_POST['idReceive'].'');
             }
-        }
-        elseif ($_GET['action'] == 'changeorderMessageSend')// si utilisateur veut changer le sens d'affichage des messages
+        }*/
+/*        elseif ($_GET['action'] == 'changeorderMessageSend')// si utilisateur veut changer le sens d'affichage des messages
         {
             if (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'upDate') 
             {
@@ -138,17 +138,52 @@ try {
                 throw new Exception('Le sens d\'affichage n\'est pas disponible');
             }
         }
-
-/*        elseif ($_GET['action'] == 'addEpisode')// si l'admin veut poster un épisode
+*/
+        elseif ($_GET['action'] == 'saveNewEpisode')// si l'admin veut enregistrer un épisode
         {
-            if (isset($_GET['idUser']) && $_GET['idUser'] == 1) 
+            if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
             {
+                 if(isset($_POST['txtEpisode']) && isset($_POST['titleEpisode']))
+                {
 
+                    saveNewEpisodeWrite($_POST['txtEpisode'], $_POST['titleEpisode']);
+                }
+                else
+                {
+                    throw new Exception('Le texte et le titre de l\'épisode ne sont pas présent');
+                }
             }
-        }*/
+        }
+        elseif ($_GET['action'] == 'saveEpisode')// si l'admin veut enregistrer un épisode
+        {
+            if (isset($_SESSION['admin']) && ($_SESSION['admin'] == 1) && isset($_POST['idEpisode']))
+            {
+                 if(isset($_POST['txtEpisode']) && isset($_POST['titleEpisode']))
+                {
+
+                    saveEpisodeWrite($_POST['txtEpisode'], $_POST['titleEpisode'], $_POST['idEpisode']);
+                }
+                else
+                {
+                    throw new Exception('Le texte et le titre de l\'épisode ne sont pas présent');
+                }
+            }
+        }
+        elseif ($_GET['action'] == 'publishEpisode')// si l'admin veut publier un épisode qu'il vient d'écrire
+        {
+            if (isset($_SESSION['admin']) && ($_SESSION['admin'] == 1) && isset($_POST['idEpisode']))
+            {
+                    publishEpisodeWrite($_POST['idEpisode']);
+            }
+            else
+            {
+                throw new Exception('L\'identifiant de l\'épisode a publier n\'est pas présent');
+            }
+            
+        }
 
 
-/*        elseif ($_GET['action'] == 'selEpModif')// si l'admin veut selectionner un épisode pour le modifier sur son interface
+        elseif ($_GET['action'] == 'selEpModif')// si l'admin veut selectionner un épisode pour le modifier sur son interface
 		{
 			if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
 			{
@@ -161,7 +196,7 @@ try {
                     throw new Exception('Aucune sélection possible d\'épisode à modifier est trouvé');
                 }
             }
-        }*/
+        }
         elseif($_GET['action'] == 'delEpModif') // si l'admin veut supprimer un épisode sur son interface
         {
             if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
@@ -323,17 +358,9 @@ try {
         {
             if (isset($_POST['idEpisode']) && $_POST['idEpisode'] > 0) // test id épisode
             {
-
             	if (isset($_SESSION['idUser']) && $_SESSION['idUser'] > 0) // test id utilisateur si connecté
             	{
-            		if (!empty($_POST['comment'])) // test si le champs n'est pas vide
-            		{
-            			addComment($_POST['idEpisode'], $_SESSION['idUser'], $_POST['comment']);
-            		}
-            		else
-            		{
-                    	throw new Exception('Le commentaire est vide !');
-                	}
+            		addComment($_POST['idEpisode'], $_SESSION['idUser'], $_POST['comment']);
             	}
             	else
             	{

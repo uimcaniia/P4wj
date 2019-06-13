@@ -53,18 +53,63 @@ $(document).ready(function(){
 	function recupDataComment(action, valComSelect, colBdd, title, div){
 
 		$.post('index.php?action='+action+'', {valComSelect:valComSelect, colBdd:colBdd}, function(donnee){
-				
-		$('#'+div).fadeIn(600);
-		$('#'+div).html(donnee);
+			var aDonnee = JSON.parse(donnee);
+			//console.log(aDonnee);
+			if(colBdd == 'pseudoSignal'){
+				var resHead = '<thead><tr><th colspan = "4">'+title+'</th></tr></thead><tbody>';
+				var resBody ='';
+				for(var i = 0 ; i < aDonnee[0].length; i++){
+					resBody = resBody+'<tr><td> Commentaire du '+aDonnee[0][i]['commentTime']+'</td><td> '+aDonnee[0][i]['comment']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[0][i]['id']+'\',\'comment\',\'\',\''+aDonnee[0][i]['idUser']+'\',byPseudo);"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[0][i]['id']+'\',\'comment\',\'\',\''+aDonnee[0][i]['idUser']+'\',\'byPseudo\');"></span></td></td></tr>';
+				}
+				if (aDonnee[1].length != 0){
+					for (var j = 0 ; j < aDonnee[1].length ; j++){
+						resBody = resBody+'<tr><td> Réponse du '+aDonnee[1][j]['dateReply']+'</td><td> '+aDonnee[1][j]['reply']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[1][j]['idcomment_reply']+'\',reply,\''+aDonnee[1][j]['id']+'\',\''+aDonnee[1][j]['iduser_reply']+'\',\'byPseudo\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[1][j]['idcomment_reply']+'\',\'reply\',\''+aDonnee[1][j]['id']+','+aDonnee[1][j]['iduser_reply']+'\',\'byPseudo\');"></span></td></tr>';
+					}
+				}
+				resComm = resHead+resBody+'</tbody>';
+			}
+			if(colBdd == 'episodeSignal'){
+				var resHead = '<thead><tr><th colspan = "5">'+title+'</th></tr></thead><tbody>';
+				var resBody ='';
 
-		if((colBdd == 'episode')||(colBdd == 'episodeSignal')){
-			$('#'+div+' thead tr th').html(title);
-		}
-		if((colBdd == 'pseudo')||(colBdd == 'pseudoSignal')){
-			$('#'+div+' thead tr').html('<th>'+title+'</th><th><span class="fas fa-envelope" onclick="animSendMessageUser(\''+valComSelect+'\',\''+title+'\');"></span></th><th></th>')
-		}
+				for(var i = 0 ; i < aDonnee.length; i++){
+					resBody = resBody+'<tr><td> Le '+aDonnee[i]['commentTime']+'</td><td> de '+aDonnee[i]['pseudo']+' : </td><td> '+aDonnee[i]['comment']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[i]['id']+'\',\'comment\',\'\',\''+aDonnee[i]['idUser']+'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[i]['id']+'\',\'comment\',\'\',\''+aDonnee[i]['idUser']+'\',\'byEpisode\');"></span></td></tr>';
+					for (var j = 0 ; j < aDonnee[i]['reply'].length ; j++){
+						resBody = resBody+'<tr><td> Réponse le '+aDonnee[i]['reply'][j]['dateReply']+'</td><td> de '+aDonnee[i]['reply'][j]['pseudo']+' : </td><td> '+aDonnee[i]['reply'][j]['reply']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[i]['id']+'\',\'reply\',\''+aDonnee[i]['reply'][j]['id']+'\',\''+aDonnee[i]['reply'][j]['iduser_reply']+'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[i]['id']+'\',\'reply\',\''+aDonnee[i]['reply'][j]['id']+'\',\''+aDonnee[i]['reply'][j]['iduser_reply']+'\',\'byEpisode\');"></span></td></tr>';	
+					}
+				}
+				resComm = resHead+resBody+'</tbody>';
+			}
+			if(colBdd == 'pseudo'){
+				var resHead = '<thead><tr><th colspan = "4">'+title+'</th></tr></thead><tbody>';
+				var resBody ='';
+				for(var i = 0 ; i < aDonnee[0].length; i++){
+					resBody = resBody+'<tr><td> Commentaire du '+aDonnee[0][i]['commentTime']+'</td><td> '+aDonnee[0][i]['comment']+'</td><td></td></tr>';
+				}
+					if (aDonnee[1].length != 0){
+						for (var j = 0 ; j < aDonnee[1].length ; j++){
+							resBody = resBody+'<tr><td> Réponse du '+aDonnee[1][j]['dateReply']+'</td><td> '+aDonnee[1][j]['reply']+'</td><td></td></tr>';
+						}
+				}
+				resComm = resHead+resBody+'</tbody>';
+			}
+			if(colBdd == 'episode'){
+				var resHead = '<thead><tr><th colspan = "3">'+title+'</th></tr></thead><tbody>';
+				var resBody ='';
 
-		return false;		
+				for(var i = 0 ; i < aDonnee.length; i++){
+					resBody = resBody+'<tr><td> Le '+aDonnee[i]['commentTime']+'</td><td> de '+aDonnee[i]['pseudo']+' : </td><td> '+aDonnee[i]['comment']+'</td></tr>';
+					for (var j = 0 ; j < aDonnee[i]['reply'].length ; j++){
+						resBody = resBody+'<tr><td> Réponse le '+aDonnee[i]['reply'][j]['dateReply']+'</td><td> de '+aDonnee[i]['reply'][j]['pseudo']+' : </td><td> '+aDonnee[i]['reply'][j]['reply']+'</td></tr>';	
+					}
+				}
+				resComm = resHead+resBody+'</tbody>';
+}
+	
+			$('#'+div).fadeIn(600);
+			$('#'+div).html(resComm);
+
+			return false;		
 	
 		});
 	}
@@ -73,7 +118,7 @@ $(document).ready(function(){
 });
 //************************************************************************
 	function delComAndRep(idComment, tableBdd, idReply, idUser, by){
-
+//var elements = document.
 		if(tableBdd == 'comment'){
 
 			$('#confirmDeleteComment').fadeIn(600);
@@ -154,3 +199,4 @@ $(document).ready(function(){
 			});
 		}
 	}
+	

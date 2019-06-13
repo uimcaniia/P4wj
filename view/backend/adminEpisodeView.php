@@ -91,13 +91,14 @@
 			 					</div>
 			 					<p></p>
 		 						<div>
-		 							<input type='texte' name='blockWriteTitleEpisode' id='blockWriteTitleEpisode'>
+		 							<input type='texte' name='blockWriteTitleEpisode' id='blockWriteTitleEpisode' value='' placeholder="Votre titre">
 		 						</div>
 		 						<div id='blockWriteEpisode'>
 		 							<textarea id='blockWriteEpisode' class='text' name='elem1'>Votre texte...</textarea>
 		 						</div>
 		 						<div id='ctrlWriteEpisode'>
-		 							<span id='saveEdit' onclick="save();">Enregistrer</span>
+		 							<span id='saveEdit'>Enregistrer</span>
+		 							<span id='showEdit'>Publier</span>
 		 						</div>
 			 				</div>
 			 			</div>
@@ -115,10 +116,10 @@
 		 						</div>
 
 		 						<div id='blockWriteEpisodeModif'>
-		 							<textarea id='blockWriteEpisodeModif' class='text' name='elem2'>Votre texte...</textarea>
+		 							<textarea id='blockWriteEpisodeModif' class='text' name='blockWriteEpisodeModif'>Votre texte...</textarea>
 		 						</div>
 		 						<div id='ctrlWriteEpisodeModif'>
-		 							<span id='saveModif' onclick="save();">Enregistrer</span>
+		 							<span id='saveModif'>Enregistrer</span>
 		 						</div>
 		 					</div>
 			 			</div>

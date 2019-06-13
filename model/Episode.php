@@ -17,13 +17,13 @@
 		 private $_title;
 	  	 private $_publication;
 	 	 private $_dataChange;
-	 	 private $_checkIdentite;
+	 	 private $_showEpisode;
 
 		// **************************************************
 		// Methode
 		// **************************************************
 
-/*	 	 public function getDataToHydrate($intIdEpisode)
+	 	 public function getDataToHydrate($intIdEpisode)
 	 	 {
 	 	 	if((is_int($intIdEpisode)) && ($intIdEpisode>0)){
 	 	 		$aData = parent::get($intIdEpisode);
@@ -33,32 +33,23 @@
 	 	 	{
 	 	 		throw new Exception('le chapitre '.$intIdEpisode.' n\'existe pas'); 
 	 	 	}
-	 	 }*/
+	 	 }
 
-/*	 	 public function hydrate($aData)
+	 	 public function hydrate($aData)
 	 	 {
-
 	 	 	if($aData != false)
 	 	 	{
-	 	 		$this->setCheckIdentite(true);
-		 	 	foreach ($aData[0] as $key => $value)
+		 	 	foreach ($aData as $key => $value)
 		 	 	{
-
 		 	 		 // On récupère le nom du setter correspondant à l'attribut en mettant sa première lettre en majuscule. 
 		 	 		$method = 'set'.ucfirst($key);
-
 		 	 		if(method_exists($this, $method))
 		 	 		{
-
 		 	 			$this->$method($value);
-		 	 			
 		 	 		}
 		 	 	}
-		 	}else
-		 	{
-		 	 	$this->setCheckIdentite(false);
 		 	}
-	 	 }*/
+	 	 }
 
 	 	 //*********************************************
 	 	 //récupère un épisode suivant son id
@@ -217,7 +208,11 @@
 		{
 			return strftime('%d-%m-%Y',strtotime($this->_dataChange));
 		}
-	
+			/** Retourne l'affiche (1) ou non (0) sur le site' */
+		public function getShowEpisode()
+		{
+			return $this->_showEpisode;
+		}
 
 		// **************************************************
 		// SETTERS
@@ -261,7 +256,12 @@
 		{
 			$this->_dataChange = $dataChange;
 		}
-
+		/** Retourne l'affiche (1) ou non (0) sur le site' */
+		public function setShowEpisode($showEpisode)
+		{
+			$showEpisode = (int) $showEpisode;
+			$this->_showEpisode;
+		}
 		
 	}
 	

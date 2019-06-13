@@ -3,31 +3,20 @@
 
 <?php ob_start(); ?>
 				<!-- <p id='confirmSendMess'></p> -->
-				<!-- <article id="messageAdmin">
-					<div>
-						<span class="fas fa-times"  onclick="closeMessageDiv()"></span>
-						<div class='flexRow'>
-							<p>Vous allez envoyer un message </p>
-							<p id='pseudoMessage'></p>
-						</div>
-						<p id='alertMessage'></p>
 
-						<div id='containMess'>
-							<div>
-								<label for='subjectMess'>Sujet : </label>
-								<input type='text' id='subjectMess' name='subjectMess' value="">
-							</div>
-							<div>
-								<label for='textMess'>Message : </label>
-								<textarea id='textMess' name='textMess' value="" class="mceNoEditor"></textarea>
-							</div>
-						</div>
+				<article id="confirmPublishEpisode">
+					<div>
+						<span id='closePublishConfirm' class="fas fa-times"></span>
+							<p>Une fois la publication activée,</p>
+							<p>le nouvel épisode sera visible par tous.</p>
+							<p>Voulez-vous publier l'épisode?</p>
+						<p id='alertMessage'></p>
 						<div id="messageBtn" class="flexRow">
-							<p>Envoyer</p>
-							<span id='sendMess' class="fas fa-check"></span>
+							<p>Publier</p>
+							<span id='publishEp' class="fas fa-check"></span>
 						</div>
 					</div>
-				</article> -->
+				</article>
 				<article id="confirmDeleteComment">
 					<div>
 						<span class="fas fa-times"  onclick="closeDeleteCommentDiv()"></span>

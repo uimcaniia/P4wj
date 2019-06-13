@@ -18,7 +18,7 @@ function listLastEpisode($nbr)
 function extractAllEpisode()
 {
 	$episodes = new Episode;
-	$aEpisode = $episodes->getAllEpisode();// on récupère tous les épisodes
+	$aEpisode = $episodes->getAllEpisodePublish();// on récupère tous les épisodes
 
 	if($aEpisode === false)
 	{
@@ -181,27 +181,30 @@ function listOldCommentEpisode($idEpisode)
 //********************************************************
 function addComment($idEpisode, $idPseudo, $comment)
 {
-	$majCommentUser = new User;
-	$userComment = $majCommentUser->get('id', $idPseudo); // on récup le nbr de commentaire qu'il a posté
-	$userComment[0]['comment'] = $userComment[0]['comment'] +1; // on ajoute +1 de commentaire
-	$userComment = $majCommentUser->update('comment', $userComment[0]['comment'], $idPseudo); // maj du nbr de commentaire
+	$comment = trim($comment);
+	if(!empty($comment)) // on s'assure de ne pas avoir de réponse vide
+	{
+		$majCommentUser = new User;
+		$userComment = $majCommentUser->get('id', $idPseudo); // on récup le nbr de commentaire qu'il a posté
+		$userComment[0]['comment'] = $userComment[0]['comment'] +1; // on ajoute +1 de commentaire
+		$userComment = $majCommentUser->update('comment', $userComment[0]['comment'], $idPseudo); // maj du nbr de commentaire
 
-	$aDataComment=array(
-		array(
-			"comment"   => "'$comment'",
-			"idEpisode" => "$idEpisode",
-			"idUser"    => "$idPseudo"));
+		$aDataComment=array(
+			array(
+				"comment"   => '"'.$comment.'"',
+				"idEpisode" => "$idEpisode",
+				"idUser"    => "$idPseudo"));
 
-	$comment = new Comment; // on ajoute le nouveau commentaire
-	$comment->hydrate($aDataComment);
-	$comment->add($comment);
+		$comment = new Comment; // on ajoute le nouveau commentaire
+		$comment->hydrate($aDataComment);
+		$comment->add($comment);
 
-	$comment2 = new Comment;
-	$aLastCom = $comment2 -> getLastComment(); // on récupère le résultat pour récupérer la date de l'enregistrement en BDD
+		$comment2 = new Comment;
+		$aLastCom = $comment2 -> getLastComment(); // on récupère le résultat pour récupérer la date de l'enregistrement en BDD
+		$aLastCom[0]['commentTime']=strftime('%d-%m-%Y',strtotime($aLastCom[0]['commentTime']));
 
-	$resComment = '<div class="commentSignal"><p> De </p><p>'.$aLastCom[0]['pseudo'].'</p><p> le </p><p>'.strftime('%d-%m-%Y',strtotime($aLastCom[0]['commentTime'])).'</p></div><div class="comment"><p id="commentUserConnectSend">'.$aLastCom[0]['comment'].'</p></div>';
-
-	echo $resComment;
+		echo json_encode($aLastCom[0]);
+	}
 }
 //********************************************************
 function addReply($idEpisode, $idPseudo, $comment, $reply)
@@ -227,7 +230,7 @@ function addReply($idEpisode, $idPseudo, $comment, $reply)
 
 		$reply2 = new Reply; // on ajoute le nouveau commentaire
 		$aLastReply = $reply2 -> getLastReply(); // on récupère le résultat pour récupérer la date de l'enregistrement en BDD
- 
+ 		$aLastReply[0]['dateReply']=strftime('%d-%m-%Y',strtotime($aLastReply[0]['dateReply']));
 		echo json_encode($aLastReply[0]);
 	}
 }

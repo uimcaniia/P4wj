@@ -195,7 +195,8 @@ function recupEpisodeSelect($valEpModif)
 {
 	$episode = new Episode();
 	$aEpisode = $episode->get($_POST['valEpModif']);
-	echo ' '.$aEpisode[0]['title'].'`'.$aEpisode[0]['episode'].'`'.$aEpisode[0]['id'].'';
+	echo json_encode($aEpisode);
+	//echo ' '.$aEpisode[0]['title'].'`'.$aEpisode[0]['episode'].'`'.$aEpisode[0]['id'].'';
 }
 //***********************************************************************
 function delEpisodeSelect($valEpDel)
@@ -221,20 +222,7 @@ function commentEpisodeSelect($idEpisode) //(requete AJAX)
 		$aReply = $reply->getAllReplyOrderJoin('idcomment_reply', $value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
 		$aComment[$key]['reply'] = $aReply;
 	}
-
-	$table.='<thead><tr><th colspan = 4>TITRE</th></tr></thead><tbody>';
-
-	for($i = 0 ; $i < count($aComment); $i++)
-	{
-		$table.= '<tr><td> Le '.$aComment[$i]['commentTime'].'</td><td> de '.$aComment[$i]['pseudo'].' : </td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['idUser'].'\',\''.$aComment[$i]['pseudo'].'\', \''.$_SESSION['idUser'].'\');"></span></td></tr>';
-
-		for($k = 0 ; $k < count($aComment[$i]['reply']); $k++)
-		{
-			$table.= '<tr><td> Réponse le '.$aComment[$i]['reply'][$k]['dateReply'].'</td><td> de '.$aComment[$i]['reply'][$k]['pseudo'].' : </td><td> '.$aComment[$i]['reply'][$k]['reply'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\''.$aComment[$i]['reply'][$k]['pseudo'].'\', \''.$_SESSION['idUser'].'\');"></span></td></tr>';	
-		}
-	}
-	$table.='</tbody>';
-	echo $table;
+	echo json_encode($aComment);
 }
 //**********************************************************************
 function commentPseudoSelect($idPseudo)//(requete AJAX)
@@ -242,26 +230,23 @@ function commentPseudoSelect($idPseudo)//(requete AJAX)
 	$table = '';
 	$comment  = new Comment();
 	$aComment = $comment->getAllCommentSelect('idUser', $idPseudo);
+	foreach($aComment as $key => $value)
+	{
+		$date=strftime('%d-%m-%Y',strtotime($value['commentTime']));
+		$aComment[$key]['commentTime'] = $date;
+	}
 	$reply    = new ReplyManager;
 	$aReply   = $reply->getAllReplySelect('iduser_reply', $idPseudo);
-
-	$table.='<thead><tr></tr></thead><tbody>';
-
-	for($i = 0 ; $i < count($aComment); $i++)
+	foreach($aReply as $key2 => $value2)
 	{
-		$table.= '<tr><td> Commentaire du '.$aComment[$i]['commentTime'].'</td><td> '.$aComment[$i]['comment'].'</td><td></td></tr>';
+		$date2=strftime('%d-%m-%Y',strtotime($value2['dateReply']));
+		$aReply[$key2]['dateReply'] = $date2;
 	}
+	$aAll = array(
+		0=>$aComment,
+		1=>$aReply);
 
-	if (!empty($aReply))
-	{
-		for ($j = 0 ; $j < count($aReply) ; $j++)
-		{
-			$table.= '<tr><td> Réponse du '.$aReply[$j]['dateReply'].'</td><td> '.$aReply[$j]['reply'].'</td><td></td></tr>';
-		}
-	}		
-	
-	$table.='</tbody>';
-	echo $table;
+	echo json_encode($aAll);
 }
 //**********************************************************************
 function commentSignalEpisodeSelect($idEpisodeSignal)//(requete AJAX)
@@ -271,25 +256,19 @@ function commentSignalEpisodeSelect($idEpisodeSignal)//(requete AJAX)
 	$aComment = $comment->getAllCommentSignalSelectJoin('idEpisode', $idEpisodeSignal, 'user', 'idUser', 'id', 'pseudo');
 	foreach ($aComment as $key => $value)
 	{
+		$date=strftime('%d-%m-%Y',strtotime($value['commentTime']));
+		$aComment[$key]['commentTime'] = $date;
 		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires + pseudo dans la table user
-		$aReply = $reply->getAllReplySignalSelectJoin('idcomment_reply', $value['id'], 'user', 'iduser_reply', 'id', 'pseudo');;
+		$aReply = $reply->getAllReplySignalSelectJoin('idcomment_reply', $value['id'], 'user', 'iduser_reply', 'id', 'pseudo');
+		foreach($aReply as $key2 => $value2)
+		{
+			$dateRe=strftime('%d-%m-%Y',strtotime($value2['dateReply']));
+			$aReply[$key2]['dateReply'] = $dateRe;
+		}
 		$aComment[$key]['reply'] = $aReply;
 	}
 
-	$table.='<thead><tr><th colspan = 6>TITRE</th></tr></thead><tbody>';
-	
-	for($i = 0 ; $i < count($aComment); $i++)
-	{
-		$table.= '<tr><td> Le '.$aComment[$i]['commentTime'].'</td><td> de '.$aComment[$i]['pseudo'].' : </td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['idUser'].'\',\''.$aComment[$i]['pseudo'].'\');"></span></td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'comment\',\'\',\''.$aComment[$i]['idUser'].'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''.$aComment[$i]['id'].'\',\'comment\',\'\',\''.$aComment[$i]['idUser'].'\',\'byEpisode\');"></span></td></tr>';
-
-		for($k = 0 ; $k < count($aComment[$i]['reply']); $k++)
-		{
-			$table.= '<tr><td> Réponse le '.$aComment[$i]['reply'][$k]['dateReply'].'</td><td> de '.$aComment[$i]['reply'][$k]['pseudo'].' : </td><td> '.$aComment[$i]['reply'][$k]['reply'].'</td><td><span class="fas fa-envelope" onclick="animSendMessageUser(\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\''.$aComment[$i]['reply'][$k]['pseudo'].'\');"></span></td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'reply\',\''.$aComment[$i]['reply'][$k]['id'].'\',\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''.$aComment[$i]['id'].'\',\'reply\',\''.$aComment[$i]['reply'][$k]['id'].'\',\''.$aComment[$i]['reply'][$k]['iduser_reply'].'\',\'byEpisode\');"></span></td></tr>';	
-		}
-	}
-
-	$table.='</tbody>';
-	echo $table;
+	echo json_encode($aComment);
 }
 //**********************************************************************
 function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
@@ -297,26 +276,27 @@ function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
 	$table = '';
 	$comment  = new Comment();
 	$aComment = $comment->getAllCommentSignalSelect('idUser', $idPseudoSignal);
+		foreach($aComment as $key => $value)
+		{
+			$date=strftime('%d-%m-%Y',strtotime($value['commentTime']));
+			$aComment[$key]['commentTime'] = $date;
+		}
+
 	$reply    = new Reply;
 	$aReply   = $reply->getAllReplySelect('iduser_reply', $idPseudoSignal);
-
-	$table.='<thead><tr></tr></thead><tbody>';
-
-	for($i = 0 ; $i < count($aComment); $i++)
-	{
-		$table.= '<tr"><td> Commentaire du '.$aComment[$i]['commentTime'].'</td><td> '.$aComment[$i]['comment'].'</td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aComment[$i]['id'].'\',\'comment\',\'\',\''.$aComment[$i]['idUser'].'\',\'byPseudo\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''.$aComment[$i]['id'].'\',\'comment\',\'\',\''.$aComment[$i]['idUser'].'\',\'byPseudo\');"></span></td></tr>';
-	}
-
-	if (!empty($aReply))
-	{
-		for ($j = 0 ; $j < count($aReply) ; $j++)
+		foreach($aReply as $key2 => $value2)
 		{
-			$table.= '<tr><td> Réponse du '.$aReply[$j]['dateReply'].'</td><td> '.$aReply[$j]['reply'].'</td><td><span class="fas fa-times" onclick="delComAndRep(\''.$aReply[$j]['idcomment_reply'].'\',\'reply\',\''.$aReply[$j]['id'].'\',\''.$aReply[$j]['iduser_reply'].'\' ,\'byPseudo\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''.$aReply[$j]['idcomment_reply'].'\',\'reply\',\''.$aReply[$j]['id'].'\',\''.$aReply[$j]['iduser_reply'].'\' ,\'byPseudo\');"></span></td></tr>';
+			$date2=strftime('%d-%m-%Y',strtotime($value2['dateReply']));
+			$aReply[$key2]['dateReply'] = $date2;
 		}
-	}	
-			$table.='</tbody>';
-			echo $table;
-		}
+
+	$aAll = array(
+		0=>$aComment,
+		1=>$aReply);
+
+
+	echo json_encode($aAll); 
+}
 
 //**********************************************************************
 function deleteCommentReply($idComment, $idUser)
@@ -344,7 +324,7 @@ function deleteReply($idReply, $idUser)
 	$moderUser         = $user->update('moderate', $actualiseModerate, $idUser);
 }
 
-//**********************************************************************
+/*//**********************************************************************
 function sendMessage($idUser, $idrecipient, $subject, $text) //(requete AJAX)
 {
 		$aDataMessage=array(
@@ -365,9 +345,9 @@ function getMessJustSend($aDataMessage)
 {
 	$table=	'<tr><td>'.$aDataMessage['date'].'</td><td>'.$aDataMessage['pseudo'].'</td><td>'.$aDataMessage['subject'].'</td><td>'.$aDataMessage['text'].'</td></tr>';
 	return $table;
-}
+}*/
 //********************************************************************
-function changeOrderMessage($colBdd, $sens, $idUser)
+/*function changeOrderMessage($colBdd, $sens, $idUser)
 {
 	$table = '';
 	$message       = new Message; 
@@ -401,22 +381,20 @@ function changeOrderMessage($colBdd, $sens, $idUser)
 			}
 	}
 	echo $table;
-}
+}*/
 //**********************************************************************
-function deleteMessage($idMess)
+/*function deleteMessage($idMess)
 {
 	$message = new Message();
 	$message->delete($idMess);
-}
+}*/
 //**********************************************************************
 function getPseudoModerate($idUser)
 {
 	$user  = new User();
 	$aUserInfos = $user->get('id', $idUser); 
-
-		$div ='<p>Pseudo : '.$aUserInfos[0]['pseudo'].'</p><p>Nombre de modération actuelle : '.$aUserInfos[0]['moderate'].'</p><p>Ce lecteur à posté '.$aUserInfos[0]['comment'].' commentaire dont '.$aUserInfos[0]['reporting'].' ont été signalé(s)</p><p>Il est inscrit depuis le '.$aUserInfos[0]['inscription'].'</p><div class="flexRow"><p>Voulez-vous bloquer ce lecteur?</p><span id="goDeletPseudoModerate" class="fas fa-user-slash" onclick="deletePseudo(\''.$aUserInfos[0]['id'].'\');"></span>';
-
-	echo $div;
+	$aUserInfos[0]['inscription']=strftime('%d-%m-%Y',strtotime($aUserInfos[0]['inscription']));
+	echo json_encode($aUserInfos[0]);
 }
 //**********************************************************************
 function deletePseudo($idUser)
@@ -436,7 +414,6 @@ function updatePswUser($psw, $pswAgain, $idUser)
 		$pswHash = password_hash($psw, PASSWORD_DEFAULT);
 		$user = new User;
 		$user-> update('psw', $pswHash, $idUser);
-		//echo 'La mise a jour a bien été effectuée.';
 	}
 	echo $alertConnectionPseudo;
 }
@@ -461,4 +438,37 @@ function removeReplySignal($idReply, $idUser)
 	$getInfosUser      = $user->get('id', $idUser);
 	$actualiseModerate = $getInfosUser[0]['reporting'] - 1;
 	$moderUser         = $user->update('reporting', $actualiseModerate, $idUser);
+}
+//*****************************************************************************
+function saveNewEpisodeWrite($texteEpisode, $titleEpisode){
+
+	$aDataEpisode=array(
+	"episode"    => '"'.$texteEpisode.'"',
+	"showEpisode"=> '0',
+	"title"      => '"'.$titleEpisode.'"');
+
+	$episode = new Episode;
+	$episode -> hydrate($aDataEpisode);
+	$episode -> add($episode);
+	$episode2 = new episode;
+	$newId = $episode2 -> getLastEpisodeNoShow();
+	echo $newId[0]['MAX(id)'];
+}
+//*****************************************************************************
+function saveEpisodeWrite($texteEpisode, $titleEpisode, $idepisode){
+
+	$aDataEpisode2=array(
+	"episode" => '"'.$texteEpisode.'"',
+	"id"      => $idepisode,
+	"title"   => '"'.$titleEpisode.'"');
+
+	$episode2 = new Episode;
+	$episode2 -> hydrate($aDataEpisode2);
+	$episode2 -> update($episode2);
+}
+//*****************************************************************************
+function publishEpisodeWrite($idepisode){
+	$idepisode = (int) $idepisode;
+	$episode = new Episode;
+	$episode -> updatePublish($idepisode);
 }
