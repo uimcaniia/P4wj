@@ -102,7 +102,6 @@ static protected $bdd = null;
 		$req -> execute();
 		
 		$res = $req->fetchAll(PDO::FETCH_ASSOC);
-/*print_r($res);*/
 		if(!empty($res)) // on vérifie si un résultat est retournée
 		{
 			return $res;
@@ -123,7 +122,6 @@ static protected $bdd = null;
 		$res=array();
 		$bdd = self::getConnexion();
 		$req = $bdd->prepare($request);
-		//print_r($aParam);
 		for($i = 0 ; $i < count($aParam) ; $i++)
 		{
 			$req -> bindValue($aParam[$i][0], $aParam[$i][1]);

@@ -106,6 +106,7 @@ $('#showNavEpisode').click(function(){
 $('#btnEditEp').click(function(){
 	$('#hideWriteEpisode').fadeIn(600);
 		$('#containtEpisodeAdmin > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)').fadeOut(0);
+		$('#containtEpisodeAdmin > div:nth-child(4) > div:nth-child(2)').css({'height':'400px'});
 	if($('#divModifSelectEp').is(":visible")){ 
 		$('#divModifSelectEp').fadeOut(0);
 	}
@@ -119,6 +120,7 @@ $('#btnEditEp').click(function(){
 //*********************************************************
 $('#btnModifEp').click(function(){
 	$('#divModifSelectEp').fadeIn(600);
+	$('#containtEpisodeAdminModif > div:nth-child(4) > div:nth-child(2)').css({'height':'400px'});
 	if($('#hideWriteEpisode').is(":visible")){ 
 		$('#hideWriteEpisode').fadeOut(0);
 	}

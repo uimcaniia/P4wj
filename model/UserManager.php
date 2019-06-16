@@ -28,9 +28,8 @@ class UserManager extends bdd{
 	 	 //lit une entrée de la table user en comparant un paramètre et une valeur
 	 	 public function get($param, $value)
 	 	 { 
-		 	$request = 'SELECT * FROM '. self::TAB_USER.' WHERE :param  = :value ';
+		 	$request = 'SELECT * FROM '. self::TAB_USER.' WHERE '.$param.'  = :value ';
 		 	$arr=array(
-		 		array(":param" , $param)
 	 	 		array(":value" , $value));
 		 	$aRes = parent::reqPrepaExecSEl($request, $arr);
 		 	return $aRes;
@@ -53,8 +52,7 @@ class UserManager extends bdd{
 	 	 {
 		 	$request = 'SELECT * FROM '. self::TAB_USER.' WHERE admin = 0 AND deleteUser = 0 ORDER BY id';
 		 	$aRes = parent::addRequestSelect($request);
-
-		 	return $aRes;
+		 	return $aRes; 
 	 	 }
 
 //******************************************************************************************************************
@@ -63,7 +61,7 @@ class UserManager extends bdd{
 
 	 	 	$request = 'UPDATE '. self::TAB_USER.' SET '.$col.' = :data WHERE id = :idUser';
 	 	 	$arr=array(
-	 	 		array(":data" , $data)
+	 	 		array(":data" , $data),
 	 	 		array(":idUser" , $idUser));
 	 	 	$aRes = parent::reqPrepaExec($request, $arr);
 	 	 }

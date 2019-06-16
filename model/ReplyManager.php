@@ -48,7 +48,6 @@ class ReplyManager extends bdd{
 	 	 	$arr=array(
 	 	 		array(":idep", $reply, PDO::PARAM_INT));
 	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);
-	 	 	//print_r($aRes);
 	 	 	return $aRes;
 
 	 	 }
@@ -71,7 +70,7 @@ class ReplyManager extends bdd{
 	 	 			   ON b.'.$colJoin.' = a.'.$col.' 
 	 	 			   WHERE a.'.$colSelect.' = :idSelect 
 	 	 			   ORDER BY '.$ordre.'';
-	 	 		 	 	$arr=array(
+	 	 	$arr=array(
 	 	 		array(":idSelect", $idSelect));
 	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);
 	 	 	return $aRes;
@@ -89,7 +88,7 @@ class ReplyManager extends bdd{
 				   WHERE a.'.$colSelect.' = :idSelect AND a.reporting_reply = 1';
 
 		 	 $arr=array(
-		 	 	array(":idSelect" , $idSelect)
+		 	 	array(":idSelect" , $idSelect),
 	 	 		array(":idSelect" , $idSelect));
 		 	 $aRes = parent::reqPrepaExecSEl($request, $arr);
 		 	 return $aRes;
@@ -179,7 +178,7 @@ class ReplyManager extends bdd{
 
 	 	 	$request = 'UPDATE '. self::TAB_REP.' SET reporting_reply = :report WHERE id = :reply';
 	 	 	$arr=array(
-	 	 		array(":reply" , $reply)
+	 	 		array(":reply" , $reply),
 	 	 		array(":report" , $report));
 	 	 	$aRes = parent::reqPrepaExec($request, $arr);
 	 	 }

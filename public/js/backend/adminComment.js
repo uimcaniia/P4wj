@@ -53,8 +53,9 @@ $(document).ready(function(){
 	function recupDataComment(action, valComSelect, colBdd, title, div){
 
 		$.post('index.php?action='+action+'', {valComSelect:valComSelect, colBdd:colBdd}, function(donnee){
+						//console.log(donnee);
 			var aDonnee = JSON.parse(donnee);
-			//console.log(aDonnee);
+
 			if(colBdd == 'pseudoSignal'){
 				var resHead = '<thead><tr><th colspan = "4">'+title+'</th></tr></thead><tbody>';
 				var resBody ='';
@@ -144,7 +145,7 @@ $(document).ready(function(){
 			$('#confirmDeleteComment span.fa-times').click(function(){
 				closeDeleteCommentReplyDiv();
 			});
-			$('#confirmDeleteComment span.fa-check').click(function(){
+			$('#delRepCom').click(function(){
 				$.post('index.php?action=delCommentReply', {idReply:idReply, idUser:idUser}, function(donnee){
 					closeDeleteCommentReplyDiv();
 					if(by == 'byEpisode'){

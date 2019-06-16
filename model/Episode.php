@@ -57,6 +57,17 @@
 	 	 {
 	 	 	if(is_int($idEpisode)){
 	 	 		$aData = parent::get($idEpisode);
+	 	 		//print_r($aData[0]);
+/*	 	 		for ($i = 0 ; $i < count($aData) ; $i++)
+				{*/
+/*		 	 		foreach ($aData[0] as $key => $value)
+					{
+						if($key=='publication')
+						{
+							$aData[0]['publication']=strftime('%d-%m-%Y',strtotime($aData[0]['publication']));
+						}
+					}*/
+				//}
 	 	 	}
 	 	 	else
 	 	 	{
@@ -102,6 +113,10 @@
 						$aData[$i]['episode'] = $valueExtract;
 						$aData[$i]['episode'] .= '...'; // on ajoute "..." à la fin de l'extrait
 					}
+					if($key=='publication')
+					{
+						$aData[$i]['publication']=strftime('%d-%m-%Y',strtotime($aData[$i]['publication']));
+					}
 				}
 			}
 			return $aData;
@@ -114,7 +129,6 @@
 	 	 	{
 	 	 		$minNum = parent::getFirstEpisode();
 	 	 		$idFirstEpisode = $minNum[0]['MIN(id)'];
-	 	 		//print_r($idFirstEpisode);
 	 	 		$idPrev = $id - 1;
 	 	 		if ($id != $idFirstEpisode) // si ce n'est pas le premier episode
 				{

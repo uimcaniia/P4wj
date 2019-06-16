@@ -19,7 +19,7 @@
  	 			</div>
  	 			<hr>
  	 			<div class='episodeExtract'>
- 	 				<p><?= $aEpisodeExtract[$i]['episode'] ?></p>
+ 	 				<p><?= strip_tags( html_entity_decode($aEpisodeExtract[$i]['episode'])) ?></p>
  	 			</div>
 
  	 			<div class='datePublication'>

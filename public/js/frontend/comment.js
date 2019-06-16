@@ -16,7 +16,7 @@ $(document).ready(function(){
 		//var commentClean = comment.replace(/ |\n|\r|\t/g, ''); // on s'assure qu'il n'y ai pas un commentaire remplis d'espace blanc
 
 			$.post('index.php?action=addComment', {comment:comment, idEpisode:idEpisode}, function(data){
-				console.log(data);
+				//console.log(data);
 				if(data == ""){
 					$(btnClose).fadeOut(0);
 					$(btnOpen).fadeIn(200);
@@ -29,7 +29,7 @@ $(document).ready(function(){
 					var now = d.getDay()+'-'+d.getMonth()+'-'+d.getFullYear();
 							//$resComment = '<div class="commentSignal"><p> De </p><p>'.$aLastCom[0]['pseudo'].'</p><p> le </p><p>'.strftime('%d-%m-%Y',strtotime($aLastCom[0]['commentTime'])).'</p></div><div class="comment"><p id="commentUserConnectSend">'.$aLastCom[0]['comment'].'</p></div>';
 
-					var res = '<div class="commentSignal"><p> De </p><p>'+aData['pseudo']+'</p><p> le </p><p>'+aData['commentTime']+'</p></div><div class="comment"><p id="commentUserConnectSend">'+aData['comment']+'</p></div>';
+					var res = '<div class="commentSignal"><p> De </p><p>'+aData['pseudo']+'</p></div><div class="comment"><p id="commentUserConnectSend">'+aData['comment']+'</p></div>';
 					$(res).appendTo($('#globalComment'));
 					$(btnClose).fadeOut(0);
 					$(btnOpen).fadeIn(200);
@@ -63,7 +63,7 @@ function replyComment(idComment, reply, divClose, btn, divPushReply){
 					var d = new Date();
 					var now = d.getDay()+'-'+d.getMonth()+'-'+d.getFullYear()+' '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
 
-					var res = '<div id="replySignal" class="replySignal"><p> De </p><p>'+aData['pseudo']+'</p><p> le </p><p>'+now+'</p></div><div class="reply"><p>'+aData['reply']+'</p></div>';
+					var res = '<div id="replySignal" class="replySignal"><p> De </p><p>'+aData['pseudo']+'</p></div><div class="reply"><p>'+aData['reply']+'</p></div>';
 					//console.log(res);
 					if(emptyDiv = ''){
 

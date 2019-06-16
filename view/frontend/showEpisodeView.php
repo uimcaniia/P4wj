@@ -1,5 +1,5 @@
 	 	 <?php $headTitle = 'La saga complète'; ?>
-	 	 <?php $titleH1 = htmlspecialchars($aEpisode[0]['title']); ?>
+	 	 <?php $titleH1 = $aEpisode[0]['title']; ?>
 
 	 	 <?php ob_start(); ?>
 
@@ -10,7 +10,7 @@
 		 	 		</div>
 	 	 			<hr>
 	 	 			<div id='episode'>
-	 	 				<p><?= htmlspecialchars($aEpisode[0]['episode']); ?></p>
+	 	 				<p><?= html_entity_decode($aEpisode[0]['episode']) ?></p>
 	 	 			</div>
 
 	 	 			<div class='datePublication'>
@@ -25,7 +25,7 @@
 			?>
 						</div>
 						<div>
-	 	 					<p>Publié le <?= $aEpisode[0]['publication'] ?></p>
+	 	 					<p>Publié le <?= strftime('%d-%m-%Y',strtotime($aEpisode[0]['publication'] ))?></p>
 	 	 					<span class='fas fa-thumbtack'></span>
 	 	 				</div>
 	 	 				<div>

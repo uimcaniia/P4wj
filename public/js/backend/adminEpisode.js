@@ -5,14 +5,8 @@ if(!Array.isArray) {
   };
 }
 //*****************************************************************
-	$('#quitEdit').click(function(){
-		//$('#blockWriteEpisode textarea').empty();
-		$('#blockWriteTitleEpisode').val('');
-		$('#blockWriteIdEp').empty();
-		var tiny= 'blockWriteEpisode';
-		tinymce.get(tiny).setContent('');
-	})
-$(document).ready(function(){
+
+//$(document).ready(function(){
 
 /*	if($('#blockWriteEpisodeModif').is(":visible")){ 
 		$('#containtEpisodeAdminModif button:nth-child(1)').fadeOut(0);
@@ -49,8 +43,6 @@ $(document).ready(function(){
 		if(idClean == ''){
 			var txtEpisode = $('#blockWriteEpisode textarea').val();
 			var titleEpisode = $('#blockWriteTitleEpisode').val();
-			console.log(txtEpisode);
-			console.log(titleEpisode);
 			$.post('index.php?action=saveNewEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode}, function(donnee){			
 				$('<p>'+donnee+'</p>').appendTo('#blockWriteIdEp');
 				$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
@@ -61,11 +53,8 @@ $(document).ready(function(){
 		}else{
 
 			var res = $('#tinymce').text();
-			console.log(res);
 			var txtEpisode = $('#blockWriteEpisode textarea').val();
 			var titleEpisode = $('#blockWriteTitleEpisode').val();
-			console.log(txtEpisode);
-			console.log(titleEpisode);
 			idEpisode = $('#blockWriteIdEp p').text();
 			$.post('index.php?action=saveEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode, idEpisode:idEpisode}, function(donnee){			
 			$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
@@ -75,7 +64,15 @@ $(document).ready(function(){
 			});
 		}
 	});
-
+//********************************************
+		$('#quitEdit').click(function(){
+			//$('#blockWriteEpisode textarea').empty();
+			$('#blockWriteTitleEpisode').val('');
+			$('#blockWriteIdEp').empty();
+			var tiny= 'blockWriteEpisode';
+			tinymce.get(tiny).setContent('');
+			$('#showEdit').fadeIn();
+		})
 	//****************************************
 
 	$('#showEdit').click( function(){
@@ -87,17 +84,20 @@ $(document).ready(function(){
 		$('#closePublishConfirm').click(function(){
 			$('#confirmPublishEpisode').fadeOut(600);
 		});
-		
+
 		$('#publishEp').click(function(){
 			var id= $('#blockWriteIdEp').text();
 			idClean = id.replace(/ |\n|\r|\t/g, '');
+			console.log(id)
 
 			if(idClean == ''){ // si il n'y a pas d'id, c'est que l'épisode n'existe pas en bdd, du coup on sauvegarde avant
-				console.log($('#blockWriteIdEp').text());
+
 				$.post('index.php?action=saveNewEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode}, function(donnee){	
-					$('<p>'+donnee+'</p>').appendTo('#blockWriteIdEp');
+					console.log(donnee);
+					$('#blockWriteIdEp').html('<p>'+donnee+'</p>');
 					$.post('index.php?action=publishEpisode', {idEpisode:donnee}, function(donnee){	
-					$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);	
+						console.log(donnee);
+						$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);	
 						$('#containtEpisodeAdmin > p:nth-child(2)').text('La publication a bien été effectuée.')
 						$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
 						$('#showEdit').fadeOut(0);
@@ -105,21 +105,20 @@ $(document).ready(function(){
 					});
 					return false;
 				});
+			$('#publishEp').unbind('click');
 				$('#confirmPublishEpisode').fadeOut(600);
 			}else{
 				idEpisode = $('#blockWriteIdEp p').text();
-				$.post('index.php?action=saveEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode, idEpisode:idEpisode}, function(donnee){			
-					$.post('index.php?action=publishEpisode', {idEpisode:idEpisode}, function(donnee){	
-						console.log(donnee);
+				$.post('index.php?action=publishEpisode', {idEpisode:id}, function(donnee){	
+					console.log(donnee);
 
 					$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
 					$('#containtEpisodeAdmin > p:nth-child(2)').text('La publication a bien été effectuée.')
 					$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
-						return false;
-					});
+					return false;
+				});
 				$('#confirmPublishEpisode').fadeOut(600);
 				$('#showEdit').fadeOut(0);
-			});
 			}
 		});
 	});
@@ -191,8 +190,8 @@ $(document).ready(function(){
 			$('#containtEpisodeAdminModif > p:nth-child(2)').text('La sauvegarde a bien été effectuée.')
 			$('#containtEpisodeAdminModif > p:nth-child(2)').delay(2000).fadeOut(1000);
 				return false;
-			});
-				
 		});
+				
 	});
+
 

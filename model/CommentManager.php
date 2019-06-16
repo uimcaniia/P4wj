@@ -73,7 +73,6 @@ class CommentManager extends bdd{
 	 	 		array(":ordre"    , $ordre, PDO::PARAM_STR));
 
 	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);
-	 	 		 	 	print_r($aRes);
 	 	 	return $aRes;
 	 	 }
 
@@ -99,8 +98,9 @@ class CommentManager extends bdd{
 				   ON b.'.$colJoin.' = a.'.$col.' 
 				   WHERE a.'.$colSelect.' = :idSelect AND a.reporting = 1 
 				   ORDER BY CAST(idEpisode AS unsigned)';
+				   //echo $request;
 			$arr=array(
-	 	 		array(":idSelect" , $idSelect));
+	 	 		array(":idSelect" , $idSelect, PDO::PARAM_INT));
 		 	 $aRes = parent::reqPrepaExecSEl($request, $arr);
 		 	 	return $aRes;
 	 	 }
@@ -137,9 +137,9 @@ class CommentManager extends bdd{
 	 	//actualise le signalement d'un commentaire
 	 	 public function update($idComment, $report){
 
-	 	 	$request = 'UPDATE '. self::TAB_COM.' SET reporting = '.$report.' WHERE id = :report';
+	 	 	$request = 'UPDATE '. self::TAB_COM.' SET reporting = :report WHERE id = :idComment';
 	 	 	$arr=array(
-	 	 		array(":idComment" , $idComment)
+	 	 		array(":idComment" , $idComment),
 	 	 		array(":report" , $report));
 	 	 	$aRes = parent::reqPrepaExec($request, $arr);
 	 	 }

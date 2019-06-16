@@ -23,6 +23,7 @@
 			$emailClean    = htmlspecialchars($email);
 			$pswClean      = htmlspecialchars($psw);
 			$errorConnexion = self::verifUserInfos($pswClean, $emailClean, 'email', 'psw');
+
 			return $this->_aTestError['tstPsw'][$errorConnexion];
 		}
 
@@ -31,6 +32,7 @@
 		{
 			$emailClean    = htmlspecialchars($email);
 			$errorMail   = self::verifChaine($emailClean,  $this->_regMail, 'email' , "" , true); // vérification des infos
+
 			return $this->_aTestError['tstMail'][$errorMail];
 		}
 		// **************************************************
@@ -38,6 +40,7 @@
 		{
 			$pseudoClean   = htmlspecialchars($pseudo);
 			$errorPseudo = self::verifChaine($pseudoClean, '', 'pseudo', "" , true);
+
 			return $this->_aTestError['tstPseudo'][$errorPseudo];
 		}
 		// **************************************************
@@ -46,27 +49,31 @@
 			$pswClean      = htmlspecialchars($psw);
 			$pswAgainClean = htmlspecialchars($pswAgain);
 			$errorPsw    = self::verifChaine($pswClean, $this->_regPsw , '', $pswAgainClean, false);
+
 			return $this->_aTestError['tstPsw'][$errorPsw];
 		}
 
 		// **************************************************
 		public function verifChaine ($chaine, $regex, $paramBdd, $confirm, $empty)
 		{
-//echo $confirm; 
+//echo $chaine; 
 			$numError= 0;
 			$aResultError=array();
+
 			if(empty($chaine))
 			{
+				//echo'vide';
 				$numError = 1;
 				array_push($aResultError, $numError);
 			}
 			else{
 				if($paramBdd != '')
 				{
+					//echo'ok1';
 					$user = new User();
 					$verifInfo = parent::get($paramBdd, $chaine);
 					//print_r($verifInfo);
-					if (!empty($verifInfo))
+					if (is_array($verifInfo))
 					{
 						$numError = 2;
 						array_push($aResultError, $numError);
@@ -80,9 +87,9 @@
 						array_push($aResultError, $numError);
 					}
 				}
-				if (!empty($confirm))
+				if ($empty == false)
 				{
-					if(($empty == false) && ($chaine != $confirm))
+					if($chaine != $confirm)
 					{
 						$numError = 5;
 						array_push($aResultError, $numError);
@@ -90,6 +97,7 @@
 				}
 
 			}
+			//print_r($aResultError);
 			if(count($aResultError) == 0)
 			{
 				return 0;

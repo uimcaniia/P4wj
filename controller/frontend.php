@@ -26,7 +26,6 @@ function extractAllEpisode()
 	}
 
 	$aEpisodeExtract = $episodes->makeExtractEpisode($aEpisode);
-	//$link = 'episode.php?id=$aEpisode[$i]["id"]';
 
 	require('view/frontend/extractAllEpisodeView.php');
 }
@@ -34,8 +33,8 @@ function extractAllEpisode()
 function showEpisode($idEpisode)
 {
 	$idEpisode = intval($idEpisode);
-	$episode       = new Episode;
-	$aEpisode      = $episode->getOneEpisode($idEpisode); // on appelle l'épisode concerné'
+	$episode   = new Episode;
+	$aEpisode  = $episode->getOneEpisode($idEpisode); // on appelle l'épisode concerné'
 	$linkEpisodePrev = $episode->getPrevIdEpisode($idEpisode);
 	$linkEpisodeNext = $episode->getNextIdEpisode($idEpisode);
 
@@ -82,7 +81,6 @@ function testErrorLog($email, $psw)
 
 		$aInputLog = login($aIdInputLog);
 		$aInputSub = login($aIdInputSub);
-
 		require('view/frontend/loginView.php');
 	}
 	else{
@@ -95,14 +93,15 @@ function testErrorLog($email, $psw)
 //*******************************************************
 function testErrorSubscribe($email, $pseudo, $psw, $pswAgain)
 {
-
+	//echo $email;
 	$form = new Form;
 	$alertConnectionMail   = $form->tstSubMail($email);
 	$alertConnectionPsw    = $form->tstSubPseudo($pseudo);
 	$alertConnectionPseudo = $form->tstSubPsw($psw, $pswAgain);
+	//	echo $alertConnectionPseudo;
 	$alert ='';
 
-	if(($alertConnectionMail != "")&&($alertConnectionMail != "")&&($alertConnectionMail != ""))
+	if(($alertConnectionMail != "") || ($alertConnectionPsw != "") || ($alertConnectionPseudo != ""))
 	{
 		$aIdInputLog = array(8, 9); // id des input a charger pour se connecter
 		$aIdInputSub = array(8, 10, 9, 15); // id des input a charger pour s'inscrire
@@ -133,9 +132,9 @@ function subscribe($email, $pseudo, $psw)
 {
 	$pswHash = password_hash($psw, PASSWORD_DEFAULT);
 	$aDataUser=array(
-	"email"  => "'$email'",
-	"pseudo" => "'$pseudo'",
-	"psw"    => "'$pswHash'",
+	"email"  => "$email",
+	"pseudo" => "$pseudo",
+	"psw"    => "$pswHash",
 	"admin"  => 0);
 
 	$user = new User();
@@ -200,7 +199,6 @@ function addComment($idEpisode, $idPseudo, $comment)
 		$comment2 = new Comment;
 		$aLastCom = $comment2 -> getLastComment(); // on récupère le résultat pour récupérer la date de l'enregistrement en BDD
 		$aLastCom[0]['commentTime']=strftime('%d-%m-%Y',strtotime($aLastCom[0]['commentTime']));
-		//print_r($aLastCom[0]);
 		echo json_encode($aLastCom[0]);
 	}
 }
@@ -217,7 +215,7 @@ function addReply($idEpisode, $idPseudo, $comment, $reply)
 
 		$aDataReply=array(
 			array(
-				"reply"          => '"'.$reply.'"',
+				"reply"          => "$reply",
 				"id_episode"     => "$idEpisode",
 				"idcomment_reply"=> "$comment",
 				"iduser_reply"   => "$idPseudo"));

@@ -27,7 +27,7 @@ try {
         }
         //*******************************************************************************
         //ESPACE POUR CRER UN COMPTE OU SE CONNECTER
-        elseif ($_GET['action'] == 'login') // si on veut se connecter ou créer son compte
+        elseif ($_GET['action'] == 'login') // si on veut se connecter
         {
         	spaceConnect();
         }
@@ -42,7 +42,7 @@ try {
 	        	throw new Exception('Aucun mail ou mdp envoyé');
 	        }
 		}
-	    elseif ($_GET['action'] == 'registration')
+	    elseif ($_GET['action'] == 'registration') // ou créer son compte
         {
         	if(isset($_POST['email']) && isset($_POST['psw']) && isset($_POST['pseudo']) && isset($_POST['pswAgain']))
         	{
@@ -67,78 +67,16 @@ try {
         {
         	if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 0) // test id pour les utilisateur
         	{
-        		//echo 'util';
-            	space();
+            	space(); // va dans l'espace utilisateur
             }
             elseif(isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
             {
-            	//echo'admin';
-            	admin();
+            	admin(); // va dans l'espace admin
             }
             else{
 				throw new Exception('Aucun compte n\'est trouvé');
 			}
 		}
-/*		elseif ($_GET['action'] == 'sendMessage')// si utilisateur veut envoyer un message
-		{
-			if (isset($_SESSION['idUser']) && isset($_SESSION['idUser']) > 0) 
-    		{
-				if (isset($_POST['idReceive']) && isset($_POST['txt']) && isset($_POST['sujet']))
-				{
-					sendMessage($_SESSION['idUser'], $_POST['idReceive'], $_POST['sujet'], $_POST['txt']);
-				}
-				else
-				{
-					throw new Exception('Aucun destinataire est trouvé');
-				}
-            }
-			else
-            {
-                throw new Exception('Aucun identifiant d\'utilisateur envoyé');
-            }
-		}*/
-/*		elseif ($_GET['action'] == 'deleteMessage')// si utilisateur veut supprimer un message
-		{
-			if (isset($_POST['idMessDel']) && $_POST['idMessDel'] > 1 && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
-    		{
-				deleteMessage($_POST['idMessDel']);
-			}
-			else
-            {
-                throw new Exception('Vous ne pouvez pas réaliser la suppression du message');
-            }
-        }*/
-/*        elseif ($_GET['action'] == 'changeorderMessageReceive')// si utilisateur veut changer le sens d'affichage des messages
-        {
-            if (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'upDate') 
-            {
-                changeOrderMessage('receive', 'ASC', $_SESSION['idUser']);
-            }
-            elseif (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'downDate') 
-            {
-                 changeOrderMessage('receive', 'DESC', $_SESSION['idUser']);
-            }
-            else
-            {
-                throw new Exception('Le sens d\'affichage n\'est pas disponible '.$_POST['idReceive'].'');
-            }
-        }*/
-/*        elseif ($_GET['action'] == 'changeorderMessageSend')// si utilisateur veut changer le sens d'affichage des messages
-        {
-            if (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'upDate') 
-            {
-                changeOrderMessage('send','ASC', $_SESSION['idUser']);
-            }
-            elseif (isset($_SESSION['idUser']) && isset($_POST['idReceive']) && $_POST['idReceive'] == 'downDate') 
-            {
-                 changeOrderMessage('send','DESC', $_SESSION['idUser']);
-            }
-            else
-            {
-                throw new Exception('Le sens d\'affichage n\'est pas disponible');
-            }
-        }
-*/
         elseif ($_GET['action'] == 'saveNewEpisode')// si l'admin veut enregistrer un épisode
         {
             if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) 
