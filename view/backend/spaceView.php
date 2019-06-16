@@ -6,8 +6,7 @@
 	<section>
 		<div id="messageUser">
 			<div class="whiteBlock">
- 				<span onclick="animShowAdminMenu('navMessage', '<?=$divHidenMessage?>');"><p>vos messages:</p>
- 				</span>
+ 			
  		</div>
 	</section>
 
@@ -51,7 +50,7 @@
 		 	 		<p>Votre pseudo : <em><?=$getInfosUser[0]['pseudo']?></em></p>
 				</div>
 				<div id='changePsw'>
-					<p>Voulez-vous changer de mot de passe? <span id="spanChangePsw" class="fas fa-pen-nib" onclick="javascript:animDivWriteNewInfoOpen('changePsw', 'contentFormChangePsw')"></span><em></em></p>
+					<p>Voulez-vous changer de mot de passe? <span id="spanChangePsw" class="fas fa-pen-nib"></span><em></em></p>
 		 	 		<div id='contentFormChangePsw'>
 <?php
 				for ($i = 0 ; $i <= count($inputNewPassword)-1 ; $i++)
@@ -64,7 +63,7 @@
 				}
 ?>
 							<div id='btnNewPsw'>
-								<span class="fas fa-times contentInputComment" onclick="javascript:animDivWriteNewInfoClose('changePsw', 'contentFormChangePsw')"></span>
+								<span id='spanCloseChangePsw' class="fas fa-times contentInputComment"></span>
 								<span id='validChangeMdp' class="fas fa-check"></span>
 							</div>
 						</div>

@@ -25,7 +25,7 @@
         <header>
             <div class="blackLine">
                 <div>
-                    <a href='$biographie' alt="Biographie de Jean Forteroche">Jean Forteroche</a>
+                    <a href='index.php?action=biography' id ='linkBiography' alt="Biographie de Jean Forteroche">Jean Forteroche</a>
                     <hr>
                 </div>
                     <?php
@@ -83,6 +83,22 @@
 
         <footer>
             <div class="blackLine">
+                <div id='confidentiel'>
+                    <h3>Informations légales</h3>
+                    <hr>
+                    <nav>
+                        <a href="index.php?action=politique">Politique de confidentialité</a>
+                        <a href="index.php?action=mention">Mentions légales</a>
+                    </nav>
+                </div>
+                <div id='copyright'>
+                    <h3>Copyright</h3>
+                    <hr>
+                    <p><span class='far fa-copyright'></span>2019 OpenClassroom.com</p>
+                    <p>Tous droits réservés</p>
+                </div>
+
+
             </div>
         </footer>
 

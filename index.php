@@ -497,6 +497,18 @@ try {
         {
             biography();
         }
+                //*******************************************************************************
+        // Mentions légales
+        elseif ($_GET['action'] == 'mention') 
+        {
+            mention();
+        }
+                //*******************************************************************************
+        // POLITIQUE DE CONFIDENTIALITé
+        elseif ($_GET['action'] == 'politique') 
+        {
+            politique();
+        }
 
 
 

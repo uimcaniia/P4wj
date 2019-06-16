@@ -17,6 +17,8 @@
 	 var linkJean = document.querySelector('header:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1)');
 	 var barre = document.querySelector('header div.blackLine hr');
 
+	 fontsize = document.getElementById('linkBiography').offsetWidth;
+
 	$(home).hover(function(){
 		$(one).delay(0).animate({'opacity': '10'}, {'duration' : 800});
 		$(four).delay(0).animate({'opacity':'10','height': '40px'}, {'duration':100});
@@ -50,9 +52,16 @@
 		$(six).delay(0).animate({'opacity': '0'}, {'duration':100});
 	});
 
+		fontsize = document.getElementById('linkBiography').offsetWidth;
+
 	$(linkJean).hover(function(){
-		$(barre).delay(0).animate({'opacity': '10'}, {'duration' : 100});
-		$(barre).delay(0).animate({'opacity':'10','width': '160px'}, {'duration':200});
+		if(fontsize == 120){
+			$(barre).delay(0).animate({'opacity': '10'}, {'duration' : 100});
+			$(barre).delay(0).animate({'opacity':'10','width': '100px'}, {'duration':200});
+		}else{
+			$(barre).delay(0).animate({'opacity': '10'}, {'duration' : 100});
+			$(barre).delay(0).animate({'opacity':'10','width': '160px'}, {'duration':200});
+		}
 
 	},function(){
 		$(barre).delay(0).animate({'opacity':'0','width': '0px'}, {'duration':100});
@@ -62,16 +71,22 @@
 animMenu();
 
 function animConnectLogin(){
+	fontsize = document.getElementById('linkBiography').offsetWidth;
 	var icon = document.getElementById('linkConnect');
 	var pseudo = $('#bienvenuePseudo').attr('class'); 
-	var link = '<a href="index.php?action=space"> cliquez ici!</a>';// $('#changePsw p em').html(
+	var link = '<a href="index.php?action=space"> '+pseudo+'</a>';// $('#changePsw p em').html(
 	//console.log(icon);
+	fontsize = document.getElementById('linkBiography').offsetWidth;
 	var classIcon = icon.className.split(' ')[1];
 	if(classIcon == 'fa-power-off'){
-		$('#bienvenuePseudo').html('Bonjour '+pseudo+' , pour accéder à votre compte, '+link);
+		$('#bienvenuePseudo').html('Bonjour'+link);
 
 	}else{
-		$('#bienvenuePseudo').html('Vous n\'êtes pas connecté.');
+		if(fontsize != 120){
+			$('#bienvenuePseudo').html('Vous n\'êtes pas connecté.');
+		}else{
+
+		}
 	}
 }
 animConnectLogin();
@@ -90,6 +105,7 @@ $('#showNavEpisode').click(function(){
 //*********************************************************
 $('#btnEditEp').click(function(){
 	$('#hideWriteEpisode').fadeIn(600);
+		$('#containtEpisodeAdmin > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)').fadeOut(0);
 	if($('#divModifSelectEp').is(":visible")){ 
 		$('#divModifSelectEp').fadeOut(0);
 	}
@@ -256,4 +272,28 @@ $('#btnArrMessSend').click(function(){
 		if($('#infoPseudoModerate').is(":visible")){ 
 		$('#infoPseudoModerate').fadeOut(0);
 	}
+});
+//**************************************************************************************
+$('#spanChangePsw').click(function(){ //divGlobal, id
+	div = document.getElementById('contentFormChangePsw');
+	btnOpen = document.querySelector('#changePsw .fa-pen-comment');
+	btnClose = document.querySelector('#changePsw .fa-times');
+
+		$(btnOpen).fadeOut(0);
+		$(btnClose).fadeIn(200);
+
+		$(div).delay(0).animate({'height':'170px'}, {'duration':200});
+		$(div).fadeIn(500);
+});
+//**************************************************************************************
+$('#spanCloseChangePsw').click(function(){
+		div = document.getElementById('contentFormChangePsw');
+		btnOpen = document.querySelector('#changePsw .fa-pen-comment');
+		btnClose = document.querySelector('#changePsw .fa-times');
+
+		$(btnClose).fadeOut(0);
+		$(btnOpen).fadeIn(200);
+
+		$(div).fadeOut(200);
+		$(div).delay(0).animate({'height':'0px'}, {'duration':200});
 });

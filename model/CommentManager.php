@@ -14,9 +14,12 @@ class CommentManager extends bdd{
 		    $param3 = $comment->getIdEpisode();
 		    $param5 = $comment->getIdUser();
 
-	 	 	$request = 'INSERT INTO '. self::TAB_COM.'(commentTime, comment, idEpisode, reporting, idUser) VALUES (NOW(), '.$param2.', '.$param3.' , 0, '.$param5.')';
-
-	 	 	parent::addRequest($request);
+	 	 	$request = 'INSERT INTO '. self::TAB_COM.'(commentTime, comment, idEpisode, reporting, idUser) VALUES (NOW(), :comment, :idEpisode , 0, :idUser)';
+	 	 	$arr=array(
+	 	 		array(":comment"  , $param2),
+	 	 		array(":idEpisode", $param3),
+	 	 		array(":idUser"   , $param5));
+	 	 	parent::reqPrepaExec($request,$arr);
 	 	 }
 
 		//*************************************************************************
@@ -25,13 +28,12 @@ class CommentManager extends bdd{
 	 	 	$request = 'SELECT MAX(id) FROM '. self::TAB_COM.'';
 	 	 	$id = parent::addRequestSelect($request);
 
-	 	 	//$request2 = 'SELECT * FROM '. self::TAB_COM.' WHERE id = '.$id.'';
 	 	 	$request2 ='SELECT a.*, b.pseudo 
 	 	 			   FROM '.self::TAB_COM.' AS a 
 	 	 			   INNER JOIN user AS b 
 	 	 			   ON b.id = a.idUser 
 	 	 			   WHERE a.id = '.$id[0]['MAX(id)'].'';
-//echo $request2;
+
 	 	 	$aRes = parent::addRequestSelect($request2);
 	 	 	return $aRes;
 	 	 }
@@ -39,9 +41,11 @@ class CommentManager extends bdd{
 	 	 //recupère tous commentaires en function de l'épisode dans un ordre définit
 	 	 public function getAllCommentOrder($idEpisode, $ordre)
 	 	 {
-	 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE idEpisode = '.$idEpisode.' ORDER BY '.$ordre.'';
-	 	 	echo $request;
-	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE idEpisode = :idEp ORDER BY :ordre';
+	 	 	$arr=array(
+	 	 		array(":idEp", $idEpisode),
+	 	 		array(":ordre" , $ordre));
+	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);
 	 	 	return $aRes;
 	 	 }
 
@@ -62,10 +66,14 @@ class CommentManager extends bdd{
 	 	 			   FROM '.self::TAB_COM.' AS a 
 	 	 			   INNER JOIN '.$tableJoin.' AS b 
 	 	 			   ON b.'.$colJoin.' = a.'.$col.' 
-	 	 			   WHERE a.'.$colSelect.' = '.$idSelect.' 
-	 	 			   ORDER BY '.$ordre.'';
-	 	 	//echo $request;
-	 	 	$aRes = parent::addRequestSelect($request);
+	 	 			   WHERE a.'.$colSelect.' = :idSelect 
+	 	 			   ORDER BY :ordre';
+	 	 	$arr=array(
+	 	 		array(":idSelect" , $idSelect, PDO::PARAM_INT),
+	 	 		array(":ordre"    , $ordre, PDO::PARAM_STR));
+
+	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);
+	 	 		 	 	print_r($aRes);
 	 	 	return $aRes;
 	 	 }
 
@@ -74,9 +82,11 @@ class CommentManager extends bdd{
 	 	 //recupère tous commentaires en function d'une valeur et dans un ordre prédéfinit
 	 	 public function getAllCommentSelect($col, $val)
 	 	 {
-		 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE '.$col.' = '.$val.' ORDER BY commentTime';
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	return $aRes;
+	 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE '.$col.' = :val ORDER BY commentTime';
+	 	 	$arr=array(
+ 	 		array(":val", $val));
+	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);
+	 	 	return $aRes;
 	 	 }
 
 	 	 //******************************************************************************************************************
@@ -87,60 +97,61 @@ class CommentManager extends bdd{
 				   FROM '.self::TAB_COM.' AS a 
 				   INNER JOIN '.$tableJoin.' AS b 
 				   ON b.'.$colJoin.' = a.'.$col.' 
-				   WHERE a.'.$colSelect.' = '.$idSelect.' AND a.reporting = 1 
+				   WHERE a.'.$colSelect.' = :idSelect AND a.reporting = 1 
 				   ORDER BY CAST(idEpisode AS unsigned)';
-
-		 	 	$aRes = parent::addRequestSelect($request);
+			$arr=array(
+	 	 		array(":idSelect" , $idSelect));
+		 	 $aRes = parent::reqPrepaExecSEl($request, $arr);
 		 	 	return $aRes;
 	 	 }
 	 	 //******************************************************************************************************************
 	 	 //recupère tous commentaires signalé en function d'une valeur 
 	 	 public function getAllCommentSignalSelect($col, $val)
 	 	 {
-		 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE reporting = 1  AND '.$col.' = '.$val.' ORDER BY CAST(idEpisode AS unsigned)';
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	return $aRes;
+		 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE reporting = 1  AND '.$col.' = :val ORDER BY CAST(idEpisode AS unsigned)';
+		 	$arr=array(
+	 	 		array(":val" , $val));
+	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);
+		 	return $aRes;
 	 	 }
 		//******************************************************************************************************************
 	 	 //supprime un comment (quand l'admin est pas content)
 	 	 public function delete($idComment)
 	 	 {
-	 	 	$request = 'DELETE FROM '. self::TAB_COM.' WHERE id = '.$idComment.'';
-	 	 	parent::addRequest($request);
+	 	 	$request = 'DELETE FROM '. self::TAB_COM.' WHERE id = :idComment';
+	 	 	$arr=array(
+	 	 		array(":idComment" , $idComment));
+	 	 	$aRes = parent::reqPrepaExec($request, $arr);
 	 	 }
 	 	 //******************************************************************************************************************
 	 	 //supprime les commentaires en fonction de l'épisode (quand celui-ci se fait supprimer)
 	 	 public function deleteByEpisode($idEpisode)
 	 	 {
-	 	 	$request = 'DELETE FROM '. self::TAB_COM.' WHERE idEpisode = '.$idEpisode.'';
-	 	 	parent::addRequest($request);
+	 	 	$request = 'DELETE FROM '. self::TAB_COM.' WHERE idEpisode = :idEpisode';
+	 	 				$arr=array(
+	 	 		array(":idEpisode" , $idEpisode));
+	 	 	$aRes = parent::reqPrepaExec($request, $arr);
 	 	 }
 
 	 	 //******************************************************************************************************************
 	 	//actualise le signalement d'un commentaire
 	 	 public function update($idComment, $report){
 
-	 	 	$request = 'UPDATE '. self::TAB_COM.' SET reporting = '.$report.' WHERE id = '.$idComment.'';
-		//echo $request;
-	 	 	parent::addRequest($request);
+	 	 	$request = 'UPDATE '. self::TAB_COM.' SET reporting = '.$report.' WHERE id = :report';
+	 	 	$arr=array(
+	 	 		array(":idComment" , $idComment)
+	 	 		array(":report" , $report));
+	 	 	$aRes = parent::reqPrepaExec($request, $arr);
 	 	 }
 
  //******************************************************************************************************************
 	 	 //recupère tous commentaires signalé et dans un ordre prédéfinit
 	 	 public function getAllCommentSignal()
 	 	 {
-		 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE reporting = 1 ORDER BY CAST(idEpisode AS unsigned)';
-		 	 	//echo $request;
-		 	 	$aRes = parent::addRequestSelect($request);
-		 	 	return $aRes;
+	 	 	$request = 'SELECT * FROM '. self::TAB_COM.' WHERE reporting = 1 ORDER BY CAST(idEpisode AS unsigned)';
+	 	 	$aRes = parent::addRequestSelect($request);
+	 	 	return $aRes;
 	 	 }
-
-
-
-
-
-
-
 
 //******************************************************************************************************************
 	 	 //compte le nombre d'entrée dans la table

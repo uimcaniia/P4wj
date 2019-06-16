@@ -31,10 +31,10 @@ function admin()
 	$episode = new Episode;
 	$aEpisode = $episode ->getAllEpisode();
 	$aEpisodeHaveComment = getEpisodeHaveComment($aAllCommentCompare); // array contenant tous les épisode ayant reçut des commentaires
-	$message         = new Message; 
-	$aMessageSend    = $message->get('send', $_SESSION['idUser'], 'date ASC'); // array qui contiendra tout les message envoyés
-	$aMessageReceive = $message->get('receive', $_SESSION['idUser'], 'date ASC'); // et les message reçut
-
+	//$message         = new Message; 
+	//$aMessageSend    = $message->get('send', $_SESSION['idUser'], 'date ASC'); // array qui contiendra tout les message envoyés
+	//$aMessageReceive = $message->get('receive', $_SESSION['idUser'], 'date ASC'); // et les message reçut
+//print_r($aMessageSend);
 	$aUserSignal     = getUserSignal($aUser);// on récupère tous les utilisateur signalés
 
 	$aEpisodeSignal  = getEpisodeSignal($aCommentSignal, $episode);  // on récupère tous les épisodes ayant uncomment signalés
@@ -42,9 +42,16 @@ function admin()
 	$user = new User;
 	$aUserModo   = $user ->getAllUserExist();
 	$aUserModerate   = $user ->getOnlyUserSignalExist($aUserModo);// on récupère tous les épisodes ayant uncomment signalés
-
-	$aMessageSend    = getMessageSend($aMessageSend);
-	$aMessageReceive = getMessageReceive($aMessageReceive);
+/*	if($aMessageSend == false)
+	{
+		$aMessageSend=array();
+	}
+	else
+	{
+		$aMessageSend = getMessageSend($aMessageSend);
+	}*/
+	
+//	$aMessageReceive = getMessageReceive($aMessageReceive);
 
 	require('view/backend/adminView.php');
 }
@@ -154,47 +161,12 @@ function getUserSignal($aUser)
 	}
 	return $aUserSignal ;
 }
-//**********************************************************************
-function getMessageSend($aMessageSend)
-{
-	for($i = 0 ; $i < count($aMessageSend) ; $i++)
-	{
-		foreach ($aMessageSend[$i] as $key => $value)
-		{
-			if($key =='receive')
-			{
-				$user = new User; 
-				$aPseudo = $user-> get('id', $value);
-				$aMessageSend[$i]['pseudo'] = $aPseudo[0]['pseudo'];
-			}
 
-		}
-	}
-	return $aMessageSend;
-}
-//**********************************************************************
-function getMessageReceive($aMessageReceive)
-{
-	for($i = 0 ; $i < count($aMessageReceive) ; $i++)
-	{
-		foreach ($aMessageReceive[$i] as $key => $value)
-		{
-			if($key =='send')
-			{
-				$user = new User; 
-				$aPseudo = $user-> get('id', $value);
-				$aMessageReceive[$i]['pseudo'] = $aPseudo[0]['pseudo'];
-			}
-
-		}
-	}
-	return $aMessageReceive;
-}
 //**********************************************************************
 function recupEpisodeSelect($valEpModif)
 {
 	$episode = new Episode();
-	$aEpisode = $episode->get($_POST['valEpModif']);
+	$aEpisode = $episode->getForModif($_POST['valEpModif']);
 	echo json_encode($aEpisode);
 	//echo ' '.$aEpisode[0]['title'].'`'.$aEpisode[0]['episode'].'`'.$aEpisode[0]['id'].'';
 }
@@ -218,6 +190,8 @@ function commentEpisodeSelect($idEpisode) //(requete AJAX)
 
 	foreach ($aComment as $key => $value)
 	{
+		$date=strftime('%d-%m-%Y',strtotime($value['commentTime']));
+		$aComment[$key]['commentTime'] = $date;
 		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires + pseudo dans la table user
 		$aReply = $reply->getAllReplyOrderJoin('idcomment_reply', $value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
 		$aComment[$key]['reply'] = $aReply;
@@ -443,9 +417,9 @@ function removeReplySignal($idReply, $idUser)
 function saveNewEpisodeWrite($texteEpisode, $titleEpisode){
 
 	$aDataEpisode=array(
-	"episode"    => '"'.$texteEpisode.'"',
+	"episode"    => $texteEpisode,
 	"showEpisode"=> '0',
-	"title"      => '"'.$titleEpisode.'"');
+	"title"      => $titleEpisode);
 
 	$episode = new Episode;
 	$episode -> hydrate($aDataEpisode);
@@ -458,9 +432,9 @@ function saveNewEpisodeWrite($texteEpisode, $titleEpisode){
 function saveEpisodeWrite($texteEpisode, $titleEpisode, $idepisode){
 
 	$aDataEpisode2=array(
-	"episode" => '"'.$texteEpisode.'"',
+	"episode" => $texteEpisode,
 	"id"      => $idepisode,
-	"title"   => '"'.$titleEpisode.'"');
+	"title"   => $titleEpisode);
 
 	$episode2 = new Episode;
 	$episode2 -> hydrate($aDataEpisode2);

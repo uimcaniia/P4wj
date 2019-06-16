@@ -177,14 +177,9 @@ font-size: 1.2em;
 
 #containtExtract h2{
   margin: 5px 0 10px 10px;
-font-size: 1.3em;
+font-size: 1.1em;
 color: #939393;
 }
-
-/*#bckBody p{
-  margin:0;
-  color: #1f8787;
-}*/
 
 .bkgEpisodeExtrait{
   position: relative;
@@ -402,6 +397,7 @@ color: #4ac2c2;
 .globalReply{
   padding-left:50px;
   display: none;
+  background-color: #0000002e;
 }
 #headerComment, .commentSignal, .comment, .replySignal, .lookReply, .reply{
   display: flex;
@@ -629,13 +625,18 @@ width:300px;
 #navEpisode .whiteBlock, #navComment .whiteBlock{
   width:150px;
 }
+#navEpisode .whiteBlock:hover, #navComment .whiteBlock:hover,  #containtAdminMessage #showMessage .whiteBlock:hover,  #containtAdminMessage .whiteBlock:hover{
+ background-color: #cee8ef;
+}
  #containtAdminMessage .whiteBlock{
   width:120px;
 
  }
  #containtAdminMessage #showMessage .whiteBlock{
   width:150px;
-
+ }
+ #PublishModif{
+  display: none;
  }
 #EpisodeWork, #CommentWork, #messageWork{
   display: flex;
@@ -651,7 +652,7 @@ text-align: center;
 display: flex;
 align-items: center;
 }
-#selectPseudoSignalModerate, #infoPseudoModerate, #blockWriteIdEp, #blockWriteIdEpModif, #arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend, #quitEdit, #hideWriteEpisode,#hideWriteEpisodeModif, #divModifSelectEp, #divDelSelectEp, #navEpisode, #navComment, #navMessage, #divSelectCom, #selectSortComEp, #selectSortComPs, #divSelectComSignal, #selectSortComSignal, #selectSortComSignEp, #selectSortComSignPs{
+#selectPseudoSignalModerate, #infoPseudoModerate, #blockWriteIdEp, #blockWriteIdEpModif, #arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend, #hideWriteEpisode,#hideWriteEpisodeModif, #divModifSelectEp, #divDelSelectEp, #navEpisode, #navComment, #navMessage, #divSelectCom, #selectSortComEp, #selectSortComPs, #divSelectComSignal, #selectSortComSignal, #selectSortComSignEp, #selectSortComSignPs{
   display: none;
 }
 #showComment, #showCommentSignal, #ShowMessage{
@@ -866,17 +867,17 @@ color: white;
 #arrayComment tbody tr:nth-child(odd), #arrayPseudo tbody tr:nth-child(odd), #arrayCommentSignal tbody tr:nth-child(odd), #arrayPseudoSignal tbody tr:nth-child(odd), #arrayMessageReceive tbody tr:nth-child(odd), #arrayMessageSend tbody tr:nth-child(odd){
   background-color: #ffffffd4;
 }
-#arrayComment tbody tr td, #arrayPseudo tbody tr td, #arrayCommentSignal tbody tr td, #arrayPseudoSignal tbody tr td, #arrayMessageReceive tbody tr td, #arrayMessageSend tbody tr td{
+#arrayComment tbody tr td, #arrayPseudo tbody tr td, #arrayPseudoSignal tbody tr td, #arrayMessageReceive tbody tr td, #arrayMessageSend tbody tr td{
   padding-left:20px;
 }
 #arrayComment > tbody tr td:nth-child(1), #arrayPseudo tbody tr td:nth-child(1), #arrayCommentSignal tbody tr td:nth-child(1), #arrayPseudoSignal tbody tr td:nth-child(1){
-  width:170px;
+  width:120px;
 }
-#arrayComment > tbody tr td:nth-child(2), #arrayPseudo tbody tr td:nth-child(2), #arrayCommentSignal tbody tr td:nth-child(2), #arrayPseudoSignal tbody tr td:nth-child(2),#arrayMessageReceive tbody tr td:nth-child(2), #arrayMessageSend tbody tr td:nth-child(2){
+#arrayComment > tbody tr td:nth-child(2), #arrayCommentSignal tbody tr td:nth-child(2),#arrayMessageReceive tbody tr td:nth-child(2), #arrayMessageSend tbody tr td:nth-child(2){
   width:150px;
 }
-#arrayComment > tbody tr td:nth-child(4), #arrayPseudo tbody tr td:nth-child(4), #arrayCommentSignal tbody tr td:nth-child(4), #arrayPseudoSignal tbody tr td:nth-child(4){
-  width:50px;
+#arrayCommentSignal tbody tr td:nth-child(4), #arrayCommentSignal tbody tr td:nth-child(5), #arrayPseudoSignal tbody tr td:nth-child(4), #arrayPseudoSignal tbody tr td:nth-child(3){
+  width:30px;
 }
 #arrayMessageReceive tbody tr td:nth-child(1), #arrayMessageSend tbody tr td:nth-child(1){
   width:100px;
@@ -889,13 +890,76 @@ body #globalComment span.far.fa-hand-point-right:hover{
   color: #4ac2c2;
 }
 /********************************************************************************/
+#biography .flexRow{
+  display: flex;
+  width:100%;
+  justify-content: center;
+
+}
+#biography #imgBiographie{
+width:40%;
+padding:30px;
+}
+#biography #textBiographie{
+width:60%;
+padding:30px;
+  }
+  #biography #imgBiographie img{
+    width:100%;
+  }
+  #biography #textBiographie p{
+    margin:0;
+  }
+  /******************************************************************/
 footer{
     width:100%;
   height: 120px;
   background-image: url('../img/fond.png');
   background-position-x: center;
   background-size: cover;
+  
 }
 footer .blackLine{
   height:120px;
+  display: flex;
+padding-top: 5px;
+width: 100%;
+justify-content: space-around;
 }
+footer a, footer p, footer h3{
+  text-decoration: none;
+  color: #3e9e9e;
+}
+footer a:hover{
+  color: #4ac2c2;
+}
+footer p{
+  margin: 0;
+}
+footer h3{
+  margin:0;
+}
+footer #confidentiel, footer #confidentiel nav{
+display: flex;
+flex-direction: column;
+  height: 120px;
+}
+footer hr{
+  width:40px;
+  margin-left: 0;
+  border:2px solid #3e9e9e;
+}
+/**************************************************/
+section#politique #contentPolitique, section#mention #contentmention{
+display: flex;
+
+margin: auto;
+padding: 20px;
+flex-direction: column;
+}
+
+section#politique #contentPolitique p.titleInfos, section#mention #contentmention p.titleInfos{
+  font-weight: bold;
+}
+section#mention #contentmention p.titleInfos{
+  margin:0;

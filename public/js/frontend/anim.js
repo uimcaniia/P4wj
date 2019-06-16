@@ -40,10 +40,6 @@ function animPopup($id){
 function animPopupReply(idDivGlobal, id){
 	popup = document.querySelector('div#'+idDivGlobal+' + div.globalReply div#'+id+'.replySignal div.popupSignal');
 	popupP = document.querySelector('div#'+idDivGlobal+' + div.globalReply div#'+id+'.replySignal div.popupSignal p');
-/*	console.log(idDivGlobal);
-	console.log(id);
-	console.log(popup);
-	console.log(popupP);*/
 
 	$(popup).delay(0).animate({'opacity': '10'}, {'duration' : 100});
 	$(popup).delay(0).animate({'height':'20px'}, {'duration':500});
@@ -94,32 +90,6 @@ function animDivWriteReplyClose(id, close){
 		$('#'+id).delay(0).animate({'height':'0px'}, {'duration':200});
 }
 
-//********************************************************
-function animDivWriteNewInfoOpen(divGlobal, id){
-
-	div = document.getElementById(id);
-	btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-comment');
-	btnClose = document.querySelector('#'+divGlobal+' .fa-times');
-
-		$(btnOpen).fadeOut(0);
-		$(btnClose).fadeIn(200);
-
-		$(div).delay(0).animate({'height':'80px'}, {'duration':200});
-		$(div).fadeIn(500);
-}
-
-function animDivWriteNewInfoClose(divGlobal, id){
-
-		div = document.getElementById(id);
-		btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-comment');
-		btnClose = document.querySelector('#'+divGlobal+' .fa-times');
-
-		$(btnClose).fadeOut(0);
-		$(btnOpen).fadeIn(200);
-
-		$(div).fadeOut(200);
-		$(div).delay(0).animate({'height':'0px'}, {'duration':200});
-}
 
 
 //********************************************************

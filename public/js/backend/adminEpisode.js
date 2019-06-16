@@ -5,7 +5,19 @@ if(!Array.isArray) {
   };
 }
 //*****************************************************************
+	$('#quitEdit').click(function(){
+		//$('#blockWriteEpisode textarea').empty();
+		$('#blockWriteTitleEpisode').val('');
+		$('#blockWriteIdEp').empty();
+		var tiny= 'blockWriteEpisode';
+		tinymce.get(tiny).setContent('');
+	})
 $(document).ready(function(){
+
+/*	if($('#blockWriteEpisodeModif').is(":visible")){ 
+		$('#containtEpisodeAdminModif button:nth-child(1)').fadeOut(0);
+	}*/
+
 //****************************************
 	//action sur le bouton sélectionner un épisode à supprimer
 	$('#goEpDel').click(function(){
@@ -26,6 +38,8 @@ $(document).ready(function(){
 		});
 	});
 //****************************************
+
+	//********************************************************
 
 	$('#saveEdit').click( function(){
 		tinyMCE.triggerSave(true, true);
@@ -86,6 +100,7 @@ $(document).ready(function(){
 					$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);	
 						$('#containtEpisodeAdmin > p:nth-child(2)').text('La publication a bien été effectuée.')
 						$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
+						$('#showEdit').fadeOut(0);
 						return false;
 					});
 					return false;
@@ -95,13 +110,15 @@ $(document).ready(function(){
 				idEpisode = $('#blockWriteIdEp p').text();
 				$.post('index.php?action=saveEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode, idEpisode:idEpisode}, function(donnee){			
 					$.post('index.php?action=publishEpisode', {idEpisode:idEpisode}, function(donnee){	
-						console.log(donnee);		
+						console.log(donnee);
+
 					$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
 					$('#containtEpisodeAdmin > p:nth-child(2)').text('La publication a bien été effectuée.')
 					$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
 						return false;
 					});
 				$('#confirmPublishEpisode').fadeOut(600);
+				$('#showEdit').fadeOut(0);
 			});
 			}
 		});
@@ -111,22 +128,50 @@ $(document).ready(function(){
 	//********************************************
 	//action sur le bouton sélectionner un épisode à modifier
 	$('#goEpModif').click(function(){
+		$('#divModifSelectEp').fadeOut(0);
+		$('#hideWriteEpisodeModif').fadeIn(300);
+		$('#containtEpisodeAdminModif > div:nth-child(4) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > button:nth-child(1)').fadeOut(0);
 
+		$('#blockWriteIdEpModif').empty();
 		var valEpModif = $('#selectEpModif').val(); 	
-				$.post('index.php?action=selEpModif', {valEpModif:valEpModif}, function(donnee){
+		$.post('index.php?action=selEpModif', {valEpModif:valEpModif}, function(donnee){
 			var aDonnee = JSON.parse(donnee);
-			console.log(aDonnee);
-				$('#divModifSelectEp').fadeOut(0);
-				$('#hideWriteEpisodeModif').fadeIn(300);
 
-				var id = aDonnee[0]['id'];
-				var title = aDonnee[0]['title'];
-				var txt = aDonnee[0]['episode'];
-				$('<p>'+id+'</p>').appendTo('#blockWriteIdEpModif');
-				//$('#blockWriteIdEpModif').text(id);
-				document.getElementById("blockWriteTitleEpisodeModif").value=title;
-				tinyMCE.get('blockWriteEpisodeModif').setContent(txt) ;
-		})
+			var id = aDonnee[0]['id'];
+			var title = aDonnee[0]['title'];
+			var txt = aDonnee[0]['episode'];
+			var publish = aDonnee[0]['showEpisode'];
+			//var btnPublish = $('#PublishModif').html();
+			$('<p>'+id+'</p>').appendTo('#blockWriteIdEpModif');
+			if(publish == 0){
+				$('#PublishModif').fadeIn(0);
+			}else{
+				$('#PublishModif').fadeOut(0);
+			}
+			document.getElementById("blockWriteTitleEpisodeModif").value=title;
+			tinyMCE.get('blockWriteEpisodeModif').setContent(txt) ;
+			$('#PublishModif').click(function(){
+				tinyMCE.triggerSave(true, true);
+				var txtEpisode = $('#blockWriteEpisodeModif textarea').val();
+				var titleEpisode = $('#blockWriteTitleEpisodeModif').val();
+				var id= $('#blockWriteIdEpModif p').text();
+				idEpisode = id.replace(/ |\n|\r|\t/g, '');
+				$.post('index.php?action=saveEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode, idEpisode:idEpisode}, function(donnee){			
+					$.post('index.php?action=publishEpisode', {idEpisode:idEpisode}, function(donnee){	
+						console.log(donnee);
+
+					$('#containtEpisodeAdminModif > p:nth-child(2)').fadeIn(600);
+					$('#containtEpisodeAdminModif > p:nth-child(2)').text('La publication a bien été effectuée.')
+					$('#containtEpisodeAdminModif > p:nth-child(2)').delay(2000).fadeOut(1000);
+						return false;
+					});
+
+				$('#confirmPublishEpisode').fadeOut(600);
+				$('#PublishModif').fadeOut(0);
+				return false;
+				});
+			})
+		});
 	});
 
 
@@ -143,7 +188,7 @@ $(document).ready(function(){
 
 			console.log(donnee);		
 			$('#containtEpisodeAdminModif > p:nth-child(2)').fadeIn(600);
-			$('#containtEpisodeAdminModif > p:nth-child(2)').text('La publication a bien été effectuée.')
+			$('#containtEpisodeAdminModif > p:nth-child(2)').text('La sauvegarde a bien été effectuée.')
 			$('#containtEpisodeAdminModif > p:nth-child(2)').delay(2000).fadeOut(1000);
 				return false;
 			});

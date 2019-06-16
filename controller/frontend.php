@@ -155,22 +155,20 @@ function listNewCommentEpisode($idEpisode)
 {
 	$idIntEpisode = intval($idEpisode); // on transforme la string en int
 	$comment = new Comment; 	// on récupère tous les commentaires suivant l'id de l'épisode
+
 	$aComment = $comment->getAllCommentOrderJoin('idEpisode', $idIntEpisode, 'commentTime', 'user', 'idUser', 'id', 'pseudo');
-
-	foreach ($aComment as $key => $value)
-	{
-		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires
-		$aReply = $reply->getAllReplyOrderJoin('idcomment_reply', $value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
-		$aComment[$key]['reply'] = $aReply;
+	if($aComment === false){
+		$aComment = array();
 	}
-
-	if($aComment === false)
+	else
 	{
-		throw new Exception('Impossible de charger la liste des commentaires');
+		foreach ($aComment as $key => $value)
+		{
+			$reply = new Reply; // on recupère les réponse correspondantes aux commentaires
+			$aReply = $reply->getAllReplyOrderJoin('idcomment_reply', $value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
+			$aComment[$key]['reply'] = $aReply;
+		}
 	}
-/*	echo '<pre>';
-	print_r($aComment);
-	echo '</pre>';*/
 	return $aComment;
 }
 //********************************************************
@@ -191,7 +189,7 @@ function addComment($idEpisode, $idPseudo, $comment)
 
 		$aDataComment=array(
 			array(
-				"comment"   => '"'.$comment.'"',
+				"comment"   => "$comment",
 				"idEpisode" => "$idEpisode",
 				"idUser"    => "$idPseudo"));
 
@@ -202,7 +200,7 @@ function addComment($idEpisode, $idPseudo, $comment)
 		$comment2 = new Comment;
 		$aLastCom = $comment2 -> getLastComment(); // on récupère le résultat pour récupérer la date de l'enregistrement en BDD
 		$aLastCom[0]['commentTime']=strftime('%d-%m-%Y',strtotime($aLastCom[0]['commentTime']));
-
+		//print_r($aLastCom[0]);
 		echo json_encode($aLastCom[0]);
 	}
 }
@@ -259,5 +257,21 @@ function signalReply($idEpisode, $idComment, $idReply, $idUserSignal)
 //********************************************************
 function biography()
 {
+	$bio = new Author;
+	$biographie = $bio->get();
 	require('view/frontend/biographyView.php');
+}
+//********************************************************
+function mention()
+{
+	$mention = new Mention;
+	$aMention = $mention->get();
+	require('view/frontend/mentionView.php');
+}
+//********************************************************
+function politique()
+{
+	$politique = new Politique;
+	$aPolitique = $politique->get();
+	require('view/frontend/politiqueView.php');
 }

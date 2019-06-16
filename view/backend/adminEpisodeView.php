@@ -99,6 +99,7 @@
 		 						<div id='ctrlWriteEpisode'>
 		 							<span id='saveEdit'>Enregistrer</span>
 		 							<span id='showEdit'>Publier</span>
+		 							<span id='quitEdit'>Quitter</span>
 		 						</div>
 			 				</div>
 			 			</div>
@@ -120,6 +121,7 @@
 		 						</div>
 		 						<div id='ctrlWriteEpisodeModif'>
 		 							<span id='saveModif'>Enregistrer</span>
+									<span id='PublishModif'>Publier</span>
 		 						</div>
 		 					</div>
 			 			</div>

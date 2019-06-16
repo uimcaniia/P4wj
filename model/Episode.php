@@ -68,7 +68,10 @@
 	 	 //récupère un certain nombre d'épisodes
 	 	 public function getSomeEpisode($nbr)
 	 	 {
-	 	 	if(is_int($nbr)){
+
+	 	 	if(is_int($nbr))
+	 	 	{
+
 	 	 		$aData = parent::getChoiseNbr($nbr);
 	 	 	}
 	 	 	else
@@ -112,11 +115,10 @@
 	 	 		$minNum = parent::getFirstEpisode();
 	 	 		$idFirstEpisode = $minNum[0]['MIN(id)'];
 	 	 		//print_r($idFirstEpisode);
-
+	 	 		$idPrev = $id - 1;
 	 	 		if ($id != $idFirstEpisode) // si ce n'est pas le premier episode
 				{
-					$idPrev = $id - 1;
-					for($idPrev ; $idPrev > 0 ; $idPrev--) // on cherche l'entrée avant (bouble)
+					for($idPrev; $idPrev >= $idFirstEpisode ; $idPrev--) // on cherche l'entrée avant (bouble)
 					{
 						$aChapitrePrev = self::getOneEpisode($idPrev); // on tente de charger l'épisode d'avant
 						if($aChapitrePrev != false) //si on a un retour
@@ -127,7 +129,6 @@
 					}
 					return $linkEpisodePrev;
 				}
-				
 				else
 				{
 					return $linkEpisodeNext='';
@@ -147,14 +148,14 @@
 	 	 	{
 	 	 		$maxNum = parent::getLastEpisode();
 	 	 		$idLastEpisode = $maxNum[0]['MAX(id)'];
-	 	 		//$nbrEpisode = $nbrEpisode +1;
+	 	 		$idNext = $id + 1 ;
 	 	 		if ($id != $idLastEpisode) // si ce n'est pas le dernier episode
 				{
-					$idNext = $id + 1;
-					for($idNext ; $idNext > 0 ; $idNext++) // on cherche l'entrée après (bouble)
+
+					for($idNext; $idNext <= $idLastEpisode ; $idNext++) // on cherche l'entrée après (bouble)
 					{
-						$aChapitrePrev = self::getOneEpisode($idNext); // on tente de charger l'épisode d'après
-						if($aChapitrePrev != false) //si on a un retour
+						$aChapitreNext = self::getOneEpisode($idNext); // on tente de charger l'épisode d'après
+						if($aChapitreNext) //si on a un retour
 						{
 							$linkEpisodeNext = $idNext;
 							break;
@@ -230,7 +231,7 @@
 		{
 			if (is_string($episode))
     		{
-    			htmlspecialchars($episode);
+    			//htmlspecialchars($episode);
 				$this->_episode = $episode;
 			}
 		}

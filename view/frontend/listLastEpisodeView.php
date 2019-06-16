@@ -15,11 +15,11 @@
 	 	 		</div>
 
  	 			<div class="titleEpisodeExtract">
- 	 				<h2><?= htmlspecialchars($aEpisodeExtract[$i]['title']); ?></h2>
+ 	 				<h2><?= $aEpisodeExtract[$i]['title'] ?></h2>
  	 			</div>
  	 			<hr>
  	 			<div class='episodeExtract'>
- 	 				<p><?= htmlspecialchars($aEpisodeExtract[$i]['episode']); ?></p>
+ 	 				<p><?= $aEpisodeExtract[$i]['episode'] ?></p>
  	 			</div>
 
  	 			<div class='datePublication'>

@@ -1,0 +1,187 @@
+@media screen and (max-width:767px){
+	header {
+		background-position-x: center;
+	}
+	header .blackLine {
+		height: 70px;
+	}
+	header .blackLine a {
+		font-size: 1.1em;
+		width: 120px;
+		margin-left: 10px;
+	}
+	header div.blackLine div {
+		width: 150px;
+	}
+	#logo img {
+	    width: 90%;
+	    margin-top: 120px;
+	}
+	header #bienvenuePseudo a{
+		margin-left: 2px;
+	}
+	header div.blackLine hr {
+		margin-left: 10px;
+	}
+	header div.blackLine div:nth-child(2), #barreMenuHeader div:nth-child(1) {
+		right: 0px;
+	}
+	#titleMenuHeader {
+	    top: 35px;
+	}
+	#titleMenuHeader p {
+		margin-right: 0
+	}
+	header #titleMenuHeader #one{
+		right: 130px;
+	}
+		header #titleMenuHeader #two{
+		right: 65px;
+	}
+		header #titleMenuHeader #three{
+		right:15px;
+	}
+		header #barreMenuHeader #four{
+		right: 120px;
+	}
+		header #barreMenuHeader #five{
+		right: 55px;
+	}
+		header #barreMenuHeader #six{
+		right:5px;
+	}
+	#bienvenuePseudo{
+		width:100px;
+	}
+	#infoSpaceTwo .flexRow{
+		flex-direction: column;
+align-items: baseline;
+	}
+	#globalSpace #password, #globalSpace #repassword{
+		max-width: 200px;
+	}
+	#globalSpace {
+margin:10px;
+	}
+	footer h3{
+		font-size:1em;
+	}
+	#titlePage img {
+		margin-left: 250px;
+	}
+	#titlePage h1 {
+		font-size: 2.2em;
+	}
+	#barre > hr:nth-child(1) {
+    	width: 200px;
+	}
+	#barre > hr:nth-child(2) {
+    width: 80px;
+	}
+	#bkgEpisode {
+		width: 100%;
+padding: 10px;
+margin: 10px;
+	}
+	#headerComment > p:nth-child(1) {
+	    font-size: 1.1em;
+	    width: 250px;
+	}
+	.datePublication > div:nth-child(2) > p:nth-child(1) {
+		margin-right: 10px;
+		margin-left: 0;
+	}
+	#bkgEpisode div.datePublication div a{
+		font-size: 0.9em;
+	}
+	#globalComment{
+		padding: 0;
+		padding-bottom: 10px;
+	}
+	#globalComment .formComment {
+width: 100%;
+	}
+	#contentInputComment{
+		width: 100%;
+	}
+	.commentSignal {
+    padding: 20px 0 0 0px;
+
+	}
+	#globalComment .comment, .globalReply .reply {
+		width:70%;
+		margin-left: 10px;
+	}
+	#globalComment .popupSignal {
+		display: none;
+	}
+	#globalComment .messSignal {
+width: 150px;
+	}
+	section#containtComment div#globalComment div.comment + p{
+    margin-left: 40px;
+}
+section#containtComment div#globalComment div.lookReply p {
+margin-left: 30px;
+	}
+#globalComment .formComment {
+margin-left:0;
+	}
+	#contentInputComment, div.contentInputReply {
+    	width: 100%;
+	}
+	#globalComment .comment, .globalReply .reply {
+    width: 90%;
+}
+.globalReply {
+    padding-left: 0px;
+    }
+    #globalComment .globalReply .messSignal {
+    	width: 180px;
+    }
+    .alertConnect {
+    width: 90%;
+	}
+	#containtLogin form {
+    width: 90%;
+	}
+	#containtLogin fieldset {
+		padding:0;
+	}
+	#containtLogin fieldset input {
+		width:80%;
+	}
+#EpisodeWork, #CommentWork, #messageWork {
+flex-wrap: wrap;
+	}
+	#writeEpisode hr, #writeEpisodeModif hr {
+		display: none;
+	}
+	#hideWriteEpisode, #hideWriteEpisodeModif {
+    width: 95%;
+    margin: auto;
+}
+	#modifEp, #delEp, #editEp, #showComment, #showCommentSignal {
+		flex-direction: column;
+	}
+	#navEpisode .flexRow, #navComment .flexRow, #navMessage .flexRow, #infoSpaceTwo .flexRow {
+		flex-direction: column;
+	}
+	#arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend {
+   	 width: 100%;
+	}
+	#arrayComment tbody tr td, #arrayPseudo tbody tr td, #arrayPseudoSignal tbody tr td, #arrayMessageReceive tbody tr td, #arrayMessageSend tbody tr td {
+    padding-left: 10px;
+}
+	#arrayComment > tbody tr td:nth-child(1), #arrayPseudo tbody tr td:nth-child(1), #arrayCommentSignal tbody tr td:nth-child(1), #arrayPseudoSignal tbody tr td:nth-child(1) {
+	    width: 100px;
+	    vertical-align: baseline;
+    }
+    #arrayComment > tbody tr td:nth-child(2), #arrayCommentSignal tbody tr td:nth-child(2), #arrayMessageReceive tbody tr td:nth-child(2), #arrayMessageSend tbody tr td:nth-child(2) {
+	    width: 90px;
+	    vertical-align: baseline;
+	}
+	#arrayCommentSignal tbody tr td:nth-child(4), #arrayCommentSignal tbody tr td:nth-child(5), #arrayPseudoSignal tbody tr td:nth-child(4), #arrayPseudoSignal tbody tr td:nth-child(3) {
+    width: 20px;
+	}
+}
