@@ -46,8 +46,8 @@ $(document).ready(function(){
 	//*************************************************************
 //AJAX pour répondre à des commentaires aux épisodes
 //function replyComment(idComment, reply, divClose, btn, divPushReply){
-	var div = document.getElementById('globalComment');
-	var elemReplyComment = div.querySelectorAll('div.contentInputReply span.fa-check');
+	//var div = document.getElementById('globalComment');
+	var elemReplyComment = document.querySelectorAll('div.contentInputReply span.fa-check');
 
 	$(elemReplyComment).click(function(){
 		var classEleme = $(this).attr('class'); 

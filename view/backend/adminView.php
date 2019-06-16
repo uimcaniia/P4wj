@@ -19,7 +19,7 @@
 				</article>
 				<article id="confirmDeleteComment">
 					<div>
-						<span class="fas fa-times"  onclick="closeDeleteCommentDiv()"></span>
+						<span class="fas fa-times"></span>
 							<p>Voulez-vous vraiment supprimer ce commentaire?</p>
 							<p>Les réponses qui y sont associés, seront supprimer en même temps.</p>
 						<p id='alertMessage'></p>
@@ -31,7 +31,7 @@
 				</article>
 				<article id="confirmDeleteCommentReply">
 					<div>
-						<span class="fas fa-times"  onclick="closeDeleteCommentReplyDiv()"></span>
+						<span class="fas fa-times"></span>
 							<p>Voulez-vous vraiment supprimer ce commentaire?</p>
 							
 						<p id='alertMessage'></p>
@@ -43,7 +43,7 @@
 				</article>
 				<article id="confirmDeleteEpisode">
 					<div>
-						<span class="fas fa-times"  onclick="closeDeleteEpisodeDiv()"></span>
+						<span class="fas fa-times"></span>
 							<p>Voulez-vous vraiment supprimer cet épisode?</p>
 						<p id='alertMessage'></p>
 						<div id="messageBtn" class="flexRow">
@@ -54,7 +54,7 @@
 				</article>
 				<article id="confirmDeletePseudo">
 					<div>
-						<span class="fas fa-times"  onclick="closeDeletePseudoDiv()"></span>
+						<span class="fas fa-times"  id='closeDeletePseudoDiv'></span>
 							<p>Voulez-vous vraiment supprimer ce compte?</p>
 							<p>Les commentaires qui y sont associés, seront encore visible.</p>
 							<p>Le pseudonyme sera modifié et le compte sera bloqué.</p>

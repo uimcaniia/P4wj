@@ -60,7 +60,7 @@ $(document).ready(function(){
 				var resHead = '<thead><tr><th colspan = "4">'+title+'</th></tr></thead><tbody>';
 				var resBody ='';
 				for(var i = 0 ; i < aDonnee[0].length; i++){
-					resBody = resBody+'<tr><td> Commentaire du '+aDonnee[0][i]['commentTime']+'</td><td> '+aDonnee[0][i]['comment']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[0][i]['id']+'\',\'comment\',\'\',\''+aDonnee[0][i]['idUser']+'\',byPseudo);"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[0][i]['id']+'\',\'comment\',\'\',\''+aDonnee[0][i]['idUser']+'\',\'byPseudo\');"></span></td></td></tr>';
+					resBody = resBody+'<tr><td> Commentaire du '+aDonnee[0][i]['commentTime']+'</td><td> '+aDonnee[0][i]['comment']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[0][i]['id']+'\',\'comment\',\'\',\''+aDonnee[0][i]['idUser']+'\', \'byPseudo\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[0][i]['id']+'\',\'comment\',\'\',\''+aDonnee[0][i]['idUser']+'\',\'byPseudo\');"></span></td></td></tr>';
 				}
 				if (aDonnee[1].length != 0){
 					for (var j = 0 ; j < aDonnee[1].length ; j++){

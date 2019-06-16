@@ -5,9 +5,9 @@
 //function animCommentPlus(){
 $(document).ready(function(){
 //**********************************************************************
-	var div1 = document.getElementById('globalComment');
-	var elemPlus = div1.querySelectorAll('span.fa-plus');
-	var elemMoins = div1.querySelectorAll('span.fa-minus');
+	//var div1 = document.getElementById('globalComment');
+	var elemPlus = document.querySelectorAll('span.fa-plus');
+	var elemMoins = document.querySelectorAll('span.fa-minus');
 
 	$(elemPlus).click(function(){
 		var classEleme = $(this).attr('class');
@@ -36,9 +36,9 @@ $(document).ready(function(){
 	});
 //**********************************************************************
 //function animDivWriteReplyOpen(){
-	var div2 = document.getElementById('globalComment');
-	var elemCommRepOpen = div2.querySelectorAll('span.fa-comment.contentInputReply');
-	var elemCommRepClose = div2.querySelectorAll('span.fa-times.contentInputReply');
+	//var div2 = document.getElementById('globalComment');
+	var elemCommRepOpen = document.querySelectorAll('span.fa-comment.contentInputReply');
+	var elemCommRepClose = document.querySelectorAll('span.fa-times.contentInputReply');
 
 	$(elemCommRepOpen).click(function(){
 		var classEleme = $(this).attr('class');
@@ -64,8 +64,8 @@ $(document).ready(function(){
 
 //**********************************************************************
 //function animPopup(){
-	var div3 = document.getElementById('globalComment');
-	var elemCommSignal = div3.querySelectorAll('div.commentSignal span.fa-bell');
+	//var div3 = document.getElementById('globalComment');
+	var elemCommSignal = document.querySelectorAll('div.commentSignal span.fa-bell');
 
 	$(elemCommSignal).click(function(){
 		var id = $(this).parent().attr('id');
@@ -134,6 +134,6 @@ function animShowAdminMenu(divShow, divHide){
 }
 //*********************************************************************
 
-//*********************************************
+
 
 
