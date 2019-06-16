@@ -299,3 +299,5 @@ $('#spanCloseChangePsw').click(function(){
 		$(div).fadeOut(200);
 		$(div).delay(0).animate({'height':'0px'}, {'duration':200});
 });
+//**************************************************************************************
+

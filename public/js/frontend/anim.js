@@ -2,31 +2,76 @@
 
  //************************************************************************************************
  //animation commentaire  + -
+//function animCommentPlus(){
+$(document).ready(function(){
+//**********************************************************************
+	var div1 = document.getElementById('globalComment');
+	var elemPlus = div1.querySelectorAll('span.fa-plus');
+	var elemMoins = div1.querySelectorAll('span.fa-minus');
 
-function animCommentPlus($id){
-	open = document.querySelector('#'+ $id+' .plusMoins .fa-plus');
-	close = document.querySelector('#'+ $id+' .plusMoins .fa-minus');
-	divFrere = document.querySelector('#'+ $id+' + .globalReply');
+	$(elemPlus).click(function(){
+		var classEleme = $(this).attr('class');
+		id = classEleme.split(' ')[2];
+	
+		open = document.querySelector('#'+ id+' .plusMoins .fa-plus');
+		close = document.querySelector('#'+ id+' .plusMoins .fa-minus');
+		divFrere = document.querySelector('#'+ id+' + .globalReply');
 
 		$(open).fadeOut(200);
 		$(close).fadeIn(200);
 		$(divFrere).fadeIn(200);
-}
+	});
 
-function animCommentMoins($id){
-	open = document.querySelector('#'+ $id+' .plusMoins .fa-plus');
-	close = document.querySelector('#'+ $id+' .plusMoins .fa-minus');
-	divFrere = document.querySelector('#'+ $id+' + .globalReply');
+	$(elemMoins).click(function(){
+		var classEleme = $(this).attr('class');
+		id = classEleme.split(' ')[2];
+
+		open = document.querySelector('#'+ id+' .plusMoins .fa-plus');
+		close = document.querySelector('#'+ id+' .plusMoins .fa-minus');
+		divFrere = document.querySelector('#'+ id+' + .globalReply');
 
 		$(close).fadeOut(200);
 		$(open).fadeIn(200);
 		$(divFrere).fadeOut(200);
-}
-//********************************************************
-function animPopup($id){
-	popup = document.querySelector('#'+ $id+' .popupSignal');
-	popupP = document.querySelector('#'+ $id+' .popupSignal p');
-	textSignal = document.querySelector('#'+ $id+' > p:nth-child(5)');
+	});
+//**********************************************************************
+//function animDivWriteReplyOpen(){
+	var div2 = document.getElementById('globalComment');
+	var elemCommRepOpen = div2.querySelectorAll('span.fa-comment.contentInputReply');
+	var elemCommRepClose = div2.querySelectorAll('span.fa-times.contentInputReply');
+
+	$(elemCommRepOpen).click(function(){
+		var classEleme = $(this).attr('class');
+		id = classEleme.split(' ')[3];
+		open = classEleme.split(' ')[4];
+
+		$('#'+open).fadeOut(0);
+
+		$('#'+id).delay(0).animate({'height':'90px'}, {'duration':200});
+		$('#'+id).fadeIn(500);
+	});
+
+	$(elemCommRepClose).click(function(){
+		var classEleme = $(this).attr('class');
+		id = classEleme.split(' ')[3];
+		close = classEleme.split(' ')[4];
+
+		$('#'+close).fadeIn(100);
+
+		$('#'+id).fadeOut(200);
+		$('#'+id).delay(0).animate({'height':'0px'}, {'duration':200});
+	});
+
+//**********************************************************************
+//function animPopup(){
+	var div3 = document.getElementById('globalComment');
+	var elemCommSignal = div3.querySelectorAll('div.commentSignal span.fa-bell');
+
+	$(elemCommSignal).click(function(){
+		var id = $(this).parent().attr('id');
+		popup = document.querySelector('#'+ id+' .popupSignal');
+		popupP = document.querySelector('#'+ id+' .popupSignal p');
+		textSignal = document.querySelector('#'+ id+' > p:nth-child(5)');
 
 		$(popup).delay(0).animate({'opacity': '10'}, {'duration' : 100});
 		$(popup).delay(0).animate({'height':'20px'}, {'duration':500});
@@ -35,62 +80,39 @@ function animPopup($id){
 		$(popupP).delay(1500).animate({'opacity': '0'}, {'duration' : 300});
 		$(popup).delay(1800).animate({'height':'0px'}, {'duration':500});
 		$(popup).delay(0).animate({'opacity': '0'}, {'duration' : 100});
-}
+	});
 
-function animPopupReply(idDivGlobal, id){
-	popup = document.querySelector('div#'+idDivGlobal+' + div.globalReply div#'+id+'.replySignal div.popupSignal');
-	popupP = document.querySelector('div#'+idDivGlobal+' + div.globalReply div#'+id+'.replySignal div.popupSignal p');
 
-	$(popup).delay(0).animate({'opacity': '10'}, {'duration' : 100});
-	$(popup).delay(0).animate({'height':'20px'}, {'duration':500});
-	$(popupP).delay(500).animate({'opacity': '10'}, {'duration' : 300});
-
-	$(popupP).delay(1500).animate({'opacity': '0'}, {'duration' : 300});
-	$(popup).delay(1800).animate({'height':'0px'}, {'duration':500});
-	$(popup).delay(0).animate({'opacity': '0'}, {'duration' : 100});
-}
 //********************************************************
-function animDivWriteCommentOpen(divGlobal, id){
-
-	div = document.getElementById(id);
-	btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-comment');
-	btnClose = document.querySelector('#'+divGlobal+' .fa-times');
+//function animDivWriteCommentOpen(divGlobal, id){
+	$('#btnOpenDivComment').click(function(){
+		div = document.getElementById('contentInputComment');
+		btnOpen = document.querySelector('#headerComment .fa-pen-comment');
+		btnClose = document.querySelector('#headerComment .fa-times');
 
 		$(btnOpen).fadeOut(0);
 		$(btnClose).fadeIn(200);
 
 		$(div).delay(0).animate({'height':'90px'}, {'duration':200});
 		$(div).fadeIn(500);
-}
+	});
 
-function animDivWriteCommentClose(divGlobal, id){
-
-		div = document.getElementById(id);
-		btnOpen = document.querySelector('#'+divGlobal+' .fa-pen-comment');
-		btnClose = document.querySelector('#'+divGlobal+' .fa-times');
+//function animDivWriteCommentClose(divGlobal, id){
+	$('#btnCloseDivComment').click(function(){
+		div = document.getElementById('contentInputComment');
+		btnOpen = document.querySelector('#headerComment .fa-pen-comment');
+		btnClose = document.querySelector('#headerComment .fa-times');
 
 		$(btnClose).fadeOut(0);
 		$(btnOpen).fadeIn(200);
 
 		$(div).fadeOut(200);
 		$(div).delay(0).animate({'height':'0px'}, {'duration':200});
-}
+	});
 //********************************************************
-function animDivWriteReplyOpen(id, open){
-		$('#'+open).fadeOut(0);
-
-		$('#'+id).delay(0).animate({'height':'90px'}, {'duration':200});
-		$('#'+id).fadeIn(500);
-}
-
-function animDivWriteReplyClose(id, close){
-		$('#'+close).fadeIn(100);
-
-		$('#'+id).fadeOut(200);
-		$('#'+id).delay(0).animate({'height':'0px'}, {'duration':200});
-}
 
 
+});
 
 //********************************************************
 function animShowAdminMenu(divShow, divHide){

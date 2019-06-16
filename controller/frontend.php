@@ -1,6 +1,6 @@
 <?php
-
-function listLastEpisode($nbr)
+// affiche les derniers épisodes
+function listLastEpisode($nbr) 
 {
 	$episodes = new Episode;
 	$aEpisode = $episodes->getSomeEpisode(4);// on récupère les 4 derniers épisode
@@ -9,12 +9,13 @@ function listLastEpisode($nbr)
 		throw new Exception('Impossible de charger les '.$nbr.' épisodes');
 	}
 
-	$aEpisodeExtract = $episodes->makeExtractEpisode($aEpisode);
+	$aEpisodeExtract = $episodes->makeExtractEpisode($aEpisode); // on récupère un extrait de l'épisode
 	$link = 'episode.php?id=$aEpisode[$i]["id"]';
 
 	require('view/frontend/listLastEpisodeView.php');
 }
 //********************************************************
+// affiche tous les épisodes
 function extractAllEpisode()
 {
 	$episodes = new Episode;
@@ -25,27 +26,29 @@ function extractAllEpisode()
 		throw new Exception('Impossible de charger la liste complètes des épisodes');
 	}
 
-	$aEpisodeExtract = $episodes->makeExtractEpisode($aEpisode);
+	$aEpisodeExtract = $episodes->makeExtractEpisode($aEpisode); // on récupère un extrait de l'épisode
 
 	require('view/frontend/extractAllEpisodeView.php');
 }
 //********************************************************
+//affiche un épisode sélectionné
 function showEpisode($idEpisode)
 {
 	$idEpisode = intval($idEpisode);
 	$episode   = new Episode;
 	$aEpisode  = $episode->getOneEpisode($idEpisode); // on appelle l'épisode concerné'
-	$linkEpisodePrev = $episode->getPrevIdEpisode($idEpisode);
-	$linkEpisodeNext = $episode->getNextIdEpisode($idEpisode);
+	$linkEpisodePrev = $episode->getPrevIdEpisode($idEpisode); // récupère le lien précédent
+	$linkEpisodeNext = $episode->getNextIdEpisode($idEpisode); // récupère le lien d'après
 
-	$aComment = listNewCommentEpisode($idEpisode);
+	$aComment = listNewCommentEpisode($idEpisode); // récupère les commentaires de l'épisode
 
 	require('view/frontend/showEpisodeView.php');
 }
 //********************************************************
+//espace pour se connecter 
 function spaceConnect()
 {
-	$alertConnectionMail='';
+	$alertConnectionMail=''; // messages d'erreurs
 	$alertConnectionPsw='';
 	$alertConnectionPseudo='';
 	$alert ='';
@@ -58,7 +61,8 @@ function spaceConnect()
 
 	require('view/frontend/loginView.php');
 }
-	//********************************************************
+//********************************************************
+//chargement des champs input de la partie connexion
 function login($aIdInput)
 {
 	$input= new Input;
@@ -66,6 +70,7 @@ function login($aIdInput)
 	return $aInput;
 }
 //*******************************************************
+//test les erreur à la connexion
 function testErrorLog($email, $psw)
 {
 	$form = new Form;
@@ -91,16 +96,15 @@ function testErrorLog($email, $psw)
 	}
 }
 //*******************************************************
+//test les erreurs à l'inscription
 function testErrorSubscribe($email, $pseudo, $psw, $pswAgain)
 {
-	//echo $email;
 	$form = new Form;
 	$alertConnectionMail   = $form->tstSubMail($email);
 	$alertConnectionPsw    = $form->tstSubPseudo($pseudo);
 	$alertConnectionPseudo = $form->tstSubPsw($psw, $pswAgain);
-	//	echo $alertConnectionPseudo;
 	$alert ='';
-
+	// si on a des erreurs à l'inscription, on relance la zone de connexion et on affiche les messages d'erreurs
 	if(($alertConnectionMail != "") || ($alertConnectionPsw != "") || ($alertConnectionPseudo != ""))
 	{
 		$aIdInputLog = array(8, 9); // id des input a charger pour se connecter
@@ -110,13 +114,14 @@ function testErrorSubscribe($email, $pseudo, $psw, $pswAgain)
 		$aInputSub = login($aIdInputSub);
 		require('view/frontend/loginView.php');
 	}
-	else{
+	else{ // si on réussit, on incrit l'utilisateur, on enregistre les données en session et on le redirige vers son compte
 		subscribe($email, $pseudo, $psw);
 		makeSession($email);
 		header ('location: index.php?action=space');
 	}
 }
 //*****************************************************
+//mise en session des infos de l'utilisateur ou de l'amin
 function makeSession($mail)
 {
 	$user = new User();
@@ -128,9 +133,10 @@ function makeSession($mail)
 	$_SESSION['email']  = $getInfosUserConnect[0]['email'];
 }
 //*******************************************************
+//inscription d'un utilisateur
 function subscribe($email, $pseudo, $psw)
 {
-	$pswHash = password_hash($psw, PASSWORD_DEFAULT);
+	$pswHash = password_hash($psw, PASSWORD_DEFAULT); // on sécurise le mot de pass
 	$aDataUser=array(
 	"email"  => "$email",
 	"pseudo" => "$pseudo",
@@ -139,31 +145,33 @@ function subscribe($email, $pseudo, $psw)
 
 	$user = new User();
 	$user-> hydrate($aDataUser);
-	$user->add($user);
+	$user->add($user); //on ajoute un user à la bdd
 }
 
 //*******************************************************
+//déconnection de l'utilisateur
 function disconnect()
 {
 	$_SESSION = array();
-	session_destroy();
-	header ( 'Location: index.php');
+	session_destroy(); //on détruit la session
+	header ( 'Location: index.php'); //on le redirige vers l'accueil
 }
 //********************************************************
+//récupère les commentaire d'un épisode en function de l'id de l'épisode
 function listNewCommentEpisode($idEpisode)
 {
 	$idIntEpisode = intval($idEpisode); // on transforme la string en int
 	$comment = new Comment; 	// on récupère tous les commentaires suivant l'id de l'épisode
 
 	$aComment = $comment->getAllCommentOrderJoin('idEpisode', $idIntEpisode, 'commentTime', 'user', 'idUser', 'id', 'pseudo');
-	if($aComment === false){
+	if($aComment === false){ // si il n'y a pas de commentaire, on affiche un array vide.
 		$aComment = array();
 	}
 	else
 	{
-		foreach ($aComment as $key => $value)
+		foreach ($aComment as $key => $value) // on récupère les réponses aux commentaires si il y en a
 		{
-			$reply = new Reply; // on recupère les réponse correspondantes aux commentaires
+			$reply = new Reply; 
 			$aReply = $reply->getAllReplyOrderJoin('idcomment_reply', $value['id'], 'dateReply', 'user', 'iduser_reply', 'id', 'pseudo');
 			$aComment[$key]['reply'] = $aReply;
 		}
@@ -171,11 +179,13 @@ function listNewCommentEpisode($idEpisode)
 	return $aComment;
 }
 //********************************************************
+// function en attente qui servira à afficher les commentaire du plus vieux au plus récent
 function listOldCommentEpisode($idEpisode)
 {
 	require('view/frontend/commentView.php');
 }
 //********************************************************
+//AJAX, insère un commentaire en BDD et retourne le commentaire en JSON
 function addComment($idEpisode, $idPseudo, $comment)
 {
 	$comment = trim($comment);
@@ -196,13 +206,14 @@ function addComment($idEpisode, $idPseudo, $comment)
 		$comment->hydrate($aDataComment);
 		$comment->add($comment);
 
-		$comment2 = new Comment;
+		$comment2 = new Comment;// on récupère le dernier commentaire
 		$aLastCom = $comment2 -> getLastComment(); // on récupère le résultat pour récupérer la date de l'enregistrement en BDD
 		$aLastCom[0]['commentTime']=strftime('%d-%m-%Y',strtotime($aLastCom[0]['commentTime']));
-		echo json_encode($aLastCom[0]);
+		echo json_encode($aLastCom[0]); 
 	}
 }
 //********************************************************
+//AJAX, insère une réponse à un commentaire en BDD et retourne le commentaire en JSON
 function addReply($idEpisode, $idPseudo, $comment, $reply)
 {
 	$reply = trim($reply);
@@ -224,13 +235,14 @@ function addReply($idEpisode, $idPseudo, $comment, $reply)
 		$reply->hydrate($aDataReply);
 		$reply->add($reply);
 
-		$reply2 = new Reply; // on ajoute le nouveau commentaire
+		$reply2 = new Reply; // on récupère le dernier commentaire
 		$aLastReply = $reply2 -> getLastReply(); // on récupère le résultat pour récupérer la date de l'enregistrement en BDD
  		$aLastReply[0]['dateReply']=strftime('%d-%m-%Y',strtotime($aLastReply[0]['dateReply']));
 		echo json_encode($aLastReply[0]);
 	}
 }
 //********************************************************
+//permet de signaler un commentaire et l'utilisateur. MAJ en BDD (reporting)
 function signalComment($idEpisode, $idComment, $idUserSignal)
 {
 	$majSignalUser = new User;
@@ -242,6 +254,7 @@ function signalComment($idEpisode, $idComment, $idUserSignal)
 	$commentReporting = $majSignalComment->update($idComment, '1');
 }
 //********************************************************
+//permet de signaler une réponse et l'utilisateur. MAJ en BDD (reporting)
 function signalReply($idEpisode, $idComment, $idReply, $idUserSignal)
 {
 	$majSignalUser = new User;
@@ -253,6 +266,7 @@ function signalReply($idEpisode, $idComment, $idReply, $idUserSignal)
 	$commentReporting = $majSignalReply->update($idReply, '1');
 }
 //********************************************************
+//affiche la biography de l'écrivain
 function biography()
 {
 	$bio = new Author;
@@ -260,6 +274,7 @@ function biography()
 	require('view/frontend/biographyView.php');
 }
 //********************************************************
+// affiche les mentiosn légales
 function mention()
 {
 	$mention = new Mention;
@@ -267,6 +282,7 @@ function mention()
 	require('view/frontend/mentionView.php');
 }
 //********************************************************
+//affiche la politique de confidentialité
 function politique()
 {
 	$politique = new Politique;

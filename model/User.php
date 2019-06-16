@@ -21,7 +21,6 @@
 		// Methode
 		// **************************************************
 
-
 	 	 public function getDataToHydrate($mail, $psw){
 
 	 	 		$aData = parent::get($mail, $psw);
@@ -37,9 +36,9 @@
 	 	 		}
 	 	 	}
 	 	 }
-
+	 	 //*****************************************************
+	 	 // récupère les utilisateur signalé mais dont le compte n'est pas supprimé
 	 	 public function getOnlyUserSignalExist($aData){
-	 	 		//print_r($aData);
 	 	 	$aUserExist = array();
 	 	 	for($i = 0 ; $i < count($aData) ; $i++)
 	 	 	{
@@ -48,7 +47,6 @@
 	 	 			array_push($aUserExist, $aData[$i]);
 	 	 		}
 	 	 	}
-
 	 	 	return $aUserExist;
 	 	 }
 

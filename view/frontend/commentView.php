@@ -11,7 +11,7 @@
 	?>
 
 
-			<p> - Laissez un message <span class="fas fa-comment contentInputComment" onclick="javascript:animDivWriteCommentOpen('headerComment', 'contentInputComment')"></span>
+			<p> - Laissez un message <span id='btnOpenDivComment' class="fas fa-comment contentInputComment"></span>
 			</p>
 		</div>
 		<div id="contentInputComment">
@@ -26,7 +26,7 @@
 				</div>
 				<input type="text" id ="commentUserConnect" value="" name ="commentUserConnect" placeholder="Votre commentaire ...">
 				<div class='formColumComment'>
-					<span class="fas fa-times contentInputComment" onclick="javascript:animDivWriteCommentClose('headerComment', 'contentInputComment')"></span>
+					<span class="fas fa-times contentInputComment" id='btnCloseDivComment'></span>
 					<span id="sendCommentEpisode" class="fas fa-check"></span>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 				{
 	?>
 					<p>- Signaler le commentaire </p>
-					<span id ="<?= $aComment[$i]['id'] ?>" class="fas fa-bell <?=$aComment[$i]['idUser']?>" onclick="javascript:animPopup('signal<?=$i?>')"></span>
+					<span id ="<?= $aComment[$i]['id'] ?>" class="fas fa-bell <?=$aComment[$i]['idUser']?> signal<?=$i?>"></span>
 					<div class="popupSignal">
 						<p> Merci de nous avoir prévenu.</p>
 					</div>
@@ -83,7 +83,7 @@
 				{
 	?>
 					<p>- Signaler le commentaire </p>
-					<span id ="<?= $aComment[$i]['id'] ?>" class="fas fa-bell <?=$aComment[$i]['idUser']?>" onclick="javascript:animPopup('signal<?=$i?>')"></span>
+					<span id ="<?= $aComment[$i]['id'] ?>" class="fas fa-bell <?=$aComment[$i]['idUser']?>"></span>
 					<div class="popupSignal">
 						<p> Merci de nous avoir prévenu.</p>
 					</div>
@@ -117,7 +117,7 @@
 		 		if($isConnect === true)
 				{
 	?>
-				<p><span class="far fa-hand-point-right"></span> Répondre <span id="btnOpen<?=$i?>" class="fas fa-comment contentInputReply" onclick="javascript:animDivWriteReplyOpen('replyDiv<?=$i?>', 'btnOpen<?=$i?>')"></span>
+				<p><span class="far fa-hand-point-right"></span> Répondre <span id="btnOpen<?=$i?>" class="fas fa-comment contentInputReply replyDiv<?=$i?> btnOpen<?=$i?>" ></span>
 				</p>
 				<div class="contentInputReply" id="replyDiv<?=$i?>">
 					
@@ -125,8 +125,8 @@
 						<label for="replyUserConnect"></label>
 						<input type="text" id ="replyUserConnect<?=$i?>" name ="replyUserConnect" placeholder="Répondre...">
 						<div class='formColumComment'>
-							<span id="btnCloseReply<?=$i?>" class="fas fa-times contentInputReply" onclick="javascript:animDivWriteReplyClose('replyDiv<?=$i?>', 'btnOpen<?=$i?>')"></span>
-							<span id="btnValidReply<?=$i?>" class="fas fa-check" onclick="javascript:replyComment('<?= $aComment[$i]['id']?>',  'replyUserConnect<?=$i?>', 'replyDiv<?=$i?>', 'btnOpen<?=$i?>', 'part<?=$i?>' )"></span>
+							<span id="btnCloseReply<?=$i?>" class="fas fa-times contentInputReply replyDiv<?=$i?> btnOpen<?=$i?>"></span>
+							<span id="btnValidReply<?=$i?>" class="fas fa-check <?=$aComment[$i]['id']?> replyUserConnect<?=$i?> replyDiv<?=$i?> btnOpen<?=$i?> part<?=$i?>"></span>
 						</div>
 					</div>
 					
@@ -149,8 +149,8 @@
 				<div class='lookReply' id='part<?=$i?>'>
 					<p><span class="far fa-hand-point-right"></span> Voir les réponses </p>
 					<div class="plusMoins">
-						<span class="fa fa-plus" onclick="javascript:animCommentPlus('part<?=$i?>')"></span>
-						<span class="fas fa-minus" onclick="javascript:animCommentMoins('part<?=$i?>')"></span>
+						<span class="fa fa-plus part<?=$i?>"></span>
+						<span class="fas fa-minus part<?=$i?>"></span>
 					</div>
 				</div>
 
@@ -169,7 +169,7 @@
 						{
 	?>
 						<p>- Signaler la réponse </p>
-						<span id ="<?=$aComment[$i]['reply'][$j]['id']?>" class="fas fa-bell <?=$aComment[$i]['reply'][$j]['iduser_reply']?>" onclick="javascript:animPopupReply('part<?=$i?>', 'replySignal<?=$j?>')"></span>
+						<span id ="<?=$aComment[$i]['reply'][$j]['id']?>" class="fas fa-bell <?=$aComment[$i]['reply'][$j]['iduser_reply']?>"></span>
 						<div class="popupSignal">
 							<p> Merci de nous avoir prévenu.</p>
 						</div>
@@ -181,7 +181,7 @@
 						{
 	?>
 						<p>- Signaler la réponse </p>
-						<span id ="<?=$aComment[$i]['reply'][$j]['id']?>" class="fas fa-bell <?=$aComment[$i]['reply'][$j]['iduser_reply']?>" onclick="javascript:animPopupReply('part<?=$i?>', 'replySignal<?=$j?>')"></span>
+						<span id ="<?=$aComment[$i]['reply'][$j]['id']?>" class="fas fa-bell <?=$aComment[$i]['reply'][$j]['iduser_reply']?>"></span>
 						<div class="popupSignal">
 							<p> Merci de nous avoir prévenu.</p>
 						</div>

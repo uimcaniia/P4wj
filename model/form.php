@@ -18,6 +18,7 @@
 		// Methode
 		// **************************************************
 
+		// test email et mot de passe fournis lors d'une tentative de connexion
 		public function tstLog($email, $psw)
 		{
 			$emailClean    = htmlspecialchars($email);
@@ -28,6 +29,7 @@
 		}
 
 		// **************************************************
+		// test email fournis lors d'une tentative d'inscription
 		public function tstSubMail($email)
 		{
 			$emailClean    = htmlspecialchars($email);
@@ -36,6 +38,7 @@
 			return $this->_aTestError['tstMail'][$errorMail];
 		}
 		// **************************************************
+		// test pseudo fournis lors d'une tentative d'inscription
 		public function tstSubPseudo($pseudo)
 		{
 			$pseudoClean   = htmlspecialchars($pseudo);
@@ -44,6 +47,7 @@
 			return $this->_aTestError['tstPseudo'][$errorPseudo];
 		}
 		// **************************************************
+		// test mot de passe fournis lors d'une tentative d'inscription
 		public function tstSubPsw($psw, $pswAgain)
 		{
 			$pswClean      = htmlspecialchars($psw);
@@ -54,32 +58,29 @@
 		}
 
 		// **************************************************
+		//test lors d'une inscription
 		public function verifChaine ($chaine, $regex, $paramBdd, $confirm, $empty)
-		{
-//echo $chaine; 
+		{ 
 			$numError= 0;
 			$aResultError=array();
 
-			if(empty($chaine))
+			if(empty($chaine)) // test si chaine vide
 			{
-				//echo'vide';
 				$numError = 1;
 				array_push($aResultError, $numError);
 			}
 			else{
-				if($paramBdd != '')
+				if($paramBdd != '') // test en base de donnée si le mail ou le pseudo existe déjà
 				{
-					//echo'ok1';
 					$user = new User();
 					$verifInfo = parent::get($paramBdd, $chaine);
-					//print_r($verifInfo);
 					if (is_array($verifInfo))
 					{
 						$numError = 2;
 						array_push($aResultError, $numError);
 					}
 				}
-				if (!empty($regex))
+				if (!empty($regex)) // test sécurité mot de passe et conformité adresse mail avec regex
 				{
 					if(preg_match($regex, $chaine) == FALSE)
 					{
@@ -87,7 +88,7 @@
 						array_push($aResultError, $numError);
 					}
 				}
-				if ($empty == false)
+				if ($empty == false) // test si le mot de passe et sa confirmation sont identique
 				{
 					if($chaine != $confirm)
 					{
@@ -95,9 +96,7 @@
 						array_push($aResultError, $numError);
 					}
 				}
-
 			}
-			//print_r($aResultError);
 			if(count($aResultError) == 0)
 			{
 				return 0;
@@ -108,6 +107,7 @@
 		}
 
 		// **************************************************
+		//test lors d'une connexion
 		public function verifUserInfos($psw, $mail, $paramBdd, $pswCompare)
 		{
 			$numError= 0;

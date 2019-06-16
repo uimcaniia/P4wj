@@ -27,6 +27,7 @@ var idEpisode =  $('#numEpisode').html();
 	});
 
 	$(aElemSignalIconeReply).click(function(){
+
 		var idDivParent = $(this).parent().parent().prev().attr('id'); // id de la div parent du parent commentaire signalé
 		var idDivParentFrere = $(this).parent().attr('id');
 		//console.log(idDivParent);
@@ -42,6 +43,16 @@ var idEpisode =  $('#numEpisode').html();
 			$(this).fadeOut(200);
 			return false;
 		});
+		popup = document.querySelector('#'+idDivParent+' + div.globalReply #'+idDivParentFrere+'.replySignal div.popupSignal');
+		popupP = document.querySelector('#'+idDivParent+' + div.globalReply #'+idDivParentFrere+'.replySignal div.popupSignal p');
+
+		$(popup).delay(0).animate({'opacity': '10'}, {'duration' : 100});
+		$(popup).delay(0).animate({'height':'20px'}, {'duration':500});
+		$(popupP).delay(500).animate({'opacity': '10'}, {'duration' : 300});
+
+		$(popupP).delay(1500).animate({'opacity': '0'}, {'duration' : 300});
+		$(popup).delay(1800).animate({'height':'0px'}, {'duration':500});
+		$(popup).delay(0).animate({'opacity': '0'}, {'duration' : 100});
 		
 	});
 

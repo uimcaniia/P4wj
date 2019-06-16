@@ -42,10 +42,20 @@ $(document).ready(function(){
 		
 	});
 
-});
+
 	//*************************************************************
 //AJAX pour répondre à des commentaires aux épisodes
-function replyComment(idComment, reply, divClose, btn, divPushReply){
+//function replyComment(idComment, reply, divClose, btn, divPushReply){
+	var div = document.getElementById('globalComment');
+	var elemReplyComment = div.querySelectorAll('div.contentInputReply span.fa-check');
+
+	$(elemReplyComment).click(function(){
+		var classEleme = $(this).attr('class'); 
+		idComment      = classEleme.split(' ')[2]; // on récup les paramètre dans la class du span cliqué
+		reply          = classEleme.split(' ')[3];
+		divClose       = classEleme.split(' ')[4];
+		btn            = classEleme.split(' ')[5];
+		divPushReply   = classEleme.split(' ')[6];
 
 		var txtReply = $('#'+reply).val(); 
 		var idEpisode = $('#numEpisode').html();
@@ -87,6 +97,6 @@ function replyComment(idComment, reply, divClose, btn, divPushReply){
 				}
 
 			});
-		//}
+	});
 
-}
+});
