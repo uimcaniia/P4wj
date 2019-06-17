@@ -1,6 +1,6 @@
 <?php
 
-class UserManager extends bdd{
+class UserManager extends Bdd{
 
 	// CONSTANTES
 

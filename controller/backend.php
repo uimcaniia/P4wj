@@ -1,5 +1,4 @@
 <?php
-
 function space()
 {
 	$user         = new User();

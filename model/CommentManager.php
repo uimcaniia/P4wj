@@ -1,6 +1,6 @@
 <?php
 
-class CommentManager extends bdd{
+class CommentManager extends Bdd{
 
 	// CONSTANTES
 

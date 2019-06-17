@@ -1,6 +1,6 @@
 <?php
 
-class EpisodeManager extends bdd{
+class EpisodeManager extends Bdd{
 
 	// CONSTANTES
 		const TAB_EPI = 'episode'; // nom de la table

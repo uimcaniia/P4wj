@@ -1,6 +1,6 @@
 <?php
 
-class InputManager extends bdd{
+class InputManager extends Bdd{
 
 	// CONSTANTES
 

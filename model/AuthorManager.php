@@ -1,6 +1,6 @@
 <?php
 
-class AuthorManager extends bdd{
+class AuthorManager extends Bdd{
 
 	// CONSTANTES
 

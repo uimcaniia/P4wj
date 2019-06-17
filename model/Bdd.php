@@ -2,10 +2,15 @@
 
 class Bdd{
 
+/*private $_serveur = "localhost";
+private $_base = "coan3607_jean_forteroche";
+private $_psw = "T0t0r0";
+private $_user = "root";*/
+
 private $_serveur = "localhost";
 private $_base = "coan3607_jean_forteroche";
-private $_psw = "coucou";
-private $_user = "root";
+private $_psw = "Ez8BgfPF-8-d";
+private $_user = "coan3607";
 
 static protected $bdd = null;
 
@@ -14,7 +19,7 @@ static protected $bdd = null;
 	{
 		try
 		{
-			self::$bdd = new PDO('mysql:host=localhost;dbname=coan3607_jean_forteroche;charset=utf8', 'root', 'T0t0r0', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+			self::$bdd = new PDO('mysql:host=wave;dbname=coan3607_jean_forteroche;charset=utf8', 'coan3607', 'Ez8BgfPF-8-d', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 			return self::$bdd;
 		}
 		catch (Exception $e)

@@ -1,6 +1,6 @@
 <?php
 
-class AdminManager extends bdd{
+class AdminManager extends Bdd{
 
 	// CONSTANTES
 

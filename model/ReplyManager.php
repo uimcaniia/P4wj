@@ -1,6 +1,6 @@
 <?php
 
-class ReplyManager extends bdd{
+class ReplyManager extends Bdd{
 
 	// CONSTANTES
 

@@ -1,6 +1,6 @@
 <?php
 
-	class form extends UserManager{
+	class Form extends UserManager{
 
 		// **************************************************
 		// attribut  de l'objet

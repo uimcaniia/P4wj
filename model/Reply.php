@@ -1,6 +1,6 @@
 <?php
 
-	class Reply extends replyManager {
+	class Reply extends ReplyManager {
 
 
 
