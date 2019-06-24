@@ -3,7 +3,7 @@
 
 		<?php ob_start(); ?>
 
-		<section id="containtLogin">
+		<div id="containtLogin">
 
 	<p class='alertConnect'><?= $alert?></p>
 	<form method="post" action="index.php?action=connect">
@@ -14,13 +14,13 @@
 $value = "";
 for ($i = 0 ; $i <= count($aInputLog)-1 ; $i++)
 {
-	if (isset($_POST["connect"]) && isset($_POST['email']) && isset($_POST['psw']))
+	if (isset($_POST["connect"]) && isset($_POST['loginEmail']) && isset($_POST['psw']))
 	{
 		$value = $_POST[$aInputLog[$i]['name']];
 	}
 	?>
 				<label for="<?=$aInputLog[$i]['id_style']?>"></label>
-				<input type ="<?=$aInputLog[$i]['type']?>" id ="<?=$aInputLog[$i]['id_style']?>" name ="<?=$aInputLog[$i]['name']?>" value="<?=$value?>" placeholder="<?=$aInputLog[$i]['placeholder']?>" contenteditable ="<?=$aInputLog[$i]['contenteditable']?>">
+				<input type ="<?=$aInputLog[$i]['type']?>" id ="<?=$aInputLog[$i]['id_style']?>" name ="<?=$aInputLog[$i]['name']?>" value="<?=$value?>" placeholder="<?=$aInputLog[$i]['placeholder']?>" contenteditable ="<?=$aInputLog[$i]['contenteditable']?>" autocomplete="off">
 	<?php
 }
 
@@ -43,7 +43,7 @@ for ($i = 0 ; $i <= count($aInputLog)-1 ; $i++)
 
 for ($j = 0 ; $j <= count($aInputSub)-1 ; $j++)
 {
-		if (isset($_POST["registration"]) && isset($_POST['email']) && isset($_POST['psw']) && isset($_POST['pseudo']))
+		if (isset($_POST["registration"]) && isset($_POST['subEmail']) && isset($_POST['subPassword']) && isset($_POST['pseudo']))
 	{
 		$value = $_POST[$aInputSub[$j]['name']];
 	}
@@ -52,7 +52,8 @@ for ($j = 0 ; $j <= count($aInputSub)-1 ; $j++)
 		$value = "{$aInputSub[$j]['value']}";
 	}
 	?>
-				<input type ="<?=$aInputSub[$j]['type']?>" id ="<?=$aInputSub[$j]['id_style']?>" name ="<?=$aInputSub[$j]['name']?>" value="<?=$value?>" placeholder="<?=$aInputSub[$j]['placeholder']?>" contenteditable ="<?=$aInputSub[$j]['contenteditable']?>">
+				<p class='<?=$aInputSub[$j]['id_style']?>'></p>
+				<input type ="<?=$aInputSub[$j]['type']?>" id ="<?=$aInputSub[$j]['id_style']?>" name ="<?=$aInputSub[$j]['name']?>" value="<?=$value?>" placeholder="<?=$aInputSub[$j]['placeholder']?>" contenteditable ="<?=$aInputSub[$j]['contenteditable']?>" autocomplete="off">
 	<?php
 }
 
@@ -62,7 +63,7 @@ for ($j = 0 ; $j <= count($aInputSub)-1 ; $j++)
 		</div>
 	</form>
 
-		</section>
+		</div>
 
 	 	<?php $content = ob_get_clean(); ?>
 	 	<?php require('view/template.php'); ?>

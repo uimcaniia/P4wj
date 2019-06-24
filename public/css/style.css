@@ -23,7 +23,7 @@ body > header:nth-child(1) > div:nth-child(1)
 {
   position: fixed;
   background-color: #000c;
-  z-index: 2000;
+  z-index: 4000;
 }
 .blackLine{
   width:100%;
@@ -93,7 +93,7 @@ right:78px;
 header #btnSpanMenuHeader span{
   font-size:1.2em;
   cursor:pointer;
-  margin-right: 30px;
+/*  margin-right: 30px;*/
 }
 header #btnSpanMenuHeader a{
   margin-left:0;
@@ -101,8 +101,8 @@ header #btnSpanMenuHeader a{
 header .blackLine a:hover, header #btnSpanMenuHeader span:hover{
   color: #75dede;
 }
-header .blackLine a{
-  margin-left:20px;
+header .blackLine a, header #bienvenuePseudoMobile a{
+  padding-left: 20px;
   text-decoration: none;
   color: #3e9e9e;
   width: 170px;
@@ -121,6 +121,17 @@ header .blackLine:last-child{
   justify-content: center;
   font-size: 2.3em;
 }
+header #bienvenuePseudo{
+    width: 100%;
+    text-align: -webkit-center;
+    text-align: center;
+  }
+
+header #bienvenuePseudoMobile{
+display: none;
+height:30px;
+color: #3e9e9e;
+}
 #logo{
   text-align: center;
 }
@@ -137,13 +148,14 @@ header .blackLine:last-child{
   display: flex;
 justify-content: center;
 height: 100px;
-align-items: end;
+align-items: flex-end;
 }
 #titlePage h1{
   margin:0;
   text-align: center;
   color : #1f8787;
   font-size: 3em;
+      z-index: 2;
 }
 #titlePage img{
   width:80px;
@@ -307,7 +319,7 @@ div#bkgEpisode div.datePublication > div:nth-child(2){
 }
 
 #globalComment .comment p, .commentSignal .comment p, #globalComment p{
-  margin: 5px 0 0 10px;
+  margin: 5px 0 0 20px;
 }
 #globalComment .comment, .globalReply .reply{
   border-left:2px solid #4ac2c2;
@@ -392,7 +404,7 @@ color: #4ac2c2;
   flex-direction:column;
   width:100%;
   color: white;
-  padding: 10px;
+/*  padding: 10px;*/
 }
 .globalReply{
   padding-left:50px;
@@ -406,7 +418,7 @@ color: #4ac2c2;
   align-items: baseline;
 }
 .commentSignal{
-  padding:20px 0 0 20px;
+  padding:20px 0 0 00px;
 }
 div.commentSignal:nth-child(2){
 padding-top:10px;
@@ -422,7 +434,7 @@ div.commentSignal p:nth-child(5), div.replySignal p:nth-child(5) {
   font-size : 0.9em;
 }
 .lookReply{
-padding:0px 10px 0px 10px;
+padding:0px;
 }
 #globalComment .lookReply .plusMoins{
   position: relative;
@@ -451,6 +463,7 @@ padding:0px 10px 0px 10px;
   width:100%;
   justify-content: center;
   align-items: center;
+  text-align: -webkit-center;
 }
 #containtLogin form{
   width:80%;
@@ -541,8 +554,7 @@ height: 20px;
 #infoSpaceThree p{
   height:20px;
 }
-#contentFormChangePseudo, #contentFormChangePsw{
-width: 480px;
+#contentFormChangePsw{
 height: 0px;
 display: none;
 }
@@ -572,9 +584,8 @@ color: #1f8787;
   color: #4ac2c2;
  cursor : pointer;
   }
-#globalSpace #pseudo, #globalSpace #password, #globalSpace #repassword{
+#globalSpace #pseudo, #globalSpace #subPassword, #globalSpace #repassword{
 height: 20px;
-width: 300px;
 border-radius: 5px;
 border: 1px solid white;
 background-color: #ffffff80;
@@ -797,6 +808,9 @@ cursor:pointer;
 margin:auto;
 position: relative;
 text-align: center;
+    top: 50%;
+    bottom: 50%;
+    transform: translateY(-50%);
 }
  #confirmDeletePseudo > div{
   height:250px;

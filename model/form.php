@@ -7,10 +7,11 @@
 		// **************************************************
 		private $_regMail ="#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#"; // regex mail
 		private $_regPsw  = "#^(?=.*[A-Z])(?=.*[0-9]).{8,}$#"; //regex pssword
+		private $_regPseudo  = "#^[a-zA-Z0-9]{3,}$#"; 
 
 		private $_aTestError = array( // array contenant les différente erreur a afficher
 		    "tstMail"   => array("","Veuillez indiquer un e-mail", "Ce mail existe déjà. Vous avez déjà un compte?" , "Adresse mail invalide."),
-		    "tstPseudo" => array("", "Veuillez indiquer un Pseudo", "Ce pseudo existe déjà. Veuillez en choisir un autre", ""),
+		    "tstPseudo" => array("", "Veuillez indiquer un Pseudo", "Ce pseudo existe déjà. Veuillez en choisir un autre", 'Le pseudo doit avoir au moins 3 caractères valides'),
 		    "tstPsw"    => array("", "Veuillez indiquer un mot de passe","", "Le mot de passe n'est pas assez sécurisé. Veuillez utiliser 8 caractères minimum avec au moins une majuscule et un chiffre", "Le mot de passe et (ou) l'adresse mail renseigné n'est pas le bon.", "Les 2 mots de passe ne sont pas identiques", 'veuillez remplir les champs', 'ce compte a été supprimé!')
 		);
 
@@ -42,7 +43,7 @@
 		public function tstSubPseudo($pseudo)
 		{
 			$pseudoClean   = htmlspecialchars($pseudo);
-			$errorPseudo = self::verifChaine($pseudoClean, '', 'pseudo', "" , true);
+			$errorPseudo = self::verifChaine($pseudoClean, $this->_regPseudo, 'pseudo', "" , true);
 
 			return $this->_aTestError['tstPseudo'][$errorPseudo];
 		}

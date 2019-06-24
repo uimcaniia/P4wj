@@ -64,7 +64,7 @@ $(document).ready(function(){
 				}
 				if (aDonnee[1].length != 0){
 					for (var j = 0 ; j < aDonnee[1].length ; j++){
-						resBody = resBody+'<tr><td> Réponse du '+aDonnee[1][j]['dateReply']+'</td><td> '+aDonnee[1][j]['reply']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[1][j]['idcomment_reply']+'\',reply,\''+aDonnee[1][j]['id']+'\',\''+aDonnee[1][j]['iduser_reply']+'\',\'byPseudo\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[1][j]['idcomment_reply']+'\',\'reply\',\''+aDonnee[1][j]['id']+','+aDonnee[1][j]['iduser_reply']+'\',\'byPseudo\');"></span></td></tr>';
+						resBody = resBody+'<tr><td> Réponse du '+aDonnee[1][j]['dateReply']+'</td><td> '+aDonnee[1][j]['reply']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[1][j]['idcomment_reply']+'\',\'reply\',\''+aDonnee[1][j]['id']+'\',\''+aDonnee[1][j]['iduser_reply']+'\',\'byPseudo\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[1][j]['idcomment_reply']+'\',\'reply\',\''+aDonnee[1][j]['id']+','+aDonnee[1][j]['iduser_reply']+'\',\'byPseudo\');"></span></td></tr>';
 					}
 				}
 				resComm = resHead+resBody+'</tbody>';
@@ -142,7 +142,7 @@ $(document).ready(function(){
 
 		}if(tableBdd == 'reply'){
 			$('#confirmDeleteCommentReply').fadeIn(600);
-			$('#confirmDeleteComment span.fa-times').click(function(){
+			$('#confirmDeleteCommentReply span.fa-times').click(function(){
 				closeDeleteCommentReplyDiv();
 			});
 			$('#delRepCom').click(function(){
@@ -176,8 +176,7 @@ $(document).ready(function(){
 
 		if(tableBdd == 'comment'){
 
-			$.post('index.php?action=removeSignalcomment', {idComment:idComment, idUser:idUser}, function(donnee){	
-			console.log(donnee);				
+			$.post('index.php?action=removeSignalcomment', {idComment:idComment, idUser:idUser}, function(donnee){				
 				if(by == 'byEpisode'){
 					$('#goComSignByEp').click();
 				}

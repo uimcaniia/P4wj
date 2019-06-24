@@ -1,5 +1,4 @@
 <?php
-//echo 'byebye2reeeeeeeeeeeee';
 session_start();
 require ('AutoLoad.php');
 require('controller/backend.php');
@@ -34,9 +33,9 @@ try {
         }
 	    elseif ($_GET['action'] == 'connect')
 	    {
-	    	if(isset($_POST['email']) && isset($_POST['psw']))
+	    	if(isset($_POST['loginEmail']) && isset($_POST['psw']))
 	    	{
-	        	testErrorLog($_POST['email'], $_POST['psw']);
+	        	testErrorLog($_POST['loginEmail'], $_POST['psw']);
 	        }
 	        else
 	        {
@@ -45,9 +44,9 @@ try {
 		}
 	    elseif ($_GET['action'] == 'registration') // ou créer son compte
         {
-        	if(isset($_POST['email']) && isset($_POST['psw']) && isset($_POST['pseudo']) && isset($_POST['pswAgain']))
+        	if(isset($_POST['subEmail']) && isset($_POST['subPassword']) && isset($_POST['pseudo']) && isset($_POST['pswAgain']))
         	{
-        		testErrorSubscribe($_POST['email'], $_POST['pseudo'], $_POST['psw'], $_POST['pswAgain']);
+        		testErrorSubscribe($_POST['subEmail'], $_POST['pseudo'], $_POST['subPassword'], $_POST['pswAgain']);
         	}
         	else
 	        {
@@ -68,13 +67,14 @@ try {
         {
         	if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 0) // test id pour les utilisateur
         	{
-            	space(); // va dans l'espace utilisateur
+            	spaceUser(); // va dans l'espace utilisateur
             }
             elseif(isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1)
             {
             	admin(); // va dans l'espace admin
             }
-            else{
+            else
+            {
 				throw new Exception('Aucun compte n\'est trouvé');
 			}
 		}
@@ -416,6 +416,7 @@ try {
         {
             if (isset($_SESSION['idUser']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 0) // on s'assure que c'est pas l'admin
             {
+
                 if(isset($_POST['valPsw']) && isset($_POST['valPswConfirm']))//
                 {
                     updatePswUser($_POST['valPsw'], $_POST['valPswConfirm'], $_SESSION['idUser']);

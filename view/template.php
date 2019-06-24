@@ -3,12 +3,12 @@
 
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"> 
-<!--         <meta $metaDescription>   -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui"> 
+        <meta name="description" content="<?= $metaDes?>" />
 
         <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-        <link $headIcon />
+        <link rel="icon" href="public/img/icon.ico" />
 
         <script src="public/js/jquery.js"></script>
         <script src="public/js/frontend/anim.js"></script>
@@ -25,7 +25,7 @@
         <header>
             <div class="blackLine">
                 <div>
-                    <a href='index.php?action=biography' id ='linkBiography' alt="Biographie de Jean Forteroche">Jean Forteroche</a>
+                    <a href='index.php?action=biography' id ='linkBiography'>Jean Forteroche</a>
                     <hr>
                 </div>
                     <?php
@@ -45,9 +45,9 @@
                 <p id="bienvenuePseudo" class="<?= $pseudoHome ?>"></p>
                 <div>
                     <nav id='btnSpanMenuHeader'>
-                        <a href='index.php?action=listLastEpisode' alt="Accueil"><span class="fas fa-home"></span></a>
-                        <a href='index.php?action=extractAllEpisode' alt="les épisodes"><span class="fas fa-book-open"></span></a>
-                        <a href='<?= $pConnect?>' alt="Espace connexion"><span id="linkConnect" class="<?= $iconConnexion ?>"></span></a>
+                        <a href='index.php?action=listLastEpisode'><span class="fas fa-home"></span></a>
+                        <a href='index.php?action=extractAllEpisode'><span class="fas fa-book-open"></span></a>
+                        <a href='<?= $pConnect?>'><span id="linkConnect" class="<?= $iconConnexion ?>"></span></a>
                     </nav>
                     <div id='titleMenuHeader'>
                         <p id="one">Accueil</p>
@@ -61,6 +61,9 @@
                     </div>
                 </div>
             </div>
+            <div  id="bienvenuePseudoMobile" class="blackLine">
+                <p class="<?= $pseudoHome ?>"></p>
+            </div>
             <div id="logo">
                 <img src="public/img/logo.png" alt="Logo de Jean Forteroche"/>
             </div>
@@ -68,8 +71,8 @@
                 <span class="fas fa-angle-double-down"></span>
             </div>
         </header>
+        <section id="bckBody">
 
-        <div id="bckBody">
             <div id="titlePage">
                 <h1><?= $titleH1 ?></h1>
                 <img src="public/img/flocon.png" alt="petits flocon">
@@ -79,7 +82,7 @@
                 <hr>
             </div>
             <?= $content ?>
-            </div>
+        </section>
 
         <footer>
             <div class="blackLine">
@@ -103,6 +106,7 @@
         </footer>
 
         <script src="public/js/frontend/animMenu.js"></script>
+        <script src="public/js/frontend/tstErrorForm.js"></script>
         <script src="public/js/frontend/signal.js"></script>
         <script src="public/js/frontend/comment.js"></script>
         <script src="public/js/backend/actualize.js"></script>

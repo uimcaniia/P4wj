@@ -54,7 +54,7 @@ function spaceConnect()
 	$alert ='';
 
 	$aIdInputLog = array(8, 9); // id des input a charger pour se connecter
-	$aIdInputSub = array(8, 10, 9, 15); // id des input a charger pour s'inscrire
+	$aIdInputSub = array(13, 10, 14, 15); // id des input a charger pour s'inscrire
 		
 	$aInputLog = login($aIdInputLog);
 	$aInputSub = login($aIdInputSub);
@@ -82,7 +82,7 @@ function testErrorLog($email, $psw)
 	if($alert !== '')
 	{
 		$aIdInputLog = array(8, 9); // id des input a charger pour se connecter
-		$aIdInputSub = array(8, 10, 9, 15); // id des input a charger pour s'inscrire
+		$aIdInputSub = array(13, 10, 14, 15); // id des input a charger pour s'inscrire
 
 		$aInputLog = login($aIdInputLog);
 		$aInputSub = login($aIdInputSub);
@@ -108,7 +108,7 @@ function testErrorSubscribe($email, $pseudo, $psw, $pswAgain)
 	if(($alertConnectionMail != "") || ($alertConnectionPsw != "") || ($alertConnectionPseudo != ""))
 	{
 		$aIdInputLog = array(8, 9); // id des input a charger pour se connecter
-		$aIdInputSub = array(8, 10, 9, 15); // id des input a charger pour s'inscrire
+		$aIdInputSub = array(13, 10, 14, 15); // id des input a charger pour s'inscrire
 
 		$aInputLog = login($aIdInputLog);
 		$aInputSub = login($aIdInputSub);

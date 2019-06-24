@@ -43,13 +43,20 @@ if(!Array.isArray) {
 		if(idClean == ''){
 			var txtEpisode = $('#blockWriteEpisode textarea').val();
 			var titleEpisode = $('#blockWriteTitleEpisode').val();
-			$.post('index.php?action=saveNewEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode}, function(donnee){			
-				$('<p>'+donnee+'</p>').appendTo('#blockWriteIdEp');
+			if((titleEpisode.length == 0)||(titleEpisode == "Votre titre")){
 				$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
-				$('#containtEpisodeAdmin > p:nth-child(2)').text('La création et la sauvegarde a bien été effectuée.')
+				$('#containtEpisodeAdmin > p:nth-child(2)').text('Votre épisode n\'a pas de titre.')
 				$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
+			}
+			else{
+				$.post('index.php?action=saveNewEpisode', {txtEpisode:txtEpisode, titleEpisode:titleEpisode}, function(donnee){			
+					$('<p>'+donnee+'</p>').appendTo('#blockWriteIdEp');
+					$('#containtEpisodeAdmin > p:nth-child(2)').fadeIn(600);
+					$('#containtEpisodeAdmin > p:nth-child(2)').text('La création et la sauvegarde a bien été effectuée.')
+					$('#containtEpisodeAdmin > p:nth-child(2)').delay(2000).fadeOut(1000);
 					return false;
 				});
+			}
 		}else{
 
 			var res = $('#tinymce').text();

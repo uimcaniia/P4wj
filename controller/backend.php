@@ -1,5 +1,5 @@
 <?php
-function space()
+function spaceUser()
 {
 	$user         = new User();
 	$getInfosUser = $user->get('id', $_SESSION['idUser']);

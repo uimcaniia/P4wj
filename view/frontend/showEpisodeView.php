@@ -1,16 +1,17 @@
-	 	 <?php $headTitle = 'La saga complète'; ?>
+	 	 <?php $headTitle = $aEpisode[0]['title']; ?>
 	 	 <?php $titleH1 = $aEpisode[0]['title']; ?>
+	 	 <?php $metaDes = 'Retrouver l\'épisode complet du chapitre \''.$aEpisode[0]['title'].'\' tiré du roman \'Un billet simple pour l\'Alaska\' par Jean Forteroche'; ?>
 
 	 	 <?php ob_start(); ?>
 
-	 	 	<section id="containtChapitre">
+	 	 	<div id="containtChapitre">
 		 	 	<div id='bkgEpisode'>
 		 	 		<div class='scotch'> 
 		 	 			<img src="public/img/scotch.png" alt="un morceau de scotch qui tient l'épisode">
 		 	 		</div>
 	 	 			<hr>
 	 	 			<div id='episode'>
-	 	 				<p><?= html_entity_decode($aEpisode[0]['episode']) ?></p>
+	 	 				<?= html_entity_decode($aEpisode[0]['episode']) ?>
 	 	 			</div>
 
 	 	 			<div class='datePublication'>
@@ -43,9 +44,9 @@
 						</div>
 				 	</div>
 		 	 	</div>
-		 	 </section>
-		 	 <section id='containtComment'>
+		 	 </div>
+		 	 <div id='containtComment'>
 		 <?php include ('commentView.php'); ?>
-		</section>
+			</div>
 	 	 <?php $content = ob_get_clean(); ?>
 	 	 <?php require('view/template.php'); ?>

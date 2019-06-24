@@ -3,7 +3,7 @@
 	class Mention extends Bdd {
 
 
-const TAB_MEN = 'Mentions'; // nom de la table
+const TAB_MEN = 'mentions'; // nom de la table
 		// **************************************************
 		// Attributs de l'objet
 		// **************************************************

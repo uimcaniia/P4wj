@@ -1,16 +1,16 @@
-<?php $headTitle = 'Espace connexion'; ?>
-<?php $titleH1 = 'Espace connexion'; ?>
+<?php $headTitle = 'Votre espace'; ?>
+<?php $titleH1 = 'Votre espace'; ?>
 
 <?php ob_start(); ?>
 
-	<section>
+	<article>
 		<div id="messageUser">
 			<div class="whiteBlock">
  			
  		</div>
-	</section>
+	</article>
 
-	 <section id='containtSpace'>
+	 <article id='containtSpace'>
 	 	 <div id='globalSpace'>
 	 	 	<hr>
 	 	 	<div id='infoSpaceOne'>
@@ -51,14 +51,14 @@
 				</div>
 				<div id='changePsw'>
 					<p>Voulez-vous changer de mot de passe? <span id="spanChangePsw" class="fas fa-pen-nib"></span><em></em></p>
-		 	 		<div id='contentFormChangePsw'>
+		 	 		<form id='contentFormChangePsw'>
 <?php
 				for ($i = 0 ; $i <= count($inputNewPassword)-1 ; $i++)
 				{
 ?>	
 						<div class='flexRow'>
 							<label for="<?=$inputNewPassword[$i]['id_style']?>"></label>
-							<input type ="<?=$inputNewPassword[$i]['type']?>" id ="<?=$inputNewPassword[$i]['id_style']?>" name ="<?=$inputNewPassword[$i]['name']?>" value="" placeholder="<?=$inputNewPassword[$i]['placeholder']?>" contenteditable ="<?=$inputNewPassword[$i]['contenteditable']?>">
+							<input type ="<?=$inputNewPassword[$i]['type']?>" id ="<?=$inputNewPassword[$i]['id_style']?>" name ="<?=$inputNewPassword[$i]['name']?>" value="" placeholder="<?=$inputNewPassword[$i]['placeholder']?>" contenteditable ="<?=$inputNewPassword[$i]['contenteditable']?>" autocomplete="off">
 <?php
 				}
 ?>
@@ -67,11 +67,11 @@
 								<span id='validChangeMdp' class="fas fa-check"></span>
 							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</section>
+	</article>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('view/template.php'); ?>

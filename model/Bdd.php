@@ -20,6 +20,7 @@ static protected $bdd = null;
 		try
 		{
 			self::$bdd = new PDO('mysql:host=wave;dbname=coan3607_jean_forteroche;charset=utf8', 'coan3607', 'Ez8BgfPF-8-d', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+/*			self::$bdd = new PDO('mysql:host=localhost;dbname=coan3607_jean_forteroche;charset=utf8', 'root', 'T0t0r0', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));*/
 			return self::$bdd;
 		}
 		catch (Exception $e)

@@ -39,7 +39,7 @@
 		{
 			$pseudoConnect='';
 	?>
-			<a href='index.php?action=login' alt="Espace connexion"><p> - Vous devez être connecté pour laisser un commentaire<span class="fas fa-user"></span></p></a>
+			<a href='index.php?action=login'><p> - Vous devez être connecté pour laisser un commentaire<span class="fas fa-user"></span></p></a>
 			<div class="hideInfoCommentSend">
 				<p id='dateComment'><?= date("d-m-Y") ?></p>
 				<p id='numEpisode'><?= $_GET['idEpisode'] ?></p>
@@ -159,7 +159,7 @@
 					for( $j = 0 ; $j <= count($aComment[$i]['reply'])-1 ; $j++)
 					{
 	?>
-					<div class="replySignal" id="replySignal<?=$j?>">
+					<div class="replySignal">
 						<p> De </p>
 						<p> <?=$aComment[$i]['reply'][$j]['pseudo']?> </p>
 						<p> le </p>
@@ -192,8 +192,8 @@
 						elseif(($isConnect == true) && ($aComment[$i]['reply'][$j]['reporting_reply'] != 0) && ($aComment[$i]['reply'][$j]['iduser_reply'] == $_SESSION['idUser']))
 						{
 	?>
-					<p class="messSignal">- Votre réponse a été signalée.</p>
-				</div>
+						<p class="messSignal">- Votre réponse a été signalée.</p>
+					</div>
 
 	<?php
 						}
@@ -201,14 +201,14 @@
 						{
 	?>
 					
-				</div>
+					</div>
 	<?php
 						}
 						else
 						{
 	?>
-					<p class="messSignal">- Réponse signalée.</p>
-				</div>
+						<p class="messSignal">- Réponse signalée.</p>
+					</div>
 	<?php
 						}
 					
@@ -217,17 +217,16 @@
 				<div class="reply">
 					<p><?=$aComment[$i]['reply'][$j]['reply']?></p>
 				</div>
+			
 
 	<?php
 					}
-	?>
-			</div>
-	<?php
-					
+?>
+					</div>
+<?php					
 				}
 			}
 		}
-
-
-			?>
+	?>
+		</div>
 		

@@ -3,7 +3,7 @@
 	class Politique extends Bdd {
 
 
-const TAB_POL = 'Politique'; // nom de la table
+const TAB_POL = 'politique'; // nom de la table
 		// **************************************************
 		// Attributs de l'objet
 		// **************************************************

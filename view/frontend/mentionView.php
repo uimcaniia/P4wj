@@ -2,7 +2,7 @@
 	 	 <?php $titleH1 = 'Mentions légales'; ?>
 
 	 	 <?php ob_start(); ?>
-	 	<section id="mention">
+	 	<div id="mention">
 		 	<div id='contentmention'>
 <?php 
 	for ($i = 0 ; $i < count($aMention) ; $i++)
@@ -19,6 +19,6 @@
 ?>
 
 		 	</div>
-	 	 </section>
+	 	 </div>
 	 	 <?php $content = ob_get_clean(); ?>
 	 	 <?php require('view/template.php'); ?>

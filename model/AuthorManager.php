@@ -4,7 +4,7 @@ class AuthorManager extends Bdd{
 
 	// CONSTANTES
 
-		const TAB_AUT = 'Author'; // nom de la table
+		const TAB_AUT = 'author'; // nom de la table
 
 
  //*****************************************************************************************************************

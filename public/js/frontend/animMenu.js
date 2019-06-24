@@ -21,7 +21,7 @@
 
 	$(home).hover(function(){
 		$(one).delay(0).animate({'opacity': '10'}, {'duration' : 800});
-		$(four).delay(0).animate({'opacity':'10','height': '40px'}, {'duration':100});
+		$(four).delay(0).animate({'opacity':'10','height': '30px'}, {'duration':100});
 		$(four).delay(0).animate({'width':'60px'}, {'duration':100});
 	},function(){
 		$(one).delay(0).animate({'opacity': '0'}, {'duration' : 100});
@@ -32,7 +32,7 @@
 
 	$(open).hover(function(){
 		$(two).delay(0).animate({'opacity': '10'}, {'duration' : 800});
-		$(five).delay(0).animate({'opacity':'10','height': '40px'}, {'duration':100});
+		$(five).delay(0).animate({'opacity':'10','height': '30px'}, {'duration':100});
 		$(five).delay(0).animate({'width':'60px'}, {'duration':100});
 	},function(){
 		$(two).delay(0).animate({'opacity': '0'}, {'duration' : 100});
@@ -43,7 +43,7 @@
 
 	$(user).hover(function(){
 		$(three).delay(0).animate({'opacity': '10'}, {'duration' : 800});
-		$(six).delay(0).animate({'opacity':'10','height': '40px'}, {'duration':100});
+		$(six).delay(0).animate({'opacity':'10','height': '30px'}, {'duration':100});
 		$(six).delay(0).animate({'width':'50px'}, {'duration':100});
 	},function(){
 		$(three).delay(0).animate({'opacity': '0'}, {'duration' : 100});
@@ -55,7 +55,7 @@
 		fontsize = document.getElementById('linkBiography').offsetWidth;
 
 	$(linkJean).hover(function(){
-		if(fontsize == 120){
+		if(fontsize == 140){
 			$(barre).delay(0).animate({'opacity': '10'}, {'duration' : 100});
 			$(barre).delay(0).animate({'opacity':'10','width': '100px'}, {'duration':200});
 		}else{
@@ -79,13 +79,17 @@ function animConnectLogin(){
 	fontsize = document.getElementById('linkBiography').offsetWidth;
 	var classIcon = icon.className.split(' ')[1];
 	if(classIcon == 'fa-power-off'){
-		$('#bienvenuePseudo').html('Bonjour'+link);
+		if(fontsize != 140){
+			$('#bienvenuePseudo').html('Bonjour'+link);
+		}else{
+			$('#bienvenuePseudoMobile p').html('Bonjour'+link);
+		}
 
 	}else{
-		if(fontsize != 120){
+		if(fontsize != 140){
 			$('#bienvenuePseudo').html('Vous n\'êtes pas connecté.');
 		}else{
-
+			$('#bienvenuePseudoMobile p').html('Vous n\'êtes pas connecté.');
 		}
 	}
 }

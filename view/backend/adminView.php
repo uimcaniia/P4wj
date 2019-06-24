@@ -65,15 +65,15 @@
 						</div>
 					</div>
 				</article>
-				<section id='containtAdmin'>
+				<article id='containtAdmin'>
 					<?php include ('adminEpisodeView.php'); ?>
-				</section>
-				<section id="containtAdminComment">
+				</article>
+				<article id="containtAdminComment">
 					<?php include ('adminCommentView.php'); ?>
-				</section>
-				<section id="containtAdminMessage">
+				</article>
+				<article id="containtAdminMessage">
 					<?php include ('adminMessageView.php'); ?>
-				</section>
+				</article>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('view/template.php'); ?>

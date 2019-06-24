@@ -3,12 +3,13 @@
 		background-position-x: center;
 	}
 	header .blackLine {
-		height: 70px;
+		height: 50px;
 	}
 	header .blackLine a {
 		font-size: 1.1em;
 		width: 120px;
-		margin-left: 10px;
+		/*margin-left: 10px;*/
+		padding-left:10;
 	}
 	header div.blackLine div {
 		width: 150px;
@@ -27,37 +28,52 @@
 		right: 0px;
 	}
 	#titleMenuHeader {
-	    top: 35px;
+	    top: 25px;
 	}
 	#titleMenuHeader p {
 		margin-right: 0
 	}
 	header #titleMenuHeader #one{
-		right: 130px;
+		right: 110px;
 	}
 		header #titleMenuHeader #two{
-		right: 65px;
+		right: 55px;
 	}
 		header #titleMenuHeader #three{
-		right:15px;
+		right:12px;
 	}
 		header #barreMenuHeader #four{
-		right: 120px;
+		right: 100px;
 	}
 		header #barreMenuHeader #five{
-		right: 55px;
+		right: 45px;
 	}
 		header #barreMenuHeader #six{
 		right:5px;
 	}
-	#bienvenuePseudo{
-		width:100px;
-	}
+
+	header p#bienvenuePseudo:nth-child(2){
+display: none;
+}
+header #bienvenuePseudoMobile{
+display: block;
+position: fixed;
+top: 50px;
+width: 100%;
+text-align: center;
+z-index: 3900;
+background-color: #000c;
+height: 40px;
+right:0;
+}
+header #bienvenuePseudoMobile p{
+margin:0;
+}
 	#infoSpaceTwo .flexRow{
 		flex-direction: column;
 align-items: baseline;
 	}
-	#globalSpace #password, #globalSpace #repassword{
+	#globalSpace #subPassword, #globalSpace #repassword{
 		max-width: 200px;
 	}
 	#globalSpace {
@@ -67,7 +83,7 @@ margin:10px;
 		font-size:1em;
 	}
 	#titlePage img {
-		margin-left: 250px;
+		margin-left: 70px;
 	}
 	#titlePage h1 {
 		font-size: 2.2em;
@@ -108,6 +124,9 @@ width: 100%;
     padding: 20px 0 0 0px;
 
 	}
+div#globalComment div.commentSignal p:nth-child(5){
+	display: none;
+}
 	#globalComment .comment, .globalReply .reply {
 		width:70%;
 		margin-left: 10px;
@@ -119,7 +138,7 @@ width: 100%;
 width: 150px;
 	}
 	section#containtComment div#globalComment div.comment + p{
-    margin-left: 40px;
+    margin-left: 30px;
 }
 section#containtComment div#globalComment div.lookReply p {
 margin-left: 30px;
@@ -184,4 +203,14 @@ flex-wrap: wrap;
 	#arrayCommentSignal tbody tr td:nth-child(4), #arrayCommentSignal tbody tr td:nth-child(5), #arrayPseudoSignal tbody tr td:nth-child(4), #arrayPseudoSignal tbody tr td:nth-child(3) {
     width: 20px;
 	}
+
+	#containtAdmin > div:nth-child(1) {
+    width: 250px;
+}
+#globalComment div.globalReply div.replySignal > p:nth-child(5){
+	display : none;
+}
+#globalComment p {
+    margin: 5px 0 0 10px;
+}
 }

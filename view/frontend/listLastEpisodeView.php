@@ -1,10 +1,11 @@
 	 	 <?php $headTitle = 'Liste des derniers articles'; ?>
 	 	 <?php $titleH1 = 'Les derniers articles'; ?>
+	 	 <?php $metaDes = 'Retrouver tous les derniers épisodes de la saga \'Un billet simple pour l\'Alaska\' par Jean Forteroche'; ?>
 
 	 	 <?php ob_start(); ?>
 
 
-	 	<section id='containtExtract'>	
+	 	<div id='containtExtract'>	
 	 	 	<?php for ($i = 0 ; $i < count($aEpisodeExtract) ; $i++)
 			{
 			?>
@@ -35,7 +36,7 @@
 	 	 	<?php 
 	 	 	}
 	 	 	?>
-	 	 </section>
+	 	 </div>
 	 	 
 	 	 <?php $content = ob_get_clean(); ?>
 	 	 <?php require('view/template.php'); ?>
