@@ -53,9 +53,7 @@ $(document).ready(function(){
 	function recupDataComment(action, valComSelect, colBdd, title, div){
 
 		$.post('index.php?action='+action+'', {valComSelect:valComSelect, colBdd:colBdd}, function(donnee){
-						//console.log(donnee);
 			var aDonnee = JSON.parse(donnee);
-
 			if(colBdd == 'pseudoSignal'){
 				var resHead = '<thead><tr><th colspan = "4">'+title+'</th></tr></thead><tbody>';
 				var resBody ='';
@@ -105,23 +103,17 @@ $(document).ready(function(){
 					}
 				}
 				resComm = resHead+resBody+'</tbody>';
-}
-	
+			}
 			$('#'+div).fadeIn(600);
 			$('#'+div).html(resComm);
-
 			return false;		
-	
 		});
 	}
-
-
 });
 //************************************************************************
+//action pour supprimer un commentaire et les réponses qui correspondent
 	function delComAndRep(idComment, tableBdd, idReply, idUser, by){
-//var elements = document.
 		if(tableBdd == 'comment'){
-
 			$('#confirmDeleteComment').fadeIn(600);
 			$('#confirmDeleteComment span.fa-times').click(function(){
 				closeDeleteCommentDiv();
@@ -139,7 +131,6 @@ $(document).ready(function(){
 					return false;
 				});
 			});
-
 		}if(tableBdd == 'reply'){
 			$('#confirmDeleteCommentReply').fadeIn(600);
 			$('#confirmDeleteCommentReply span.fa-times').click(function(){
@@ -172,10 +163,9 @@ $(document).ready(function(){
 	}
 
 //************************************************************************
+//action pour retirer le signalement d'un commentaire signalées
 	function removeSignal(idComment, tableBdd, idReply, idUser, by){
-
 		if(tableBdd == 'comment'){
-
 			$.post('index.php?action=removeSignalcomment', {idComment:idComment, idUser:idUser}, function(donnee){				
 				if(by == 'byEpisode'){
 					$('#goComSignByEp').click();
@@ -185,7 +175,6 @@ $(document).ready(function(){
 				}
 				return false;
 			});
-
 
 		}if(tableBdd == 'reply'){
 			$.post('index.php?action=removeSignalReply', {idReply:idReply, idUser:idUser}, function(donnee){
