@@ -1,8 +1,8 @@
-	 	 <?php $headTitle = 'Biographie'; ?>
-	 	 <?php $titleH1 = 'Jean Forteroche'; ?>
-	 	 <?php $metaDes = 'Biographie de Jean Forteroche. Sa vie... et une de ses oeuvres.'; ?>
+<?php $headTitle = 'Biographie'; ?>
+<?php $titleH1 = 'Jean Forteroche'; ?>
+<?php $metaDes = 'Biographie de Jean Forteroche. Sa vie... et une de ses oeuvres.'; ?>
 
-	 	 <?php ob_start(); ?>
+<?php ob_start(); ?>
 	 	<div id="biography">
 	 		<div class='flexRow'>
 		 		<div id='imgBiographie'>
@@ -13,5 +13,5 @@
 		 		</div>
 		 	</div>
 	 	 </div>
-	 	 <?php $content = ob_get_clean(); ?>
-	 	 <?php require('view/template.php'); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require('view/template.php'); ?>

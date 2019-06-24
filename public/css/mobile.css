@@ -8,8 +8,7 @@
 	header .blackLine a {
 		font-size: 1.1em;
 		width: 120px;
-		/*margin-left: 10px;*/
-		padding-left:10;
+		padding-left:10px;
 	}
 	header div.blackLine div {
 		width: 150px;
@@ -51,33 +50,32 @@
 		header #barreMenuHeader #six{
 		right:5px;
 	}
-
 	header p#bienvenuePseudo:nth-child(2){
-display: none;
-}
-header #bienvenuePseudoMobile{
-display: block;
-position: fixed;
-top: 50px;
-width: 100%;
-text-align: center;
-z-index: 3900;
-background-color: #000c;
-height: 40px;
-right:0;
-}
-header #bienvenuePseudoMobile p{
-margin:0;
-}
+		display: none;
+	}
+	header #bienvenuePseudoMobile{
+		display: block;
+		position: fixed;
+		top: 50px;
+		width: 100%;
+		text-align: center;
+		z-index: 3900;
+		background-color: #000c;
+		height: 40px;
+		right:0;
+	}
+	header #bienvenuePseudoMobile p{
+		margin:0;
+	}
 	#infoSpaceTwo .flexRow{
 		flex-direction: column;
-align-items: baseline;
+		align-items: baseline;
 	}
 	#globalSpace #subPassword, #globalSpace #repassword{
 		max-width: 200px;
 	}
 	#globalSpace {
-margin:10px;
+		margin:10px;
 	}
 	footer h3{
 		font-size:1em;
@@ -96,8 +94,8 @@ margin:10px;
 	}
 	#bkgEpisode {
 		width: 100%;
-padding: 10px;
-margin: 10px;
+		padding: 10px;
+		margin: 10px;
 	}
 	#headerComment > p:nth-child(1) {
 	    font-size: 1.1em;
@@ -115,18 +113,17 @@ margin: 10px;
 		padding-bottom: 10px;
 	}
 	#globalComment .formComment {
-width: 100%;
+		width: 100%;
 	}
 	#contentInputComment{
 		width: 100%;
 	}
 	.commentSignal {
-    padding: 20px 0 0 0px;
-
+    	padding: 20px 0 0 0px;
 	}
-div#globalComment div.commentSignal p:nth-child(5){
-	display: none;
-}
+	div#globalComment div.commentSignal p:nth-child(5){
+		display: none;
+	}
 	#globalComment .comment, .globalReply .reply {
 		width:70%;
 		margin-left: 10px;
@@ -135,34 +132,34 @@ div#globalComment div.commentSignal p:nth-child(5){
 		display: none;
 	}
 	#globalComment .messSignal {
-width: 150px;
+		width: 150px;
 	}
 	section#containtComment div#globalComment div.comment + p{
-    margin-left: 30px;
-}
-section#containtComment div#globalComment div.lookReply p {
-margin-left: 30px;
+    	margin-left: 30px;
 	}
-#globalComment .formComment {
-margin-left:0;
+	section#containtComment div#globalComment div.lookReply p {
+		margin-left: 30px;
+	}
+	#globalComment .formComment {
+		margin-left:0;
 	}
 	#contentInputComment, div.contentInputReply {
     	width: 100%;
 	}
 	#globalComment .comment, .globalReply .reply {
-    width: 90%;
-}
-.globalReply {
-    padding-left: 0px;
+    	width: 90%;
+	}
+	.globalReply {
+   		padding-left: 0px;
     }
     #globalComment .globalReply .messSignal {
     	width: 180px;
     }
     .alertConnect {
-    width: 90%;
+    	width: 90%;
 	}
 	#containtLogin form {
-    width: 90%;
+    	width: 90%;
 	}
 	#containtLogin fieldset {
 		padding:0;
@@ -170,16 +167,16 @@ margin-left:0;
 	#containtLogin fieldset input {
 		width:80%;
 	}
-#EpisodeWork, #CommentWork, #messageWork {
-flex-wrap: wrap;
+	#EpisodeWork, #CommentWork, #messageWork {
+		flex-wrap: wrap;
 	}
 	#writeEpisode hr, #writeEpisodeModif hr {
 		display: none;
 	}
 	#hideWriteEpisode, #hideWriteEpisodeModif {
-    width: 95%;
-    margin: auto;
-}
+	    width: 95%;
+	    margin: auto;
+	}
 	#modifEp, #delEp, #editEp, #showComment, #showCommentSignal {
 		flex-direction: column;
 	}
@@ -187,11 +184,11 @@ flex-wrap: wrap;
 		flex-direction: column;
 	}
 	#arrayComment, #arrayPseudo, #arrayCommentSignal, #arrayPseudoSignal, #arrayMessageReceive, #arrayMessageSend {
-   	 width: 100%;
+   		width: 100%;
 	}
 	#arrayComment tbody tr td, #arrayPseudo tbody tr td, #arrayPseudoSignal tbody tr td, #arrayMessageReceive tbody tr td, #arrayMessageSend tbody tr td {
-    padding-left: 10px;
-}
+    	padding-left: 10px;
+	}
 	#arrayComment > tbody tr td:nth-child(1), #arrayPseudo tbody tr td:nth-child(1), #arrayCommentSignal tbody tr td:nth-child(1), #arrayPseudoSignal tbody tr td:nth-child(1) {
 	    width: 100px;
 	    vertical-align: baseline;
@@ -201,16 +198,15 @@ flex-wrap: wrap;
 	    vertical-align: baseline;
 	}
 	#arrayCommentSignal tbody tr td:nth-child(4), #arrayCommentSignal tbody tr td:nth-child(5), #arrayPseudoSignal tbody tr td:nth-child(4), #arrayPseudoSignal tbody tr td:nth-child(3) {
-    width: 20px;
+    	width: 20px;
 	}
-
 	#containtAdmin > div:nth-child(1) {
-    width: 250px;
-}
-#globalComment div.globalReply div.replySignal > p:nth-child(5){
-	display : none;
-}
-#globalComment p {
-    margin: 5px 0 0 10px;
-}
+    	width: 250px;
+	}
+	#globalComment div.globalReply div.replySignal > p:nth-child(5){
+		display : none;
+	}
+	#globalComment p {
+	    margin: 5px 0 0 10px;
+	}
 }

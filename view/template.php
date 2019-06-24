@@ -12,7 +12,8 @@
 
         <script src="public/js/jquery.js"></script>
         <script src="public/js/frontend/anim.js"></script>
-        <script src="https://cdn.tiny.cloud/1/srz41u49mvl7063mbtpqe2wb8l1hn1vvc2b6oo14kzrf96nq/tinymce/5/tinymce.min.js"></script>
+        <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=srz41u49mvl7063mbtpqe2wb8l1hn1vvc2b6oo14kzrf96nq"></script>
+        <!-- <script src="public/js/tinymce.min.js"></script>  -->
         <script>tinymce.init({selector:'textarea'});</script>
 
         <link href="public/css/style.css" rel="stylesheet"/>

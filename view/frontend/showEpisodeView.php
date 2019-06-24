@@ -1,8 +1,8 @@
-	 	 <?php $headTitle = $aEpisode[0]['title']; ?>
-	 	 <?php $titleH1 = $aEpisode[0]['title']; ?>
-	 	 <?php $metaDes = 'Retrouver l\'épisode complet du chapitre \''.$aEpisode[0]['title'].'\' tiré du roman \'Un billet simple pour l\'Alaska\' par Jean Forteroche'; ?>
+<?php $headTitle = $aEpisode[0]['title']; ?>
+<?php $titleH1 = $aEpisode[0]['title']; ?>
+<?php $metaDes = 'Retrouver l\'épisode complet du chapitre \''.$aEpisode[0]['title'].'\' tiré du roman \'Un billet simple pour l\'Alaska\' par Jean Forteroche'; ?>
 
-	 	 <?php ob_start(); ?>
+<?php ob_start(); ?>
 
 	 	 	<div id="containtChapitre">
 		 	 	<div id='bkgEpisode'>
@@ -13,40 +13,37 @@
 	 	 			<div id='episode'>
 	 	 				<?= html_entity_decode($aEpisode[0]['episode']) ?>
 	 	 			</div>
-
 	 	 			<div class='datePublication'>
 	 	 				<div>
-			<?php 
-			if($linkEpisodePrev != '')
-			{
-			?> 	
+<?php 
+	if($linkEpisodePrev != '')
+	{
+?> 	
 	 	 					<a href='index.php?action=ShowEpisode&amp;idEpisode=<?= $linkEpisodePrev ?>'>Précédent</a>
-			<?php 
-			}
-			?>
+<?php 
+	}
+?>
 						</div>
 						<div>
 	 	 					<p>Publié le <?= strftime('%d-%m-%Y',strtotime($aEpisode[0]['publication'] ))?></p>
 	 	 					<span class='fas fa-thumbtack'></span>
 	 	 				</div>
 	 	 				<div>
-			<?php 
-			if($linkEpisodeNext != '')
-			{
-			?>
+<?php 
+	if($linkEpisodeNext != '')
+	{
+?>
 	 	 					<a href='index.php?action=ShowEpisode&amp;idEpisode=<?= $linkEpisodeNext ?>'>Suivant</a>
-	 	 				
-
-	 	 	<?php
-			}
-			?>
-
+<?php
+	}
+?>
 						</div>
 				 	</div>
 		 	 	</div>
 		 	 </div>
 		 	 <div id='containtComment'>
-		 <?php include ('commentView.php'); ?>
+<?php include ('commentView.php'); ?>
 			</div>
-	 	 <?php $content = ob_get_clean(); ?>
-	 	 <?php require('view/template.php'); ?>
+
+<?php $content = ob_get_clean(); ?>
+<?php require('view/template.php'); ?>

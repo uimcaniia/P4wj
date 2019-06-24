@@ -1,7 +1,7 @@
-	 	 <?php $headTitle = 'Politique de confidentialité'; ?>
-	 	 <?php $titleH1 = 'Politique de confidentialité'; ?>
+<?php $headTitle = 'Politique de confidentialité'; ?>
+<?php $titleH1 = 'Politique de confidentialité'; ?>
 
-	 	 <?php ob_start(); ?>
+<?php ob_start(); ?>
 	 	<div id="politique">
 		 	<div id='contentPolitique'>
 <?php 
@@ -17,8 +17,7 @@
 <?php
 	}
 ?>
-
 		 	</div>
 	 	 </div>
-	 	 <?php $content = ob_get_clean(); ?>
-	 	 <?php require('view/template.php'); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require('view/template.php'); ?>

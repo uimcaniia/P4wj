@@ -1,7 +1,7 @@
-	 	 <?php $headTitle = 'Mentions légales'; ?>
-	 	 <?php $titleH1 = 'Mentions légales'; ?>
+<?php $headTitle = 'Mentions légales'; ?>
+<?php $titleH1 = 'Mentions légales'; ?>
 
-	 	 <?php ob_start(); ?>
+<?php ob_start(); ?>
 	 	<div id="mention">
 		 	<div id='contentmention'>
 <?php 
@@ -17,8 +17,7 @@
 <?php
 	}
 ?>
-
 		 	</div>
 	 	 </div>
-	 	 <?php $content = ob_get_clean(); ?>
-	 	 <?php require('view/template.php'); ?>
+<?php $content = ob_get_clean(); ?>
+<?php require('view/template.php'); ?>

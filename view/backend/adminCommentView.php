@@ -14,7 +14,6 @@
 		 							</span>
 				 				</div>
 				 				<div id="divSelectCom">
-					 				<!-- <div class='flexColumn'> -->
 						 				<div class="flexRow">
 					 						<div>
 						 						<button id ='sortEp' class="whiteBlock" type='submit' name='sortEp'>Par épisode</button>
@@ -81,10 +80,7 @@
 ?>
 											</div>
 										</div>
-
-									<!-- </div> -->
 								</div>
-
 				 			</div>
 
 				 			<div id="showCommentSignal">

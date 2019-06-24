@@ -40,7 +40,6 @@
 				vous avez eu<em> <?=$getInfosUser[0]['reporting']?> </em>commentaire(s) de signalé</p>
 <?php
 			}
-
 ?>
 	 	 		<p>Voici les informations que nous avons</p>
 	 	 	</div>
