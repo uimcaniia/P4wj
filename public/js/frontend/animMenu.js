@@ -52,7 +52,7 @@
 		$(six).delay(0).animate({'opacity': '0'}, {'duration':100});
 	});
 
-		fontsize = document.getElementById('linkBiography').offsetWidth;
+	fontsize = document.getElementById('linkBiography').offsetWidth;
 
 	$(linkJean).hover(function(){
 		if(fontsize == 140){
@@ -69,22 +69,22 @@
 	});
 }
 animMenu();
-
+//***************************************************************************
+//animation de la zone login et de l'affichage 
 function animConnectLogin(){
 	fontsize = document.getElementById('linkBiography').offsetWidth;
 	var icon = document.getElementById('linkConnect');
 	var pseudo = $('#bienvenuePseudo').attr('class'); 
 	var link = '<a href="index.php?action=space"> '+pseudo+'</a>';// $('#changePsw p em').html(
-	//console.log(icon);
 	fontsize = document.getElementById('linkBiography').offsetWidth;
 	var classIcon = icon.className.split(' ')[1];
+
 	if(classIcon == 'fa-power-off'){
 		if(fontsize != 140){
 			$('#bienvenuePseudo').html('Bonjour'+link);
 		}else{
 			$('#bienvenuePseudoMobile p').html('Bonjour'+link);
 		}
-
 	}else{
 		if(fontsize != 140){
 			$('#bienvenuePseudo').html('Vous n\'êtes pas connecté.');
@@ -96,7 +96,7 @@ function animConnectLogin(){
 animConnectLogin();
 
 //**************************************************************
-//animation zone admin
+//animation zone admin. 
 $('#showNavEpisode').click(function(){
 	$('#navEpisode').fadeIn(600);
 	if($('#navComment').is(":visible")){ 

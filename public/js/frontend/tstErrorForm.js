@@ -2,7 +2,9 @@
 	var regPsw  = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/; 
 	var regPseudo  = /^[a-zA-Z0-9]{3,}$/; 
 	var btnSub = document.getElementsByName('registration');
-
+//**************************************************************************************
+//vérification des infos lors de la création d'un compte.
+//vérification côté client avant côté serveur
 	$('#subPassword').change(function(){
 		var value = $('#subPassword').val();
 		if(value.length == 0)
@@ -16,7 +18,6 @@
 		else
 		{
 			$('p.subPassword').text('');
-
 		}
 	});
 
@@ -31,7 +32,6 @@
 		else
 		{
 			$('p.subEmail').text('');
-
 		}		
 	});
 
@@ -45,7 +45,6 @@
 		else if(value != valuePsw)
 		{
 			$('p.repassword').text('Les deux mots de pass sont différents');
-
 		}		
 	});
 
@@ -61,7 +60,6 @@
 		}
 		else{
 			$('p.pseudo').text('');
-
 		}		
 	});
 

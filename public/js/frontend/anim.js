@@ -2,10 +2,9 @@
 
  //************************************************************************************************
  //animation commentaire  + -
-//function animCommentPlus(){
 $(document).ready(function(){
 //**********************************************************************
-	//var div1 = document.getElementById('globalComment');
+// animation de l'ouverture de l'affichage des réponses des commentaires
 	var elemPlus = document.querySelectorAll('span.fa-plus');
 	var elemMoins = document.querySelectorAll('span.fa-minus');
 
@@ -35,8 +34,7 @@ $(document).ready(function(){
 		$(divFrere).fadeOut(200);
 	});
 //**********************************************************************
-//function animDivWriteReplyOpen(){
-	//var div2 = document.getElementById('globalComment');
+//animation de l'affichage de la zone de saisie d'une réponse
 	var elemCommRepOpen = document.querySelectorAll('span.fa-comment.contentInputReply');
 	var elemCommRepClose = document.querySelectorAll('span.fa-times.contentInputReply');
 
@@ -46,7 +44,6 @@ $(document).ready(function(){
 		open = classEleme.split(' ')[4];
 
 		$('#'+open).fadeOut(0);
-
 		$('#'+id).delay(0).animate({'height':'90px'}, {'duration':200});
 		$('#'+id).fadeIn(500);
 	});
@@ -57,14 +54,11 @@ $(document).ready(function(){
 		close = classEleme.split(' ')[4];
 
 		$('#'+close).fadeIn(100);
-
 		$('#'+id).fadeOut(200);
 		$('#'+id).delay(0).animate({'height':'0px'}, {'duration':200});
 	});
 
 //**********************************************************************
-//function animPopup(){
-	//var div3 = document.getElementById('globalComment');
 	var elemCommSignal = document.querySelectorAll('div.commentSignal span.fa-bell');
 
 	$(elemCommSignal).click(function(){
@@ -82,9 +76,8 @@ $(document).ready(function(){
 		$(popup).delay(0).animate({'opacity': '0'}, {'duration' : 100});
 	});
 
-
 //********************************************************
-//function animDivWriteCommentOpen(divGlobal, id){
+//animation de l'affichage de la zone de saisie d'un commentaire
 	$('#btnOpenDivComment').click(function(){
 		div = document.getElementById('contentInputComment');
 		btnOpen = document.querySelector('#headerComment .fa-pen-comment');
@@ -97,7 +90,6 @@ $(document).ready(function(){
 		$(div).fadeIn(500);
 	});
 
-//function animDivWriteCommentClose(divGlobal, id){
 	$('#btnCloseDivComment').click(function(){
 		div = document.getElementById('contentInputComment');
 		btnOpen = document.querySelector('#headerComment .fa-pen-comment');
@@ -109,12 +101,10 @@ $(document).ready(function(){
 		$(div).fadeOut(200);
 		$(div).delay(0).animate({'height':'0px'}, {'duration':200});
 	});
-//********************************************************
-
-
 });
 
 //********************************************************
+// animation de l'ouverture et fermeture des div de la zone admin
 function animShowAdminMenu(divShow, divHide){
 	if (divHide == ""){
 		$('#'+divShow).fadeIn(600);
@@ -128,12 +118,7 @@ function animShowAdminMenu(divShow, divHide){
 			}
 		}	
 	}
-
-
-	
 }
-//*********************************************************************
-
 
 
 
