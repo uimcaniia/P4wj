@@ -27,7 +27,7 @@ function extractAllEpisode()
 	}
 
 	$aEpisodeExtract = $episodes->makeExtractEpisode($aEpisode); // on récupère un extrait de l'épisode
-
+	
 	require('view/frontend/extractAllEpisodeView.php');
 }
 //********************************************************

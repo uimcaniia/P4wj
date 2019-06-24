@@ -1,4 +1,6 @@
 <?php
+//*****************************************************************************
+//zone utilisateur
 function spaceUser()
 {
 	$user         = new User();
@@ -6,14 +8,13 @@ function spaceUser()
 	$user-> hydrate($getInfosUser[0]);
 
 	$input       = new Input();
-	//$inputPseudo = $input->get(10); // array contenant les attribut du champs input pseudo
-
 	$inputNewPassword    = $input->get(14);// array contenant les attribut du champs input password
 	$inputRepeatPassword = $input->get(15);
 	array_push($inputNewPassword, $inputRepeatPassword[0]); // assemblage des 2 array
 	require('view/backend/spaceView.php');
 }
 //**********************************************************************
+// zone administrateur
 function admin()
 {
 	$admin         = new Admin();
@@ -54,10 +55,9 @@ function admin()
 
 		require('view/backend/adminView.php');
 	}
-
-
 }
 //**********************************************************************
+//récupère tous les épisode ayant reçut des commentaires
 function getEpisodeHaveComment($aComment)
 {
 	$aEpisode = array();
@@ -83,6 +83,7 @@ function getEpisodeHaveComment($aComment)
 	return $aEpisode;
 }
 //**********************************************************************
+//récupère tous les utilisateur ayant posté des commentaires
 function getUserHadPostComment($aComment, $aReply)
 {
 	$aUser = array();
@@ -123,6 +124,7 @@ function getUserHadPostComment($aComment, $aReply)
 	return $aUser;
 }
 //**********************************************************************
+//récupère tous les épisode ayant reçut des signalement à leurs commentaires
 function getEpisodeSignal($aCommentSignal, $episode)
 {
 	$aEpisodeSignal = array();
@@ -147,6 +149,7 @@ function getEpisodeSignal($aCommentSignal, $episode)
 	return $aEpisodeSignal;
 }
 //**********************************************************************
+//récupère tous les utilisateur ayant reçut des signalement à leurs commentaires
 function getUserSignal($aUser)
 {
 	$aUserSignal = array();  
@@ -165,6 +168,7 @@ function getUserSignal($aUser)
 }
 
 //**********************************************************************
+// pour récupérer un épisode suivant le titre sélectionnés
 function recupEpisodeSelect($valEpModif)
 {
 	$episode = new Episode();
@@ -173,9 +177,9 @@ function recupEpisodeSelect($valEpModif)
 		$aEpisode = array();
 	}
 	echo json_encode($aEpisode);
-	//echo ' '.$aEpisode[0]['title'].'`'.$aEpisode[0]['episode'].'`'.$aEpisode[0]['id'].'';
 }
 //***********************************************************************
+//pour supprimer un épisode
 function delEpisodeSelect($valEpDel)
 {
 	$episode  = new Episode();
@@ -187,6 +191,7 @@ function delEpisodeSelect($valEpDel)
 
 }
 //**********************************************************************
+//récupère les commentaire suivant l'épisode'
 function commentEpisodeSelect($idEpisode) //(requete AJAX)
 {
 	$table = '';
@@ -206,6 +211,7 @@ function commentEpisodeSelect($idEpisode) //(requete AJAX)
 	echo json_encode($aComment);
 }
 //**********************************************************************
+//récupère les commentaire suivant le pseudo
 function commentPseudoSelect($idPseudo)//(requete AJAX)
 {
 	$table = '';
@@ -236,6 +242,7 @@ function commentPseudoSelect($idPseudo)//(requete AJAX)
 	echo json_encode($aAll);
 }
 //**********************************************************************
+//récupère les commentaire signalées suivant l'épisode'
 function commentSignalEpisodeSelect($idEpisodeSignal)//(requete AJAX)
 {
 	$table = '';
@@ -264,6 +271,7 @@ function commentSignalEpisodeSelect($idEpisodeSignal)//(requete AJAX)
 	echo json_encode($aComment);
 }
 //**********************************************************************
+//récupère les commentaire signalées suivant le pseudo
 function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
 {
 	$table = '';
@@ -292,12 +300,11 @@ function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
 	$aAll = array(
 		0=>$aComment,
 		1=>$aReply);
-
-
 	echo json_encode($aAll); 
 }
 
 //**********************************************************************
+//pour supprimer un commentaire et les réponses associées
 function deleteCommentReply($idComment, $idUser)
 {
 	$comment  = new Comment;
@@ -312,6 +319,7 @@ function deleteCommentReply($idComment, $idUser)
 	$moderUser         = $user->update('moderate', $actualiseModerate, $idUser);
 }
 //**********************************************************************
+// pour supprimer une réponse
 function deleteReply($idReply, $idUser)
 {
 	$reply    = new Reply;
@@ -324,6 +332,7 @@ function deleteReply($idReply, $idUser)
 }
 
 //**********************************************************************
+//pour modérer un utilisateur
 function getPseudoModerate($idUser)
 {
 	$user  = new User();
@@ -332,6 +341,7 @@ function getPseudoModerate($idUser)
 	echo json_encode($aUserInfos[0]);
 }
 //**********************************************************************
+// pour bloquer le compte d'un utilisateur
 function deletePseudo($idUser)
 {
 	$user = new User; // on ne supprime pas le compte, mais on le bloque
@@ -339,9 +349,9 @@ function deletePseudo($idUser)
 	$user-> update('deleteUser', '1', $idUser);
 }
 //********************************************************************
+// pour mettre à jour le mot de pass d'un utilisateur
 function updatePswUser($psw, $pswAgain, $idUser)
 {
-
 	$form = new Form;
 	$alertConnectionPseudo = $form->tstSubPsw($psw, $pswAgain);
 	if ($alertConnectionPseudo == '')
@@ -353,6 +363,7 @@ function updatePswUser($psw, $pswAgain, $idUser)
 	echo $alertConnectionPseudo;
 }
 //*********************************************************************
+//pour enlever le signalement d'un commentaire
 function removeCommentSignal($idComment, $idUser)
 {
 	$majSignalComment = new Comment;
@@ -364,6 +375,7 @@ function removeCommentSignal($idComment, $idUser)
 	$moderUser         = $user->update('reporting', $actualiseModerate, $idUser);
 }
 //*********************************************************************
+//pour enlever le signalement d'une réponse 
 function removeReplySignal($idReply, $idUser)
 {
 	$majSignalReply = new Reply;
@@ -375,6 +387,7 @@ function removeReplySignal($idReply, $idUser)
 	$moderUser         = $user->update('reporting', $actualiseModerate, $idUser);
 }
 //*****************************************************************************
+//pour sauvegarder un nouvel épisode
 function saveNewEpisodeWrite($texteEpisode, $titleEpisode){
 
 	$aDataEpisode=array(
@@ -390,6 +403,7 @@ function saveNewEpisodeWrite($texteEpisode, $titleEpisode){
 	echo $newId[0]['MAX(id)'];
 }
 //*****************************************************************************
+//pour sauvegarder un épisode
 function saveEpisodeWrite($texteEpisode, $titleEpisode, $idepisode){
 
 	$aDataEpisode2=array(
@@ -402,6 +416,7 @@ function saveEpisodeWrite($texteEpisode, $titleEpisode, $idepisode){
 	$episode2 -> update($episode2);
 }
 //*****************************************************************************
+//pour pubblier un épisode
 function publishEpisodeWrite($idepisode){
 	$idepisode = (int) $idepisode;
 	$episode = new Episode;
