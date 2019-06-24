@@ -13,7 +13,6 @@
         <script src="public/js/jquery.js"></script>
         <script src="public/js/frontend/anim.js"></script>
         <script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=srz41u49mvl7063mbtpqe2wb8l1hn1vvc2b6oo14kzrf96nq"></script>
-        <!-- <script src="public/js/tinymce.min.js"></script>  -->
         <script>tinymce.init({selector:'textarea'});</script>
 
         <link href="public/css/style.css" rel="stylesheet"/>
@@ -29,7 +28,7 @@
                     <a href='index.php?action=biography' id ='linkBiography'>Jean Forteroche</a>
                     <hr>
                 </div>
-                    <?php
+<?php
                         if(isset($_SESSION['idUser']) && isset($_SESSION['pseudo']) && isset($_SESSION['admin']))
                         {
                             $iconConnexion = "fas fa-power-off";
@@ -42,7 +41,7 @@
                             $pConnect = 'index.php?action=login';
                             $pseudoHome = '';
                         }
-                    ?>
+?>
                 <p id="bienvenuePseudo" class="<?= $pseudoHome ?>"></p>
                 <div>
                     <nav id='btnSpanMenuHeader'>
@@ -51,7 +50,7 @@
                         <a href='<?= $pConnect?>'><span id="linkConnect" class="<?= $iconConnexion ?>"></span></a>
                     </nav>
                     <div id='titleMenuHeader'>
-                        <p id="one">Accueil</p>
+                        <p id="one">Accueil</p> 
                         <p id="two">Episode</p>
                         <p id="three">login</p>
                     </div>
@@ -101,8 +100,6 @@
                     <p><span class='far fa-copyright'></span>2019 OpenClassroom.com</p>
                     <p>Tous droits réservés</p>
                 </div>
-
-
             </div>
         </footer>
 
@@ -115,7 +112,6 @@
         <script src="public/js/backend/adminComment.js"></script>
         <script src="public/js/backend/adminMessage.js"></script>
 
-        
     </body>
 </html>
 
