@@ -3,13 +3,12 @@
 class UserManager extends Bdd{
 
 	// CONSTANTES
-
 		const TAB_USER = 'user'; // nom de la table
 
 //******************************************************************************************************************
 	 	 //ajoute un utilisateur
-	 	 public function add(User $user){
-
+	 	 public function add(User $user)
+	 	 {
 		    $param2 = $user->getEmail();
 		    $param3 = $user->getPseudo();
 		    $param4 = $user->getPsw();
@@ -57,8 +56,8 @@ class UserManager extends Bdd{
 
 //******************************************************************************************************************
 	 	//actualise une infos d'un utilisateur
-	 	 public function update($col, $data, $idUser){
-
+	 	 public function update($col, $data, $idUser)
+	 	 {
 	 	 	$request = 'UPDATE '. self::TAB_USER.' SET '.$col.' = :data WHERE id = :idUser';
 	 	 	$arr=array(
 	 	 		array(":data" , $data),
@@ -69,22 +68,14 @@ class UserManager extends Bdd{
 
 //******************************************************************************************************************
 	 	 //supprime un utilisateur (quand l'admin est pas content)
-	 	 public function delete(User $user){
-
+	 	 public function delete(User $user)
+	 	 {
 	 	 	$param = $user->getId();
-	 	 	
 	 	 	$request = 'DELETE FROM '. self::TAB_USER.' WHERE id = :param';
 	 	 	$arr=array(
 	 	 		array(":param" , $param));
 	 	 	$aRes = parent::reqPrepaExec($request, $arr);
 	 	 }
 
-
-		
-
-
 	}
 
-
-
-?>

@@ -57,17 +57,6 @@
 	 	 {
 	 	 	if(is_int($idEpisode)){
 	 	 		$aData = parent::get($idEpisode);
-	 	 		//print_r($aData[0]);
-/*	 	 		for ($i = 0 ; $i < count($aData) ; $i++)
-				{*/
-/*		 	 		foreach ($aData[0] as $key => $value)
-					{
-						if($key=='publication')
-						{
-							$aData[0]['publication']=strftime('%d-%m-%Y',strtotime($aData[0]['publication']));
-						}
-					}*/
-				//}
 	 	 	}
 	 	 	else
 	 	 	{
@@ -79,7 +68,6 @@
 	 	 //récupère un certain nombre d'épisodes
 	 	 public function getSomeEpisode($nbr)
 	 	 {
-
 	 	 	if(is_int($nbr))
 	 	 	{
 
@@ -181,7 +169,6 @@
 				{
 					return $linkEpisodeNext='';
 				}
-				
 	 	 	}
 	 	 	else
 	 	 	{

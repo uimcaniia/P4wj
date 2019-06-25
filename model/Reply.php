@@ -2,8 +2,6 @@
 
 	class Reply extends ReplyManager {
 
-
-
 		// CONSTANTES
 		const ID    = 'id';          
 		const RE    = 'reply';  //  	texte de la réponse
@@ -41,9 +39,6 @@
 
 	 	 public function hydrate($aData)
 	 	 {
-/*	 	 			echo '<pre>';
-	print_r($aData);
-	echo '</pre>';*/
 	 	 	if($aData != false)
 	 	 	{
 		 	 	foreach ($aData[0] as $key => $value)
@@ -52,14 +47,11 @@
 		 	 		$method = 'set'.ucfirst($key);
 		 	 		if(method_exists($this, $method))
 		 	 		{
-
 		 	 			$this->$method($value);
-		 	 			//echo $value;
 		 	 		}
 		 	 	}
 		 	}else
 		 	{
-
 		 	}
 	 	 }
 

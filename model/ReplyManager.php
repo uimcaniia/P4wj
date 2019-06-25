@@ -3,7 +3,6 @@
 class ReplyManager extends Bdd{
 
 	// CONSTANTES
-
 		const TAB_REP = 'reply'; // nom de la table
 
 //******************************************************************************************************************
@@ -35,7 +34,7 @@ class ReplyManager extends Bdd{
 	 	 			   INNER JOIN user AS b 
 	 	 			   ON b.id = a.iduser_reply 
 	 	 			   WHERE a.id = '.$id[0]['MAX(id)'].'';
-//echo $request2;
+
 	 	 	$aRes = parent::addRequestSelect($request2);
 	 	 	return $aRes;
 	 	 }
@@ -75,7 +74,6 @@ class ReplyManager extends Bdd{
 	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);
 	 	 	return $aRes;
 	 	 }
-
 
 //******************************************************************************************************************
 	 	 //recupère toutes les réponses signalées en function d'une sélection avec jointure

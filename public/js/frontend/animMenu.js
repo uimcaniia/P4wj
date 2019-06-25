@@ -55,7 +55,7 @@
 	fontsize = document.getElementById('linkBiography').offsetWidth;
 
 	$(linkJean).hover(function(){
-		if(fontsize == 140){
+		if(fontsize == 130){
 			$(barre).delay(0).animate({'opacity': '10'}, {'duration' : 100});
 			$(barre).delay(0).animate({'opacity':'10','width': '100px'}, {'duration':200});
 		}else{
@@ -80,13 +80,13 @@ function animConnectLogin(){
 	var classIcon = icon.className.split(' ')[1];
 
 	if(classIcon == 'fa-power-off'){
-		if(fontsize != 140){
+		if(fontsize != 130){
 			$('#bienvenuePseudo').html('Bonjour'+link);
 		}else{
 			$('#bienvenuePseudoMobile p').html('Bonjour'+link);
 		}
 	}else{
-		if(fontsize != 140){
+		if(fontsize != 130){
 			$('#bienvenuePseudo').html('Vous n\'êtes pas connecté.');
 		}else{
 			$('#bienvenuePseudoMobile p').html('Vous n\'êtes pas connecté.');

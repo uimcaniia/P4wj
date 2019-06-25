@@ -12,7 +12,6 @@ const TAB_MEN = 'mentions'; // nom de la table
 		 private $_titre;
 	  	 private $_text;
 
-
 		// **************************************************
 		// Methode
 		// **************************************************
@@ -21,10 +20,8 @@ const TAB_MEN = 'mentions'; // nom de la table
 	 	 public function get()
 	 	 { 
 	 	 	$request = 'SELECT * FROM '. self::TAB_MEN.'';
-	 	 	//echo $request;
 	 	 	$aRes = parent::addRequestSelect($request);
 	 	 	return $aRes;
-
 	 	 }
 
 
@@ -48,7 +45,6 @@ const TAB_MEN = 'mentions'; // nom de la table
 		{
 			return $this->_text;
 		}
-		
 
 		// **************************************************
 		// SETTERS

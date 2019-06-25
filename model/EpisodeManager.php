@@ -57,7 +57,7 @@ class EpisodeManager extends Bdd{
 	 	 }
 
 //******************************************************************************************************************
-	 	 		
+	 	 // récupère le dernier épisode publié
 	 	 public function getLastEpisode()
 	 	 {
 	 	 	$request = 'SELECT MAX(id) FROM '. self::TAB_EPI.' WHERE showEpisode = 1';

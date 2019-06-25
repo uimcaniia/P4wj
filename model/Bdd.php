@@ -19,8 +19,8 @@ static protected $bdd = null;
 	{
 		try
 		{
-			self::$bdd = new PDO('mysql:host=wave;dbname=coan3607_jean_forteroche;charset=utf8', 'coan3607', 'Ez8BgfPF-8-d', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-/*			self::$bdd = new PDO('mysql:host=localhost;dbname=coan3607_jean_forteroche;charset=utf8', 'root', 'T0t0r0', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));*/
+/*			self::$bdd = new PDO('mysql:host=wave;dbname=coan3607_jean_forteroche;charset=utf8', 'coan3607', 'Ez8BgfPF-8-d', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));*/
+			self::$bdd = new PDO('mysql:host=localhost;dbname=coan3607_jean_forteroche;charset=utf8', 'root', 'T0t0r0', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 			return self::$bdd;
 		}
 		catch (Exception $e)
@@ -32,8 +32,8 @@ static protected $bdd = null;
 
 //******************************************************************************************************************
 	//Exécute une requête (INSERT INTO, UPDATE, DELETE)
-	 public function addRequest($request)
-	 {
+	public function addRequest($request)
+	{
 		$bdd = self::getConnexion();
 
 		$rep = $bdd->query($request);
@@ -82,8 +82,6 @@ static protected $bdd = null;
 		$rep->closeCursor(); // Termine le traitement de la requête
 		return $res;
 	}
-
-
 
 //**********************************************************************************************
 	// Exécute une requête type (SELECT) préparée et renvoie le resultat ou false si rien 

@@ -47,38 +47,6 @@
 	 		return $aRes;
 	 	}
 
-/*	 	 public function getDataToHydrate($intComment)
-	 	 {
-	 	 	if(is_int($intComment))
-	 	 	{
-	 	 		$aData = parent::get($intComment);
-	 	 		self::hydrate($aData);
-	 	 	}else
-	 	 	{
-	 	 		echo 'les commentaire de l\'épisode '.$intComment.' n\'existe pas'; 
-	 	 	}
-	 	 }
-
-	 	 public function hydrate($aData)
-	 	 {
-	 	 	if($aData != false)
-	 	 	{
-	 	 		$this->setCheckIdentite(true);
-		 	 	foreach ($aData[0] as $key => $value)
-		 	 	{
-		 	 		 // On récupère le nom du setter correspondant à l'attribut en mettant sa première lettre en majuscule. 
-		 	 		$method = 'set'.ucfirst($key);
-		 	 		if(method_exists($this, $method))
-		 	 		{
-		 	 			$this->$method($value);
-		 	 		}
-		 	 	}
-		 	}else
-		 	{
-		 	 	$this->setCheckIdentite(false);
-		 	}
-	 	 }*/
-
 
 		// **************************************************
 		// GETTERS

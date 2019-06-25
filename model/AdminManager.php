@@ -30,13 +30,10 @@ class AdminManager extends Bdd{
 	 	 //lit une entrée de la table user en comparant un paramètre et une valeur
 	 	 public function get($param, $val)
 	 	 { 
-
 		 	$request = 'SELECT * FROM '. self::TAB_USER.' WHERE '.$param.'  = :val ';
 	 	 	$arr=array(
 	 	 		array(":val", $val));
 	 	 	$aRes = parent::reqPrepaExecSEl($request, $arr);return $aRes;
-		 	 
-	 	 	
 	 	 }
 
 //******************************************************************************************************************
@@ -63,12 +60,4 @@ class AdminManager extends Bdd{
 	 	 	$aRes = parent::reqPrepaExec($request, $arr);
 	 	 }
 
-
-		
-
-
 	}
-
-
-
-?>

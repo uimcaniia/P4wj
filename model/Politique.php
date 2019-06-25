@@ -2,7 +2,6 @@
 
 	class Politique extends Bdd {
 
-
 const TAB_POL = 'politique'; // nom de la table
 		// **************************************************
 		// Attributs de l'objet
@@ -12,7 +11,6 @@ const TAB_POL = 'politique'; // nom de la table
 		 private $_titre;
 	  	 private $_text;
 
-
 		// **************************************************
 		// Methode
 		// **************************************************
@@ -21,7 +19,6 @@ const TAB_POL = 'politique'; // nom de la table
 	 	 public function get()
 	 	 { 
 	 	 	$request = 'SELECT * FROM '. self::TAB_POL.'';
-	 	 	//echo $request;
 	 	 	$aRes = parent::addRequestSelect($request);
 	 	 	return $aRes;
 
@@ -43,7 +40,7 @@ const TAB_POL = 'politique'; // nom de la table
 		{
 			return $this->_titre;
 		}
-				/** Retourne le texte de la politique de confidentialité */
+		/** Retourne le texte de la politique de confidentialité */
 		public function getText()
 		{
 			return $this->_text;

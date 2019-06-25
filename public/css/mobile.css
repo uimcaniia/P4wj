@@ -209,4 +209,17 @@
 	#globalComment p {
 	    margin: 5px 0 0 10px;
 	}
+	#biography .flexRow {
+	    display: flex;
+	   flex-direction: column;
+	   align-items: center;
+	}
+	#biography #textBiographie {
+	    width: 90%;
+	    padding: 0;
+	}
+	#biography #imgBiographie {
+	    width: 90%;
+	    padding: 0;
+	}
 }
