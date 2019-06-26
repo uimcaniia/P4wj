@@ -302,7 +302,7 @@ div#bkgEpisode div.datePublication > div:nth-child(2){
   display: none;
 }
 #globalComment .comment p, .commentSignal .comment p, #globalComment p{
-  margin: 5px 0 0 20px;
+  margin: 5px 0 0 10px;
 }
 #globalComment .comment, .globalReply .reply{
   border-left:2px solid #4ac2c2;
@@ -386,6 +386,7 @@ color: #4ac2c2;
   flex-direction:column;
   width:100%;
   color: white;
+  padding-bottom: 20px;
 }
 .globalReply{
   padding-left:50px;
@@ -404,7 +405,7 @@ color: #4ac2c2;
 div.commentSignal:nth-child(2){
   padding-top:10px;
 }
-#headerComment > p, div.commentSignal p:nth-child(1), div.commentSignal p:nth-child(3), div.commentSignal span, div.replySignal p:nth-child(1), div.replySignal p:nth-child(3), div.replySignal span{
+#headerComment > p, div.commentSignal p:nth-child(1), div.commentSignal p:nth-child(3), div.commentSignal span, div.replySignal p:nth-child(1), div.replySignal p:nth-child(3), span.fa-comment, span.fa-bell{
   color: #4ac2c2;
 }
 #headerComment > p:nth-child(1){
@@ -863,6 +864,7 @@ cursor:pointer;
 /*********************************************************************************/
 body #globalComment span.far.fa-hand-point-right{
   cursor:initial;
+    color: #4ac2c2;
 }
 body #globalComment span.far.fa-hand-point-right:hover{
   color: #4ac2c2;

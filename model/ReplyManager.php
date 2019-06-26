@@ -86,7 +86,6 @@ class ReplyManager extends Bdd{
 				   WHERE a.'.$colSelect.' = :idSelect AND a.reporting_reply = 1';
 
 		 	 $arr=array(
-		 	 	array(":idSelect" , $idSelect),
 	 	 		array(":idSelect" , $idSelect));
 		 	 $aRes = parent::reqPrepaExecSEl($request, $arr);
 		 	 return $aRes;

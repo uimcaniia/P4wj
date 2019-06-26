@@ -26,6 +26,7 @@ function admin()
 	else{
 		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires + pseudo dans la table user
 		$aReply = $reply->getAllReply();
+		$aReplySignal = $reply->getAllReplySignal();
 		if($aReply === false){
 			$aReply = array();
 		}
@@ -47,7 +48,7 @@ function admin()
 
 		$aUserSignal     = getUserSignal($aUser);// on récupère tous les utilisateur signalés
 
-		$aEpisodeSignal  = getEpisodeSignal($aCommentSignal, $episode);  // on récupère tous les épisodes ayant uncomment signalés
+		$aEpisodeSignal  = getEpisodeReplySignal($aReplySignal,$aCommentSignal, $episode);  // on récupère tous les épisodes ayant une réponse signalée
 
 		$user = new User;
 		$aUserModo   = $user ->getAllUserExist();
@@ -123,12 +124,31 @@ function getUserHadPostComment($aComment, $aReply)
 	}
 	return $aUser;
 }
+
 //**********************************************************************
-//récupère tous les épisode ayant reçut des signalement à leurs commentaires
-function getEpisodeSignal($aCommentSignal, $episode)
+//récupère tous les épisode ayant reçut des signalement à leurs réponse
+function getEpisodeReplySignal($aReplySignal, $aCommentSignal, $episode)
 {
 	$aEpisodeSignal = array();
 	$akeyDoble = array(); // array qui contiendra les id des episode déjà chargé pour éviter les doublons
+
+	for($i = 0 ; $i < count($aReplySignal);$i++)
+	{
+		foreach ($aReplySignal[$i] as $key => $value)
+		{
+			if($key =='id_episode')
+			{
+				if(!in_array($value, $akeyDoble))
+				{
+					$episode = new Episode; 
+					$aEpisode2 = $episode-> get($value);
+					array_push($aEpisodeSignal, $aEpisode2[0]);
+					array_push($akeyDoble, $value);
+				}
+			}
+		}
+	}
+	//$akeyDoble = array(); // array qui contiendra les id des episode déjà chargé pour éviter les doublons
 
 	for($i = 0 ; $i < count($aCommentSignal) ; $i++)
 	{
@@ -248,26 +268,51 @@ function commentSignalEpisodeSelect($idEpisodeSignal)//(requete AJAX)
 	$table = '';
 	$comment = new Comment(); // on recup les commentaire + le pseudo dans la table user
 	$aComment = $comment->getAllCommentSignalSelectJoin('idEpisode', $idEpisodeSignal, 'user', 'idUser', 'id', 'pseudo');
-	if($aComment === false){
-		$aComment = array();
-	}
-	foreach ($aComment as $key => $value)
+	$reply = new Reply;  // on recupère les réponse correspondantes aux commentaires + pseudo dans la table user
+	$aReply = $reply->getAllReplySignalSelectJoin('id_episode', $idEpisodeSignal, 'user', 'iduser_reply', 'id', 'pseudo');
+	if($aComment === false) // si il n'y a pas de commentaire signalés, on vérifie les réponses signalées des commentaires
 	{
-		$date=strftime('%d-%m-%Y',strtotime($value['commentTime']));
-		$aComment[$key]['commentTime'] = $date;
-		$reply = new Reply; // on recupère les réponse correspondantes aux commentaires + pseudo dans la table user
-		$aReply = $reply->getAllReplySignalSelectJoin('idcomment_reply', $value['id'], 'user', 'iduser_reply', 'id', 'pseudo');
-		if($aReply === false){
-			$aReply = array();
-		}
-		foreach($aReply as $key2 => $value2)
+		if($aReply === false)
 		{
-			$dateRe=strftime('%d-%m-%Y',strtotime($value2['dateReply']));
-			$aReply[$key2]['dateReply'] = $dateRe;
+			$aComment = array();
 		}
-		$aComment[$key]['reply'] = $aReply;
+		else
+		{
+			$aComment = array();
+			foreach($aReply as $key2 => $value2)
+			{
+				$dateRe=strftime('%d-%m-%Y',strtotime($value2['dateReply']));
+				$aReply[$key2]['dateReply'] = $dateRe;
+			}
+			for($i = 0 ; $i < (count($aReply)) ; $i++)
+			{
+				$aComment[$i]['reply']=$aReply[$i];
+			}
+		}
 	}
-	//print_r($aComment);
+	else
+	{
+		foreach ($aComment as $key => $value)
+		{
+			$date=strftime('%d-%m-%Y',strtotime($value['commentTime']));
+			$aComment[$key]['commentTime'] = $date;
+			$aReply = $reply->getAllReplySignalSelectJoin('idcomment_reply', $value['id'], 'user', 'iduser_reply', 'id', 'pseudo');
+			if($aReply === false)
+			{
+				$aReply = array();
+			}
+			else
+			{
+				foreach($aReply as $key2 => $value2)
+				{
+					$dateRe=strftime('%d-%m-%Y',strtotime($value2['dateReply']));
+					$aReply[$key2]['dateReply'] = $dateRe;
+				}
+				$aComment[$key]['reply'] = $aReply;
+			}
+		}
+	}
+
 	echo json_encode($aComment);
 }
 //**********************************************************************
@@ -287,7 +332,8 @@ function commentSignalPseudoSelect($idPseudoSignal)//(requete AJAX)
 	}
 
 	$reply    = new Reply;
-	$aReply   = $reply->getAllReplySelect('iduser_reply', $idPseudoSignal);
+	$aReply   = $reply->getAllReplySignalSelect('iduser_reply', $idPseudoSignal);
+
 	if($aReply === false){
 		$aReply = array();
 	}

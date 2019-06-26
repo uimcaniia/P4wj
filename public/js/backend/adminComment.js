@@ -71,12 +71,21 @@ $(document).ready(function(){
 				var resHead = '<thead><tr><th colspan = "5">'+title+'</th></tr></thead><tbody>';
 				var resBody ='';
 
-				for(var i = 0 ; i < aDonnee.length; i++){
-					resBody = resBody+'<tr><td>Commentaire du '+aDonnee[i]['commentTime']+'</td><td> de '+aDonnee[i]['pseudo']+' : </td><td> '+aDonnee[i]['comment']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[i]['id']+'\',\'comment\',\'\',\''+aDonnee[i]['idUser']+'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[i]['id']+'\',\'comment\',\'\',\''+aDonnee[i]['idUser']+'\',\'byEpisode\');"></span></td></tr>';
-					for (var j = 0 ; j < aDonnee[i]['reply'].length ; j++){
-						resBody = resBody+'<tr><td> Réponse le '+aDonnee[i]['reply'][j]['dateReply']+'</td><td> de '+aDonnee[i]['reply'][j]['pseudo']+' : </td><td> '+aDonnee[i]['reply'][j]['reply']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[i]['id']+'\',\'reply\',\''+aDonnee[i]['reply'][j]['id']+'\',\''+aDonnee[i]['reply'][j]['iduser_reply']+'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[i]['id']+'\',\'reply\',\''+aDonnee[i]['reply'][j]['id']+'\',\''+aDonnee[i]['reply'][j]['iduser_reply']+'\',\'byEpisode\');"></span></td></tr>';	
+					for(var i = 0 ; i < aDonnee.length; i++){
+						if(Array.isArray(aDonnee[i]['reply'])){
+							resBody = resBody+'<tr><td>Commentaire du '+aDonnee[i]['commentTime']+'</td><td> de '+aDonnee[i]['pseudo']+' : </td><td> '+aDonnee[i]['comment']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[i]['id']+'\',\'comment\',\'\',\''+aDonnee[i]['idUser']+'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[i]['id']+'\',\'comment\',\'\',\''+aDonnee[i]['idUser']+'\',\'byEpisode\');"></span></td></tr>';
+							for (var j = 0 ; j < aDonnee[i]['reply'].length ; j++){
+								resBody = resBody+'<tr><td> Réponse le '+aDonnee[i]['reply'][j]['dateReply']+'</td><td> de '+aDonnee[i]['reply'][j]['pseudo']+' : </td><td> '+aDonnee[i]['reply'][j]['reply']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[i]['id']+'\',\'reply\',\''+aDonnee[i]['reply'][j]['id']+'\',\''+aDonnee[i]['reply'][j]['iduser_reply']+'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[i]['id']+'\',\'reply\',\''+aDonnee[i]['reply'][j]['id']+'\',\''+aDonnee[i]['reply'][j]['iduser_reply']+'\',\'byEpisode\');"></span></td></tr>';	
+							}
+						}
+						else if(aDonnee[i]['reply']==undefined){
+							resBody = resBody+'<tr><td>Commentaire du '+aDonnee[i]['commentTime']+'</td><td> de '+aDonnee[i]['pseudo']+' : </td><td> '+aDonnee[i]['comment']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[i]['id']+'\',\'comment\',\'\',\''+aDonnee[i]['idUser']+'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[i]['id']+'\',\'comment\',\'\',\''+aDonnee[i]['idUser']+'\',\'byEpisode\');"></span></td></tr>';
+						}
+						else{
+							resBody = resBody+'<tr><td> Réponse le '+aDonnee[i]['reply']['dateReply']+'</td><td> de '+aDonnee[i]['reply']['pseudo']+' : </td><td> '+aDonnee[i]['reply']['reply']+'</td><td><span class="fas fa-times" onclick="delComAndRep(\''+aDonnee[i]['reply']['idcomment_reply']+'\',\'reply\',\''+aDonnee[i]['reply']['id']+'\',\''+aDonnee[i]['reply']['iduser_reply']+'\',\'byEpisode\');"></span></td><td><span class="fas fa-bell-slash" onclick="removeSignal(\''+aDonnee[i]['reply']['idcomment_reply']+'\',\'reply\',\''+aDonnee[i]['reply']['id']+'\',\''+aDonnee[i]['reply']['iduser_reply']+'\',\'byEpisode\');"></span></td></tr>';	
+						}
 					}
-				}
+				
 				resComm = resHead+resBody+'</tbody>';
 			}
 			if(colBdd == 'pseudo'){

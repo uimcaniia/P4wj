@@ -25,9 +25,9 @@ $(document).ready(function(){
 // action pour signaler une réponse
 	$(aElemSignalIconeReply).click(function(){
 		var idDivParent = $(this).parent().parent().prev().attr('id'); // id de la div parent du parent commentaire signalé
-		var idDivParentFrere = $(this).parent().attr('id');
 		var idComment = $(this).attr('id');
-		var pRefresh = $('#'+idDivParent+ ' + div.globalReply #'+idDivParentFrere+' > p:nth-child(5)'); // div p a rafraichir
+		var pRefresh = $(this).prev(); // div p a rafraichir
+
 		var idReplySignal = $(this).attr('id'); // id de la réponse signalé
 		var idUserReplySignal = this.className.split(' ')[2]; // id de l'utilisateur signalé
 
@@ -36,8 +36,8 @@ $(document).ready(function(){
 			$(this).fadeOut(200);
 			return false;
 		});
-		popup = document.querySelector('#'+idDivParent+' + div.globalReply #'+idDivParentFrere+'.replySignal div.popupSignal');
-		popupP = document.querySelector('#'+idDivParent+' + div.globalReply #'+idDivParentFrere+'.replySignal div.popupSignal p');
+		popup = $(this).next();
+		popupP = $(this).next().children();
 
 		$(popup).delay(0).animate({'opacity': '10'}, {'duration' : 100});
 		$(popup).delay(0).animate({'height':'20px'}, {'duration':500});
